@@ -1,0 +1,104 @@
+# The single declaration of chapter order and document roles.
+#
+# THIS FILE IS AUTHORITATIVE. The site, the book, the PDF, llms.txt, llms-full.txt,
+# the pack branch and the role lint all derive the reading order from `nav:` below.
+# There is exactly one list of chapters in this repository, and it is this one.
+# Do not add a second copy anywhere — see contracts/roles-declaration.md.
+#
+# The reading order is specified (doc/build.md), not invented. If src/pack/ gains a
+# document that is in neither `nav` nor `extra.pack.not_in_book`, `guide roles lint`
+# fails by design (FR-011): a document that is silently absent from the book is the
+# exact failure this declaration exists to prevent.
+
+site_name: The Dungeon Master's Guide
+site_description: The creator kit for a shared, permissionless world of diegetic conspiracy satire.
+
+# NFR-001 / C-003: the one configured base. Note the subpath and the trailing slash.
+# Moving to a custom domain is a change to this value and nothing else (SC-006).
+# Every absolute URL in every surface derives from here via build.config.absolute_url().
+site_url: https://conspiracy-larp.github.io/dungeon-masters-guide/
+
+# src/pack/ is the product. The build reads it and never writes to it (C-002, C-006).
+docs_dir: src/pack
+site_dir: site
+
+nav:
+  - Creator Kit: creator-kit.md
+  - Getting Started: getting-started.md
+  - How We Tell It: storytelling.md
+  - Philosophy: philosophy.md
+  - Improvisation: improvisation.md
+  - Ethics: ethics.md
+  - Communications: communications.md
+  - Worked Example: worked-example.md
+  - Technical Suggestions: technical-suggestions.md
+  - Continuity Checker: story-continuity-checker-prompt.md
+
+# FR-011 at the MkDocs level: an undeclared document must FAIL the build.
+#
+# `omitted_files` defaults to `info`, and --strict only escalates WARNING — so with the
+# default, a new undeclared document in src/pack/ builds green and is silently missing
+# from the nav, which is exactly the silent failure FR-011 exists to prevent (R-003).
+# Verified against MkDocs 1.6.1: with the default, a probe document produced only an
+# INFO and exit 0. Raising it to `warn` is what makes --strict actually bite.
+#
+# `guide roles lint` enforces the same rule independently and with a better message;
+# both exist because CI runs the lint but a human running `mkdocs serve` gets only this.
+validation:
+  nav:
+    omitted_files: warn
+
+# REQUIRED, not optional. docs_dir is src/pack, so these two documents sit inside the
+# docs tree while being deliberately absent from `nav`. With `omitted_files: warn` above,
+# that would fail the build. Declaring them here tells MkDocs the omission is intentional
+# and suppresses the warning for exactly these two WITHOUT weakening --strict for genuine
+# mistakes: a new, undeclared document still fails.
+#
+# This list must always equal extra.pack.not_in_book below.
+# `guide roles lint` asserts that the two agree — two lists that can disagree is
+# precisely the drift this declaration exists to end.
+not_in_nav: |
+  README.md
+  start.md
+
+extra:
+  pack:
+    # Published, but outside the book's reading flow.
+    not_in_book:
+      - README.md   # the pack's index; front door of the pack branch
+      - start.md    # the bootstrap; published as AGENTS.md (FR-010)
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+  features:
+    - navigation.top
+    - content.code.copy
+
+# --- For WP03 (theme), so you don't have to rediscover this ---------------------------
+#
+# Two hooks belong here and are deliberately NOT pre-declared, because MkDocs validates
+# both eagerly and a config naming a path that does not exist yet aborts every build —
+# including WP04/WP05/WP06, which depend on this lane. Add each one WITH the files:
+#
+#   theme.custom_dir: src/theme/site/overrides
+#       Validated at config load: `mkdocs build` refuses to start if the directory is
+#       absent, so it cannot be declared ahead of the directory.
+#
+#   extra_css:
+#       CAREFUL. extra_css paths resolve relative to `docs_dir`, which here is
+#       `src/pack/` — the product. `extra_css: [stylesheets/extra.css]` would demand
+#       `src/pack/stylesheets/extra.css`, i.e. writing build assets into the guide,
+#       which C-002/C-006 forbid and which the role lint would then fail on as an
+#       undeclared file. Ship CSS through `custom_dir` instead: files under
+#       `src/theme/site/overrides/` are copied into the output, so put the stylesheet at
+#       `src/theme/site/overrides/stylesheets/extra.css` and reference it from a
+#       `main.html` template override.
+# -------------------------------------------------------------------------------------
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - toc:
+      permalink: true
