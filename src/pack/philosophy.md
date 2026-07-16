@@ -1,10 +1,9 @@
 # The philosophy — why we do this
 
-*Companion to `creator-kit.md` and `ethics.md`. The creator kit tells you how to play; the ethics
-document tells you where the moral floor is. This document is the deeper thing underneath both: **why
-this project exists at all**, and why comedians and software developers are the right people to attempt
-it. It reiterates, at greater length, ideas the kit states in passing — because the reasoning is worth
-having in full.*
+*Conspiracy theory does not merely spread falsehood — it hijacks real questions and answers them with a
+lie so lurid the real question can never be asked again. This is the argument for fighting that with
+comedy rather than correction, and for why comedians and software developers turn out to be the right
+people to try. The reasoning the rest of the pack states only in passing.*
 
 ---
 

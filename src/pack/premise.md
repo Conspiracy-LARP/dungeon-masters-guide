@@ -1,9 +1,9 @@
 # The premise — what if it were all true
 
-*Companion to `creator-kit.md`. This is the one idea the whole shared world rests on, and the only page
-that describes what is true *inside* it. Not why we do this — that's [`philosophy.md`](philosophy.md).
-Not how we tell it — that's [`storytelling.md`](storytelling.md). This is the world itself: the premise,
-where it came from, and what follows from taking it seriously.*
+*The one idea the whole shared world rests on, and the only page describing what is true* inside *it.
+Where the premise came from — Wilson and Shea, 1975 — and what follows from taking it seriously: a world
+that must be staffed, old, self-contradicting, unbearably banal, and understood by nobody, not even the
+people running it.*
 
 ---
 

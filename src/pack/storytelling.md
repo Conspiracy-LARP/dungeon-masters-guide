@@ -1,10 +1,9 @@
 # How we tell it — an alternate reality game, told diegetically
 
-*Companion to `creator-kit.md` (see §6). This is the whole craft of the telling, end to end: the two
-ideas the project rests on — what an **alternate reality game** is, and what **diegetic storytelling**
-means — then the working method that follows from them, the **realism engine** that makes an artifact
-convincing, and the **tells** that keep a convincing artifact from ever being quoted as evidence. It
-absorbs and expands the kit's "show, don't tell."*
+*What an alternate reality game is, what it means to tell a story with no narrator, and the two crafts
+that follow from it: the realism engine that makes an invented artifact convincing, and the deliberate
+tells that stop a convincing artifact being quoted as evidence. The reference you will use most while
+actually building.*
 
 ---
 

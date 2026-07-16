@@ -1,7 +1,7 @@
 # Getting started — hand it to your agent
 
-*Companion to `creator-kit.md` (see §3). The whole on-ramp, and it is shorter than you think: you do not
-set this up. Your agent does. You make a blank repository and tell it where to read.*
+*The whole on-ramp, and it is shorter than you think: you do not set this up — your agent does. Make a
+blank repository, tell your agent where to read, and answer its questions. Six steps, one of them yours.*
 
 ---
 

@@ -1,10 +1,9 @@
 # What improvisation teaches us about world-building
 
-*Companion to `creator-kit.md`. This whole project is a piece of improvised theatre — just a very slow
-one, performed not on a stage over an evening but across the open web over months, in text, hypertext,
-and interactive applications. Everything good about how improv troupes build a world together transfers
-directly to how we build ours. These are the principles. None is a rule with an enforcer; they are simply
-what makes the collaboration work.*
+*This project is improvised theatre performed across the open web over months instead of on a stage over
+an evening — so the craft that lets a troupe build a world together transfers directly to building ours.
+"Yes, and", radical acceptance, and turning the camera. None of it is a rule with an enforcer; it is
+simply what makes the collaboration work.*
 
 ---
 
