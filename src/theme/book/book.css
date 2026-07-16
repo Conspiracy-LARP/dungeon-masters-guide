@@ -1,0 +1,143 @@
+/*
+ * The single-file HTML book (FR-003). Inlined into book.html by pandoc's
+ * --embed-resources, because "single-file" means single file.
+ *
+ * SCOPE. This styles ONE generated document: dist/book/book.html. It is not the site's
+ * stylesheet — src/theme/site/ is WP03's and this file must never grow into a second
+ * copy of it. What is shared is declared below and mirrored in template.tex; that
+ * three-way echo (site CSS / book CSS / LaTeX) is the drift cost plan.md § Complexity
+ * Tracking accepted when the toolchain decision was taken. Keep the shared block small
+ * enough that a human can check it.
+ */
+
+:root {
+  /* Shared decisions. Mirrored in src/theme/book/template.tex — change both. */
+  --guide-ink: #1a1a1a;
+  --guide-accent: #4051b5;
+  --guide-muted: #6e6e6e;
+  --guide-rule: #d8d8d8;
+  --guide-shade: #f5f5f5;
+  --guide-measure: 34em; /* ~68 characters: the same measure the A4 page sets */
+}
+
+html {
+  font-size: 17px;
+}
+
+body {
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 6rem;
+  max-width: var(--guide-measure);
+  color: var(--guide-ink);
+  font-family: Georgia, "DejaVu Serif", "Times New Roman", serif;
+  line-height: 1.6;
+  hyphens: auto;
+}
+
+h1, h2, h3, h4 {
+  font-family: system-ui, -apple-system, "DejaVu Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.25;
+  margin: 2.2em 0 0.6em;
+}
+
+/* Chapters. The PDF starts each on a fresh recto; the web has no pages, so a rule and
+   air do the same job of saying "a new thing starts here". */
+h1 {
+  font-size: 1.9rem;
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 3px solid var(--guide-accent);
+}
+
+h1:first-of-type { border-top: 0; padding-top: 0; margin-top: 1rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.1rem; }
+h4 { font-size: 1rem; color: var(--guide-muted); }
+
+a { color: var(--guide-accent); }
+
+/* Cross-references land here from #ch-… anchors. Without the offset the chapter title
+   sits flush against the viewport edge and the reader cannot tell they arrived. */
+[id] { scroll-margin-top: 1.5rem; }
+
+blockquote {
+  margin: 1.4em 0;
+  padding: 0.1em 0 0.1em 1em;
+  border-left: 3px solid var(--guide-rule);
+  color: var(--guide-muted);
+  font-style: italic;
+}
+
+code, pre {
+  font-family: "DejaVu Sans Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+}
+
+pre {
+  background: var(--guide-shade);
+  padding: 0.9em 1em;
+  border-radius: 4px;
+  overflow-x: auto; /* the directory trees are drawn with box characters and are wide */
+}
+
+code:not(pre code) {
+  background: var(--guide-shade);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+/* The good-tell/bad-tell comparison is two columns of full sentences. On a phone it has
+   to be allowed to scroll rather than to crush. */
+table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.9em;
+}
+
+th, td {
+  border: 1px solid var(--guide-rule);
+  padding: 0.5em 0.7em;
+  text-align: left;
+  vertical-align: top;
+}
+
+th { background: var(--guide-shade); }
+
+hr { border: 0; border-top: 1px solid var(--guide-rule); margin: 2.5em 0; }
+
+/* The table of contents, which pandoc emits as #TOC. The book is long; the ToC is how a
+   reader finds a chapter, so it gets to be a first-class object rather than a list. */
+#TOC {
+  margin: 2rem 0 3rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--guide-shade);
+  border-radius: 6px;
+  font-family: system-ui, -apple-system, "DejaVu Sans", sans-serif;
+  font-size: 0.95rem;
+}
+
+#TOC ul { list-style: none; padding-left: 1rem; }
+#TOC > ul { padding-left: 0; }
+#TOC li { margin: 0.3em 0; }
+#TOC a { text-decoration: none; }
+#TOC a:hover { text-decoration: underline; }
+
+header#title-block-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 3px solid var(--guide-accent);
+}
+
+header#title-block-header .subtitle {
+  color: var(--guide-muted);
+  font-style: italic;
+}
+
+@media print {
+  /* If someone prints book.html anyway, say where the real one is. The PDF is the
+     print artifact (FR-004); this is a signpost, not a competitor. */
+  body { max-width: none; }
+  #TOC { background: none; }
+}
