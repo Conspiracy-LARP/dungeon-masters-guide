@@ -16,7 +16,8 @@ subtasks:
 - T035
 phase: Phase 2 - The surfaces
 assignee: ''
-agent: claude
+agent: "claude:opus:python-pedro:implementer"
+shell_pid: "10042"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -228,3 +229,4 @@ samples are ignored; the live pack passes on both branches; failures name the br
 ## Activity Log
 
 - 2026-07-16T19:58:13Z – system – Prompt created.
+- 2026-07-16T21:18:04Z – claude:opus:python-pedro:implementer – shell_pid=10042 – Assigned agent via action command
