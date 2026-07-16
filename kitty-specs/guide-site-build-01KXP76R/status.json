@@ -1,35 +1,35 @@
 {
-  "event_count": 13,
-  "last_event_id": "01KXP9ZZCR9GGPHYQBK1ZD9JGX",
-  "materialized_at": "2026-07-16T20:30:52.312120+00:00",
+  "event_count": 18,
+  "last_event_id": "01KXPAVYW0S7TB14VE8702JMNJ",
+  "materialized_at": "2026-07-16T20:46:09.280786+00:00",
   "mission_number": "",
   "mission_slug": "guide-site-build-01KXP76R",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 0,
+    "approved": 1,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 2,
-    "in_review": 0,
+    "in_progress": 0,
+    "in_review": 1,
     "planned": 7
   },
   "work_packages": {
     "WP01": {
-      "actor": "claude:opus:researcher-robbie:researcher",
+      "actor": "user",
       "force_count": 0,
-      "lane": "in_progress",
-      "last_event_id": "01KXP9Z46GBZN46XDS3B5301NP",
-      "last_transition_at": "2026-07-16T20:30:24.464047+00:00"
+      "lane": "approved",
+      "last_event_id": "01KXPAQW2HZSN777MJ5X87TWPC",
+      "last_transition_at": "2026-07-16T20:43:55.345691+00:00"
     },
     "WP02": {
-      "actor": "claude:opus:python-pedro:implementer",
+      "actor": "claude:opus:reviewer-renata:reviewer",
       "force_count": 0,
-      "lane": "in_progress",
-      "last_event_id": "01KXP9ZZCR9GGPHYQBK1ZD9JGX",
-      "last_transition_at": "2026-07-16T20:30:52.312120+00:00"
+      "lane": "in_review",
+      "last_event_id": "01KXPAVYW0S7TB14VE8702JMNJ",
+      "last_transition_at": "2026-07-16T20:46:09.280786+00:00"
     },
     "WP03": {
       "actor": "finalize-tasks",
