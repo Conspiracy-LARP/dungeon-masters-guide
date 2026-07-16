@@ -43,6 +43,21 @@ site match automatically, and keep CI light. Rejected in favour of print quality
 
 ## R3 — Serving raw markdown as readable text (the highest risk)
 
+> **SETTLED 2026-07-16 by WP01 — condition C1 holds.** GitHub Pages serves `.md` from the project-site
+> subpath as `content-type: text/markdown; charset=utf-8`, no `Content-Disposition`, body as source. A
+> plain GET returns readable text; risk R-001 does not materialise and the URL map stands unchanged.
+> Evidence: verbatim headers in `spike/FINDINGS.md`, independently re-probed at review.
+>
+> **The fallback order below was wrong, and the spike is why we know.** Evidence: extensionless files
+> serve as `application/octet-stream` — *less* readable than the problem they were meant to solve. The
+> only proven escape hatch is **`.txt` twins** (`text/plain; charset=utf-8`). Strike extensionless.
+>
+> **The result is a snapshot, not a guarantee.** The content-type is GitHub's choice and is pinned by
+> nothing in this repo. If it is ever remapped, the machine column fails silently while the site looks
+> perfect — the same invisibility that justified the spike. A post-deploy assertion that
+> `curl -sSI {base}AGENTS.md` still returns a `text/*` type is cheap insurance for whoever owns
+> FR-007/FR-008 in service. Out of scope for this mission; recorded here so it is not lost.
+
 **Decision**: publish `.nojekyll`, serve the `.md` files as static assets, and **verify the served
 content-type empirically in the first work package, before any other work**.
 
@@ -62,9 +77,11 @@ headers. If the content-type is unusable, the fallback is to *also* publish each
 extensionless or `.txt` path and point `llms.txt` there — but we must know before styling anything.
 
 **Alternatives considered**: *Assume it works* — rejected; it is the one requirement whose failure is
-silent. *Serve from Fly instead* — full control over headers, but reintroduces infrastructure the
-stakeholder explicitly does not want (C-003). Keep as the escape hatch only if Pages cannot serve
-readable markdown at all.
+silent. **This rejection was vindicated**: assuming would have been *correct* by luck, but the same
+one-file spike also disproved the fallback ranking below, which assuming would have left wrong and
+undiscovered until it was needed under pressure. *Serve from Fly instead* — full control over headers,
+but reintroduces infrastructure the stakeholder explicitly does not want (C-003). Keep as the escape
+hatch only if Pages cannot serve readable markdown at all.
 
 ## R4 — Publishing the `pack` branch
 
@@ -141,12 +158,14 @@ alphabetised chapters would satisfy the convention and defeat the mission.
 |---|---|
 | Site generator | Resolved — R1 |
 | PDF toolchain | Resolved — R2 (stakeholder decision `01KXP7BCG6XFDHDRGZ57NXG90Q`) |
-| Raw markdown served readably | **Deliberately unresolved — R3.** Cannot be settled by research; requires a deployed spike. First work package. |
+| Raw markdown served readably | **Resolved by WP01 — C1 holds** (`text/markdown; charset=utf-8`). The map stands; no fallback adopted. The spike also corrected R3's fallback order. |
 | Pack branch mechanism | Resolved — R4 |
 | Reading-order home | Resolved — R5 (adopts spec assumption A-002) |
 | Build language/tooling | Resolved — R6 |
 | Link integrity method | Resolved — R7 |
 | Machine index shape | Resolved — R8 |
 
-No `[NEEDS CLARIFICATION]` markers remain. R3 is not a clarification — it is a known unknown with a
-designed experiment and a fallback.
+No `[NEEDS CLARIFICATION]` markers remain. R3 was not a clarification — it was a known unknown with a
+designed experiment and a fallback, and WP01 ran that experiment. It returned the answer we hoped for
+*and* an answer we did not expect: the fallback we had ranked second was the worst of the options. That
+is the argument for spiking a host-controlled behaviour rather than reasoning about it.
