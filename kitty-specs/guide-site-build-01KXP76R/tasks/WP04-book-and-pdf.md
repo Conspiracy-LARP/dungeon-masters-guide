@@ -19,8 +19,8 @@ subtasks:
 - T022
 phase: Phase 2 - The surfaces
 assignee: ''
-agent: "claude:opus:python-pedro:implementer"
-shell_pid: "26621"
+agent: "claude:opus:reviewer-renata:reviewer"
+shell_pid: "33434"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -272,4 +272,4 @@ printed on paper, by a human.
 - 2026-07-16T21:29:46Z – claude:opus:reviewer-renata:reviewer – shell_pid=14582 – Started review via action command
 - 2026-07-16T22:44:57Z – claude:opus:reviewer-renata:reviewer – shell_pid=24774 – Started review via action command
 - 2026-07-16T22:51:27Z – user – shell_pid=24774 – Moved to planned
-- 2026-07-16T22:52:11Z – claude:opus:python-pedro:implementer – shell_pid=26621 – Started implementation via action command
+- 2026-07-16T23:16:58Z – claude:opus:reviewer-renata:reviewer – shell_pid=33434 – Started review via action command
