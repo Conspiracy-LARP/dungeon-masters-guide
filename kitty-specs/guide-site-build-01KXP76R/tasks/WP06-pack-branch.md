@@ -18,7 +18,8 @@ subtasks:
 - T031
 phase: Phase 2 - The surfaces
 assignee: ''
-agent: claude
+agent: "claude:opus:python-pedro:implementer"
+shell_pid: "2435"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -252,3 +253,4 @@ ls doc/core/AGENTS.md doc/core/creator-kit.md
 ## Activity Log
 
 - 2026-07-16T19:58:13Z – system – Prompt created.
+- 2026-07-16T21:07:07Z – claude:opus:python-pedro:implementer – shell_pid=2435 – Assigned agent via action command
