@@ -1,3 +1,14 @@
+---
+affected_files: []
+cycle_number: 1
+mission_slug: guide-site-build-01KXP76R
+reproduction_command:
+reviewed_at: '2026-07-16T20:51:12Z'
+reviewer_agent: unknown
+verdict: rejected
+wp_id: WP02
+---
+
 # WP02 — Review cycle 1
 
 **Verdict**: rejected — one blocking finding. Everything else passes and was independently
