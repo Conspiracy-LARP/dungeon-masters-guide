@@ -96,10 +96,10 @@ week one rather than week four.
 **Independent test**: a recorded, real HTTP response for a `.md` on a real Pages deployment, with its
 content-type, plus a confirmed or amended `contracts/url-map.md`.
 
-- [ ] T001 Stand up a throwaway Pages deployment with `.nojekyll` and probe files (WP01)
-- [ ] T002 Record the actual HTTP response for `.md`, and for `.txt`/extensionless twins (WP01)
-- [ ] T003 Decide: confirm the URL map, or specify the fallback (WP01)
-- [ ] T004 Amend `contracts/url-map.md`; escalate if the guide's own text must change (WP01)
+- [x] T001 Stand up a throwaway Pages deployment with `.nojekyll` and probe files (WP01)
+- [x] T002 Record the actual HTTP response for `.md`, and for `.txt`/extensionless twins (WP01)
+- [x] T003 Decide: confirm the URL map, or specify the fallback (WP01)
+- [x] T004 Amend `contracts/url-map.md`; escalate if the guide's own text must change (WP01)
 
 **Risks**: The finding may invalidate the URL map. If so, `src/pack/start.md`, `README.md` and
 `technical-suggestions.md` all quote addresses to readers — and content is out of scope. Escalate;
