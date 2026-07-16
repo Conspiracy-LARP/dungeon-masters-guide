@@ -28,6 +28,10 @@ extra:
       - README.md                     # the pack's index; front door of the pack branch
       - start.md                      # the bootstrap; published as AGENTS.md
 
+validation:                           # REQUIRED — without this, --strict does NOT enforce FR-011
+  nav:
+    omitted_files: warn
+
 not_in_nav: |                         # REQUIRED — see "The --strict interaction" below
   README.md
   start.md
@@ -35,21 +39,46 @@ not_in_nav: |                         # REQUIRED — see "The --strict interacti
 
 ## The `--strict` interaction (resolves analysis finding U2)
 
+> **CORRECTED 2026-07-16 by WP02, against a real build.** This section previously claimed that an
+> undeclared document "is an INFO that `--strict` escalates to a build failure." **That is false.**
+> `validation.nav.omitted_files` defaults to `info`, and `--strict` escalates only `WARNING` — so on
+> MkDocs 1.6.1 the real pack **plus** an undeclared `sneaky-new-doc.md` builds green, exit 0. FR-011 was
+> therefore enforced by our own lint alone, and anyone running `mkdocs serve` locally would have seen
+> nothing. The resolution below now includes the `validation` key that makes the claim true.
+
 `docs_dir` is `src/pack`, so the two `not_in_book` documents sit **inside** the docs tree while being
-deliberately absent from `nav`. Under `mkdocs build --strict` — which the build uses — a file present in
-`docs_dir` but missing from `nav` is an INFO that `--strict` escalates to a build failure. Left
-unspecified, WP03's first build fails and the implementer invents a workaround.
+deliberately absent from `nav`. Left unspecified, WP03's first build behaviour is a guess.
 
 The resolution is declared, not discovered:
 
-1. **Use MkDocs' `not_in_nav` key** (MkDocs ≥ 1.6) listing exactly the `not_in_book` set. This tells
-   MkDocs the omission is intentional and suppresses the warning **without** weakening `--strict` for
-   genuine mistakes — a *new* undeclared document still fails the build, which is what FR-011 wants.
-2. **Do not** disable `--strict`, and **do not** add the two documents to `nav`. The first hides real
+1. **Set `validation.nav.omitted_files: warn`.** Without it, `--strict` ignores omitted files entirely
+   and FR-011 has no teeth in the build. With it, an undeclared document aborts the build
+   (`Aborted with 1 warnings in strict mode!`) — verified.
+2. **Use MkDocs' `not_in_nav` key** (MkDocs ≥ 1.6) listing exactly the `not_in_book` set. This tells
+   MkDocs the two omissions are intentional, so they pass while a *new* undeclared document still fails
+   — which is what FR-011 wants.
+3. **Do not** disable `--strict`, and **do not** add the two documents to `nav`. The first hides real
    errors; the second puts the pack's index and the machine bootstrap into the human reading order,
    which is what `not_in_book` exists to prevent.
-3. `not_in_nav` and `extra.pack.not_in_book` must list the same files. The role lint (FR-011) asserts it;
+4. `not_in_nav` and `extra.pack.not_in_book` must list the same files. The role lint (FR-011) asserts it;
    two lists that can disagree is precisely the drift this contract exists to end.
+
+## Theme hooks must not be pre-declared (WP02 finding)
+
+The tasks originally told WP02 to pre-declare the theme hooks so WP03 need only create files. **That is
+not possible, and attempting it breaks four lanes.** Recorded here so it is not re-attempted:
+
+- **`theme.custom_dir` is validated eagerly.** A config naming a directory that does not exist yet aborts
+  *every* build — including WP04, WP05 and WP06, which all depend on WP02's lane. It cannot precede the
+  directory it names.
+- **`extra_css` resolves relative to `docs_dir`, which is `src/pack/` — the product.**
+  `extra_css: [stylesheets/extra.css]` would demand `src/pack/stylesheets/extra.css`: build assets
+  written into the guide, violating C-002 and C-006, and then failing the role lint as an undeclared
+  document. **Ship CSS through `custom_dir` instead** — files under `src/theme/site/overrides/` are
+  copied to the output; put the stylesheet there and reference it from a `main.html` override.
+
+WP03 therefore adds both hooks together with the files they name. This is a small, justified edit to
+WP02's `mkdocs.yml` rather than an ownership violation; the config documents exactly what to add.
 
 ## The landing page
 
