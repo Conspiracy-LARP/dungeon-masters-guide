@@ -94,6 +94,20 @@ picture of a link.
 - **Never write to `src/pack/`** (C-002, C-006). Report; do not fix.
 - Depends on WP06: you need the pack-branch tree builder to check the branch's links.
 
+**Your scope is the two branches, and that is deliberate** (resolves analysis finding C2). FR-013 says
+cross-references must resolve on *every* published surface; the other two are covered elsewhere, so do
+not duplicate them:
+
+| Surface | Covered by |
+|---|---|
+| `main` (bootstrap is `start.md`) | **you** — T034 |
+| `pack` branch (bootstrap is `AGENTS.md`) | **you** — T034 |
+| The rendered site | WP03 — MkDocs link validation under `--strict` |
+| The book | WP04 T022 — the cross-reference flattening tests |
+
+The two branches are where the risk actually lives, because they are the only surfaces where the *same
+bytes* must resolve against *different filenames*. That asymmetry has already broken once.
+
 ## Branch Strategy
 
 - **Strategy**: feature-branch, PR-bound
