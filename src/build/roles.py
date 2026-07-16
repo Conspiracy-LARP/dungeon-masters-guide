@@ -298,7 +298,9 @@ def check_drift(pack_dir: Path, config: BuildConfig) -> list[DriftFinding]:
 
     readme_path = pack_dir / README_FILENAME
     if readme_path.is_file():
-        listed = set(_extract_section_bullets(readme_path.read_text(encoding="utf-8"), "The documents"))
+        listed = set(
+            _extract_section_bullets(readme_path.read_text(encoding="utf-8"), "The documents")
+        )
         # The pack's index lists everything published except itself.
         expected = all_declared - {README_FILENAME}
         findings.extend(_compare(README_FILENAME, listed, expected))

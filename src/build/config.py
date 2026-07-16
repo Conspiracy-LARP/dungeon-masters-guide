@@ -157,7 +157,9 @@ def load_config(mkdocs_path: Path | None = None) -> BuildConfig:
     """
     path = mkdocs_path if mkdocs_path is not None else _repo_root() / MKDOCS_FILENAME
     if not path.is_file():
-        raise ConfigError(f"No declaration at {path}. The build has no reading order to derive from.")
+        raise ConfigError(
+            f"No declaration at {path}. The build has no reading order to derive from."
+        )
 
     raw = yaml.load(path.read_text(encoding="utf-8"), Loader=_mkdocs_loader())
     if not isinstance(raw, dict):

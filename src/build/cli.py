@@ -80,7 +80,9 @@ def roles_list() -> None:
             if document.published_name != document.filename
             else ""
         )
-        click.echo(f"{position} [{document.role.value}] {document.filename} — {document.title}{published}")
+        click.echo(
+            f"{position} [{document.role.value}] {document.filename} — {document.title}{published}"
+        )
 
 
 @roles.command("check-drift")
@@ -110,7 +112,11 @@ def roles_check_drift(branch: str | None) -> None:
 
     fatal = drift_is_fatal(resolved_branch)
     label = "DRIFT" if fatal else "WARNING: drift"
-    click.secho(f"{label} ({len(findings)} finding(s)) on branch {resolved_branch or '?'}:", fg="red" if fatal else "yellow", err=True)
+    click.secho(
+        f"{label} ({len(findings)} finding(s)) on branch {resolved_branch or '?'}:",
+        fg="red" if fatal else "yellow",
+        err=True,
+    )
     for finding in findings:
         click.secho(f"  - {finding.describe()}", fg="red" if fatal else "yellow", err=True)
 

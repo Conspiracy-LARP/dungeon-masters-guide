@@ -32,6 +32,13 @@ build-backend = "poetry.core.masonry.api"
 [tool.black]
 line-length = 100
 target-version = ["py311"]
+# This REPLACES black's DEFAULT_EXCLUDES, which contains "build" and would otherwise
+# silently skip src/build/ — the only Python package in this repo. Without this line
+# `black --check .` sees 5 files instead of 11, exits 0, and never looks at the code it
+# is meant to format: a gate that only looks like one. WP08 wires this into CI and
+# WP03-WP06 inherit this file, so the vacuity would propagate. Guarded by
+# tests/test_toolchain.py — if you edit this line, that test tells you what you broke.
+exclude = "/(\\.git|\\.venv|\\.mypy_cache|\\.pytest_cache|site)/"
 
 [tool.mypy]
 python_version = "3.11"

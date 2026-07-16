@@ -78,21 +78,32 @@ theme:
 
 # --- For WP03 (theme), so you don't have to rediscover this ---------------------------
 #
-# Two hooks belong here and are deliberately NOT pre-declared, because MkDocs validates
-# both eagerly and a config naming a path that does not exist yet aborts every build —
-# including WP04/WP05/WP06, which depend on this lane. Add each one WITH the files:
+# Two hooks belong here and are deliberately NOT pre-declared. They fail in two DIFFERENT
+# ways, and the difference is the point. Add each one WITH the files it names:
 #
 #   theme.custom_dir: src/theme/site/overrides
-#       Validated at config load: `mkdocs build` refuses to start if the directory is
-#       absent, so it cannot be declared ahead of the directory.
+#       Validated eagerly, at config load: `mkdocs build` refuses to start if the
+#       directory is absent ("The path set in custom_dir does not exist" / "Aborted with
+#       a configuration error!", exit 1). So it cannot precede the directory it names —
+#       declaring it early would break every build in this lane and in WP04/WP05/WP06,
+#       which depend on it. This is the loud failure, and the harmless one.
 #
 #   extra_css:
-#       CAREFUL. extra_css paths resolve relative to `docs_dir`, which here is
-#       `src/pack/` — the product. `extra_css: [stylesheets/extra.css]` would demand
-#       `src/pack/stylesheets/extra.css`, i.e. writing build assets into the guide,
-#       which C-002/C-006 forbid and which the role lint would then fail on as an
-#       undeclared file. Ship CSS through `custom_dir` instead: files under
-#       `src/theme/site/overrides/` are copied into the output, so put the stylesheet at
+#       CAREFUL — this one is NOT validated, and that makes it worse, not better.
+#       extra_css paths resolve relative to `docs_dir`, which here is `src/pack/` — the
+#       product. `extra_css: [stylesheets/extra.css]` demands
+#       `src/pack/stylesheets/extra.css`: writing build assets into the guide, which
+#       C-002/C-006 forbid.
+#
+#       Naming a file that does not exist does NOT abort the build. MkDocs exits 0 and
+#       emits the `<link>` regardless — you get a silent 404 on a site that looks like it
+#       built fine. And nothing downstream catches it: the role lint globs `*.md` only
+#       (`_pack_files` in src/build/roles.py), so a `.css` sitting under `src/pack/`
+#       sails straight through the lint untouched. A quiet wrong answer with no check
+#       standing behind it.
+#
+#       Ship CSS through `custom_dir` instead: files under `src/theme/site/overrides/`
+#       are copied into the output, so put the stylesheet at
 #       `src/theme/site/overrides/stylesheets/extra.css` and reference it from a
 #       `main.html` template override.
 # -------------------------------------------------------------------------------------
