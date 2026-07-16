@@ -1,0 +1,46 @@
+# WP01 SPIKE — THROWAWAY. DELETE ME.
+#
+# Mission: guide-site-build-01KXP76R, work package WP01.
+#
+# This workflow publishes ONLY the `spike/` directory to GitHub Pages, to answer one question against a
+# real deployment: does GitHub Pages serve a raw `.md` file as text a model can read, or as a download?
+# See `spike/FINDINGS.md` for the recorded answer.
+#
+# It is NOT the build for the guide site (that is WP03). It is expected to be deleted once the finding is
+# recorded. If you have found this workflow and it is still here, it is a leftover — remove it.
+#
+# Manual dispatch only: it must never run on a push to main and clobber the real site.
+
+name: WP01 spike — content-type probe (throwaway)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let the spike race the real Pages deployment.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      # Publish ONLY spike/ — nothing else in the repo goes to Pages.
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: spike
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
