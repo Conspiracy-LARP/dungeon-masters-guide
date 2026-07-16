@@ -1,0 +1,57 @@
+[tool.poetry]
+name = "dungeon-masters-guide-build"
+version = "0.1.0"
+description = "Build machinery for the Conspiracy LARP creator kit: site, book, PDF and machine-readable surfaces, all derived from src/pack/."
+authors = ["Conspiracy LARP <noreply@example.com>"]
+readme = "README.md"
+# src/ is NOT a conventional Python source root in this repo: src/pack/ is the
+# markdown product and src/theme/ is presentation. Only src/build/ is a package,
+# so name it explicitly rather than letting Poetry infer and package the guide.
+packages = [{ include = "build", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+mkdocs = "^1.6"
+mkdocs-material = "^9.5"
+pyyaml = "^6.0"
+click = "^8.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+black = "^24.0"
+mypy = "^1.8"
+types-pyyaml = "^6.0"
+
+[tool.poetry.scripts]
+guide = "build.cli:guide"
+
+[build-system]
+requires = ["poetry-core>=1.5.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+# This REPLACES black's DEFAULT_EXCLUDES, which contains "build" and would otherwise
+# silently skip src/build/ — the only Python package in this repo. Without this line
+# `black --check .` sees 5 files instead of 11, exits 0, and never looks at the code it
+# is meant to format: a gate that only looks like one. WP08 wires this into CI and
+# WP03-WP06 inherit this file, so the vacuity would propagate. Guarded by
+# tests/test_toolchain.py — if you edit this line, that test tells you what you broke.
+exclude = "/(\\.git|\\.venv|\\.mypy_cache|\\.pytest_cache|site)/"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src/build", "tests"]
+# The guide itself is markdown; keep mypy off everything that is not the build.
+exclude = "^(src/pack|src/theme)/"
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# "." so `tests` imports as a package; "src" so `build` imports without an install.
+pythonpath = ["src", "."]
