@@ -190,10 +190,10 @@ follow rather than documents to read.
 **Independent test**: `llms.txt` leads with the bootstrap as an instruction; `llms-full.txt` is the
 chapters in nav order; changing the configured base changes every address.
 
-- [ ] T023 `llms.py`: `llms.txt`, bootstrap first, as a procedure (WP05)
-- [ ] T024 `llms-full.txt`: chapters concatenated in nav order (WP05)
-- [ ] T025 Every address derives from the configured base (WP05)
-- [ ] T026 Tests, including the base-URL swap (SC-006) (WP05)
+- [x] T023 `llms.py`: `llms.txt`, bootstrap first, as a procedure (WP05)
+- [x] T024 `llms-full.txt`: chapters concatenated in nav order (WP05)
+- [x] T025 Every address derives from the configured base (WP05)
+- [x] T026 Tests, including the base-URL swap (SC-006) (WP05)
 
 **Risks**: An index that satisfies the llmstxt convention while burying the bootstrap under alphabetised
 chapters defeats the mission.
