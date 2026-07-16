@@ -125,8 +125,9 @@ confirm before writing the workflow.
   3. Job `build`: the site (WP03), the book and PDF (WP04), `llms.txt`/`llms-full.txt` (WP05); assemble
      one Pages artifact including `.nojekyll` and the raw `.md` files.
   4. Job `deploy`: `actions/deploy-pages`, on `main` only.
-  5. Remove WP01's spike workflow (`spike-content-type.yml`) if it is still present — it has served its
-     purpose and a stray Pages-deploying workflow is a hazard.
+  5. **Verify** WP01's spike workflow (`spike-content-type.yml`) is absent — WP01 removed it at
+     teardown and review confirmed it across every ref, so this should be a no-op check, not a deletion.
+     If it has reappeared, stop and ask why rather than deleting someone else's owned file.
 
 - **Files**: `.github/workflows/publish.yml`
 
@@ -223,7 +224,7 @@ The workflow is verified by executing it, not by review:
 | Per-run TeX install blows NFR-005 | Prebuilt image (T039); measure and report |
 | Site publishes while the branch fails → surfaces diverge | Both behind `needs: verify` (T038), tested for real |
 | A PR or fork force-pushes `pack` or deploys Pages | Publish only on push to `main`; narrow token scope |
-| WP01's spike workflow left deploying to Pages | T036 removes it |
+| WP01's spike workflow left deploying to Pages | Already removed by WP01 and confirmed at review; T036 only verifies |
 | "It's in the YAML so it works" | T040 pushes a real change and looks |
 | Provenance check placed before the build, so it inspects nothing and passes vacuously | It must run against built output; assert it fails on a planted hand-authored file |
 
@@ -232,7 +233,7 @@ The workflow is verified by executing it, not by review:
 - Can a pull request publish anything? It must not.
 - Are `deploy` and `mirror` both gated on `verify`? Was that tested by breaking something?
 - What is the measured push-to-live time?
-- Is WP01's spike workflow gone?
+- Is WP01's spike workflow still absent?
 - Did the `pack` branch tip actually move on a real push?
 
 ## Activity Log
