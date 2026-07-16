@@ -682,15 +682,27 @@ def test_the_palette_is_not_outranked_by_materials_own_colours() -> None:
     )
 
 
-def test_the_wide_tables_can_scroll_inside_themselves(site: Path) -> None:
-    """NFR-002: at 320px the widest tables must scroll, not the page.
+def test_no_table_opts_out_of_materials_containment(site: Path) -> None:
+    """A canary on Material's table containment. Not, on this content, the NFR-002 guard.
 
     Material contains a table with `.md-typeset table:not([class]) { max-width: 100%;
     overflow: auto }` — a CSS rule, not its JavaScript wrapper, so containment does not
     depend on a script running. The selector is the fragile part: a table that acquires a
-    class (an `attr_list` annotation in the pack, say) silently falls out of that rule
-    and starts pushing the page sideways on a phone. So that is what is asserted, on the
-    real chapters — `storytelling.md`'s tells comparison is the widest thing the guide has.
+    class (an `attr_list` annotation in the pack, say) silently falls out of that rule.
+    That is what is asserted, on the real chapters.
+
+    What this does *not* claim, having been measured rather than assumed: adding a class
+    to `storytelling.md`'s tells table — the widest thing the guide has — does drop
+    containment at 320px (`display` inline-block → table, `overflow-x` auto → hidden,
+    `max-width` 100% → none) and the page still does not scroll sideways. The cells wrap
+    into 286px. So on today's content it is `overflow-wrap: break-word` in typography.css
+    doing the real work, and this test is an early warning that the containment mechanism
+    has changed, not proof that NFR-002 holds.
+
+    NFR-002 itself is verified by rendering all 13 pages at a 320px viewport and checking
+    `scrollWidth == innerWidth`. Keep this canary — it fires before a genuinely wider
+    table (one whose longest word exceeds the viewport) would — but do not read a green
+    result here as the width guarantee. It is not one.
     """
     classed = []
     total = 0
@@ -745,14 +757,23 @@ def _without_comments(css: str) -> str:
 
 
 def _material_stylesheet() -> str:
-    """Material's own compiled CSS — the thing our overrides have to win against."""
+    """Material's own compiled CSS — the thing our overrides have to win against.
+
+    Every sheet, not just `main.*.min.css`. The two signals this file reads off Material
+    live in different files: `--md-text-font-family` is declared in `main`, while all 50
+    occurrences of `data-md-color-primary` — including the
+    `[scheme][primary=indigo]{--md-typeset-a-color:#5488e8}` rule that `primary: custom`
+    exists to escape — are in the sibling `palette.*.min.css`. Globbing `main` alone
+    pointed the palette canary at a file that could never carry its signal, so it could
+    not fail. Concatenating is what gives it teeth.
+    """
     spec = importlib.util.find_spec("material")
     assert spec is not None and spec.origin is not None, "Material is not installed"
     sheets = sorted(
-        (Path(spec.origin).parent / "templates" / "assets" / "stylesheets").glob("main.*.min.css")
+        (Path(spec.origin).parent / "templates" / "assets" / "stylesheets").glob("*.min.css")
     )
-    assert sheets, "Material's stylesheet is not where it has always been"
-    return sheets[0].read_text(encoding="utf-8")
+    assert sheets, "Material's stylesheets are not where they have always been"
+    return "".join(sheet.read_text(encoding="utf-8") for sheet in sheets)
 
 
 def test_the_font_stack_is_declared_where_material_can_see_it() -> None:
@@ -803,6 +824,15 @@ def test_the_theme_is_not_silently_git_ignored() -> None:
     add it and says nothing; the palette, the typography and the template override simply
     never leave the machine, and the build fails later and elsewhere, on a `custom_dir`
     that is not there. The pattern is now anchored to the repo root (`/site/`).
+
+    `--no-index` is load-bearing, and its absence was this guard's own version of the bug
+    it guards. `git check-ignore` consults the index by default and reports nothing for a
+    tracked file — so once the theme was committed, the check passed no matter what the
+    pattern said, and reverting `.gitignore` to the unanchored `site/` left it green.
+    `--no-index` asks the question actually at stake: would the pattern refuse a *new*
+    file here? That is the live failure — `src/theme/site/overrides/partials/foo.html`
+    added tomorrow is still silently unaddable under an unanchored `site/`, and the
+    existing files being tracked does nothing to save the next contributor.
     """
     tracked = [
         str(path.relative_to(_REPO_ROOT))
@@ -812,7 +842,7 @@ def test_the_theme_is_not_silently_git_ignored() -> None:
     assert tracked, "sanity: the theme has files"
 
     ignored = subprocess.run(
-        ["git", "check-ignore", *tracked],
+        ["git", "check-ignore", "--no-index", *tracked],
         cwd=_REPO_ROOT,
         capture_output=True,
         text=True,
