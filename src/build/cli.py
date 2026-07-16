@@ -9,6 +9,14 @@ import click
 
 from build.config import BuildConfig, ConfigError, load_config
 from build.llms import DEFAULT_OUTPUT_DIR, LlmsError, write_full, write_index
+from build.packbranch import (
+    REFERENCE_COMMIT,
+    PackBranchError,
+    build_tree,
+    compare_against_ref,
+    publish,
+    render_documents,
+)
 from build.provenance import ProvenanceError, verify_provenance
 from build.roles import (
     Document,
@@ -205,6 +213,94 @@ def llms_full(output_dir: Path) -> None:
     click.secho(
         f"Wrote {written} ({len(chapters(documents))} chapters, in reading order).", fg="green"
     )
+
+
+@guide.group()
+def pack() -> None:
+    """The pack branch: the flat markdown mirror creators attach as a submodule."""
+
+
+@pack.command("build")
+@click.option(
+    "--out",
+    "out_dir",
+    required=True,
+    type=click.Path(file_okay=False, path_type=Path),
+    help="Directory to materialise the branch tree into.",
+)
+def pack_build(out_dir: Path) -> None:
+    """Materialise the pack branch tree: src/pack/'s markdown, flat, renamed (FR-009).
+
+    Builds only; never pushes. The tree is the contract, so it is inspectable on its own.
+    """
+    config = _config()
+    try:
+        files = build_tree(out_dir, config)
+    except (PackBranchError, RoleError) as exc:
+        click.secho(str(exc), fg="red", err=True)
+        sys.exit(1)
+
+    renamed = [f for f in files if f.was_renamed]
+    click.secho(f"OK: {len(files)} documents written to {out_dir}.", fg="green")
+    for built in renamed:
+        click.echo(f"  renamed: {built.source_name} -> {built.published_name}")
+
+
+@pack.command("verify-reproduction")
+@click.option(
+    "--ref",
+    default=REFERENCE_COMMIT,
+    show_default=True,
+    help="The commit the generated tree must reproduce byte-for-byte.",
+)
+def pack_verify_reproduction(ref: str) -> None:
+    """Compare the generated tree against the hand-built pack tip (C-005).
+
+    The gate between this automation and a branch a live consumer's submodule tracks. A
+    mismatch is a finding to investigate, not a baseline to update: either the hand build
+    or the automation is wrong, and force-pushing before knowing which breaks the
+    `submodule add` command the guide already publishes to readers (R-002).
+    """
+    config = _config()
+    try:
+        files = render_documents(config.pack_dir, config)
+        result = compare_against_ref(files, ref=ref)
+    except (PackBranchError, RoleError) as exc:
+        click.secho(str(exc), fg="red", err=True)
+        sys.exit(1)
+
+    if not result.matches:
+        click.secho(result.describe(), fg="red", err=True)
+        sys.exit(1)
+    click.secho(result.describe(), fg="green")
+
+
+@pack.command("publish")
+@click.option("--remote", default="origin", show_default=True, help="The remote to push to.")
+@click.option(
+    "--dry-run",
+    is_flag=True,
+    help="Build the tree and the commit, but do not push.",
+)
+def pack_publish(remote: str, dry_run: bool) -> None:
+    """Force-push the pack branch as an orphan commit (FR-009). CI on main only.
+
+    Idempotent: an unchanged src/pack/ yields an identical tree and no push at all, so
+    consumers do not see a new tip for a tree that never moved.
+    """
+    config = _config()
+    try:
+        files = render_documents(config.pack_dir, config)
+        commit, pushed = publish(files, remote=remote, dry_run=dry_run)
+    except (PackBranchError, RoleError) as exc:
+        click.secho(str(exc), fg="red", err=True)
+        sys.exit(1)
+
+    if not pushed:
+        click.secho(f"OK: {remote}/pack already carries this tree; nothing to push.", fg="green")
+        return
+    action = "would push (dry run)" if dry_run else "pushed"
+    click.secho(f"OK: {action} {commit[:7]} to {remote}/pack ({len(files)} documents).", fg="green")
 
 
 @guide.group()
