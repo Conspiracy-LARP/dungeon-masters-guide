@@ -16,8 +16,8 @@ subtasks:
 - T004
 phase: Phase 1 - Foundation
 assignee: ''
-agent: "claude:opus:researcher-robbie:researcher"
-shell_pid: "79084"
+agent: "claude:opus:reviewer-renata:reviewer"
+shell_pid: "87301"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -248,3 +248,5 @@ verbatim.
 - 2026-07-16T19:58:13Z – system – Prompt created.
 - 2026-07-16T20:30:29Z – claude:opus:researcher-robbie:researcher – shell_pid=79084 – Assigned agent via action command
 - 2026-07-16T20:38:22Z – claude:opus:researcher-robbie:researcher – shell_pid=79084 – Yes — the machine surface works: GitHub Pages serves raw .md from the subpath as text/markdown; charset=utf-8, readable source with no download disposition, so C1 is confirmed and the URL map needs no amendment.
+- 2026-07-16T20:41:56Z – claude:opus:reviewer-renata:reviewer – shell_pid=87301 – Started review via action command
+- 2026-07-16T20:43:56Z – user – shell_pid=87301 – Review passed: evidence-grade spike. Verbatim curl -i headers from the REAL project-site subpath (conspiracy-larp.github.io/dungeon-masters-guide/, run 29532549096, deployed from the lane branch) — not a domain root, not local. Independently re-probed live: probe.md=text/markdown; charset=utf-8, probe.txt=text/plain, probe=application/octet-stream, no Content-Disposition on any, live body sha256 matches the recorded sha AND the committed probe files (all three byte-identical at 614 bytes, so extension was the only variable). .txt/extensionless fallbacks probed while the spike was up, as required. C1 marked CONFIRMED in contracts/url-map.md (6441d18, correctly on the planning branch per lane guard); map unchanged, no fallback adopted, Amendment rule not triggered, git diff --stat src/pack/ empty (C-006 respected). Cleanup verified: spike workflow file absent from every branch, probe files deleted, github-pages deployment-branch policy back to main-only (temp policy 54841701 gone). Sole residue is the still-live spike index.html, which FINDINGS.md discloses honestly and which self-describes as a throwaway — acceptable per the 'removed OR clearly marked' criterion. Bonus value: evidence corrects research R3's fallback order (extensionless is octet-stream, worse than the problem). No unrelated changes.
