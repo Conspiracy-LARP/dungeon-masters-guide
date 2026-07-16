@@ -17,6 +17,7 @@ from build.packbranch import (
     publish,
     render_documents,
 )
+from build.links import LinkError, Rule, check_links
 from build.provenance import ProvenanceError, verify_provenance
 from build.roles import (
     Document,
@@ -301,6 +302,58 @@ def pack_publish(remote: str, dry_run: bool) -> None:
         return
     action = "would push (dry run)" if dry_run else "pushed"
     click.secho(f"OK: {action} {commit[:7]} to {remote}/pack ({len(files)} documents).", fg="green")
+
+
+@guide.group()
+def links() -> None:
+    """Cross-references: the bare-sibling invariant the whole architecture rests on."""
+
+
+@links.command("check")
+def links_check() -> None:
+    """Check every cross-reference resolves on BOTH branches, with no paths (FR-013).
+
+    Three rules, from data-model.md: no path separator (C-001); resolves on `main`,
+    where the bootstrap is `start.md`; resolves on the pack branch, where it is
+    `AGENTS.md`. The third is not redundant — a `README.md` link to `AGENTS.md` once
+    resolved on the branch and 404'd on `main`, and only an ad-hoc check caught it.
+
+    Reports; never fixes. The build does not write to src/pack/ (C-002).
+    """
+    config = _config()
+    try:
+        findings = check_links(config)
+    except (LinkError, PackBranchError, RoleError) as exc:
+        click.secho(str(exc), fg="red", err=True)
+        sys.exit(1)
+
+    if not findings:
+        click.secho(
+            "OK: every cross-reference is a bare sibling name, and resolves on both "
+            "`main` (bootstrap start.md) and the pack branch (bootstrap AGENTS.md).",
+            fg="green",
+        )
+        return
+
+    paths = [f for f in findings if f.rule is Rule.PATH_SEPARATOR]
+    unresolved = [f for f in findings if f.rule is Rule.UNRESOLVED]
+
+    click.secho(f"Link check FAILED ({len(findings)} finding(s)):", fg="red", err=True)
+    if paths:
+        click.secho("\nLinks carrying a path (C-001):", fg="red", err=True)
+        for finding in paths:
+            click.secho(f"  - {finding.describe()}", fg="red", err=True)
+    if unresolved:
+        click.secho("\nLinks that do not resolve:", fg="red", err=True)
+        for finding in unresolved:
+            click.secho(f"  - {finding.describe()}", fg="red", err=True)
+
+    click.secho(
+        "\nFix the link by hand in src/pack/ — the build never edits it (C-002).",
+        fg="red",
+        err=True,
+    )
+    sys.exit(1)
 
 
 @guide.group()
