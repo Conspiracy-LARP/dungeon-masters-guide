@@ -27,7 +27,36 @@ extra:
     not_in_book:                      # published, but outside the book's flow
       - README.md                     # the pack's index; front door of the pack branch
       - start.md                      # the bootstrap; published as AGENTS.md
+
+not_in_nav: |                         # REQUIRED — see "The --strict interaction" below
+  README.md
+  start.md
 ```
+
+## The `--strict` interaction (resolves analysis finding U2)
+
+`docs_dir` is `src/pack`, so the two `not_in_book` documents sit **inside** the docs tree while being
+deliberately absent from `nav`. Under `mkdocs build --strict` — which the build uses — a file present in
+`docs_dir` but missing from `nav` is an INFO that `--strict` escalates to a build failure. Left
+unspecified, WP03's first build fails and the implementer invents a workaround.
+
+The resolution is declared, not discovered:
+
+1. **Use MkDocs' `not_in_nav` key** (MkDocs ≥ 1.6) listing exactly the `not_in_book` set. This tells
+   MkDocs the omission is intentional and suppresses the warning **without** weakening `--strict` for
+   genuine mistakes — a *new* undeclared document still fails the build, which is what FR-011 wants.
+2. **Do not** disable `--strict`, and **do not** add the two documents to `nav`. The first hides real
+   errors; the second puts the pack's index and the machine bootstrap into the human reading order,
+   which is what `not_in_book` exists to prevent.
+3. `not_in_nav` and `extra.pack.not_in_book` must list the same files. The role lint (FR-011) asserts it;
+   two lists that can disagree is precisely the drift this contract exists to end.
+
+## The landing page
+
+FR-001 requires the landing page be the kit's "What is this?" pitch, derived at build time (WP03 T013).
+`src/pack/README.md` is **not** the site index — it is the pack branch's front door, and it is
+`not_in_book`. WP03's hook generates the index; `README.md` is published as a page and as raw markdown
+like any other non-chapter document.
 
 ## Rules
 
