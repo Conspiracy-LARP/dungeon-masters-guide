@@ -254,7 +254,7 @@ failure blocks both targets.
 - [x] T037 The pack-branch mirror job (WP08)
 - [x] T038 A lint failure blocks **both** publication targets (WP08)
 - [x] T039 Baked TeX image to protect the 5-minute budget (WP08)
-- [x] T040 Verify rebuild-and-redeploy actually happens on push (WP08)
+- [ ] T040 Verify rebuild-and-redeploy actually happens on push (WP08)
 
 **Risks**: Needs Pages enabled and permitted to publish from automation (D-002) — an account-level
 prerequisite outside the code. Publishing a good site beside a broken branch is worse than publishing
