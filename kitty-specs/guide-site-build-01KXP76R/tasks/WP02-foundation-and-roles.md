@@ -376,3 +376,4 @@ poetry run guide roles lint    # against the real pack: must pass today
 - 2026-07-16T20:30:55Z – claude:opus:python-pedro:implementer – shell_pid=79720 – Assigned agent via action command
 - 2026-07-16T20:44:40Z – claude:opus:python-pedro:implementer – shell_pid=79720 – Ready for review: build foundation + roles declaration. 85 tests pass; black/mypy clean; roles lint and check-drift pass against the real pack; src/pack untouched. Two findings in commit msg: mkdocs --strict does NOT fail on undeclared docs by default (fixed via validation.nav.omitted_files: warn); extra_css/custom_dir hooks left for WP03 with rationale documented.
 - 2026-07-16T20:46:09Z – claude:opus:reviewer-renata:reviewer – shell_pid=91742 – Started review via action command
+- 2026-07-16T20:51:13Z – user – shell_pid=91742 – Moved to planned
