@@ -146,11 +146,11 @@ once, here, and both consumers inherit the fix.
 pitch, an AI pointer on every page, `.nojekyll`, and raw `.md` at parallel paths with the bootstrap
 published as `AGENTS.md`.
 
-- [ ] T012 `src/theme/site/`: palette and typography, bounded (WP03)
-- [ ] T013 Landing page derived from the kit's pitch (WP03)
-- [ ] T014 Per-page AI pointer and `rel="alternate"` metadata (WP03)
-- [ ] T015 Raw markdown at parallel paths, with the bootstrap published as `AGENTS.md` (WP03)
-- [ ] T016 `.nojekyll`, subpath correctness, responsive and contrast verification (WP03)
+- [x] T012 `src/theme/site/`: palette and typography, bounded (WP03)
+- [x] T013 Landing page derived from the kit's pitch (WP03)
+- [x] T014 Per-page AI pointer and `rel="alternate"` metadata (WP03)
+- [x] T015 Raw markdown at parallel paths, with the bootstrap published as `AGENTS.md` (WP03)
+- [x] T016 `.nojekyll`, subpath correctness, responsive and contrast verification (WP03)
 
 **Risks**: Design investment is bounded to palette and typography (NFR-004). The Gygax homage is Out of
 Scope (A-004) and this is where it will try to creep in.
