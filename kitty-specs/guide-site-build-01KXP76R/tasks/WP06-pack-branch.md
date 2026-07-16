@@ -18,7 +18,8 @@ subtasks:
 - T031
 phase: Phase 2 - The surfaces
 assignee: ''
-agent: claude
+agent: "claude:opus:python-pedro:implementer"
+shell_pid: "2435"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -252,3 +253,5 @@ ls doc/core/AGENTS.md doc/core/creator-kit.md
 ## Activity Log
 
 - 2026-07-16T19:58:13Z – system – Prompt created.
+- 2026-07-16T21:07:07Z – claude:opus:python-pedro:implementer – shell_pid=2435 – Assigned agent via action command
+- 2026-07-16T21:14:23Z – claude:opus:python-pedro:implementer – shell_pid=2435 – Ready for review: reproduction gate GREEN — generated tree byte-identical to d024682 (same git tree object 8d90209, all 12 files). getting-started.md intact. Builder pure and separate from publisher; publish guarded to CI-on-main; no force-push performed.
