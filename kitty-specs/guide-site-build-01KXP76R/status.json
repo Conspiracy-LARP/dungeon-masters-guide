@@ -1,18 +1,18 @@
 {
-  "event_count": 45,
-  "last_event_id": "01KXPDBT0NJYEP6JQ5WTB6566R",
-  "materialized_at": "2026-07-16T21:29:45.749494+00:00",
+  "event_count": 53,
+  "last_event_id": "01KXPEPPXTPM742T5FY13RPRZQ",
+  "materialized_at": "2026-07-16T21:53:11.610052+00:00",
   "mission_number": "",
   "mission_slug": "guide-site-build-01KXP76R",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 5,
+    "approved": 6,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 1,
+    "in_progress": 0,
     "in_review": 1,
     "planned": 2
   },
@@ -32,11 +32,11 @@
       "last_transition_at": "2026-07-16T21:04:56.079171+00:00"
     },
     "WP03": {
-      "actor": "claude:opus:frontend-freddy:implementer",
-      "force_count": 0,
-      "lane": "in_progress",
-      "last_event_id": "01KXPC1VG02ZGJAST1HJHPYPFQ",
-      "last_transition_at": "2026-07-16T21:06:51.008431+00:00"
+      "actor": "user",
+      "force_count": 1,
+      "lane": "approved",
+      "last_event_id": "01KXPEPPXTPM742T5FY13RPRZQ",
+      "last_transition_at": "2026-07-16T21:53:11.610052+00:00"
     },
     "WP04": {
       "actor": "claude:opus:reviewer-renata:reviewer",
