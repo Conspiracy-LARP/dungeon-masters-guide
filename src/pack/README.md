@@ -29,6 +29,10 @@ ever appear on a client-facing surface (see the "membrane" section of the creato
   file to an LLM (Claude Code, Codex, or similar) in a fresh session and say "let's begin"; it interviews
   you (firewalling your real identity *out* of the fiction), helps you map your corner of the imagined
   world, and does almost all of the building. Start here.
+- **[`premise.md`](premise.md)** — the world itself. *What if it were all true?* — the Wilson and Shea
+  lineage (1975), and what follows from taking it seriously: a world staffed, old, self-contradicting,
+  unbearably banal, and understood by nobody, not even the people running it. The only page describing
+  what is true *inside* the fiction.
 - **[`getting-started.md`](getting-started.md)** — the practical on-ramp: setting up a workspace (a
   private parent repo with this kit as a submodule), and the three-move interview the LLM runs before it
   writes a single artifact — firewall your real identity, map your corner, generate build prompts.

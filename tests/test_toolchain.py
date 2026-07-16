@@ -32,7 +32,19 @@ from pathlib import Path
 
 #: Directories that legitimately hold no first-party source. Everything else under the
 #: repo root that ends in `.py` is code a gate is supposed to look at.
-_NOT_SOURCE = frozenset({".git", ".venv", ".mypy_cache", ".pytest_cache", "site", "__pycache__"})
+_NOT_SOURCE = frozenset(
+    {
+        # spec-kitty lane worktrees: eight checked-out copies of this repo. Runtime state,
+        # gitignored, and not source — counting them makes the gate compare 22 against 128.
+        ".worktrees",
+        ".git",
+        ".venv",
+        ".mypy_cache",
+        ".pytest_cache",
+        "site",
+        "__pycache__",
+    }
+)
 
 
 def _first_party_python_files(repo_root: Path) -> set[Path]:

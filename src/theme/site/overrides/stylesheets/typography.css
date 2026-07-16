@@ -141,3 +141,11 @@ body {
 .guide-ai-pointer a:hover {
   color: var(--md-accent-fg-color);
 }
+
+/* Version stamp — small, quiet, on every page (stakeholder requirement). */
+.guide-version {
+  text-align: center;
+  padding: 0.6rem 0 1.2rem;
+  font-size: 0.7rem;
+  opacity: 0.65;
+}

@@ -58,8 +58,9 @@ site a tasteful "referee's manual" aesthetic as an homage, but readability comes
   source" link per page). **Astro Starlight** is a fine, more polished alternative if you prefer.
 - Landing page: the "What is this?" pitch from `creator-kit.md`.
 - Left-nav / reading order (mirror `src/pack/README.md` and the kit's companion map):
-  1. `creator-kit.md` (the hub / quick read)
-  2. `getting-started.md`
+  1. `creator-kit.md` (the introduction / hub — the quick read)
+  2. `premise.md` (the world itself — added 2026-07-17)
+  3. `getting-started.md`
   3. `storytelling.md`
   4. `philosophy.md`
   5. `improvisation.md`
@@ -75,7 +76,7 @@ site a tasteful "referee's manual" aesthetic as an homage, but readability comes
 
 `src/pack/` contains the guide and nothing else, but not every file is a *chapter*:
 
-- **Chapters** — the ten documents in the reading order above. These are the book, in that order.
+- **Chapters** — the eleven documents in the reading order above, in that order.
 - **Not chapters, still published** — `README.md` (the pack's own index; the front door of the `pack`
   branch) and `start.md` (the machine bootstrap, published as `/AGENTS.md`). Both ship as pages and raw
   markdown; neither belongs in the printed book's flow.

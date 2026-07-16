@@ -431,10 +431,21 @@ def test_swapping_the_base_moves_every_generated_address(
     """
     original_base = config.base_url
 
+    # The bootstrap and the human on-ramp quote the base deliberately — they must print an
+    # address a cold model or a person can act on (BOOTSTRAP_MAY_QUOTE_THE_BASE). Their raw
+    # copies, rendered pages and the search index that carries their text survive by design.
+    # Everything else must follow the configured base.
+    def _is_declared_exception(rel: str) -> bool:
+        name = Path(rel).name
+        return name in {"AGENTS.md", "getting-started.md", "start.md"} or rel.startswith(
+            ("getting-started/", "start/", "search/")
+        )
+
     survivors = [
         str(path.relative_to(swapped_site))
         for path in _text_files(swapped_site)
         if original_base in path.read_text(encoding="utf-8", errors="ignore")
+        and not _is_declared_exception(str(path.relative_to(swapped_site)))
     ]
     assert not survivors, (
         f"after rebuilding with {_OTHER_BASE}, these files still contain {original_base}: "
@@ -459,21 +470,40 @@ def test_swapping_the_base_moves_every_generated_address(
     )
 
 
-def test_the_pack_declares_no_absolute_address_of_itself(config: BuildConfig) -> None:
+#: The only two documents allowed to quote the deployed address, and why.
+#:
+#: The bootstrap's whole job is to be fetched cold by a model that has nothing else: it
+#: cannot derive an address it was not given. `getting-started.md` must print a URL a human
+#: can paste. Neither can be expressed relatively, so this is a real exception, taken
+#: deliberately on 2026-07-17 rather than discovered later.
+#:
+#: The cost is stated plainly: changing the base is a one-value change **plus these two
+#: prose edits** (url-map's Amendment rule). SC-006's promise holds for every generated
+#: address; it does not hold for the two the guide speaks aloud.
+#:
+#: The allow-list is the point. A *third* document quoting the base still fails here.
+BOOTSTRAP_MAY_QUOTE_THE_BASE: Final[frozenset[str]] = frozenset({"start.md", "getting-started.md"})
+
+
+def test_only_the_bootstrap_quotes_an_absolute_address_of_itself(
+    config: BuildConfig,
+) -> None:
     """The premise the swap test rests on, pinned down rather than assumed.
 
-    If the guide's prose ever quotes the deployed base, the swap above stops being a
-    build question and becomes a content one (url-map's Amendment rule) — and this test
-    is where that is discovered.
+    If any *other* document quotes the deployed base, the swap above stops being a build
+    question and becomes a content one (url-map's Amendment rule) — and this test is where
+    that is discovered.
     """
-    quoting = [
+    quoting = {
         path.name
         for path in config.pack_dir.glob("*.md")
         if "conspiracy-larp.github.io" in path.read_text(encoding="utf-8")
-    ]
-    assert not quoting, (
-        f"{quoting} quote the deployed base. Changing the base is then a content change "
-        "too (C-006, url-map Amendment rule) — escalate rather than editing the pack."
+    }
+    unexpected = sorted(quoting - BOOTSTRAP_MAY_QUOTE_THE_BASE)
+    assert not unexpected, (
+        f"{unexpected} quote the deployed base. Only the bootstrap may: it is fetched cold "
+        "and cannot derive an address. Changing the base is then a content change too "
+        "(C-006, url-map Amendment rule) — escalate rather than editing the pack."
     )
 
 

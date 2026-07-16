@@ -8,7 +8,7 @@ from pathlib import Path
 import click
 
 from build.book import (
-    DEFAULT_OUTPUT_DIR,
+    DEFAULT_OUTPUT_DIR as BOOK_OUTPUT_DIR,
     EXPECTED_PDF_SECONDS,
     PINNED_PANDOC_IMAGE,
     BookError,
@@ -187,12 +187,12 @@ _output_option = click.option(
     "output_dir",
     type=click.Path(file_okay=False, path_type=Path),
     default=None,
-    help=f"Where to write the book. [default: {DEFAULT_OUTPUT_DIR}]",
+    help=f"Where to write the book. [default: {BOOK_OUTPUT_DIR}]",
 )
 
 
 def _resolve_output(output_dir: Path | None) -> Path:
-    return output_dir if output_dir is not None else _repo_root() / DEFAULT_OUTPUT_DIR
+    return output_dir if output_dir is not None else _repo_root() / BOOK_OUTPUT_DIR
 
 
 @book.command("assemble")

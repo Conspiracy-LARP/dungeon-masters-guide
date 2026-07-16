@@ -23,6 +23,7 @@ tell the LLM "let's begin," and it will interview you and start.*
 *This is the **quick read** — the whole gist in one sitting. Several themes are summarised here in a
 paragraph and expanded in their own companion documents, so you can go deep only where you want to:*
 
+> - **[`premise.md`](premise.md)** — the world itself: what if it were all true, where the idea came from, and what must follow.
 > - **[`getting-started.md`](getting-started.md)** — the on-ramp: your workspace, and the interview the LLM runs before it builds anything.
 > - **[`philosophy.md`](philosophy.md)** — the detailed *why*: conspiracy steals real conversations; our answer; and why it's a fight worth joining.
 > - **[`storytelling.md`](storytelling.md)** — the whole craft of the telling: what an alternate reality game is, how diegetic (no-narrator) storytelling works, the realism engine that makes an artifact convincing, and the tells that stop it being quoted as evidence.

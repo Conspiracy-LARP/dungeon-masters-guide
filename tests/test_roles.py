@@ -274,12 +274,18 @@ def test_roles_lint_passes_against_the_real_pack() -> None:
     assert "OK" in result.output
 
 
-def test_real_pack_declares_ten_chapters(real_repo_config: BuildConfig) -> None:
-    """The reading order is specified, not invented — doc/build.md."""
+def test_real_pack_declares_the_specified_chapters(real_repo_config: BuildConfig) -> None:
+    """The reading order is specified, not invented — doc/build.md.
+
+    `premise.md` joined at position 2 on 2026-07-17 (stakeholder). The specification moved
+    first, in doc/build.md; this test follows it. It is not a count for its own sake — it
+    pins the exact order, so a document silently reordered fails here.
+    """
     documents = load_documents(real_repo_config.pack_dir, real_repo_config)
     book = chapters(documents)
     assert [d.filename for d in book] == [
         "creator-kit.md",
+        "premise.md",
         "getting-started.md",
         "storytelling.md",
         "philosophy.md",
