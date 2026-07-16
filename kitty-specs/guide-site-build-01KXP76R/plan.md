@@ -34,11 +34,24 @@ as readable text — a thing we do not control and cannot test locally — so pr
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-**Skipped — no charter exists.** `spec-kitty charter context` reports `mode: missing` for both `specify`
-and `plan`; `.kittify/charter/charter.md` is absent. No charter gates to evaluate, and this is not
-treated as a violation.
+**Re-evaluated 2026-07-16 — a charter now exists.** It did not when this plan was written; one was
+created mid-mission because `agent action implement` refuses to run without it (`charter_source
+missing`). Generated via `charter interview --defaults --profile minimal`, so it is stock defaults, not a
+considered statement about this project.
 
-Two built-in directives were applied regardless, and both pass:
+**No MUST principle is violated.** Checked statement by statement:
+
+| Charter statement | Force | Assessment |
+|---|---|---|
+| "Use the project's declared test approach" | SHOULD | Pass — pytest + lints + two behavioural tests, declared above |
+| "Only require the quality gates explicitly declared by this project" | SHOULD | Pass |
+| "Use only the languages, frameworks, and tools explicitly declared" | SHOULD | Pass — all in Technical Context |
+| "At least one focused reviewer approves before merge" | SHOULD | Pass — the implement-review loop |
+| "Must run on macOS and Linux developer environments" | **MUST** | Pass — Python + containerised pandoc/TeX |
+| "CLI operations should complete quickly (typically under 2 seconds)" | SHOULD | **Tension** — `guide book pdf` exceeds this by design; NFR-005 budgets 5 minutes. Recorded as analysis finding CH1 (low): a stock default scoped to product CLIs, and this project ships none. |
+| DIR-001 "Keep spec, plan, tasks, implementation, review artifacts consistent" | warn | Pass — and the reason this section was updated rather than left stale |
+
+Two built-in directives also apply, and both pass:
 
 - **DIRECTIVE_003 (Decision Documentation)** — the PDF toolchain fork is recorded as decision
   `01KXP7BCG6XFDHDRGZ57NXG90Q` with rationale and rejected alternative. R1–R8 in `research.md` each
@@ -71,24 +84,55 @@ kitty-specs/guide-site-build-01KXP76R/
 
 ```
 src/pack/                # THE GUIDE — canonical, flat, 12 .md files. Read-only to this mission (C-006).
-src/build/               # New. Python/click CLIs, Poetry-managed:
-├── roles.py             #   parse the nav declaration; resolve document roles; lint (FR-011)
-├── llms.py              #   derive llms.txt + llms-full.txt (FR-005, FR-006)
-├── book.py              #   assemble chapters into the book source, flatten print cross-refs (FR-003, FR-004)
-├── packbranch.py        #   build the orphan mirror: rename + rewrite refs (FR-009, FR-010)
-└── links.py             #   link/invariant check across both branches (FR-013, C-001)
-src/theme/               # New. Palette + typography overrides only (NFR-004), plus the LaTeX template.
-tests/                   # New. pytest for the above.
-mkdocs.yml               # New. Site config AND the single source of reading order + roles (R5).
-pyproject.toml           # New. Poetry.
-.github/workflows/       # New. Build, lint, deploy Pages, mirror the pack branch (FR-012).
-doc/build.md             # Existing brief. The requirements source; not modified by this mission.
+
+mkdocs.yml               # WP02. Site config AND the single declaration of reading order + roles (R5).
+pyproject.toml           # WP02. Poetry. Packages src/build only — src/pack is content, not a package.
+poetry.lock
+
+src/build/               # Python/click CLIs, Poetry-managed. Command surface: `guide <group> <cmd>`.
+├── cli.py               #   WP02. The `guide` click group.
+├── config.py            #   WP02. The ONE base-URL helper. Nothing else composes a URL. (NFR-001)
+├── roles.py             #   WP02. Document model, role resolution, published_name (FR-011)
+│                        #         → `guide roles lint | list | check-drift`
+├── rename.py            #   WP02. Reference rewriting, boundary-aware (FR-010). Shared by WP03 + WP06.
+├── provenance.py        #   WP02. Every output traces to the pack (NFR-003)
+│                        #         → `guide verify provenance --output <dir>`
+├── site.py              #   WP03. Landing-page derivation, AI pointer, raw-md publishing
+├── book.py              #   WP04. Chapter assembly + print cross-ref flattening
+├── llms.py              #   WP05. llms.txt / llms-full.txt
+├── packbranch.py        #   WP06. The orphan mirror
+└── links.py             #   WP07. Link/invariant check across both branches
+
+src/theme/
+├── site/                # WP03. Palette + typography ONLY (NFR-004). CSS ships via custom_dir —
+│   └── overrides/       #       NOT extra_css, which resolves into src/pack/. See below.
+└── book/                # WP04. LaTeX template + pinned fonts.
+
+tests/                   # pytest. Temporary-pack fixtures — never the live src/pack/.
+spike/                   # WP01. FINDINGS.md only; the spike itself is removed.
+doc/acceptance/          # WP09. Behavioural evidence (SC-001/002/003).
+.github/workflows/       # WP08. publish.yml — build, lint, deploy Pages, mirror the pack branch.
+doc/build.md             # The requirements source. Not modified by this mission.
 ```
+
+**Two traps this tree encodes, both found by building rather than reasoning** (WP02):
+
+- **`extra_css` resolves relative to `docs_dir`, which is `src/pack/`.** Declaring it would write build
+  assets into the product (C-002, C-006). It does *not* abort on a missing file — it exits 0 and ships a
+  silent 404, which is the worse failure. CSS ships through `theme.custom_dir` instead.
+- **`theme.custom_dir` is validated eagerly**, so it cannot be declared before the directory exists — a
+  config naming a missing path aborts every build in the four lanes that depend on WP02. WP03 adds both
+  hooks together with their files.
 
 **Structure Decision**: Single project. `src/pack/` is input and is never written to by the build
 (C-002, C-006); `src/build/` holds the derivation scripts; `src/theme/` holds the bounded styling for
-both output systems. This preserves the repo's existing `src/` ↔ `doc/` split, in which `doc/` is
-documentation *about* the guide and never ships.
+both output systems, split `site/` ↔ `book/` so WP03 and WP04 own disjoint surfaces. This preserves the
+repo's existing `src/` ↔ `doc/` split, in which `doc/` is documentation *about* the guide and never
+ships.
+
+*Updated 2026-07-16 to match what WP01 and WP02 actually built (analysis finding I1). The earlier tree
+omitted five modules, the theme split, and two directories — the map an implementer reads first should
+not be fiction.*
 
 ## Complexity Tracking
 

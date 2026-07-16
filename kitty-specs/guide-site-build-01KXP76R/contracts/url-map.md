@@ -23,8 +23,22 @@ domain root. `{base}` below stands for that value. No component may hard-code a 
 
 **C1 — `.md` must be served as readable text.** Not a download, not converted to HTML. This is the
 condition the whole machine column rests on, it is decided by the host rather than by us, and its
-failure is invisible from the site. **Unverified at plan time** — IC-01 exists solely to settle it
-against a real deployment before anything else is built (R3, R-001).
+failure is invisible from the site.
+
+> **CONFIRMED 2026-07-16 by WP01** against the real deployment. GitHub Pages serves `.md` from the
+> project-site subpath as **`content-type: text/markdown; charset=utf-8`**, with **no
+> `Content-Disposition`**, body delivered as markdown **source**. A plain GET returns readable text.
+> **The map above stands unchanged; no fallback is adopted and the Amendment rule is not triggered.**
+> Verbatim headers and reasoning: `spike/FINDINGS.md` on the WP01 lane branch. Risk R-001 does not
+> materialise.
+>
+> Two notes for downstream work:
+> - **`.txt` twins are a proven escape hatch** (`text/plain; charset=utf-8`) if GitHub ever remaps `.md`.
+>   **Extensionless twins are not** — they serve as `application/octet-stream`, i.e. worse than the
+>   problem they would solve. Strike them from the fallback order in R3.
+> - The content-type is the host's choice and is **not pinned by anything in this repo**. This is a
+>   snapshot, not a guarantee; if it ever changes, the machine column fails silently while the site looks
+>   perfect.
 
 **C2 — the subpath is real.** `{base}` ends in `/dungeon-masters-guide/`. Every generated link —
 `llms.txt` entries, per-page raw-markdown pointers, the PDF link — must be subpath-correct. Root-relative

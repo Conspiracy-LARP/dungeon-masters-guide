@@ -207,6 +207,27 @@ don't build it.
 
 ### Subtask T016 – `.nojekyll`, subpath correctness, responsive and contrast verification
 
+**Three additions since this prompt was written** — read them before starting; they resolve analysis
+findings C2 and C3, and one carries a trap WP02 proved:
+
+- **Add the theme hooks yourself, together with the files they name.** WP02 deliberately did NOT
+  pre-declare them, and `mkdocs.yml` documents why: `theme.custom_dir` is validated eagerly, so naming a
+  directory before it exists aborts every build in the four lanes depending on WP02; and **`extra_css`
+  resolves relative to `docs_dir`, which is `src/pack/`** — declaring it would write build assets into
+  the product (C-002, C-006) and fail the role lint. **Ship CSS through `custom_dir`**, i.e.
+  `src/theme/site/overrides/stylesheets/extra.css` referenced from a `main.html` override. This is a
+  small, sanctioned edit to WP02's `mkdocs.yml`, not an ownership violation.
+- **Enable MkDocs link validation** (`validation.links.unrecognized_links: warn`, plus `anchors`) so
+  `--strict` fails on a broken internal link in the rendered site. FR-013 requires cross-references
+  resolve on *every* published surface; WP07 covers the two branches and WP04 T022 covers the book's
+  flattened references, so this closes the site — the last uncovered surface (finding **C2**). Note
+  WP02 already set `validation.nav.omitted_files: warn`; follow that pattern.
+- **Assert the base-URL swap for the site's URLs** (finding **C3**). WP05 T026 tests it for
+  `llms.txt`/`llms-full.txt`, but WP03 also generates addresses — the AI pointer, `rel="alternate"`,
+  the PDF link. Build with base A, rebuild with base B, assert every generated address changed and none
+  retained A. This is the test that catches a hard-coded hostname, and without it NFR-001/SC-006 hold for
+  the machine files but not the site.
+
 - **Purpose**: The conditions the whole surface rests on, verified rather than assumed.
 
 - **Steps**:
@@ -239,6 +260,9 @@ Mandatory cases:
 - No published raw document contains an unrewritten `start.md` reference.
 - `.nojekyll` is present in the output.
 - No root-relative links in the built HTML.
+- **Base-URL swap**: rebuild with a different base; every generated address follows, none retains the old
+  one (C3, NFR-001, SC-006).
+- **A broken internal link fails `mkdocs build --strict`** once link validation is enabled (C2, FR-013).
 - Landing-page extraction fails loudly when the expected section is absent.
 
 ## Risks & Mitigations
@@ -250,6 +274,8 @@ Mandatory cases:
 | Root-relative links 404 on the subpath | T016 greps the built output |
 | Jekyll eats the raw markdown | `.nojekyll` emitted and asserted |
 | Wide tables overflow on mobile | Test at 320px with the real chapters |
+| A hard-coded hostname survives in the site while `llms.txt` is clean | Base-swap assertion in T016 (C3) |
+| `extra_css` writes into `src/pack/` — a C-002/C-006 violation the role lint would then flag | Ship CSS via `custom_dir`; WP02 proved this and documented it in `mkdocs.yml` |
 | An authored landing page drifts from the kit | Derive it; fail loudly if extraction breaks |
 
 ## Review Guidance

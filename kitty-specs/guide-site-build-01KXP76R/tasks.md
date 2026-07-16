@@ -96,10 +96,10 @@ week one rather than week four.
 **Independent test**: a recorded, real HTTP response for a `.md` on a real Pages deployment, with its
 content-type, plus a confirmed or amended `contracts/url-map.md`.
 
-- [ ] T001 Stand up a throwaway Pages deployment with `.nojekyll` and probe files (WP01)
-- [ ] T002 Record the actual HTTP response for `.md`, and for `.txt`/extensionless twins (WP01)
-- [ ] T003 Decide: confirm the URL map, or specify the fallback (WP01)
-- [ ] T004 Amend `contracts/url-map.md`; escalate if the guide's own text must change (WP01)
+- [x] T001 Stand up a throwaway Pages deployment with `.nojekyll` and probe files (WP01)
+- [x] T002 Record the actual HTTP response for `.md`, and for `.txt`/extensionless twins (WP01)
+- [x] T003 Decide: confirm the URL map, or specify the fallback (WP01)
+- [x] T004 Amend `contracts/url-map.md`; escalate if the guide's own text must change (WP01)
 
 **Risks**: The finding may invalidate the URL map. If so, `src/pack/start.md`, `README.md` and
 `technical-suggestions.md` all quote addresses to readers — and content is out of scope. Escalate;
@@ -117,14 +117,14 @@ order and document roles that everything else derives from.
 document; `roles.py` resolves `start.md`'s `published_name` to `AGENTS.md`; the provenance check fails an
 output file with no source.
 
-- [ ] T005 Poetry project, dependencies, dev tooling, click entry point, test harness (WP02)
-- [ ] T006 `mkdocs.yml`: the nav (ten chapters) and the `not_in_book` declaration (WP02)
-- [ ] T007 `config.py`: the single base-URL configuration (WP02)
-- [ ] T008 `roles.py`: Document model, role resolution, `published_name` (WP02)
-- [ ] T009 `rename.py`: reference rewriting, with the `getting-started.md` trap covered (WP02)
-- [ ] T010 Role lint — an undeclared document fails the build (WP02)
-- [ ] T011 Prose drift check — warn on branches, fail on `main`, never fix (WP02)
-- [ ] T045 Provenance check — every published file traces back to the pack, NFR-003 (WP02)
+- [x] T005 Poetry project, dependencies, dev tooling, click entry point, test harness (WP02)
+- [x] T006 `mkdocs.yml`: the nav (ten chapters) and the `not_in_book` declaration (WP02)
+- [x] T007 `config.py`: the single base-URL configuration (WP02)
+- [x] T008 `roles.py`: Document model, role resolution, `published_name` (WP02)
+- [x] T009 `rename.py`: reference rewriting, with the `getting-started.md` trap covered (WP02)
+- [x] T010 Role lint — an undeclared document fails the build (WP02)
+- [x] T011 Prose drift check — warn on branches, fail on `main`, never fix (WP02)
+- [x] T045 Provenance check — every published file traces back to the pack, NFR-003 (WP02)
 
 **Parallel opportunities**: T007, T009 and T045 are independent of the rest once T005 lands.
 
