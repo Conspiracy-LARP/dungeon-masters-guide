@@ -8,8 +8,10 @@ from pathlib import Path
 import click
 
 from build.config import BuildConfig, ConfigError, load_config
+from build.llms import DEFAULT_OUTPUT_DIR, LlmsError, write_full, write_index
 from build.provenance import ProvenanceError, verify_provenance
 from build.roles import (
+    Document,
     RoleError,
     check_declaration,
     check_drift,
@@ -133,6 +135,75 @@ def roles_check_drift(branch: str | None) -> None:
         "Warning only on a feature branch; this WILL fail on main. Fix the prose by hand.",
         fg="yellow",
         err=True,
+    )
+
+
+@guide.group()
+def llms() -> None:
+    """The machine-readable surfaces: llms.txt and llms-full.txt.
+
+    Both are generated from the declaration and the pack (NFR-003). Neither is ever
+    hand-written: a hand-written index is a second copy of the reading order, and it
+    starts lying the first time a chapter moves.
+    """
+
+
+def _documents() -> tuple[BuildConfig, list[Document]]:
+    config = _config()
+    try:
+        return config, load_documents(config.pack_dir, config)
+    except RoleError as exc:
+        raise click.ClickException(str(exc)) from exc
+
+
+@llms.command("index")
+@click.option(
+    "--output",
+    "output_dir",
+    default=DEFAULT_OUTPUT_DIR,
+    show_default=True,
+    type=click.Path(file_okay=False, path_type=Path),
+    help="Directory to write llms.txt into. Created if absent.",
+)
+def llms_index(output_dir: Path) -> None:
+    """Generate llms.txt — the machine index, with the bootstrap first (FR-005).
+
+    Follows the llmstxt.org convention with one deliberate deviation: the first entry is
+    not a document but a procedure. A model told to help someone build a node should
+    follow the bootstrap, not read ten chapters and then ask what they want.
+    """
+    config, documents = _documents()
+    try:
+        written = write_index(config, documents, output_dir)
+    except LlmsError as exc:
+        raise click.ClickException(str(exc)) from exc
+    click.secho(
+        f"Wrote {written} ({len(chapters(documents))} chapters, bootstrap first).", fg="green"
+    )
+
+
+@llms.command("full")
+@click.option(
+    "--output",
+    "output_dir",
+    default=DEFAULT_OUTPUT_DIR,
+    show_default=True,
+    type=click.Path(file_okay=False, path_type=Path),
+    help="Directory to write llms-full.txt into. Created if absent.",
+)
+def llms_full(output_dir: Path) -> None:
+    """Generate llms-full.txt — every chapter concatenated, in reading order (FR-006).
+
+    Chapters only, byte-for-byte. The bootstrap is not buried in here; it has its own
+    address.
+    """
+    config, documents = _documents()
+    try:
+        written = write_full(config, documents, output_dir)
+    except LlmsError as exc:
+        raise click.ClickException(str(exc)) from exc
+    click.secho(
+        f"Wrote {written} ({len(chapters(documents))} chapters, in reading order).", fg="green"
     )
 
 
