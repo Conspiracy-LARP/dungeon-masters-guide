@@ -21,8 +21,8 @@ subtasks:
 - T016
 phase: Phase 2 - The surfaces
 assignee: ''
-agent: "claude:opus:frontend-freddy:implementer"
-shell_pid: "18239"
+agent: "claude:opus:reviewer-renata:reviewer"
+shell_pid: "19221"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -295,3 +295,5 @@ Mandatory cases:
 - 2026-07-16T21:34:06Z – claude:opus:reviewer-renata:reviewer – shell_pid=15762 – Started review via action command
 - 2026-07-16T21:44:17Z – user – shell_pid=15762 – Moved to planned
 - 2026-07-16T21:45:02Z – claude:opus:frontend-freddy:implementer – shell_pid=18239 – Started implementation via action command
+- 2026-07-16T21:48:10Z – claude:opus:frontend-freddy:implementer – shell_pid=18239 – Cycle 1 fix: gitignore guard uses --no-index, Material canary reads palette stylesheet, table docstring corrected
+- 2026-07-16T21:48:40Z – claude:opus:reviewer-renata:reviewer – shell_pid=19221 – Started review via action command
