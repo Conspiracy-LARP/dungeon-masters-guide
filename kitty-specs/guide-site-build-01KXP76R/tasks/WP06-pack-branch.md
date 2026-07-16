@@ -18,8 +18,8 @@ subtasks:
 - T031
 phase: Phase 2 - The surfaces
 assignee: ''
-agent: "claude:opus:python-pedro:implementer"
-shell_pid: "2435"
+agent: "claude:opus:reviewer-renata:reviewer"
+shell_pid: "8264"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -255,3 +255,5 @@ ls doc/core/AGENTS.md doc/core/creator-kit.md
 - 2026-07-16T19:58:13Z – system – Prompt created.
 - 2026-07-16T21:07:07Z – claude:opus:python-pedro:implementer – shell_pid=2435 – Assigned agent via action command
 - 2026-07-16T21:14:23Z – claude:opus:python-pedro:implementer – shell_pid=2435 – Ready for review: reproduction gate GREEN — generated tree byte-identical to d024682 (same git tree object 8d90209, all 12 files). getting-started.md intact. Builder pure and separate from publisher; publish guarded to CI-on-main; no force-push performed.
+- 2026-07-16T21:14:54Z – claude:opus:reviewer-renata:reviewer – shell_pid=8264 – Started review via action command
+- 2026-07-16T21:17:20Z – user – shell_pid=8264 – Review passed: reproduction gate independently verified — 'guide pack build' output hashes to 8d90209a68a48d9b99ca6adc7df387a44410fc70, identical to d024682^{tree}. Gate mutation-tested three ways by the reviewer (corrupt README -> content diff; drop ethics.md -> only_reference; add leak.md -> only_generated), all red, so the gate can fail. AGENTS.md present / start.md absent; getting-started.md intact (3 refs in AGENTS.md, 1 in README.md, zero 'getting-AGENTS' anywhere); no unrewritten start.md refs; tree is 12 flat .md files, no machinery leak. Rename reuses WP02 rewrite_references() — no re.sub/.replace in packbranch.py. No force-push: origin/pack still d024682. Publish guard verified live: refuses off-CI (exit 1) and refuses CI on non-main. git diff src/pack/ empty. 118 passed, black clean, mypy clean. Anti-pattern checklist all PASS. Coordination note: src/build/cli.py is a shared surface (WP02-WP06 all register command groups); WP06's touch is the 'pack' group the WP mandates, additive only. Judgement calls upheld: skipping the push on an unchanged tree is correct (a fresh orphan tip per run gives consumers a spurious submodule diff for a tree that never moved, and satisfies 'no meaningfully different branch' more strictly than re-pushing); _clean_output_dir refusing unrecognised entries is right for a human-typed --out; render_documents rejecting duplicate published_name is correct fail-loud.
