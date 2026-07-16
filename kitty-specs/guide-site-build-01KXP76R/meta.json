@@ -12,5 +12,7 @@
   "purpose_tldr": "Publish the Dungeon Master's Guide as an attractive website, a printable book, and a one-URL bootstrap any LLM can follow to start building.",
   "slug": "guide-site-build-01KXP76R",
   "target_branch": "feat/guide-site-build",
-  "topology": "coord"
+  "topology": "coord",
+  "vcs": "git",
+  "vcs_locked_at": "2026-07-16T20:30:22.074904+00:00"
 }

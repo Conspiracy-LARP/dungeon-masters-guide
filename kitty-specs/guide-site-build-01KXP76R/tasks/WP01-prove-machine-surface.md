@@ -16,7 +16,8 @@ subtasks:
 - T004
 phase: Phase 1 - Foundation
 assignee: ''
-agent: claude
+agent: "claude:opus:researcher-robbie:researcher"
+shell_pid: "79084"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -245,3 +246,5 @@ verbatim.
 ## Activity Log
 
 - 2026-07-16T19:58:13Z – system – Prompt created.
+- 2026-07-16T20:30:29Z – claude:opus:researcher-robbie:researcher – shell_pid=79084 – Assigned agent via action command
+- 2026-07-16T20:38:22Z – claude:opus:researcher-robbie:researcher – shell_pid=79084 – Yes — the machine surface works: GitHub Pages serves raw .md from the subpath as text/markdown; charset=utf-8, readable source with no download disposition, so C1 is confirmed and the URL map needs no amendment.
