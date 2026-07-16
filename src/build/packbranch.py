@@ -39,12 +39,13 @@ from __future__ import annotations
 
 import os
 import subprocess
-from dataclasses import dataclass
+import tempfile
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Final, Sequence
 
 from build.config import BuildConfig
-from build.rename import rewrite_references
+from build.rename import SOURCE_NAME, rewrite_references
 from build.roles import load_documents
 
 #: The published branch. Consumers pin a submodule to it.
@@ -56,6 +57,21 @@ PUBLISH_SOURCE_BRANCH: Final[str] = "main"
 
 #: The hand-built tip the automation must reproduce before it takes over (C-005).
 REFERENCE_COMMIT: Final[str] = "d024682"
+
+#: The commit whose ``src/pack/`` the hand build was rendered from — its *inputs*.
+#:
+#: ``39c2452`` was the tip of `main` at 20:01 on 2026-07-16; ``d024682`` was published by
+#: hand six minutes later, and its twelve files are exactly this commit's twelve pack
+#: documents with the bootstrap renamed. Pinning the inputs is what lets the reproduction
+#: gate be about the generator rather than about the prose (see :func:`verify_reproduction`).
+REFERENCE_INPUT_COMMIT: Final[str] = "39c2452"
+
+#: Where the pack lives in the repository, for reading a past commit's inputs out of git.
+#: The live build gets this from ``docs_dir``; a historical commit has no config to ask.
+PACK_PATH: Final[str] = "src/pack"
+
+#: The pack's index — published, but not a chapter. The branch's front door.
+PACK_INDEX: Final[str] = "README.md"
 
 #: The generating commit message — the branch's own statement of its contract.
 #:
@@ -293,6 +309,88 @@ def read_ref_tree(ref: str, repo_root: Path | None = None) -> dict[str, bytes]:
         )
         tree[name] = blob.stdout
     return tree
+
+
+def read_ref_pack(
+    dest: Path, ref: str = REFERENCE_INPUT_COMMIT, repo_root: Path | None = None
+) -> Path:
+    """Materialize ``src/pack/`` as it stood at ``ref`` into ``dest``.
+
+    The reproduction gate's *inputs*. Read out of the object database, flattened to bare
+    filenames exactly as ``docs_dir`` presents them, so the generator sees the same pack
+    the hand build saw. Nothing is checked out and the live pack is never touched
+    (C-002, C-006).
+    """
+    dest.mkdir(parents=True, exist_ok=True)
+    listing = _git(["ls-tree", "-r", "--name-only", ref, "--", PACK_PATH], repo_root=repo_root)
+    names = [line for line in listing.splitlines() if line]
+    if not names:
+        raise PackBranchError(
+            f"{ref} carries no {PACK_PATH}; it cannot be the hand build's input commit."
+        )
+
+    for name in names:
+        blob = subprocess.run(
+            ["git", "cat-file", "blob", f"{ref}:{name}"],
+            capture_output=True,
+            check=True,
+            cwd=repo_root,
+        )
+        (dest / Path(name).name).write_bytes(blob.stdout)
+    return dest
+
+
+def reference_config(config: BuildConfig, pack_dir: Path) -> BuildConfig:
+    """The declaration describing the reference inputs, not today's pack.
+
+    The hand build predates ``mkdocs.yml`` — no declaration of its own was ever recorded —
+    so the roles the generator needs are reconstructed from the reference pack itself:
+    the bootstrap and the index are the pack's two non-chapters, everything else is a
+    chapter. The chapter *order* is deliberately not reconstructed because the branch's
+    tree is flat: order cannot affect the bytes this gate compares, and inventing one
+    would be a second reading order for :mod:`build.roles` to disagree with.
+
+    ``base_url`` carries over from ``config`` untouched. It plays no part in the pack
+    tree, and naming a host here would put a second copy of it in the build (NFR-001).
+    """
+    names = sorted(p.name for p in pack_dir.glob("*.md"))
+    not_in_book = tuple(n for n in names if n in (PACK_INDEX, SOURCE_NAME))
+    nav = tuple(n for n in names if n not in not_in_book)
+
+    return replace(
+        config,
+        nav=nav,
+        nav_titles={},
+        not_in_book=not_in_book,
+        not_in_nav=not_in_book,
+        pack_dir=pack_dir,
+    )
+
+
+def verify_reproduction(
+    config: BuildConfig,
+    ref: str = REFERENCE_COMMIT,
+    input_ref: str = REFERENCE_INPUT_COMMIT,
+    repo_root: Path | None = None,
+) -> ComparisonResult:
+    """Regenerate the tree from the hand build's own inputs and compare it to ``ref``.
+
+    **This is the gate C-005 actually asked for, and the distinction is the whole point.**
+    Comparing a tree generated from *today's* ``src/pack/`` against ``d024682`` asserts
+    that the guide's content never changes — an edit to the prose reds it, which is both
+    wrong and guaranteed, since the pack is the product and editing it is the job. What
+    C-005 wanted proved is that the *automation* reproduces the hand build. That claim is
+    about the generator, so the inputs must be held fixed and the generator varied: pin
+    the inputs to ``input_ref``, regenerate, compare to ``ref``.
+
+    The gate then fires on exactly what it is guarding — a change in the generator that
+    would ship a different tree to the consumer whose submodule tracks this branch — and
+    stays silent on content, forever, without anyone re-baselining it.
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        pack_dir = read_ref_pack(Path(tmp) / "pack", ref=input_ref, repo_root=repo_root)
+        files = render_documents(pack_dir, reference_config(config, pack_dir))
+        return compare_against_ref(files, ref=ref, repo_root=repo_root)
 
 
 def compare_against_ref(
