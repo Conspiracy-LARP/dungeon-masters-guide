@@ -445,10 +445,47 @@ class _Reference:
     """What a pack filename resolves to for a reader who cannot click."""
 
     document: Document
-    #: Rendered as a standalone replacement, e.g. "Chapter 6, *Ethics* (page 88)".
+    #: Rendered as a standalone replacement, e.g. "Chapter 6, \\emph{Ethics} (page 88)".
     standalone: str
     #: Rendered as a parenthetical after a prose label, e.g. "(Chapter 6, ..., page 88)".
     parenthetical: str
+
+
+def _emphasised_title(title: str) -> str:
+    """A book title, italicised, in a form that survives *wherever it is substituted in*.
+
+    **Raw LaTeX, not markdown ``*``, and that is the whole point of this function.**
+
+    The obvious spelling is ``f"*{title}*"``. It is wrong, and it was wrong in a way no
+    test caught for a whole cycle, because a replacement is not a document — it is a
+    fragment spliced into prose the transform did not write and cannot see. Markdown
+    emphasis is delimiter-based, so its meaning depends entirely on what surrounds it,
+    and ``*`` cannot nest inside ``*``. The guide's chapter preambles are exactly that
+    shape::
+
+        *Companion to `creator-kit.md` (see §3). This is the practical on-ramp: ...*
+
+    Substituting markdown emphasis into that produces ``*Companion to Chapter 1, *Creator
+    Kit* (page ...)...*``, and pandoc's reader — correctly, per the markdown spec — closes
+    the outer emphasis at the second ``*``. The remainder of the preamble loses its
+    italic and two literal asterisks are typeset on the page. That shipped on the opening
+    page of 8 of the 10 chapters.
+
+    Raw inline LaTeX has no such dependence on its surroundings: pandoc carries
+    ``\\emph{...}`` through as a ``RawInline`` and it composes inside ``\\emph``,
+    ``\\textbf``, or nothing at all, identically. (LaTeX's own nested-``\\emph`` rule then
+    sets an italic title inside an italic preamble upright, which is the correct
+    typographic answer and is free.)
+
+    This makes the string print-only, which it already unavoidably was — ``\\pageref`` is
+    in there too, and :func:`retarget_for_html` never calls this. The title is escaped
+    because raw LaTeX means pandoc will not escape it for us.
+
+    The general rule, which is the lesson worth keeping: **a substitution must be
+    well-formed at the site it lands in, not merely well-formed on its own.** See
+    :func:`check_print_ready` for the guard, and note what that guard did *not* ask.
+    """
+    return f"\\emph{{{_tex_escape(title)}}}"
 
 
 def _reference_index(documents: Iterable[Document], config: BuildConfig) -> dict[str, _Reference]:
@@ -462,12 +499,16 @@ def _reference_index(documents: Iterable[Document], config: BuildConfig) -> dict
       as ``AGENTS.md`` (FR-010) — is not in the book at all, so there is no page to turn
       to. It resolves to its published URL, composed by ``config.absolute_url`` and
       nothing else (NFR-001). The reader types it, which is the only thing paper affords.
+
+    Every replacement built here is **emphasis-safe by construction** — see
+    :func:`_emphasised_title`. Nothing in this function may emit a markdown ``*``:
+    these strings land in prose whose emphasis the transform cannot see.
     """
     index: dict[str, _Reference] = {}
     for document in documents:
         if document.is_chapter:
             anchor = chapter_anchor(document.filename)
-            body = f"Chapter {document.position}, *{document.title}*"
+            body = f"Chapter {document.position}, {_emphasised_title(document.title)}"
             index[document.filename] = _Reference(
                 document=document,
                 standalone=f"{body} (page \\pageref{{{anchor}}})",
@@ -475,7 +516,7 @@ def _reference_index(documents: Iterable[Document], config: BuildConfig) -> dict
             )
         else:
             url = config.absolute_url(published_name(document.filename))
-            body = f"*{document.title}*, published at <{url}>"
+            body = f"{_emphasised_title(document.title)}, published at <{url}>"
             index[document.filename] = _Reference(
                 document=document,
                 standalone=body,
@@ -529,11 +570,12 @@ def flatten_for_print(
     only moment that matters — a human, holding paper, trying to follow a pointer that
     is not there.
 
-    What it does:
+    What it does (the title is raw ``\\emph`` rather than markdown ``*``, and
+    :func:`_emphasised_title` explains why that is not cosmetic):
 
-    - ``[`ethics.md`](ethics.md)`` → ``Chapter 6, *Ethics* (page 88)``
-    - ``[the moral floor](ethics.md)`` → ``the moral floor (Chapter 6, *Ethics*, page 88)``
-    - `` `ethics.md` `` in running prose → ``Chapter 6, *Ethics* (page 88)``
+    - ``[`ethics.md`](ethics.md)`` → ``Chapter 6, \\emph{Ethics} (page 88)``
+    - ``[the moral floor](ethics.md)`` → ``the moral floor (Chapter 6, \\emph{Ethics}, page 88)``
+    - `` `ethics.md` `` in running prose → ``Chapter 6, \\emph{Ethics} (page 88)``
     - ``[start.md](start.md)`` → the bootstrap's *published URL*, since it is not in the
       book and so has no page to point at.
 
@@ -575,9 +617,65 @@ def flatten_for_print(
     for character, replacement in PRINT_SUBSTITUTIONS.items():
         flattened = flattened.replace(character, replacement)
 
+    check_emphasis_safety(text, flattened)
     check_print_ready(flattened, config, resolved)
     check_font_coverage(flattened)
     return flattened
+
+
+#: The markdown delimiters whose meaning depends on what surrounds them.
+_EMPHASIS_DELIMITERS: Final[tuple[str, ...]] = ("*", "_")
+
+
+def check_emphasis_safety(source: str, flattened: str) -> None:
+    """Assert the flattening did not *introduce* a markdown emphasis delimiter (FR-004).
+
+    **This is the guard that was missing, and its absence is why literal asterisks were
+    typeset on the opening page of 8 of the 10 chapters for a whole review cycle.**
+
+    :func:`check_print_ready` asks "did the reference get replaced?" — a question about
+    the *action*. It cannot fail on this defect, because the reference genuinely was
+    replaced. What nobody asked was whether the replacement is still well-formed **in the
+    context it landed in**. A fragment spliced into prose the transform never parsed can
+    be perfectly well-formed alone and still break the span it lands inside; markdown
+    emphasis is delimiter-based, so ``*`` is not a character, it is a state change in
+    text this function's caller cannot see.
+
+    The invariant, and why it is stated as an inequality rather than an equality:
+
+    - Flattening may legitimately **remove** delimiters. ``[**ethics.md**](ethics.md)``
+      resolves to a standalone reference and the label's ``**`` goes with the label.
+    - Flattening may **never add** one. There is no delimiter this transform could add
+      that would be safe, because it does not know whether it is already inside a span.
+
+    So: emphasis delimiters may fall, never rise. That makes the check total over the
+    whole document rather than a pattern-match on the shapes we happened to think of —
+    any future replacement that reaches for ``*`` fails the build with this message
+    instead of reaching a printed page.
+
+    Args:
+        source: the markdown handed to :func:`flatten_for_print`.
+        flattened: what came back, substitutions applied.
+
+    Raises:
+        BookError: naming the delimiter and the count.
+    """
+    for delimiter in _EMPHASIS_DELIMITERS:
+        before = source.count(delimiter)
+        after = flattened.count(delimiter)
+        if after <= before:
+            continue
+        raise BookError(
+            f"Flattening introduced {after - before} markdown {delimiter!r} "
+            f"delimiter(s) ({before} → {after}). A cross-reference replacement is "
+            "spliced into prose this transform never parsed, so it may land inside an "
+            "already-emphasised span — and markdown cannot nest a delimiter inside "
+            f"itself. Pandoc closes the outer span early and typesets a literal "
+            f"{delimiter!r} on the page, at the end of a green build.\n"
+            "Build the replacement out of raw inline LaTeX instead, which composes "
+            "anywhere: see _emphasised_title() in src/build/book.py.\n"
+            "Do not fix this by editing src/pack/ — the prose is correct (C-002, C-006)."
+        )
 
 
 def check_print_ready(
@@ -779,16 +877,37 @@ def _run(runner: PandocRunner, args: list[str], *, what: str) -> None:
 
 
 #: XeLaTeX's way of telling you a glyph is absent: a log line, and a gap on the page.
-_MISSING_CHARACTER: Final[re.Pattern[str]] = re.compile(r"^Missing character:.*$", re.MULTILINE)
+#:
+#: **The line is NOT anchored at "Missing character", and that is the entire point of
+#: this comment.** XeLaTeX emits the warning, but the build never hears it from XeLaTeX
+#: — it hears it from pandoc, which relays it with its own severity prefix. A real
+#: captured line, from the pinned image (`tests/test_book.py` pins this verbatim)::
+#:
+#:     [WARNING] Missing character: There is no 🤖 (U+1F916) (U+1F916) in font [lmroman12-bold]:mapping=tex
+#:
+#: A ``^Missing character:`` pattern matched **zero** of those — for a whole review
+#: cycle. The guard was called on every render, read a log containing exactly the string
+#: it was hunting, and could not see it. So match the substring anywhere on the line and
+#: let the prefix be whatever the relaying tool decides it is; the payload is what we are
+#: after, not the packaging.
+_MISSING_CHARACTER: Final[re.Pattern[str]] = re.compile(r"^.*Missing character:.*$", re.MULTILINE)
 
 
 def _report_missing_glyphs(log: str, what: str) -> None:
     """Turn XeLaTeX's most dangerous warning into a failure.
 
-    ``check_font_coverage`` catches this before the render, from the source. This is the
-    belt to that braces, and it reads the one place that has the final say: XeLaTeX
-    itself, on the actual fonts it actually loaded. A run that logs "Missing character"
-    has produced a PDF with text missing from it and exited zero.
+    ``check_font_coverage`` catches this before the render, from the source, against a
+    hand-maintained allow-list. This is the belt to that braces, and it reads the one
+    place that has the final say: XeLaTeX itself, on the actual fonts it actually loaded.
+    A run that logs "Missing character" has produced a PDF with text missing from it and
+    exited zero.
+
+    **The two guards fail independently, which is the only reason both exist.**
+    ``COVERED_CHARACTERS`` is a human claim about what the fonts carry, and a human claim
+    verified by hand is wrong eventually — add a character to it without running
+    ``fc-list`` and the pre-render guard waves through a glyph the fonts do not have.
+    This function is what catches that, and it can only do so if its pattern matches the
+    log it is actually handed. It did not. See :data:`_MISSING_CHARACTER`.
     """
     missing = _MISSING_CHARACTER.findall(log)
     if missing:
@@ -857,8 +976,11 @@ def render_pdf(
             "pdf",
             "--pdf-engine",
             "xelatex",
-            # Two passes minimum, or every \pageref from T018's flattening prints as
-            # "??" — the cross-references would be flattened and then useless.
+            # Do not stop at a TeX error prompt. pandoc already runs the engine the two
+            # passes that T018's \pageref flattening needs (one to write the .aux, one to
+            # read it), so the page numbers are not this flag's doing — without it a
+            # render that hits an error would sit waiting on stdin that nobody is
+            # attached to, and CI would hang rather than fail.
             "--pdf-engine-opt=-interaction=nonstopmode",
             "--template",
             _relative(template, repo_root),

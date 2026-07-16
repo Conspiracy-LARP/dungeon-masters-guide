@@ -12,10 +12,12 @@ asserted against it would go red because someone edited the guide.
 
 from __future__ import annotations
 
+import json
 import re
+import shutil
 import subprocess
 from pathlib import Path
-from typing import Callable
+from typing import Any, Callable
 
 import pytest
 
@@ -24,8 +26,10 @@ from build.book import (
     PINNED_PANDOC_IMAGE,
     PRINT_SUBSTITUTIONS,
     BookError,
+    _report_missing_glyphs,
     assemble,
     chapter_anchor,
+    check_emphasis_safety,
     check_font_coverage,
     check_print_ready,
     flatten_for_print,
@@ -33,6 +37,45 @@ from build.book import (
     write_intermediates,
 )
 from build.config import BuildConfig
+
+
+def _pandoc_ast(markdown: str, tmp_path: Path) -> dict[str, Any] | None:
+    """Parse `markdown` with the real pandoc and return its AST, or None if absent.
+
+    Prefers the pinned image — the reader whose answer the PDF actually depends on — and
+    falls back to a local pandoc. Returns None rather than raising so the caller can skip
+    cleanly on a machine with neither.
+    """
+    source = tmp_path / "fragment.md"
+    source.write_text(markdown, encoding="utf-8")
+
+    if shutil.which("docker"):
+        command = [
+            "docker",
+            "run",
+            "--rm",
+            "--volume",
+            f"{tmp_path}:/data",
+            "--workdir",
+            "/data",
+            PINNED_PANDOC_IMAGE,
+        ]
+    elif shutil.which("pandoc"):
+        command = ["pandoc"]
+    else:
+        return None
+
+    result = subprocess.run(
+        [*command, "fragment.md", "--from", "markdown", "--to", "json"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:  # pragma: no cover - no image pulled, no network
+        return None
+    parsed: dict[str, Any] = json.loads(result.stdout)
+    return parsed
+
 
 # --------------------------------------------------------------------------------------
 # T017 — assembly
@@ -178,14 +221,14 @@ def test_a_bare_sibling_link_becomes_a_chapter_reference(pack_config: BuildConfi
     flattened = flatten_for_print("See [`ethics.md`](ethics.md) for the floor.", pack_config)
 
     assert "[`ethics.md`](ethics.md)" not in flattened
-    assert "Chapter 3, *Ethics* (page \\pageref{ch-ethics})" in flattened
+    assert "Chapter 3, \\emph{Ethics} (page \\pageref{ch-ethics})" in flattened
 
 
 def test_a_prose_labelled_link_keeps_its_prose(pack_config: BuildConfig) -> None:
     """A label that says something is kept; the reference is appended, not substituted."""
     flattened = flatten_for_print("See [the moral floor](ethics.md).", pack_config)
 
-    assert "the moral floor (Chapter 3, *Ethics*, page \\pageref{ch-ethics})" in flattened
+    assert "the moral floor (Chapter 3, \\emph{Ethics}, page \\pageref{ch-ethics})" in flattened
 
 
 def test_an_inline_code_filename_becomes_a_chapter_reference(pack_config: BuildConfig) -> None:
@@ -193,7 +236,7 @@ def test_an_inline_code_filename_becomes_a_chapter_reference(pack_config: BuildC
     flattened = flatten_for_print("Companion to `ethics.md`, which sets the floor.", pack_config)
 
     assert "`ethics.md`" not in flattened
-    assert "Companion to Chapter 3, *Ethics* (page \\pageref{ch-ethics})" in flattened
+    assert "Companion to Chapter 3, \\emph{Ethics} (page \\pageref{ch-ethics})" in flattened
 
 
 def test_an_inline_code_link_sample_is_left_alone(pack_config: BuildConfig) -> None:
@@ -276,6 +319,138 @@ def test_check_print_ready_catches_a_survivor(pack_config: BuildConfig) -> None:
 
 
 # --------------------------------------------------------------------------------------
+# T018 — the replacement must be well-formed WHERE IT LANDS, not merely in isolation
+#
+# Every flattening test above this line feeds the transform a bare sentence with no
+# surrounding emphasis. That is why a replacement built from markdown `*` shipped: it is
+# correct in a bare sentence and broken in the one construct the guide actually uses.
+# A reference is not a document — it is a fragment spliced into prose the transform never
+# parsed. These tests exercise the landing site, not the fragment.
+# --------------------------------------------------------------------------------------
+
+#: The real construct, verbatim in shape from `src/pack/getting-started.md:3-6`: an
+#: italic preamble whose emphasis span contains an inline-code cross-reference. Eight of
+#: the ten chapters open with one of these.
+_ITALIC_PREAMBLE: str = (
+    "*Companion to `ethics.md` (see §3). This is the practical on-ramp: how to set up a\n"
+    "place to work, and the shortest path there.*"
+)
+
+
+def test_a_reference_inside_an_italic_preamble_keeps_the_italic(
+    pack_config: BuildConfig,
+) -> None:
+    """The defect, at the source level: `*` cannot nest inside `*`.
+
+    `*Companion to Chapter 3, *Ethics* (page ...) ...*` is not "emphasis containing
+    emphasis" — markdown has no such reading. Pandoc closes the outer span at the second
+    delimiter, the rest of the preamble goes upright, and the two orphaned delimiters
+    typeset as literal asterisks. This asserts the shape that makes that impossible:
+    exactly the two delimiters the source itself wrote, and no more.
+    """
+    flattened = flatten_for_print(_ITALIC_PREAMBLE, pack_config)
+
+    assert "`ethics.md`" not in flattened  # the reference was resolved at all
+    assert "\\emph{Ethics}" in flattened  # ...and the title is still italicised
+    assert (
+        flattened.count("*") == 2
+    ), f"the emphasis span gained delimiters and will not survive pandoc: {flattened!r}"
+    assert flattened.startswith("*") and flattened.endswith("*")
+
+
+def test_no_reference_replacement_contains_a_markdown_delimiter(
+    pack_config: BuildConfig,
+) -> None:
+    """The invariant stated directly, against every reference the pack can produce.
+
+    Both kinds — a chapter, and a `not_in_book` document resolving to its URL — are
+    spliced into prose whose emphasis state the transform cannot see. Neither may carry a
+    delimiter whose meaning depends on that state. This is the property; the test above
+    is one construct that demonstrates it mattering.
+    """
+    from build.book import _reference_index
+    from build.roles import load_documents
+
+    index = _reference_index(load_documents(pack_config.pack_dir, pack_config), pack_config)
+    assert index  # guard the guard: an empty index would pass vacuously
+
+    for filename, reference in index.items():
+        for rendered in (reference.standalone, reference.parenthetical):
+            assert "*" not in rendered, f"{filename} → {rendered!r} carries a markdown '*'"
+            assert "_" not in rendered, f"{filename} → {rendered!r} carries a markdown '_'"
+
+
+def test_check_emphasis_safety_catches_an_introduced_delimiter() -> None:
+    """The guard has to bite. Hand it the exact string the old code produced."""
+    source = "*Companion to `ethics.md`, the floor.*"
+    broken = "*Companion to Chapter 3, *Ethics* (page \\pageref{ch-ethics}), the floor.*"
+
+    with pytest.raises(BookError, match="introduced 2 markdown"):
+        check_emphasis_safety(source, broken)
+
+
+def test_check_emphasis_safety_allows_delimiters_to_fall(pack_config: BuildConfig) -> None:
+    """The invariant is an inequality, not an equality, and this is why.
+
+    `[**ethics.md**](ethics.md)` resolves to a standalone reference and the label's `**`
+    goes with the label. Delimiters legitimately *fall*; only a rise is the defect. An
+    equality here would fail on the pack's own house style and be switched off.
+    """
+    flattened = flatten_for_print("See [**ethics.md**](ethics.md).", pack_config)
+
+    assert "*" not in flattened  # four delimiters fell, and that is correct
+    check_emphasis_safety("See [**ethics.md**](ethics.md).", flattened)  # does not raise
+
+
+def test_the_whole_assembled_book_flattens_emphasis_safely(pack_config: BuildConfig) -> None:
+    """End to end, on the real assembled shape: flattening never raises the count."""
+    assembled = assemble(pack_config)
+    flattened = flatten_for_print(assembled, pack_config)
+
+    check_emphasis_safety(assembled, flattened)  # does not raise
+    assert flattened.count("*") <= assembled.count("*")
+
+
+def test_pandoc_reads_the_flattened_preamble_as_one_emphasis_span(
+    pack_config: BuildConfig, tmp_path: Path
+) -> None:
+    """The claim, settled by the only authority that counts: pandoc's own reader.
+
+    The tests above assert a delimiter count, which is a proxy for this. This asserts the
+    thing itself — that the flattened preamble parses to a **single `Emph` node spanning
+    the whole sentence**, with no literal `*` reaching the page. It is the check that
+    would have failed on day one, because it asks what the reader will see rather than
+    what the transform meant.
+
+    Skipped without the pinned toolchain, deliberately: the answer has to come from the
+    real markdown reader. Hand-rolling a parser here to avoid the skip would be the same
+    mistake this test exists to catch, one level down.
+    """
+    flattened = flatten_for_print(_ITALIC_PREAMBLE, pack_config)
+    document = _pandoc_ast(flattened, tmp_path)
+    if document is None:
+        pytest.skip("neither the pinned pandoc image nor a local pandoc is available")
+
+    blocks = document["blocks"]
+    assert len(blocks) == 1 and blocks[0]["t"] == "Para", f"unexpected shape: {blocks}"
+
+    children = blocks[0]["c"]
+    assert len(children) == 1 and children[0]["t"] == "Emph", (
+        "the preamble is not one emphasis span — the flattening broke the span it landed "
+        f"in and part of the sentence escaped the italic: {children}"
+    )
+
+    span = children[0]["c"]
+    literals = [node["c"] for node in span if node["t"] == "Str"]
+    assert not [
+        text for text in literals if "*" in text
+    ], f"a literal asterisk was typeset on the page: {literals}"
+    assert {"t": "RawInline", "c": ["tex", "\\emph{Ethics}"]} in span
+    # The tail of the sentence is inside the span, not stranded outside it.
+    assert "there." in literals
+
+
+# --------------------------------------------------------------------------------------
 # T019 — characters
 # --------------------------------------------------------------------------------------
 
@@ -309,6 +484,145 @@ def test_an_uncovered_character_fails_loudly() -> None:
 def test_every_substitution_target_is_not_itself_a_covered_character() -> None:
     """A character in both lists would mean the substitution was never needed."""
     assert not set(PRINT_SUBSTITUTIONS) & COVERED_CHARACTERS
+
+
+# --------------------------------------------------------------------------------------
+# T019 — the post-render guard, which had no test and therefore did not work
+#
+# `check_font_coverage` (above) fires, and is tested. It reads the *source* against a
+# hand-maintained allow-list. `_report_missing_glyphs` reads the *log*, from XeLaTeX, on
+# the fonts it really loaded — it exists precisely to catch the allow-list being wrong,
+# which is the one thing `check_font_coverage` structurally cannot do. It shipped with a
+# regex anchored at `^Missing character:` while pandoc prefixes every such line with
+# `[WARNING] `, so it matched nothing it would ever be handed. Live call site, dead
+# effect, green build, missing glyph.
+#
+# These lines are CAPTURED, not composed. That distinction is the whole value of this
+# block: a test written against an invented log line passes against the broken regex too,
+# which is exactly how a guard gets a green test and no teeth.
+# --------------------------------------------------------------------------------------
+
+#: Captured from `pandoc --to pdf --pdf-engine xelatex` in the pinned image
+#: (PANDOC_IMAGE_DIGEST), rendering a document containing 🤖. Reproduce with:
+#:
+#:   printf '# Ethics \U0001F916\n' > /tmp/g.md && docker run --rm -v /tmp:/data -w /data \
+#:     pandoc/extra:3.8-ubuntu@sha256:21ce... g.md -t pdf --pdf-engine xelatex -o g.pdf
+#:
+#: Note the `[WARNING] ` prefix, and note that pandoc exited **0**.
+_REAL_MISSING_CHARACTER_LOG: str = (
+    "[WARNING] Missing character: There is no \U0001f916 (U+1F916) (U+1F916) in font "
+    "[lmroman12-bold]:mapping=tex\n"
+)
+
+#: The same warning from the book's own template, which loads the DejaVu family.
+#: Captured by the cycle-1 reviewer against the same image.
+_REAL_MISSING_CHARACTER_LOG_DEJAVU: str = (
+    "[WARNING] Missing character: There is no \U0001f916 (U+1F916) (U+1F916) in font "
+    "DejaVu Serif Bold/OT:script=\n"
+    "[WARNING] Missing character: There is no \U0001f916 (U+1F916) (U+1F916) in font "
+    "DejaVu Sans Bold/OT:script=l\n"
+)
+
+
+@pytest.mark.parametrize(
+    "log",
+    [_REAL_MISSING_CHARACTER_LOG, _REAL_MISSING_CHARACTER_LOG_DEJAVU],
+    ids=["default-fonts", "dejavu-template"],
+)
+def test_report_missing_glyphs_fires_on_real_pandoc_output(log: str) -> None:
+    """The guard must see the log it is actually handed — prefix and all.
+
+    This is the test whose absence was the defect. Feed it the bytes pandoc really
+    writes; if the pattern is ever re-anchored to the start of the line, this goes red
+    instead of the book quietly losing a character.
+    """
+    with pytest.raises(BookError, match="Missing character"):
+        _report_missing_glyphs(log, "Rendering the PDF")
+
+
+def test_report_missing_glyphs_names_every_warning_it_found() -> None:
+    """A count and the offending lines, or the reader has to go find the log themselves."""
+    with pytest.raises(BookError) as raised:
+        _report_missing_glyphs(_REAL_MISSING_CHARACTER_LOG_DEJAVU, "Rendering the PDF")
+
+    message = str(raised.value)
+    assert "2 'Missing character' warning(s)" in message
+    assert "DejaVu Serif Bold" in message  # the actual line, not a summary of it
+
+
+def test_report_missing_glyphs_is_quiet_on_a_clean_log() -> None:
+    """Guard the guard from the other side: it must not fire on a healthy render.
+
+    A check that fails on everything gets switched off just as fast as one that fails on
+    nothing. This log is a real successful render's output, warnings and all — pandoc
+    says plenty that is not this.
+    """
+    clean = (
+        "[WARNING] This document format requires a nonempty <title> element.\n"
+        "  Defaulting to 'book.print' as the title.\n"
+        "  To specify a title, use 'title' in metadata.\n"
+    )
+    _report_missing_glyphs(clean, "Rendering the PDF")  # does not raise
+
+
+def test_the_missing_character_pattern_is_not_anchored_past_pandocs_prefix() -> None:
+    """The regression, named at the level it actually happened.
+
+    `^Missing character:` is the spelling a careful person writes and it matches zero of
+    pandoc's real lines. The test above proves the guard fires today; this one says *why*
+    it used to not, so the next person to tidy this regex sees the trap before they set
+    it again.
+    """
+    from build.book import _MISSING_CHARACTER
+
+    assert _MISSING_CHARACTER.findall(_REAL_MISSING_CHARACTER_LOG), (
+        "the pattern does not match pandoc's real output. It is relayed with a "
+        "'[WARNING] ' prefix, so the pattern must not anchor at 'Missing character:'."
+    )
+    assert not re.compile(r"^Missing character:.*$", re.MULTILINE).findall(
+        _REAL_MISSING_CHARACTER_LOG
+    ), "sanity: the old anchored pattern really did match nothing"
+
+
+def test_the_missing_glyph_guard_fires_against_the_real_toolchain(tmp_path: Path) -> None:
+    """End to end: pandoc renders, drops a glyph, exits 0, and the build fails anyway.
+
+    Everything above this feeds `_report_missing_glyphs` a string. This one does not know
+    what the log says — it makes the real toolchain produce one and asserts the guard
+    turns a silent, successful, wrong render into a red build.
+
+    It goes through `_run`, so it covers the whole path that failed: pandoc's exit code
+    (zero!), the stdout/stderr capture, the pattern, and the raise. `check_font_coverage`
+    is bypassed on purpose — this is the guard that catches the allow-list being wrong,
+    so a test that let the allow-list stop it first would be testing the other guard.
+    """
+    from build.book import _run, resolve_runner
+
+    try:
+        runner = resolve_runner("auto", tmp_path)
+    except BookError:
+        pytest.skip("neither the pinned pandoc image nor a local pandoc is available")
+
+    source = tmp_path / "glyph.md"
+    source.write_text("# Ethics \U0001f916 and satire\n\nSome text.\n", encoding="utf-8")
+
+    with pytest.raises(BookError, match="characters silently dropped"):
+        _run(
+            runner,
+            [
+                "glyph.md",
+                "--from",
+                "markdown",
+                "--to",
+                "pdf",
+                "--pdf-engine",
+                "xelatex",
+                "--pdf-engine-opt=-interaction=nonstopmode",
+                "--output",
+                "glyph.pdf",
+            ],
+            what="Rendering the PDF",
+        )
 
 
 # --------------------------------------------------------------------------------------
