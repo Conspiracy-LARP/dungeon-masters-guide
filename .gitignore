@@ -1,6 +1,13 @@
-# Build outputs — generated from src/pack/, never committed
-site/
-dist/
+# Build outputs — generated from src/pack/, never committed.
+#
+# ANCHORED TO THE REPO ROOT ON PURPOSE. An unanchored `site/` matches a directory named
+# `site` at ANY depth — including `src/theme/site/`, the site's palette, typography and
+# template override, which git then refuses to add without a word. The build fails later
+# and elsewhere (`theme.custom_dir` aborts on a directory that is not there), so the
+# leading slash is what keeps the cause anywhere near the symptom. `site` here means the
+# `site_dir` in mkdocs.yml, and only that.
+/site/
+/dist/
 *.pdf
 
 # Editors
