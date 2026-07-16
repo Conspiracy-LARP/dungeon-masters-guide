@@ -1,20 +1,20 @@
 {
-  "event_count": 60,
-  "last_event_id": "01KXPKZ4Z0J3F2C1S872X5XJWA",
-  "materialized_at": "2026-07-16T23:25:11.008102+00:00",
+  "event_count": 61,
+  "last_event_id": "01KXPM0897Z039MCYGMHZFQGJT",
+  "materialized_at": "2026-07-16T23:25:47.175898+00:00",
   "mission_number": "",
   "mission_slug": "guide-site-build-01KXP76R",
   "mission_type": "software-dev",
   "summary": {
     "approved": 7,
-    "blocked": 1,
+    "blocked": 0,
     "canceled": 0,
     "claimed": 0,
     "done": 0,
     "for_review": 0,
     "in_progress": 0,
     "in_review": 0,
-    "planned": 1
+    "planned": 2
   },
   "work_packages": {
     "WP01": {
@@ -67,11 +67,11 @@
       "last_transition_at": "2026-07-16T21:29:39.245184+00:00"
     },
     "WP08": {
-      "actor": "claude:opus:implementer-ivan:implementer",
-      "force_count": 0,
-      "lane": "blocked",
-      "last_event_id": "01KXPKZ4Z0J3F2C1S872X5XJWA",
-      "last_transition_at": "2026-07-16T23:25:11.008102+00:00"
+      "actor": "user",
+      "force_count": 1,
+      "lane": "planned",
+      "last_event_id": "01KXPM0897Z039MCYGMHZFQGJT",
+      "last_transition_at": "2026-07-16T23:25:47.175898+00:00"
     },
     "WP09": {
       "actor": "finalize-tasks",
