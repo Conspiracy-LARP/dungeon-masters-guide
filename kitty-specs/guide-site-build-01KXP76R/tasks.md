@@ -250,11 +250,11 @@ prose.
 **Independent test**: a change pushed to `main` is live on every surface within five minutes; a lint
 failure blocks both targets.
 
-- [ ] T036 `publish.yml`: build, lint, deploy Pages (WP08)
-- [ ] T037 The pack-branch mirror job (WP08)
-- [ ] T038 A lint failure blocks **both** publication targets (WP08)
-- [ ] T039 Baked TeX image to protect the 5-minute budget (WP08)
-- [ ] T040 Verify rebuild-and-redeploy actually happens on push (WP08)
+- [x] T036 `publish.yml`: build, lint, deploy Pages (WP08)
+- [x] T037 The pack-branch mirror job (WP08)
+- [x] T038 A lint failure blocks **both** publication targets (WP08)
+- [x] T039 Baked TeX image to protect the 5-minute budget (WP08)
+- [x] T040 Verify rebuild-and-redeploy actually happens on push (WP08)
 
 **Risks**: Needs Pages enabled and permitted to publish from automation (D-002) — an account-level
 prerequisite outside the code. Publishing a good site beside a broken branch is worse than publishing
