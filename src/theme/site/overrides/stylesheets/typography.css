@@ -1,0 +1,143 @@
+/* The site's type. NFR-004, NFR-002.
+ *
+ * The guide is long-form prose that people are asked to read cover to cover, so the
+ * things that matter here are measure, leading and hierarchy — not personality. Same
+ * scope rule as palette.css: Material's own properties and a handful of typeset rules,
+ * no new components.
+ *
+ * Lives under the theme's `custom_dir` for the reason palette.css does: `extra_css`
+ * resolves against `docs_dir`, which is the product. See mkdocs.yml.
+ */
+
+/* `theme.font: false` in mkdocs.yml means Material requests no webfont, so these stacks
+ * resolve to something already on the reader's machine — nothing to download, nothing to
+ * block first paint on a phone (NFR-002).
+ *
+ * A serif for a manual that is read in long sittings; the mono stack is for the code and
+ * the file names, of which this guide has many.
+ *
+ * THE SELECTOR IS `body`, NOT `:root`, AND THAT IS THE WHOLE TRICK. Material declares
+ *
+ *     body { --md-text-font-family: var(--md-text-font, _), -apple-system, ... }
+ *
+ * on `body` itself. A `:root` declaration therefore sets the variable on `html` and is
+ * then *shadowed* at `body` by Material's own — every element under body resolves
+ * Material's declaration, not ours, and `var(--md-text-font, _)` falls back to the `_`
+ * placeholder plus the system sans stack.
+ *
+ * The failure is silent, which is why this comment is long: the page renders perfectly
+ * in a sans-serif that is not the one anybody chose, `getComputedStyle(html)` reports
+ * our value back (because on `html` it really is set), and nothing warns. It was caught
+ * by measuring a rendered page in a browser, not by reading the CSS. Declaring at the
+ * same selector Material does, from a stylesheet that loads after it, is what makes ours
+ * win. `tests/test_site.py::test_the_font_stack_is_declared_where_material_can_see_it`
+ * pins this down, including the day Material moves the declaration.
+ */
+body {
+  --md-text-font-family: Charter, "Bitstream Charter", "Iowan Old Style", "Palatino Linotype",
+    Palatino, Georgia, Cambria, "Times New Roman", Times, serif;
+  --md-code-font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", "Roboto Mono", monospace;
+}
+
+/* --- Body ---------------------------------------------------------------------------- */
+
+.md-typeset {
+  line-height: 1.72;                 /* long-form leading; Material's default is 1.6 */
+  /* NFR-002: a 320px viewport must not scroll sideways. The guide names long file
+   * paths, URLs and commands in running text, and an unbreakable token is the classic
+   * way a narrow layout starts scrolling. Break them instead. */
+  overflow-wrap: break-word;
+}
+
+.md-typeset code {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* MEASURE (~65–75 characters), the one typographic decision that does most of the work
+ * in a document this long.
+ *
+ * Applied to the flow elements only, deliberately NOT to `.md-typeset` itself: tables
+ * and code blocks must keep the full column, because Material makes those scroll inside
+ * their own wrapper (`.md-typeset__scrollwrap`) — which is exactly what keeps the wide
+ * tables in storytelling.md from scrolling the page at 320px. Capping their container
+ * would narrow the scroll area for no benefit.
+ *
+ * `ch` rather than `rem` so the measure tracks the font rather than a number that was
+ * right once. */
+.md-typeset > p,
+.md-typeset > ul,
+.md-typeset > ol,
+.md-typeset > blockquote,
+.md-typeset > dl,
+.md-typeset > h1,
+.md-typeset > h2,
+.md-typeset > h3,
+.md-typeset > h4,
+.md-typeset > h5,
+.md-typeset > h6 {
+  max-width: 72ch;
+}
+
+/* --- Hierarchy ----------------------------------------------------------------------- */
+
+.md-typeset h1 {
+  font-weight: 700;
+  font-size: 1.9em;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--md-typeset-color);    /* Material greys H1 out by default; this is a manual */
+}
+
+.md-typeset h2 {
+  font-weight: 700;
+  font-size: 1.45em;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  margin-top: 1.8em;
+}
+
+.md-typeset h3 {
+  font-weight: 600;
+  font-size: 1.2em;
+  line-height: 1.4;
+  margin-top: 1.4em;
+}
+
+.md-typeset h4 {
+  font-weight: 600;
+  font-size: 1em;
+}
+
+/* The kit's quick-read box and the pull quotes: set apart by a rule and colour, not by
+ * a box — the same restraint as everywhere else here. */
+.md-typeset blockquote {
+  border-left-width: 2px;
+  color: var(--md-default-fg-color--light);
+}
+
+/* --- The AI pointer (T014) ----------------------------------------------------------- */
+
+/* Not a bespoke component: one line of text, in the page's own colours, above the
+ * content. It is visible on purpose — a human who wants the clean source should be able
+ * to see the link a model follows (FR-002). */
+.guide-ai-pointer {
+  font-size: 0.68rem;
+  line-height: 1.5;
+  margin: 0 0 1.2em;
+  padding: 0.4em 0.6em;
+  border-left: 2px solid var(--md-default-fg-color--lighter);
+  background-color: var(--md-code-bg-color);
+  color: var(--md-default-fg-color--light);
+  overflow-wrap: break-word;
+}
+
+.guide-ai-pointer a {
+  color: var(--md-typeset-a-color);
+}
+
+.guide-ai-pointer a:focus,
+.guide-ai-pointer a:hover {
+  color: var(--md-accent-fg-color);
+}

@@ -1,0 +1,50 @@
+{#
+  The one template override (NFR-004). It does exactly three things, and each is a
+  requirement rather than a decoration:
+
+    1. links the palette and typography stylesheets — which is how CSS reaches the
+       output at all, since `extra_css` would resolve against `src/pack/`, the product
+       (C-002, C-006; see mkdocs.yml);
+    2. declares the page's clean markdown source to machines that never render it —
+       `<link rel="alternate" type="text/markdown">` (FR-002);
+    3. shows the same address to humans who want the source (FR-002).
+
+  Everything else is stock Material, deliberately.
+
+  `raw_markdown_url` is put into the context by the `on_page_context` hook in
+  src/build/site.py. It is composed there by `BuildConfig.absolute_url()` from the one
+  configured base (NFR-001), and it uses the document's *published* name, so the
+  bootstrap points at AGENTS.md rather than start.md (FR-010) without this template
+  knowing anything about that rename.
+
+  It is undefined on theme-rendered pages that are not pack documents (404.html), which
+  is what the `{% if %}` is for — an undefined name is falsy in Jinja, so those pages
+  simply carry no pointer.
+#}
+{% extends "base.html" %}
+
+{% block styles %}
+  {{ super() }}
+  {#- After Material's own stylesheets, so these override rather than lose. The `url`
+      filter keeps the hrefs relative to the page, which is what makes them correct on a
+      project site served from a subpath (C-003). -#}
+  <link rel="stylesheet" href="{{ 'stylesheets/palette.css' | url }}">
+  <link rel="stylesheet" href="{{ 'stylesheets/typography.css' | url }}">
+{% endblock %}
+
+{% block extrahead %}
+  {{ super() }}
+  {% if raw_markdown_url %}
+    <link rel="alternate" type="text/markdown" href="{{ raw_markdown_url }}">
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% if raw_markdown_url %}
+    <aside class="guide-ai-pointer">
+      🤖 Reading this as an AI? The clean markdown source is here →
+      <a href="{{ raw_markdown_url }}" type="text/markdown">{{ raw_markdown_url }}</a>
+    </aside>
+  {% endif %}
+  {{ super() }}
+{% endblock %}
