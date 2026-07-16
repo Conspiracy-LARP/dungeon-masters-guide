@@ -229,10 +229,10 @@ lie to readers who already followed its published instructions (R-002).
 **Independent test**: the checker fails a link containing a path separator, and fails a link that
 resolves on one branch but not the other.
 
-- [ ] T032 `links.py`: extract links, excluding inline-code examples (WP07)
-- [ ] T033 Assert no path separators in any cross-link (C-001) (WP07)
-- [ ] T034 Assert resolution on both `main` and `pack` (WP07)
-- [ ] T035 Tests, including the historical `README.md` regression (WP07)
+- [x] T032 `links.py`: extract links, excluding inline-code examples (WP07)
+- [x] T033 Assert no path separators in any cross-link (C-001) (WP07)
+- [x] T034 Assert resolution on both `main` and `pack` (WP07)
+- [x] T035 Tests, including the historical `README.md` regression (WP07)
 
 **Risks**: Must exclude inline-code examples — the guide *documents* the link convention using inline
 code, and those samples are not links to follow. A naive extractor will fail the build on the guide's own
