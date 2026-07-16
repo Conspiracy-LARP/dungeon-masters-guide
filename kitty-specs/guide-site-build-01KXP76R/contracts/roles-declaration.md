@@ -69,13 +69,22 @@ The tasks originally told WP02 to pre-declare the theme hooks so WP03 need only 
 not possible, and attempting it breaks four lanes.** Recorded here so it is not re-attempted:
 
 - **`theme.custom_dir` is validated eagerly.** A config naming a directory that does not exist yet aborts
-  *every* build — including WP04, WP05 and WP06, which all depend on WP02's lane. It cannot precede the
-  directory it names.
+  *every* build (`Aborted with a configuration error!`, exit 1) — including WP04, WP05 and WP06, which
+  all depend on WP02's lane. It cannot precede the directory it names. **This is the only one of the two
+  that aborts.**
 - **`extra_css` resolves relative to `docs_dir`, which is `src/pack/` — the product.**
   `extra_css: [stylesheets/extra.css]` would demand `src/pack/stylesheets/extra.css`: build assets
-  written into the guide, violating C-002 and C-006, and then failing the role lint as an undeclared
-  document. **Ship CSS through `custom_dir` instead** — files under `src/theme/site/overrides/` are
-  copied to the output; put the stylesheet there and reference it from a `main.html` override.
+  written into the guide, violating C-002 and C-006. **Ship CSS through `custom_dir` instead** — files
+  under `src/theme/site/overrides/` are copied to the output; put the stylesheet there and reference it
+  from a `main.html` override.
+
+  *Precision, corrected at WP02's review — the first draft of this section overstated both points, and
+  the accurate version is the stronger argument:* `extra_css` naming a missing file does **not** abort;
+  it exits 0 and ships a **silent 404**. Nor would it fail the role lint, which globs `*.md` only. So the
+  real hazard is not a loud failure you would notice — it is that putting the stylesheet in the only
+  place `extra_css` can see it means writing into the product, and putting it anywhere else fails
+  quietly at runtime. Verified against MkDocs 1.6.1: a stylesheet under `src/theme/` was not copied to
+  output; the same file under `src/pack/stylesheets/` was.
 
 WP03 therefore adds both hooks together with the files they name. This is a small, justified edit to
 WP02's `mkdocs.yml` rather than an ownership violation; the config documents exactly what to add.

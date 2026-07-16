@@ -118,8 +118,8 @@ doc/build.md             # The requirements source. Not modified by this mission
 **Two traps this tree encodes, both found by building rather than reasoning** (WP02):
 
 - **`extra_css` resolves relative to `docs_dir`, which is `src/pack/`.** Declaring it would write build
-  assets into the product (C-002, C-006) and then fail the role lint as an undeclared document. CSS ships
-  through `theme.custom_dir` instead.
+  assets into the product (C-002, C-006). It does *not* abort on a missing file — it exits 0 and ships a
+  silent 404, which is the worse failure. CSS ships through `theme.custom_dir` instead.
 - **`theme.custom_dir` is validated eagerly**, so it cannot be declared before the directory exists — a
   config naming a missing path aborts every build in the four lanes that depend on WP02. WP03 adds both
   hooks together with their files.
