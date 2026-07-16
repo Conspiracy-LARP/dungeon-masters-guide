@@ -124,6 +124,11 @@ confirm before writing the workflow.
      - `poetry run pytest`
   3. Job `build`: the site (WP03), the book and PDF (WP04), `llms.txt`/`llms-full.txt` (WP05); assemble
      one Pages artifact including `.nojekyll` and the raw `.md` files.
+     **Pass `--output` explicitly to `guide llms index` and `guide llms full`** — carried forward from
+     WP05's review. Their `DEFAULT_OUTPUT_DIR` mirrors `site_dir:` in `mkdocs.yml` rather than reading
+     it, so if `site_dir` ever drifts, the default would silently strand `llms.txt` *outside* the
+     published tree: the machine index 404s while the site looks perfect. Being explicit costs one flag
+     and removes the coupling.
   4. Job `deploy`: `actions/deploy-pages`, on `main` only.
   5. **Verify** WP01's spike workflow (`spike-content-type.yml`) is absent — WP01 removed it at
      teardown and review confirmed it across every ref, so this should be a no-op check, not a deletion.
@@ -162,6 +167,12 @@ confirm before writing the workflow.
   1. Both `deploy` and `mirror` declare `needs: verify`.
   2. Test it for real: break a link on a branch, confirm **neither** target publishes. Reading the YAML
      is not evidence.
+  3. **Confirm each gate command actually exits non-zero** — carried forward from WP07's review, which
+     found that deleting the final `sys.exit(1)` from `links_check` leaves all 151 tests green. The
+     CLI's "fails the build" path is itself unguarded: a check that reports and does not fail is the
+     exact defect this mission has now hit five times. Run each of `guide roles lint`,
+     `guide links check` and `guide verify provenance` against a deliberately broken input **in CI** and
+     assert the job goes red — do not infer it from a passing test suite.
   3. Ensure a failure is visible — a red run, not a silently skipped job.
 
 - **Files**: `.github/workflows/publish.yml`
@@ -226,7 +237,10 @@ The workflow is verified by executing it, not by review:
 | A PR or fork force-pushes `pack` or deploys Pages | Publish only on push to `main`; narrow token scope |
 | WP01's spike workflow left deploying to Pages | Already removed by WP01 and confirmed at review; T036 only verifies |
 | "It's in the YAML so it works" | T040 pushes a real change and looks |
+| `llms.txt` silently written outside the published tree if `site_dir` drifts | Pass `--output` explicitly (WP05 review); T040 confirms `llms.txt` is live |
 | Provenance check placed before the build, so it inspects nothing and passes vacuously | It must run against built output; assert it fails on a planted hand-authored file |
+| A gate command reports a problem but exits 0, so CI stays green | WP07's review proved this is unguarded for `links_check`; T038 step 3 verifies non-zero exit in CI for every gate |
+| Cold pandoc/TeX image pull (~58s, 1.1GB) blows the 5-minute budget | WP04 measured it: render is ~6s, the pull is the cost. Cache the image or use Actions' `container:` key |
 
 ## Review Guidance
 

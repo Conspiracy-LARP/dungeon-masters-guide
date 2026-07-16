@@ -146,11 +146,11 @@ once, here, and both consumers inherit the fix.
 pitch, an AI pointer on every page, `.nojekyll`, and raw `.md` at parallel paths with the bootstrap
 published as `AGENTS.md`.
 
-- [ ] T012 `src/theme/site/`: palette and typography, bounded (WP03)
-- [ ] T013 Landing page derived from the kit's pitch (WP03)
-- [ ] T014 Per-page AI pointer and `rel="alternate"` metadata (WP03)
-- [ ] T015 Raw markdown at parallel paths, with the bootstrap published as `AGENTS.md` (WP03)
-- [ ] T016 `.nojekyll`, subpath correctness, responsive and contrast verification (WP03)
+- [x] T012 `src/theme/site/`: palette and typography, bounded (WP03)
+- [x] T013 Landing page derived from the kit's pitch (WP03)
+- [x] T014 Per-page AI pointer and `rel="alternate"` metadata (WP03)
+- [x] T015 Raw markdown at parallel paths, with the bootstrap published as `AGENTS.md` (WP03)
+- [x] T016 `.nojekyll`, subpath correctness, responsive and contrast verification (WP03)
 
 **Risks**: Design investment is bounded to palette and typography (NFR-004). The Gygax homage is Out of
 Scope (A-004) and this is where it will try to creep in.
@@ -165,12 +165,12 @@ Scope (A-004) and this is where it will try to creep in.
 **Independent test**: a PDF with a title page, a page-numbered ToC, real pagination, A4 body type, and no
 construction that assumes clicking.
 
-- [ ] T017 `book.py`: assemble chapters in nav order (WP04)
-- [ ] T018 Flatten print-hostile cross-references (WP04)
-- [ ] T019 `src/theme/book/`: LaTeX template — title page, ToC with page numbers, A4 (WP04)
-- [ ] T020 Pinned fonts and the pandoc/XeLaTeX container invocation (WP04)
-- [ ] T021 The single-file HTML book (WP04)
-- [ ] T022 Tests for assembly and cross-reference flattening (WP04)
+- [x] T017 `book.py`: assemble chapters in nav order (WP04)
+- [x] T018 Flatten print-hostile cross-references (WP04)
+- [x] T019 `src/theme/book/`: LaTeX template — title page, ToC with page numbers, A4 (WP04)
+- [x] T020 Pinned fonts and the pandoc/XeLaTeX container invocation (WP04)
+- [x] T021 The single-file HTML book (WP04)
+- [x] T022 Tests for assembly and cross-reference flattening (WP04)
 
 **Parallel opportunities**: T019 and T021 are independent of each other.
 
@@ -229,10 +229,10 @@ lie to readers who already followed its published instructions (R-002).
 **Independent test**: the checker fails a link containing a path separator, and fails a link that
 resolves on one branch but not the other.
 
-- [ ] T032 `links.py`: extract links, excluding inline-code examples (WP07)
-- [ ] T033 Assert no path separators in any cross-link (C-001) (WP07)
-- [ ] T034 Assert resolution on both `main` and `pack` (WP07)
-- [ ] T035 Tests, including the historical `README.md` regression (WP07)
+- [x] T032 `links.py`: extract links, excluding inline-code examples (WP07)
+- [x] T033 Assert no path separators in any cross-link (C-001) (WP07)
+- [x] T034 Assert resolution on both `main` and `pack` (WP07)
+- [x] T035 Tests, including the historical `README.md` regression (WP07)
 
 **Risks**: Must exclude inline-code examples — the guide *documents* the link convention using inline
 code, and those samples are not links to follow. A naive extractor will fail the build on the guide's own
