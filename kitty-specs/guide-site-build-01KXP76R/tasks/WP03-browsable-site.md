@@ -291,3 +291,4 @@ Mandatory cases:
 
 - 2026-07-16T19:58:13Z – system – Prompt created.
 - 2026-07-16T21:06:52Z – claude:opus:frontend-freddy:implementer – shell_pid=2435 – Assigned agent via action command
+- 2026-07-16T21:33:24Z – claude:opus:frontend-freddy:implementer – shell_pid=2435 – Ready for review: site + raw markdown surface. /AGENTS.md verified in output; base-swap and provenance pass. Four silent bugs found via real build/browser (README/index collision, font var shadowing, palette outranked by Material's indigo, .gitignore swallowing src/theme/site/) — see commit ab8791e.
