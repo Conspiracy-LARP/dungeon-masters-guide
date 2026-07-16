@@ -1,0 +1,30 @@
+{
+  "entries": [
+    {
+      "created_at": "2026-07-16T19:44:40.454593Z",
+      "decision_id": "01KXP7BCG6XFDHDRGZ57NXG90Q",
+      "final_answer": "pandoc-latex: produce the printable PDF with pandoc and a XeLaTeX template. Chosen for print typography quality, accepting a TeX dependency in CI and two independent style systems (site CSS and LaTeX template) that must be kept from drifting.",
+      "input_key": "pdf_toolchain",
+      "mission_id": "01KXP76R20B7GDSGW5VFEK9TFG",
+      "mission_slug": "guide-site-build-01KXP76R",
+      "opened_by": "cli",
+      "options": [
+        "pandoc-latex",
+        "html-to-pdf",
+        "Other"
+      ],
+      "origin_flow": "plan",
+      "other_answer": false,
+      "question": "How should the printable PDF be produced: a print-typesetting engine (pandoc/LaTeX) or an HTML-to-PDF renderer that reuses the site's own stylesheet?",
+      "rationale": null,
+      "resolved_at": "2026-07-16T19:48:13.909975Z",
+      "resolved_by": null,
+      "slot_key": "plan.book.pdf-toolchain",
+      "status": "resolved",
+      "step_id": null,
+      "summary_json": null
+    }
+  ],
+  "mission_id": "01KXP76R20B7GDSGW5VFEK9TFG",
+  "version": 1
+}

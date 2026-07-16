@@ -1,0 +1,16 @@
+{
+  "coordination_branch": "kitty/mission-guide-site-build-01KXP76R",
+  "created_at": "2026-07-16T19:42:08.449434+00:00",
+  "flattened": false,
+  "friendly_name": "Guide Site, Book, and LLM Bootstrap",
+  "mission_id": "01KXP76R20B7GDSGW5VFEK9TFG",
+  "mission_number": null,
+  "mission_slug": "guide-site-build-01KXP76R",
+  "mission_type": "software-dev",
+  "pr_bound": true,
+  "purpose_context": "The guide's text is finished but reaches nobody: it exists only as markdown in a git repo. This mission builds the pipeline that turns that markdown into the four surfaces the project needs - a readable website for creators evaluating whether to join, a printable book for people who read on paper, machine-readable sources so an LLM can consume the guide directly, and the pack branch creators attach to their own projects as a submodule. All four are generated from the same bytes so they can never disagree. The single most important outcome is behavioural: a creator should be able to hand any LLM one URL and have it set up their workspace and start the interview.",
+  "purpose_tldr": "Publish the Dungeon Master's Guide as an attractive website, a printable book, and a one-URL bootstrap any LLM can follow to start building.",
+  "slug": "guide-site-build-01KXP76R",
+  "target_branch": "feat/guide-site-build",
+  "topology": "coord"
+}
