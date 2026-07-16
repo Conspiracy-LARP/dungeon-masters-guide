@@ -209,11 +209,11 @@ already exists.
 **Independent test**: the generated tree is byte-identical to `d024682`; links resolve on the branch;
 `git submodule add -b pack …` works from a bare checkout.
 
-- [ ] T027 `packbranch.py`: the orphan mirror tree builder (WP06)
-- [ ] T028 Apply rename and reference rewrite to the branch tree (WP06)
-- [ ] T029 Reproduction gate against the hand-built `d024682` (WP06)
-- [ ] T030 Force-push publisher; read-only contract stated in the commit message (WP06)
-- [ ] T031 Tests, including the `getting-started.md` substring trap (WP06)
+- [x] T027 `packbranch.py`: the orphan mirror tree builder (WP06)
+- [x] T028 Apply rename and reference rewrite to the branch tree (WP06)
+- [x] T029 Reproduction gate against the hand-built `d024682` (WP06)
+- [x] T030 Force-push publisher; read-only contract stated in the commit message (WP06)
+- [x] T031 Tests, including the `getting-started.md` substring trap (WP06)
 
 **Risks**: **Someone is already depending on this branch.** It was hand-built on 2026-07-16 to unblock
 the `5g_arg` project, whose `doc/core` submodule points at it. Automation that diverges makes the guide
