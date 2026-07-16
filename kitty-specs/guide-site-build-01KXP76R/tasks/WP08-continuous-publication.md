@@ -21,7 +21,8 @@ subtasks:
 - T040
 phase: Phase 3 - Publication and acceptance
 assignee: ''
-agent: claude
+agent: "claude:opus:implementer-ivan:implementer"
+shell_pid: "38894"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -254,3 +255,7 @@ The workflow is verified by executing it, not by review:
 
 - 2026-07-16T19:58:13Z – system – Prompt created.
 - 2026-07-16T23:25:47Z – user – Moved to planned
+- 2026-07-16T23:29:28Z – claude:opus:implementer-ivan:implementer – shell_pid=38894 – Started implementation via action command
+- 2026-07-16T23:49:48Z – claude:opus:implementer-ivan:implementer – shell_pid=38894 – T036-T039 done. T040 (push a real change to main; watch all surfaces update within 5 min) is NOT verified and left pending: the publish pipeline cannot go green on main because pytest has 6 pre-existing failures rooted in content that landed on feat (premise.md and the rewritten getting-started.md/start.md) without finishing its consequences. Every failure is a real finding the gates correctly report, not a stale test, and each needs a src/pack/ or doc/build.md edit that this mission is forbidden to make (C-002/C-006). Triage table in doc/follow-ups.md. Everything else is proven in CI: all five gates fire against deliberately broken input; a broken link blocks BOTH targets (control run: deploy+mirror ran; treatment run with one broken link: both skipped); the reproduction gate is fixed and decoupled from content. Pipeline wall-clock 38-62s, well inside NFR-005.
+- 2026-07-16T23:50:04Z – claude:opus:implementer-ivan:implementer – shell_pid=38894 – Pipeline delivered; all gates proven to fire in CI; reproduction gate (G1) fixed and re-proved by mutation. T040 deliberately left PENDING rather than marked done: push-to-live on main is unverifiable because pytest has 6 pre-existing failures from content that landed without finishing its consequences. Each is a real finding the gates correctly report and each needs a src/pack/ or doc/build.md edit forbidden to this mission (C-002/C-006). Triage in doc/follow-ups.md. Forced the move so the WP can be reviewed on its merits; T040 is the review's decision to make.
+- 2026-07-16T23:50:35Z – user – shell_pid=38894 – Pipeline delivered; every gate proven to fire in CI; reproduction gate (G1) fixed and re-proved by mutation. T040 left PENDING deliberately: push-to-live on main is unverifiable because pytest has 6 pre-existing failures from content that landed without finishing its consequences — each a real finding needing a src/pack/ or doc/build.md edit forbidden to this mission (C-002/C-006). Triage in doc/follow-ups.md.
