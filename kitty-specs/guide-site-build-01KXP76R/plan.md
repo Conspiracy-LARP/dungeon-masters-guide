@@ -34,11 +34,24 @@ as readable text — a thing we do not control and cannot test locally — so pr
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-**Skipped — no charter exists.** `spec-kitty charter context` reports `mode: missing` for both `specify`
-and `plan`; `.kittify/charter/charter.md` is absent. No charter gates to evaluate, and this is not
-treated as a violation.
+**Re-evaluated 2026-07-16 — a charter now exists.** It did not when this plan was written; one was
+created mid-mission because `agent action implement` refuses to run without it (`charter_source
+missing`). Generated via `charter interview --defaults --profile minimal`, so it is stock defaults, not a
+considered statement about this project.
 
-Two built-in directives were applied regardless, and both pass:
+**No MUST principle is violated.** Checked statement by statement:
+
+| Charter statement | Force | Assessment |
+|---|---|---|
+| "Use the project's declared test approach" | SHOULD | Pass — pytest + lints + two behavioural tests, declared above |
+| "Only require the quality gates explicitly declared by this project" | SHOULD | Pass |
+| "Use only the languages, frameworks, and tools explicitly declared" | SHOULD | Pass — all in Technical Context |
+| "At least one focused reviewer approves before merge" | SHOULD | Pass — the implement-review loop |
+| "Must run on macOS and Linux developer environments" | **MUST** | Pass — Python + containerised pandoc/TeX |
+| "CLI operations should complete quickly (typically under 2 seconds)" | SHOULD | **Tension** — `guide book pdf` exceeds this by design; NFR-005 budgets 5 minutes. Recorded as analysis finding CH1 (low): a stock default scoped to product CLIs, and this project ships none. |
+| DIR-001 "Keep spec, plan, tasks, implementation, review artifacts consistent" | warn | Pass — and the reason this section was updated rather than left stale |
+
+Two built-in directives also apply, and both pass:
 
 - **DIRECTIVE_003 (Decision Documentation)** — the PDF toolchain fork is recorded as decision
   `01KXP7BCG6XFDHDRGZ57NXG90Q` with rationale and rejected alternative. R1–R8 in `research.md` each
