@@ -190,10 +190,10 @@ follow rather than documents to read.
 **Independent test**: `llms.txt` leads with the bootstrap as an instruction; `llms-full.txt` is the
 chapters in nav order; changing the configured base changes every address.
 
-- [ ] T023 `llms.py`: `llms.txt`, bootstrap first, as a procedure (WP05)
-- [ ] T024 `llms-full.txt`: chapters concatenated in nav order (WP05)
-- [ ] T025 Every address derives from the configured base (WP05)
-- [ ] T026 Tests, including the base-URL swap (SC-006) (WP05)
+- [x] T023 `llms.py`: `llms.txt`, bootstrap first, as a procedure (WP05)
+- [x] T024 `llms-full.txt`: chapters concatenated in nav order (WP05)
+- [x] T025 Every address derives from the configured base (WP05)
+- [x] T026 Tests, including the base-URL swap (SC-006) (WP05)
 
 **Risks**: An index that satisfies the llmstxt convention while burying the bootstrap under alphabetised
 chapters defeats the mission.
@@ -209,11 +209,11 @@ already exists.
 **Independent test**: the generated tree is byte-identical to `d024682`; links resolve on the branch;
 `git submodule add -b pack …` works from a bare checkout.
 
-- [ ] T027 `packbranch.py`: the orphan mirror tree builder (WP06)
-- [ ] T028 Apply rename and reference rewrite to the branch tree (WP06)
-- [ ] T029 Reproduction gate against the hand-built `d024682` (WP06)
-- [ ] T030 Force-push publisher; read-only contract stated in the commit message (WP06)
-- [ ] T031 Tests, including the `getting-started.md` substring trap (WP06)
+- [x] T027 `packbranch.py`: the orphan mirror tree builder (WP06)
+- [x] T028 Apply rename and reference rewrite to the branch tree (WP06)
+- [x] T029 Reproduction gate against the hand-built `d024682` (WP06)
+- [x] T030 Force-push publisher; read-only contract stated in the commit message (WP06)
+- [x] T031 Tests, including the `getting-started.md` substring trap (WP06)
 
 **Risks**: **Someone is already depending on this branch.** It was hand-built on 2026-07-16 to unblock
 the `5g_arg` project, whose `doc/core` submodule points at it. Automation that diverges makes the guide
