@@ -17,6 +17,7 @@ subtasks:
 - T009
 - T010
 - T011
+- T045
 phase: Phase 1 - Foundation
 assignee: ''
 agent: claude
@@ -35,9 +36,11 @@ create_intent:
 - src/build/config.py
 - src/build/roles.py
 - src/build/rename.py
+- src/build/provenance.py
 - tests/conftest.py
 - tests/test_roles.py
 - tests/test_rename.py
+- tests/test_provenance.py
 execution_mode: code_change
 model: ''
 owned_files:
@@ -49,9 +52,11 @@ owned_files:
 - src/build/config.py
 - src/build/roles.py
 - src/build/rename.py
+- src/build/provenance.py
 - tests/conftest.py
 - tests/test_roles.py
 - tests/test_rename.py
+- tests/test_provenance.py
 role: implementer
 tags: []
 task_type: implement
@@ -183,7 +188,12 @@ model fetches from the site. Build metadata must not leak into the product.
            - README.md
            - start.md
      ```
-  4. Include the theme/`extra_css` hooks WP03 will populate, pointing at `src/theme/site/`, so WP03 only
+  4. Declare MkDocs' `not_in_nav` key listing the same two documents. `docs_dir` is `src/pack`, so they
+     sit in the docs tree while being absent from `nav`, and `mkdocs build --strict` fails on that unless
+     the omission is declared. `not_in_nav` suppresses it **without** weakening `--strict` — a new
+     undeclared document still fails, which is what FR-011 wants. See
+     `contracts/roles-declaration.md` § "The `--strict` interaction". Resolves analysis finding U2.
+  5. Include the theme/`extra_css` hooks WP03 will populate, pointing at `src/theme/site/`, so WP03 only
      has to create files rather than edit this one.
 
 - **Files**: `mkdocs.yml`
@@ -282,9 +292,10 @@ model fetches from the site. Build metadata must not leak into the product.
      declaration.
   2. Report any mismatch clearly — which file, which document, missing or extra.
   3. **Never write to `src/pack/`** (C-002, C-006). Report only.
-  4. Decide with the reviewer whether drift fails CI or merely reports. Recommendation: **report on the
-     branch, fail on `main`** — prose and config drift naturally during authoring, and a hard failure
-     would punish the writer mid-edit.
+  4. **Strictness is decided, not yours to choose**: drift **warns** (exit 0) on feature branches and
+     **fails** (non-zero) on `main`. Rationale: prose and config drift naturally while someone is
+     mid-edit, and a hard failure would punish the writer; but drift must never reach `main`, where the
+     prose is what creators read. Implement exactly this; do not re-litigate it.
 
 - **Files**: `src/build/roles.py`, `tests/test_roles.py`
 
@@ -293,6 +304,31 @@ model fetches from the site. Build metadata must not leak into the product.
 - **Notes**: This is the one check that reaches into prose, and the temptation to auto-fix it will be
   strong. Don't. The guide's wording is the product; a script rewording it is exactly the failure C-002
   exists to prevent.
+
+### Subtask T045 – Provenance check: every published file traces back to the pack
+
+- **Purpose**: **NFR-003** — "100% of every published surface traces to a source document in the pack;
+  zero hand-written pages." Nothing currently verifies this, and it is the mechanism by which **SC-004**
+  ("no two surfaces can disagree") is claimed true *by construction*. Unverified, the mission's central
+  architectural claim rests on convention rather than enforcement.
+
+- **Steps**:
+  1. `src/build/provenance.py` exposing `guide verify provenance --output <dir>`: walk a built output
+     directory and assert every file is accounted for — either derived from a `src/pack/` document
+     (by `published_name`) or on an explicit allow-list of known generated artifacts (`llms.txt`,
+     `llms-full.txt`, `.nojekyll`, the PDF, the book, search indexes, theme assets).
+  2. Any output file matching neither is a **failure**, naming the file: it is hand-authored content,
+     which NFR-003 forbids.
+  3. Keep the allow-list explicit and small. A wildcard defeats the check.
+  4. WP08 wires this into CI's `verify` job; you provide the command.
+
+- **Files**: `src/build/provenance.py`, `tests/test_provenance.py`
+
+- **Parallel?**: **[P]** — independent of T006–T011 once T005 lands.
+
+- **Notes**: This project has already been bitten twice by exactly this class of drift — the reading
+  order diverged across four prose copies, and a hand-written link broke across two branches. Both were
+  caught by luck. This is the check that replaces luck. Added in response to analysis finding **C1**.
 
 ## Test Strategy
 
@@ -306,7 +342,8 @@ Mandatory cases:
 - `published_name`: `start.md` → `AGENTS.md`; every other file unchanged.
 - **`rewrite_references` leaves `getting-started.md` intact.** This is the regression test that matters.
 - Non-flat pack (a file with `/`) fails.
-- Drift check reports a mismatch and writes nothing.
+- Drift check reports a mismatch and writes nothing; warns on a feature branch, fails on `main`.
+- **Provenance**: an output file with no pack source and no allow-list entry **fails** (T045).
 
 ```bash
 poetry run pytest

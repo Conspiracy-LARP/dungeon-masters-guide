@@ -119,6 +119,8 @@ confirm before writing the workflow.
   2. Job `verify`: `poetry install`, then
      - `guide roles lint` (WP02)
      - `guide links check` (WP07)
+     - `guide verify provenance --output <built-site>` (WP02 T045) — enforces NFR-003; must run
+       **after** the build, since it inspects output. Sequence accordingly.
      - `poetry run pytest`
   3. Job `build`: the site (WP03), the book and PDF (WP04), `llms.txt`/`llms-full.txt` (WP05); assemble
      one Pages artifact including `.nojekyll` and the raw `.md` files.
@@ -223,6 +225,7 @@ The workflow is verified by executing it, not by review:
 | A PR or fork force-pushes `pack` or deploys Pages | Publish only on push to `main`; narrow token scope |
 | WP01's spike workflow left deploying to Pages | T036 removes it |
 | "It's in the YAML so it works" | T040 pushes a real change and looks |
+| Provenance check placed before the build, so it inspects nothing and passes vacuously | It must run against built output; assert it fails on a planted hand-authored file |
 
 ## Review Guidance
 

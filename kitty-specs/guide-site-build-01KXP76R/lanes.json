@@ -34,14 +34,17 @@
         "src/build/__init__.py",
         "src/build/cli.py",
         "src/build/config.py",
+        "src/build/provenance.py",
         "src/build/rename.py",
         "src/build/roles.py",
         "tests/conftest.py",
+        "tests/test_provenance.py",
         "tests/test_rename.py",
         "tests/test_roles.py"
       ],
       "predicted_surfaces": [
         "api",
+        "artifact-rendering",
         "tracker-integration"
       ],
       "depends_on_lanes": [],
@@ -184,7 +187,7 @@
       "parallel_group": 4
     }
   ],
-  "computed_at": "2026-07-16T20:12:34.230249+00:00",
+  "computed_at": "2026-07-16T20:26:19.580440+00:00",
   "computed_from": "dependency_graph+ownership",
   "planning_artifact_wps": []
 }

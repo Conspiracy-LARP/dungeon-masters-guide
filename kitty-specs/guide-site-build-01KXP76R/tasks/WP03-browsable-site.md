@@ -100,6 +100,12 @@ don't build it.
 
 - **Never write to `src/pack/`** (C-002, C-006). The landing page is *derived*, not authored — do not
   add an `index.md` to the pack.
+- **The `--strict` question is already answered** — do not re-derive it. `src/pack` is the `docs_dir`,
+  so `README.md` and `start.md` sit in the docs tree but are intentionally absent from `nav`, which
+  `--strict` would fail on. WP02's `mkdocs.yml` declares them under MkDocs' `not_in_nav` key, which
+  suppresses that specific warning while still failing on a genuinely undeclared document. Do not
+  disable `--strict` and do not add them to `nav`. See `contracts/roles-declaration.md` § "The `--strict`
+  interaction".
 - `mkdocs.yml` is owned by **WP02**. It already contains the theme and `extra_css` hooks pointing at
   `src/theme/site/`. You create those files; you should not need to edit the config. If you genuinely
   must, record a one-line rationale.
@@ -143,7 +149,8 @@ don't build it.
 - **Steps**:
   1. Extract the "What is this?" section from `src/pack/creator-kit.md` at build time.
   2. Render it as the site index — via an MkDocs hook in `src/build/site.py`, not by adding a file to
-     the pack.
+     the pack. Note `src/pack/README.md` is **not** the index: it is the pack branch's front door and is
+     `not_in_book`. It publishes as an ordinary page and as raw markdown.
   3. Link the PDF prominently from the landing page (FR-004 requires it be linked prominently; WP04
      produces it, you surface it).
   4. Fail the build if the expected section cannot be found, rather than shipping an empty landing page.

@@ -36,7 +36,8 @@ proves it. A green CI run does not.
 | T008 | `roles.py`: Document model, role resolution, `published_name` | WP02 | |
 | T009 | `rename.py`: reference rewriting, with the `getting-started.md` trap covered | WP02 | [P] |
 | T010 | Role lint — an undeclared document fails the build | WP02 | |
-| T011 | Prose drift check — report against the declaration, never fix | WP02 | |
+| T011 | Prose drift check — warn on branches, fail on `main`, never fix | WP02 | |
+| T045 | Provenance check — every published file traces back to the pack (NFR-003) | WP02 | [P] |
 | T012 | `src/theme/site/`: palette and typography, bounded | WP03 | [P] |
 | T013 | Landing page derived from the kit's pitch | WP03 | [P] |
 | T014 | Per-page AI pointer and `rel="alternate"` metadata | WP03 | |
@@ -71,6 +72,9 @@ proves it. A green CI run does not.
 | T043 | SC-003 — print the PDF and read it on paper | WP09 | [P] |
 | T044 | Record results; close the mission or escalate | WP09 | |
 
+*T045 is appended rather than inserted: renumbering 30+ existing IDs to slot one subtask in
+sequence would churn every prompt for no benefit.*
+
 ---
 
 # Phase 1 — Foundation
@@ -104,13 +108,14 @@ do not quietly edit the pack.
 ## WP02 — Build foundation and the roles declaration
 
 **Prompt**: [tasks/WP02-foundation-and-roles.md](tasks/WP02-foundation-and-roles.md)
-**Priority**: P0 — blocking · **Estimated prompt size**: ~430 lines · **Depends on**: none
+**Priority**: P0 — blocking · **Estimated prompt size**: ~370 lines · **Depends on**: none
 
 **Goal**: Stand up the Python build project, and make the site config the single declaration of chapter
 order and document roles that everything else derives from.
 
 **Independent test**: `poetry run pytest` green; the role lint fails a pack containing an undeclared
-document; `roles.py` resolves `start.md`'s `published_name` to `AGENTS.md`.
+document; `roles.py` resolves `start.md`'s `published_name` to `AGENTS.md`; the provenance check fails an
+output file with no source.
 
 - [ ] T005 Poetry project, dependencies, dev tooling, click entry point, test harness (WP02)
 - [ ] T006 `mkdocs.yml`: the nav (ten chapters) and the `not_in_book` declaration (WP02)
@@ -118,9 +123,10 @@ document; `roles.py` resolves `start.md`'s `published_name` to `AGENTS.md`.
 - [ ] T008 `roles.py`: Document model, role resolution, `published_name` (WP02)
 - [ ] T009 `rename.py`: reference rewriting, with the `getting-started.md` trap covered (WP02)
 - [ ] T010 Role lint — an undeclared document fails the build (WP02)
-- [ ] T011 Prose drift check — report against the declaration, never fix (WP02)
+- [ ] T011 Prose drift check — warn on branches, fail on `main`, never fix (WP02)
+- [ ] T045 Provenance check — every published file traces back to the pack, NFR-003 (WP02)
 
-**Parallel opportunities**: T007 and T009 are independent of the rest once T005 lands.
+**Parallel opportunities**: T007, T009 and T045 are independent of the rest once T005 lands.
 
 **Runs in parallel with**: WP01. Nothing here depends on the spike's finding.
 
