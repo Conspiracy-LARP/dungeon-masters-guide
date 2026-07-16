@@ -6,6 +6,9 @@ dependencies:
 requirement_refs:
 - FR-013
 tracker_refs: []
+planning_base_branch: feat/guide-site-build
+merge_target_branch: feat/guide-site-build
+branch_strategy: Planning artifacts for this mission were generated on feat/guide-site-build. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into feat/guide-site-build unless the human explicitly redirects the landing branch.
 subtasks:
 - T032
 - T033

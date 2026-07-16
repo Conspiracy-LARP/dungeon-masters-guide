@@ -7,6 +7,9 @@ requirement_refs:
 - FR-008
 - FR-009
 tracker_refs: []
+planning_base_branch: feat/guide-site-build
+merge_target_branch: feat/guide-site-build
+branch_strategy: Planning artifacts for this mission were generated on feat/guide-site-build. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into feat/guide-site-build unless the human explicitly redirects the landing branch.
 subtasks:
 - T041
 - T042
@@ -20,16 +23,16 @@ history:
   actor: system
   action: Prompt generated via /spec-kitty.tasks
 agent_profile: human-in-charge
-authoritative_surface: kitty-specs/guide-site-build-01KXP76R/acceptance/
+authoritative_surface: doc/acceptance/
 create_intent:
-- kitty-specs/guide-site-build-01KXP76R/acceptance/sc-001-cold-bootstrap.md
-- kitty-specs/guide-site-build-01KXP76R/acceptance/sc-002-submodule.md
-- kitty-specs/guide-site-build-01KXP76R/acceptance/sc-003-printed-book.md
-- kitty-specs/guide-site-build-01KXP76R/acceptance/summary.md
-execution_mode: planning_artifact
+- doc/acceptance/sc-001-cold-bootstrap.md
+- doc/acceptance/sc-002-submodule.md
+- doc/acceptance/sc-003-printed-book.md
+- doc/acceptance/summary.md
+execution_mode: code_change
 model: ''
 owned_files:
-- kitty-specs/guide-site-build-01KXP76R/acceptance/**
+- doc/acceptance/**
 role: reviewer
 tags: []
 task_type: review
@@ -127,7 +130,7 @@ already written things. Test the order, not just the presence.
   6. Repeat with a **second, different model** if available. One model's success may be that model's
      good judgement rather than the bootstrap's clarity.
 
-- **Files**: `kitty-specs/guide-site-build-01KXP76R/acceptance/sc-001-cold-bootstrap.md`
+- **Files**: `doc/acceptance/sc-001-cold-bootstrap.md`
 
 - **Parallel?**: No.
 
@@ -156,7 +159,7 @@ already written things. Test the order, not just the presence.
      `src/pack/README.md`, and `src/pack/technical-suggestions.md`. **Run what the guide says**, not what
      you think it means.
 
-- **Files**: `kitty-specs/guide-site-build-01KXP76R/acceptance/sc-002-submodule.md`
+- **Files**: `doc/acceptance/sc-002-submodule.md`
 
 - **Parallel?**: **[P]**
 
@@ -180,7 +183,7 @@ already written things. Test the order, not just the presence.
      - [ ] Emoji rendered or sensibly substituted, not tofu boxes
   3. Read a chapter. Not skim — read it. Is it a book, or a printed website?
 
-- **Files**: `kitty-specs/guide-site-build-01KXP76R/acceptance/sc-003-printed-book.md`
+- **Files**: `doc/acceptance/sc-003-printed-book.md`
 
 - **Parallel?**: **[P]**
 
@@ -199,7 +202,7 @@ already written things. Test the order, not just the presence.
      does not work has failed, and saying so is the whole value of this WP.
   4. If all three pass, say so plainly and recommend closure.
 
-- **Files**: `kitty-specs/guide-site-build-01KXP76R/acceptance/summary.md`
+- **Files**: `doc/acceptance/summary.md`
 
 - **Parallel?**: No.
 

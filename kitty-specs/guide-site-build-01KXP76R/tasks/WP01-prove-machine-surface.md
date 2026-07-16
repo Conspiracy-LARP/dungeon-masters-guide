@@ -6,6 +6,9 @@ requirement_refs:
 - FR-007
 - FR-008
 tracker_refs: []
+planning_base_branch: feat/guide-site-build
+merge_target_branch: feat/guide-site-build
+branch_strategy: Planning artifacts for this mission were generated on feat/guide-site-build. During /spec-kitty.implement this WP may branch from a dependency-specific base, but completed changes must merge back into feat/guide-site-build unless the human explicitly redirects the landing branch.
 subtasks:
 - T001
 - T002
@@ -26,13 +29,12 @@ create_intent:
 - spike/.nojekyll
 - spike/index.html
 - .github/workflows/spike-content-type.yml
-- kitty-specs/guide-site-build-01KXP76R/spike-findings.md
+- spike/FINDINGS.md
 execution_mode: code_change
 model: ''
 owned_files:
 - spike/**
 - .github/workflows/spike-content-type.yml
-- kitty-specs/guide-site-build-01KXP76R/contracts/url-map.md
 role: researcher
 tags: []
 task_type: research
@@ -162,10 +164,10 @@ Read before starting:
   3. Fetch `probe.md` the way a model would — a plain GET with no browser headers — and confirm the body
      is the source text.
   4. Confirm `.nojekyll` was honoured: the `.md` exists at all, and was not renamed or converted.
-  5. Write the raw responses into `kitty-specs/guide-site-build-01KXP76R/spike-findings.md`. Paste the
+  5. Write the raw responses into `spike/FINDINGS.md`. Paste the
      actual headers. Do not paraphrase them.
 
-- **Files**: `kitty-specs/guide-site-build-01KXP76R/spike-findings.md`
+- **Files**: `spike/FINDINGS.md`
 
 - **Parallel?**: No.
 
@@ -186,7 +188,7 @@ Read before starting:
        does not want (C-003). Last resort only, and it needs stakeholder sign-off.
   3. Record the decision with its rationale and the evidence that drove it.
 
-- **Files**: `kitty-specs/guide-site-build-01KXP76R/spike-findings.md`
+- **Files**: `spike/FINDINGS.md`
 
 - **Parallel?**: No.
 
