@@ -4,7 +4,7 @@ artifact_type: spec-kitty.analysis-report
 command: /spec-kitty.analyze
 mission_slug: guide-site-build-01KXP76R
 mission_id: 01KXP76R20B7GDSGW5VFEK9TFG
-generated_at: '2026-07-16T20:52:57.691369+00:00'
+generated_at: '2026-07-16T21:06:34.496339+00:00'
 analyzer_agent: unknown
 input_artifacts:
   spec.md:
@@ -12,7 +12,7 @@ input_artifacts:
     sha256: 10c8b0cecc861d8a2764ff0eb0cc1801ebac3ba646beffe7cba77437caf3c6af
   plan.md:
     path: /Users/salimfadhley/workspace/dungeon-masters-guide/kitty-specs/guide-site-build-01KXP76R/plan.md
-    sha256: 00561e47f28138263a64ae5668b2e93827164e5d9c4235e489ac1196ac7e411c
+    sha256: 3097385842951484f651d4fd91edce07980aa3436b52fb7c7543c2458b6958a3
   tasks.md:
     path: /Users/salimfadhley/workspace/dungeon-masters-guide/kitty-specs/guide-site-build-01KXP76R/tasks.md
     sha256: af66c742d204f894444f28419309e8eff43ea24c68c55729e8e57e30002a70cd
@@ -22,9 +22,9 @@ input_artifacts:
 verdict: ready
 issue_counts:
   medium: 0
-  low: 3
   critical: 0
   high: 0
+  low: 3
   info: 0
 findings:
 - id: D1
@@ -41,12 +41,14 @@ findings:
   summary: The default-generated charter sets 'CLI operations should complete quickly (typically under 2 seconds)', which the guide book pdf build exceeds by design; NFR-005 budgets 5 minutes. A hedged SHOULD scoped to product CLIs, and this project ships none.
 ---
 
-## Specification Analysis Report (re-run 3 — post-remediation, mid-implementation)
+## Specification Analysis Report (re-run 4 — mid-implementation, WP01+WP02 approved)
 
 **Mission**: `guide-site-build-01KXP76R`
-**Trigger**: the implement gate reported `stale_analysis_report` (stale input: `plan.md`) after planning
-artifacts were corrected against evidence from WP01 and WP02.
-**Supersedes**: run 1 (`blocked`, 1 high / 6 medium / 2 low) and run 2 (`ready`, 4 medium / 2 low).
+**Trigger**: `stale_analysis_report` (stale input: `plan.md`) after a precision correction to the
+`extra_css` hazard, raised at WP02's review.
+**Supersedes**: run 1 (`blocked`, 1 high / 6 medium / 2 low), run 2 (`ready`, 4 medium / 2 low),
+run 3 (`ready`, 3 low).
+**Status**: WP01 **approved**, WP02 **approved** (cycle 1). WP03–WP06 ready to dispatch in parallel.
 **Charter**: present. Re-evaluated; no MUST violated.
 
 ### Resolved since run 2
@@ -105,7 +107,10 @@ it.** Three planning assumptions have been disproved by execution so far, each c
 2. **The `--strict` rationale was wrong** — `validation.nav.omitted_files` defaults to `info` and
    `--strict` escalates only `WARNING`, so FR-011 had no teeth in the build at all. One config key fixed it.
 3. **The `extra_css` instruction would have violated C-002/C-006** — it resolves relative to `docs_dir`,
-   which is `src/pack/`, so the build would have written assets into the product.
+   which is `src/pack/`, so the build would have written assets into the product. **Corrected twice**:
+   the first correction overstated it as a loud failure. It is not — a missing `extra_css` file exits 0
+   and ships a *silent 404*, and the role lint globs `*.md` only, so a stray `.css` is invisible to it.
+   The accurate version is the stronger argument: the hazard is not a failure you would notice.
 
 A fourth was caught at review: `black --check .` was vacuous, because black's `DEFAULT_EXCLUDES` contains
 `build` and silently skipped `src/build/` — 5 files checked of 11, while the skipped ones violated black.
@@ -118,6 +123,6 @@ The artifacts and the implementation now agree. Nothing blocks.
 
 ### Next Actions
 
-1. **Proceed.** WP02 is in fix cycle 1/3 (one config line plus a `black .` run, fix verified end to end
-   by the reviewer). Its approval unblocks the four-lane round: WP03, WP04, WP05, WP06.
+1. **Proceed.** WP01 and WP02 are approved. Dispatch the four-lane round — WP03, WP04, WP05, WP06 —
+   which is the widest point of the sprint. WP07 follows WP06; WP08 gathers; WP09 closes.
 2. **D1, C4, CH1** — accept.
