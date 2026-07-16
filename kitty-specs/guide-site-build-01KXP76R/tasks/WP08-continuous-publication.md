@@ -253,3 +253,4 @@ The workflow is verified by executing it, not by review:
 ## Activity Log
 
 - 2026-07-16T19:58:13Z – system – Prompt created.
+- 2026-07-16T23:25:47Z – user – Moved to planned
