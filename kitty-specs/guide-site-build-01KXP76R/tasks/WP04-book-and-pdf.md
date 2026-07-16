@@ -20,7 +20,7 @@ subtasks:
 phase: Phase 2 - The surfaces
 assignee: ''
 agent: "claude:opus:reviewer-renata:reviewer"
-shell_pid: "14582"
+shell_pid: "24774"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -270,3 +270,4 @@ printed on paper, by a human.
 - 2026-07-16T21:06:57Z – claude:opus:python-pedro:implementer – shell_pid=2435 – Assigned agent via action command
 - 2026-07-16T21:28:55Z – claude:opus:python-pedro:implementer – shell_pid=2435 – Ready for review: book assembled in nav order from roles.load_documents(); PDF has title page, page-numbered ToC, 58 pages, cross-references flattened to chapter+page; single-file HTML book from the same intermediate with links retargeted to internal anchors. Emoji substituted to pifont dingbats with two guards against silent glyph loss. Image pinned by digest. src/pack/ untouched.
 - 2026-07-16T21:29:46Z – claude:opus:reviewer-renata:reviewer – shell_pid=14582 – Started review via action command
+- 2026-07-16T22:44:57Z – claude:opus:reviewer-renata:reviewer – shell_pid=24774 – Started review via action command
