@@ -21,8 +21,8 @@ subtasks:
 - T016
 phase: Phase 2 - The surfaces
 assignee: ''
-agent: "claude:opus:frontend-freddy:implementer"
-shell_pid: "18239"
+agent: "claude:opus:reviewer-renata:reviewer"
+shell_pid: "19221"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -296,3 +296,5 @@ Mandatory cases:
 - 2026-07-16T21:44:17Z – user – shell_pid=15762 – Moved to planned
 - 2026-07-16T21:45:02Z – claude:opus:frontend-freddy:implementer – shell_pid=18239 – Started implementation via action command
 - 2026-07-16T21:48:10Z – claude:opus:frontend-freddy:implementer – shell_pid=18239 – Cycle 1 fix: gitignore guard uses --no-index, Material canary reads palette stylesheet, table docstring corrected
+- 2026-07-16T21:48:40Z – claude:opus:reviewer-renata:reviewer – shell_pid=19221 – Started review via action command
+- 2026-07-16T21:53:12Z – user – shell_pid=19221 – Cycle 1 fix verified; both guards personally watched to fire. (1) .gitignore guard: reverting to unanchored 'site/' turns test_the_theme_is_not_silently_git_ignored RED naming all three theme files; restoring turns it green. Side-by-side proves --no-index load-bearing: old code path reports nothing on the live bug, new one names all three. Underlying bug confirmed live -- 'git add' on a new theme file is refused under the unanchored pattern. (2) Material canary: data-md-color-primary occurs 50x in the *.min.css concatenation, 0x in main alone (old haystack had no possible needle). Appending [scheme][primary=custom] to palette.*.min.css turns the palette test RED; restoring turns it green. Config half fires independently (custom->indigo). (3) Font test premise intact for a stronger reason than sort order: palette carries zero --md-text-font-family occurrences, so the glob change cannot affect it. (4) Advisory 3 addressed: renamed to test_no_table_opts_out_of_materials_containment; docstring pins containment as a canary and disclaims being the NFR-002 guard. (5) Mutation hygiene clean: both Material sheets byte-identical to the pristine 9.7.6 wheel by sha256, verified independently rather than on report. Commit 498bee7 touches tests/test_site.py only; src/pack/ frozen. Gates: pytest 139, black clean, mypy clean, mkdocs --strict exit 0. Details in review-cycle-2.md. Also repaired review-cycle-1.md, which shipped without YAML frontmatter (recorded its actual verdict: rejected).

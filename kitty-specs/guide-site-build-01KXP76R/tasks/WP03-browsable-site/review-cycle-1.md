@@ -1,3 +1,15 @@
+---
+affected_files:
+- tests/test_site.py
+cycle_number: 1
+mission_slug: guide-site-build-01KXP76R
+reproduction_command:
+reviewed_at: '2026-07-16T21:45:00Z'
+reviewer_agent: reviewer-renata
+verdict: rejected
+work_package_id: WP03
+---
+
 # WP03 review — cycle 1
 
 **Verdict: changes requested.** Two of the four claimed regression tests do not fire. Both fixes are
