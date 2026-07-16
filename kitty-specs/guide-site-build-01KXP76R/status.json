@@ -1,7 +1,7 @@
 {
-  "event_count": 28,
-  "last_event_id": "01KXPC20CXZ8MH39HWEY0FX6VT",
-  "materialized_at": "2026-07-16T21:06:56.028936+00:00",
+  "event_count": 30,
+  "last_event_id": "01KXPC25NJQMRAW2FTY3GXFQ9A",
+  "materialized_at": "2026-07-16T21:07:01.425602+00:00",
   "mission_number": "",
   "mission_slug": "guide-site-build-01KXP76R",
   "mission_type": "software-dev",
@@ -12,9 +12,9 @@
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 2,
+    "in_progress": 3,
     "in_review": 0,
-    "planned": 5
+    "planned": 4
   },
   "work_packages": {
     "WP01": {
@@ -46,11 +46,11 @@
       "last_transition_at": "2026-07-16T21:06:56.028936+00:00"
     },
     "WP05": {
-      "actor": "finalize-tasks",
+      "actor": "claude:opus:python-pedro:implementer",
       "force_count": 0,
-      "lane": "planned",
-      "last_event_id": "01KXP8XTJ34W756HC3PA5VK9T5",
-      "last_transition_at": "2026-07-16T20:12:13.251383+00:00"
+      "lane": "in_progress",
+      "last_event_id": "01KXPC25NJQMRAW2FTY3GXFQ9A",
+      "last_transition_at": "2026-07-16T21:07:01.425602+00:00"
     },
     "WP06": {
       "actor": "finalize-tasks",
