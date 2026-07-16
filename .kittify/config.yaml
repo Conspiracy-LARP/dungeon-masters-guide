@@ -1,0 +1,15 @@
+project:
+  uuid: fa6e8103-68a1-4ba1-9900-87227113af47
+  slug: dungeon-masters-guide
+  node_id: f3e2d94d0fa7
+  build_id: 9b93292c-b71a-5b7a-8989-322f8b64ddbe
+vcs:
+  type: git
+agents:
+  available:
+  - claude
+  - gemini
+  - opencode
+  - codex
+  auto_commit: true
+  lint_on_edit: false
