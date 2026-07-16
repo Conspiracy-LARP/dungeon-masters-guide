@@ -1,7 +1,7 @@
 {
-  "event_count": 18,
-  "last_event_id": "01KXPAVYW0S7TB14VE8702JMNJ",
-  "materialized_at": "2026-07-16T20:46:09.280786+00:00",
+  "event_count": 19,
+  "last_event_id": "01KXPB571MA41ANR8KQT5BA41V",
+  "materialized_at": "2026-07-16T20:51:12.564217+00:00",
   "mission_number": "",
   "mission_slug": "guide-site-build-01KXP76R",
   "mission_type": "software-dev",
@@ -13,8 +13,8 @@
     "done": 0,
     "for_review": 0,
     "in_progress": 0,
-    "in_review": 1,
-    "planned": 7
+    "in_review": 0,
+    "planned": 8
   },
   "work_packages": {
     "WP01": {
@@ -25,11 +25,11 @@
       "last_transition_at": "2026-07-16T20:43:55.345691+00:00"
     },
     "WP02": {
-      "actor": "claude:opus:reviewer-renata:reviewer",
-      "force_count": 0,
-      "lane": "in_review",
-      "last_event_id": "01KXPAVYW0S7TB14VE8702JMNJ",
-      "last_transition_at": "2026-07-16T20:46:09.280786+00:00"
+      "actor": "user",
+      "force_count": 1,
+      "lane": "planned",
+      "last_event_id": "01KXPB571MA41ANR8KQT5BA41V",
+      "last_transition_at": "2026-07-16T20:51:12.564217+00:00"
     },
     "WP03": {
       "actor": "finalize-tasks",
