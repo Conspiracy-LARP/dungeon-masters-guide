@@ -20,7 +20,8 @@ subtasks:
 - T045
 phase: Phase 1 - Foundation
 assignee: ''
-agent: claude
+agent: "claude:opus:python-pedro:implementer"
+shell_pid: "79720"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -372,3 +373,4 @@ poetry run guide roles lint    # against the real pack: must pass today
 ## Activity Log
 
 - 2026-07-16T19:58:13Z – system – Prompt created.
+- 2026-07-16T20:30:55Z – claude:opus:python-pedro:implementer – shell_pid=79720 – Assigned agent via action command
