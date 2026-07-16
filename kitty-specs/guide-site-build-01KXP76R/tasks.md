@@ -165,12 +165,12 @@ Scope (A-004) and this is where it will try to creep in.
 **Independent test**: a PDF with a title page, a page-numbered ToC, real pagination, A4 body type, and no
 construction that assumes clicking.
 
-- [ ] T017 `book.py`: assemble chapters in nav order (WP04)
-- [ ] T018 Flatten print-hostile cross-references (WP04)
-- [ ] T019 `src/theme/book/`: LaTeX template — title page, ToC with page numbers, A4 (WP04)
-- [ ] T020 Pinned fonts and the pandoc/XeLaTeX container invocation (WP04)
-- [ ] T021 The single-file HTML book (WP04)
-- [ ] T022 Tests for assembly and cross-reference flattening (WP04)
+- [x] T017 `book.py`: assemble chapters in nav order (WP04)
+- [x] T018 Flatten print-hostile cross-references (WP04)
+- [x] T019 `src/theme/book/`: LaTeX template — title page, ToC with page numbers, A4 (WP04)
+- [x] T020 Pinned fonts and the pandoc/XeLaTeX container invocation (WP04)
+- [x] T021 The single-file HTML book (WP04)
+- [x] T022 Tests for assembly and cross-reference flattening (WP04)
 
 **Parallel opportunities**: T019 and T021 are independent of each other.
 
