@@ -21,7 +21,8 @@ subtasks:
 - T016
 phase: Phase 2 - The surfaces
 assignee: ''
-agent: claude
+agent: "claude:opus:frontend-freddy:implementer"
+shell_pid: "2435"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -289,3 +290,4 @@ Mandatory cases:
 ## Activity Log
 
 - 2026-07-16T19:58:13Z – system – Prompt created.
+- 2026-07-16T21:06:52Z – claude:opus:frontend-freddy:implementer – shell_pid=2435 – Assigned agent via action command
