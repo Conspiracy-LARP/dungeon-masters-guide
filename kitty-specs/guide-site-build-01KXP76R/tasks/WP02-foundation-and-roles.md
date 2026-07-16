@@ -20,8 +20,8 @@ subtasks:
 - T045
 phase: Phase 1 - Foundation
 assignee: ''
-agent: "claude:opus:python-pedro:implementer"
-shell_pid: "95857"
+agent: "claude:opus:reviewer-renata:reviewer"
+shell_pid: "98291"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -378,3 +378,5 @@ poetry run guide roles lint    # against the real pack: must pass today
 - 2026-07-16T20:46:09Z – claude:opus:reviewer-renata:reviewer – shell_pid=91742 – Started review via action command
 - 2026-07-16T20:51:13Z – user – shell_pid=91742 – Moved to planned
 - 2026-07-16T20:53:00Z – claude:opus:python-pedro:implementer – shell_pid=95857 – Started implementation via action command
+- 2026-07-16T20:59:33Z – claude:opus:python-pedro:implementer – shell_pid=95857 – Cycle 1 fix: black excludes overridden, src/build/ now checked (12 files, was 5), regression test added. tests/test_toolchain.py is a new file outside owned_files — it is the guard the reviewer explicitly requested, inside the lane's tests/ scope, same basis as the accepted tests/__init__.py. Verified both re-exclusion routes (deleting the key; narrowing the pattern to re-add 'build') fail with a diagnostic message. mypy confirmed clean at 12 source files, no exclusion issue. 91 tests pass; black+mypy clean; roles lint/check-drift pass; src/pack untouched. Also corrected two mkdocs.yml overstatements per review: extra_css does not abort (silent 404) and would not fail the role lint (*.md glob only).
+- 2026-07-16T21:00:29Z – claude:opus:reviewer-renata:reviewer – shell_pid=98291 – Started review via action command
