@@ -4,7 +4,7 @@ artifact_type: spec-kitty.analysis-report
 command: /spec-kitty.analyze
 mission_slug: guide-site-build-01KXP76R
 mission_id: 01KXP76R20B7GDSGW5VFEK9TFG
-generated_at: '2026-07-16T20:27:29.828002+00:00'
+generated_at: '2026-07-16T20:29:55.703773+00:00'
 analyzer_agent: unknown
 input_artifacts:
   spec.md:
@@ -17,14 +17,14 @@ input_artifacts:
     path: /Users/salimfadhley/workspace/dungeon-masters-guide/kitty-specs/guide-site-build-01KXP76R/tasks.md
     sha256: af66c742d204f894444f28419309e8eff43ea24c68c55729e8e57e30002a70cd
   charter:
-    path:
-    sha256:
+    path: /Users/salimfadhley/workspace/dungeon-masters-guide/.kittify/charter/charter.md
+    sha256: fef944ebc79e9ee2ed69a8dfafe87322aaa74f5c5ed98d84e9528f86c538edde
 verdict: ready
 issue_counts:
   medium: 4
-  critical: 0
-  low: 2
+  low: 3
   high: 0
+  critical: 0
   info: 0
 findings:
 - id: C2
@@ -51,13 +51,19 @@ findings:
   severity: low
   category: coverage
   summary: WP01 and WP09 carry requirement_refs (FR-007, FR-008, FR-009) for requirements they prove or verify rather than implement, which inflates apparent coverage; the real implementers are WP03 and WP06.
+- id: CH1
+  severity: low
+  category: charter-alignment
+  summary: The default-generated charter sets a performance target of 'CLI operations should complete quickly (typically under 2 seconds)', which the guide book pdf build exceeds by design; NFR-005 budgets 5 minutes end-to-end. A hedged SHOULD, not a MUST, and it plausibly scopes to product CLIs rather than build pipelines - but it is a default nobody chose.
 ---
 
 ## Specification Analysis Report (re-run after remediation)
 
 **Mission**: `guide-site-build-01KXP76R` · **Analysed**: spec.md, plan.md, tasks.md + 9 WP prompts
 **Supersedes**: the first run (verdict `blocked`, 9 findings: 1 high, 6 medium, 2 low)
-**Charter**: absent — no charter principles to validate against.
+**Charter**: **now present** — created during this session via `charter interview --defaults --profile
+minimal` + `generate` + `sync`, because `agent action implement` refuses to run without one
+(`charter_source missing`). This is the first run in which Charter Alignment is assessable.
 
 ### Resolved since the previous run
 
@@ -102,8 +108,30 @@ outside the code.
 
 ### Charter Alignment Issues
 
-None assessable — no charter. DIRECTIVE_003 (decision documentation) is now better served: U1's
-resolution is recorded with its rationale rather than delegated to implementation.
+The charter is deliberately non-committal — it defers to "the project's declared" test approach, quality
+gates, and tooling rather than imposing its own. Checked statement by statement:
+
+| Charter statement | Force | Assessment |
+|---|---|---|
+| "Use the project's declared test approach; if none declared, mark NEEDS CLARIFICATION" | SHOULD | **Pass** — plan.md declares pytest + lints + two behavioural tests |
+| "Only require the quality gates explicitly declared by this project before merge" | SHOULD | **Pass** — gates are the declared lints and tests |
+| "Use only the languages, frameworks, and tools explicitly declared by this project" | SHOULD | **Pass** — Python 3.12, MkDocs+Material, pandoc/XeLaTeX, all declared in Technical Context |
+| "At least one focused reviewer approves before merge" | SHOULD | **Pass** — the implement-review loop enforces it |
+| "Must run on macOS and Linux developer environments" | **MUST** | **Pass** — Python + containerised pandoc/TeX; no platform-specific code |
+| "CLI operations should complete quickly (typically under 2 seconds)" | SHOULD | **CH1 (low)** — `guide book pdf` exceeds this by design; NFR-005 budgets 5 minutes |
+| DIR-001 "Keep spec, plan, tasks, implementation, review artifacts consistent" (severity: warn) | warn | **Pass** — this analysis is that check; I1/I2 are the open drift |
+
+**No MUST principle is violated**, so there is no CRITICAL charter finding.
+
+**CH1 in context**: the 2-second target is a stock default from the `software-dev-default` template set,
+not a considered decision about this project. It reads as scoped to product CLI operations; this project
+ships no CLI to users — `guide` is build machinery, and its slowest command renders a book with LaTeX.
+Recorded as LOW rather than silently ignored, because the charter now binds future missions too. If it
+grates, amend the charter (its own Amendment Process: proposed by PR, reviewed before adoption) rather
+than let a default nobody chose sit as governance.
+
+DIRECTIVE_003 (decision documentation) is now better served than in the first run: U1's resolution is
+recorded with its rationale rather than delegated to implementation.
 
 ### Unmapped Tasks
 
@@ -118,6 +146,7 @@ None. 45 subtasks across 9 work packages; all mapped.
 - **Overall FR+NFR coverage**: 19/19 (100%)
 - **Ambiguity count**: 0 (was 2)
 - **Duplication count**: 1
+- **Charter conflicts**: 0 MUST, 1 SHOULD tension (CH1)
 - **Critical issues**: 0 · **High issues**: 0 (was 1)
 
 ### Assessment
@@ -136,4 +165,5 @@ execution order, and none can silently corrupt an output.
    satisfied). Dispatch them in parallel — the round the lanes were computed for.
 2. **I1 and I2** — fix opportunistically; neither blocks work.
 3. **C2 and C3** — decide during WP07/WP03 review; both are one-line scoping calls.
-4. **D1, C4** — accept.
+4. **D1, C4, CH1** — accept, or amend the charter's stock 2-second performance default if it will keep
+   surfacing across future missions.
