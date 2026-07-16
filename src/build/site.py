@@ -101,6 +101,29 @@ _BUILD: SiteBuild | None = None
 # --------------------------------------------------------------------------------------
 
 
+def _project_version() -> str:
+    """The single source of the version: ``pyproject.toml``'s ``[tool.poetry].version``.
+
+    Read at build time and injected into ``config.extra`` so the footer, ``llms.txt`` and the
+    book all state the same number. Typing it into ``mkdocs.yml`` as well would be a second
+    source free to drift — the exact failure the reading order and the title both taught us.
+    Fails loudly rather than shipping a page that quietly claims the wrong version.
+    """
+    import re as _re
+
+    from build.config import _repo_root
+
+    pyproject = _repo_root() / "pyproject.toml"
+    text = pyproject.read_text(encoding="utf-8")
+    match = _re.search(r'^version\s*=\s*"([^"]+)"', text, _re.M)
+    if match is None:
+        raise SiteError(
+            f"no `version` found in {pyproject}. The site footer, llms.txt and the book all "
+            "derive the version from it; there is nowhere else to read it from."
+        )
+    return match.group(1)
+
+
 def extract_pitch(markdown: str) -> str:
     """Return the "What is this?" section of the kit.
 
@@ -262,6 +285,21 @@ def _verify_published(site_dir: Path, build: SiteBuild) -> None:
         )
 
 
+def write_robots(site_dir: Path, config: BuildConfig) -> Path:
+    """Point crawlers at the sitemap MkDocs generates.
+
+    Generated, not authored: `docs_dir` is `src/pack/` — the product — so a hand-written
+    `robots.txt` would have to live inside the guide (C-002/C-006). The sitemap URL derives
+    from the one configured base (NFR-001), so a domain change carries it.
+    """
+    path = site_dir / "robots.txt"
+    path.write_text(
+        f"User-agent: *\nAllow: /\nSitemap: {config.absolute_url('sitemap.xml')}\n",
+        encoding="utf-8",
+    )
+    return path
+
+
 def write_nojekyll(site_dir: Path) -> Path:
     """Emit the empty ``.nojekyll`` marker (FR-012).
 
@@ -331,9 +369,14 @@ def _require_build() -> SiteBuild:
 
 
 def on_config(config: MkDocsConfig) -> MkDocsConfig:
-    """Resolve the declaration, the documents and the landing page — or fail the build."""
+    """Resolve the declaration, the documents and the landing page — or fail the build.
+
+    Also injects the version from ``pyproject.toml`` into ``config.extra`` so every surface
+    states the same number from one source.
+    """
     global _BUILD
     _BUILD = _resolve(config)
+    config.extra["version_string"] = _project_version()
     return config
 
 
@@ -429,3 +472,4 @@ def on_post_build(*, config: MkDocsConfig) -> None:
     except SiteError as exc:
         raise PluginError(str(exc)) from exc
     write_nojekyll(site_dir)
+    write_robots(site_dir, build.config)

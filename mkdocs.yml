@@ -10,7 +10,7 @@
 # fails by design (FR-011): a document that is silently absent from the book is the
 # exact failure this declaration exists to prevent.
 
-site_name: The Dungeon Master's Guide
+site_name: "Conspiracy Larp: Player/Creator's Kit"
 site_description: The creator kit for a shared, permissionless world of diegetic conspiracy satire.
 
 # NFR-001 / C-003: the one configured base. Note the subpath and the trailing slash.
@@ -23,7 +23,8 @@ docs_dir: src/pack
 site_dir: site
 
 nav:
-  - Creator Kit: creator-kit.md
+  - Introduction: creator-kit.md
+  - The Premise: premise.md
   - Getting Started: getting-started.md
   - How We Tell It: storytelling.md
   - Philosophy: philosophy.md
@@ -88,6 +89,11 @@ not_in_nav: |
   start.md
 
 extra:
+  # `version_string` is INJECTED by the on_config hook from pyproject.toml's version.
+  # Deliberately not written here: a second copy is a second source, free to drift.
+  analytics:
+    provider: google
+    property: G-WT4KQCWFYC
   pack:
     # Published, but outside the book's reading flow.
     not_in_book:

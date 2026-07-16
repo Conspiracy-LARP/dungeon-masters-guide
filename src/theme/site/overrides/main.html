@@ -48,3 +48,16 @@
   {% endif %}
   {{ super() }}
 {% endblock %}
+
+{#
+  The version, on every page (stakeholder requirement: visible in all compiled outputs).
+  Source: pyproject.toml -> injected into config.extra by site.py's on_config. One source.
+#}
+{% block footer %}
+  {{ super() }}
+  {% if config.extra.version_string %}
+  <div class="guide-version">
+    Conspiracy Larp: Player/Creator's Kit — version {{ config.extra.version_string }}
+  </div>
+  {% endif %}
+{% endblock %}
