@@ -230,3 +230,4 @@ samples are ignored; the live pack passes on both branches; failures name the br
 
 - 2026-07-16T19:58:13Z – system – Prompt created.
 - 2026-07-16T21:18:04Z – claude:opus:python-pedro:implementer – shell_pid=10042 – Assigned agent via action command
+- 2026-07-16T21:24:49Z – claude:opus:python-pedro:implementer – shell_pid=10042 – Ready for review: guide links check enforces all three cross-reference rules on both branches; live pack passes; 2026-07-16 README->AGENTS.md regression locked as a test; guards mutation-demonstrated red
