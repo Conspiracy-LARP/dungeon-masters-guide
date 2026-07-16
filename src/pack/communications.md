@@ -1,8 +1,8 @@
 # How we communicate — cells, collaboration, and the strangers we'll never meet
 
-*Companion to `creator-kit.md`. This is the community side of the project: how creators find each other,
-build on each other, and organise (barely). None of it is compulsory. Like everything in the kit, it is
-a description of how the game tends to work, not a set of rules with an enforcer.*
+*There is no forum, no membership and no boss. People organise in small cells, build on strangers they
+will never identify, and are one another's audience. How to interweave your work with someone else's —
+and why not knowing who made a thing is a feature rather than a gap.*
 
 ---
 

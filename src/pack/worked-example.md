@@ -1,9 +1,8 @@
 # A worked example — how one corner grew, one idea at a time
 
-*Companion to `creator-kit.md`. This is a single illustrative history — not a template, and deliberately
-told without naming any real site, character, or domain. The point is not *what* was built but the
-**shape of how it grew**: from one small flash of insight, each thing suggesting the next. Your corner
-will look nothing like this, and that's exactly right.*
+*How a single node actually grew — one idea suggesting the next, from a rediscovered intranet, to a
+blogger who finds it, to the villain's own corporate homepage. Anonymised on purpose: the lesson is the
+shape of the process, not the specifics. Yours will look nothing like it, and that is correct.*
 
 ---
 

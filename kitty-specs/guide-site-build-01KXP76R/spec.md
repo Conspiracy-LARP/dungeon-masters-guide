@@ -79,8 +79,8 @@ in their project broken by the update.
 |---|---|---|
 | FR-001 | Publish a browsable website generated from the pack, with search and a left-hand nav in the defined ten-chapter reading order. The landing page is the guide's own "What is this?" pitch. | Accepted |
 | FR-002 | Every published page offers its own clean markdown source: a visible link a human can follow, and machine-discoverable metadata a model can act on without reading the page. | Accepted |
-| FR-003 | Publish the whole guide as a single-file document containing all ten chapters in reading order. | Accepted |
-| FR-004 | Publish a printable edition with a title page, a table of contents carrying page numbers, real pagination, and body text sized for A4/Letter. It must contain no construction that requires clicking. It is linked prominently from the site. | Accepted |
+| FR-003 | ~~Publish the whole guide as a single-file document.~~ **DESCOPED 2026-07-17** by the stakeholder: the website and the LLM-readable markdown are the deliverables; nobody reads the book. | Descoped |
+| FR-004 | ~~Publish a printable PDF.~~ **DESCOPED 2026-07-17.** Beyond nobody wanting it, the PDF is the only reason CI needs a 1.1GB pandoc/TeX image — measured by WP04 at ~58s cold against ~6s for the render itself. Dropping it removes the main risk to NFR-005. WP04's code is complete and stays in the repo; it is simply not in the pipeline. | Descoped |
 | FR-005 | Publish a machine-readable index of the guide, following the `llms.txt` convention, whose first and most prominent entry is the bootstrap. | Accepted |
 | FR-006 | Publish the entire guide concatenated into one machine-readable file, in reading order. | Accepted |
 | FR-007 | Serve every document's raw markdown at a predictable parallel address, delivered as text a model can read directly — not as a download, and not converted to a rendered page. | Accepted |
@@ -121,7 +121,7 @@ Measured from the outside, without reference to how any of it is built:
 |---|---|---|
 | SC-001 | A fresh LLM session, given nothing but the one address, produces a correctly structured workspace with the kit attached, and asks about real-identity boundaries **before** writing any artifact. | Run against a real model, end to end. Not a structural check. |
 | SC-002 | A creator attaches the kit to their own project with a single command that succeeds first time. | Execute the published command against the published branch from a clean checkout. |
-| SC-003 | A reader can print the guide and read it cover to cover with nothing missing and nothing requiring a click. | Print it. |
+| SC-003 | ~~Printed and read on paper.~~ **DESCOPED** with FR-003/FR-004. | n/a |
 | SC-004 | No two published surfaces can disagree about the guide's content. | All surfaces are generated from the same source; verified by the absence of any hand-authored output. |
 | SC-005 | A reader on a phone can read any chapter without horizontal scrolling. | Inspect at 320px. |
 | SC-006 | The guide can be moved to a new address by changing one value. | Change it, rebuild, confirm every generated address follows. |

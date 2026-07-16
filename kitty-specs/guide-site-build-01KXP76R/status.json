@@ -1,84 +1,20 @@
 {
-  "event_count": 63,
-  "last_event_id": "01KXPM6ZKGRFB52NBR0WCDQP2C",
-  "materialized_at": "2026-07-16T23:29:27.632997+00:00",
+  "event_count": 0,
+  "last_event_id": null,
+  "materialized_at": "",
   "mission_number": "",
-  "mission_slug": "guide-site-build-01KXP76R",
+  "mission_slug": "",
   "mission_type": "software-dev",
   "summary": {
-    "approved": 7,
+    "approved": 0,
     "blocked": 0,
     "canceled": 0,
     "claimed": 0,
     "done": 0,
     "for_review": 0,
-    "in_progress": 1,
+    "in_progress": 0,
     "in_review": 0,
-    "planned": 1
+    "planned": 0
   },
-  "work_packages": {
-    "WP01": {
-      "actor": "user",
-      "force_count": 0,
-      "lane": "approved",
-      "last_event_id": "01KXPAQW2HZSN777MJ5X87TWPC",
-      "last_transition_at": "2026-07-16T20:43:55.345691+00:00"
-    },
-    "WP02": {
-      "actor": "user",
-      "force_count": 1,
-      "lane": "approved",
-      "last_event_id": "01KXPBYB8F53DNN9SKYEH32P2D",
-      "last_transition_at": "2026-07-16T21:04:56.079171+00:00"
-    },
-    "WP03": {
-      "actor": "user",
-      "force_count": 1,
-      "lane": "approved",
-      "last_event_id": "01KXPEPPXTPM742T5FY13RPRZQ",
-      "last_transition_at": "2026-07-16T21:53:11.610052+00:00"
-    },
-    "WP04": {
-      "actor": "user",
-      "force_count": 1,
-      "lane": "approved",
-      "last_event_id": "01KXPKWNX8N4VQ8BRSJVRTJPGK",
-      "last_transition_at": "2026-07-16T23:23:50.056172+00:00"
-    },
-    "WP05": {
-      "actor": "user",
-      "force_count": 0,
-      "lane": "approved",
-      "last_event_id": "01KXPCQHWSBCV9CH70WY9M5H9B",
-      "last_transition_at": "2026-07-16T21:18:42.073722+00:00"
-    },
-    "WP06": {
-      "actor": "user",
-      "force_count": 0,
-      "lane": "approved",
-      "last_event_id": "01KXPCN1SCW9AMB215FW22J7Q2",
-      "last_transition_at": "2026-07-16T21:17:20.044066+00:00"
-    },
-    "WP07": {
-      "actor": "user",
-      "force_count": 0,
-      "lane": "approved",
-      "last_event_id": "01KXPDBKNDJHCHAC3XNH7VEMRJ",
-      "last_transition_at": "2026-07-16T21:29:39.245184+00:00"
-    },
-    "WP08": {
-      "actor": "claude:opus:implementer-ivan:implementer",
-      "force_count": 1,
-      "lane": "in_progress",
-      "last_event_id": "01KXPM6ZKGRFB52NBR0WCDQP2C",
-      "last_transition_at": "2026-07-16T23:29:27.632997+00:00"
-    },
-    "WP09": {
-      "actor": "finalize-tasks",
-      "force_count": 0,
-      "lane": "planned",
-      "last_event_id": "01KXP8YCM352T6QWFNHX7QJJCD",
-      "last_transition_at": "2026-07-16T20:12:31.747628+00:00"
-    }
-  }
+  "work_packages": {}
 }

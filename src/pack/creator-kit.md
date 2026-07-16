@@ -1,11 +1,11 @@
-# The Creator Kit — a shared world of diegetic conspiracy satire
+# Introduction — a shared world of diegetic conspiracy satire
 
 **What is this?** In a sentence: it is the *Dungeon Master's Guide* to an **alternate reality game** that
 uses diegetic storytelling to ask one question — *what if all the conspiracy theories were true?*
 
-The idea is not new. In the late 1960s and early '70s, Robert Anton Wilson and Robert Shea took every
-conspiracy theory they could lay hands on and, in the LSD-hazed **_Illuminatus!_ Trilogy**, imagined them
-all as simultaneously true. We are doing essentially the same thing — but aimed at the *modern* conspiracy
+The idea is not new. Writing through the late 1960s and early '70s, Robert Anton Wilson and Robert Shea
+took every conspiracy theory they could lay hands on and, in the LSD-hazed **_Illuminatus!_ Trilogy**
+(published **1975**), imagined them all as simultaneously true. We are doing essentially the same thing — but aimed at the *modern* conspiracy
 theories, told through *modern* media and technology, and rendered **entirely diegetically**: not as a
 novel with a narrator, but as a mesh of real-looking websites, documents, and artifacts left quietly on
 the open internet for the curious to stumble upon. Player-collaborators borrow the tools of comedic improv
@@ -471,6 +471,5 @@ do what only the audience can do — decide, by reading and following the thread
 
 ---
 
-*When you're ready, tell the LLM: "Let's begin." It will start with the interview in Section 3 —
-firewalling your real identity first, then mapping your corner, then generating the first thing to
-build.*
+**Ready? → [`getting-started.md`](getting-started.md).** Six steps, and only one of them is yours: make
+a blank repository and tell your agent to read the bootstrap. It does the rest.

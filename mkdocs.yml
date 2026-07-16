@@ -1,0 +1,190 @@
+# The single declaration of chapter order and document roles.
+#
+# THIS FILE IS AUTHORITATIVE. The site, the book, the PDF, llms.txt, llms-full.txt,
+# the pack branch and the role lint all derive the reading order from `nav:` below.
+# There is exactly one list of chapters in this repository, and it is this one.
+# Do not add a second copy anywhere — see contracts/roles-declaration.md.
+#
+# The reading order is specified (doc/build.md), not invented. If src/pack/ gains a
+# document that is in neither `nav` nor `extra.pack.not_in_book`, `guide roles lint`
+# fails by design (FR-011): a document that is silently absent from the book is the
+# exact failure this declaration exists to prevent.
+
+site_name: "Conspiracy Larp: Player/Creator's Kit"
+site_description: The creator kit for a shared, permissionless world of diegetic conspiracy satire.
+
+# NFR-001 / C-003: the one configured base. Note the subpath and the trailing slash.
+# Moving to a custom domain is a change to this value and nothing else (SC-006).
+# Every absolute URL in every surface derives from here via build.config.absolute_url().
+site_url: https://conspiracy-larp.github.io/dungeon-masters-guide/
+
+# src/pack/ is the product. The build reads it and never writes to it (C-002, C-006).
+docs_dir: src/pack
+site_dir: site
+
+nav:
+  - Introduction: creator-kit.md
+  - The Premise: premise.md
+  - Getting Started: getting-started.md
+  - How We Tell It: storytelling.md
+  - Philosophy: philosophy.md
+  - Improvisation: improvisation.md
+  - Ethics: ethics.md
+  - Communications: communications.md
+  - Worked Example: worked-example.md
+  - Technical Suggestions: technical-suggestions.md
+  - Continuity Checker: story-continuity-checker-prompt.md
+
+# The build's own hook (WP03). Derives the landing page from the kit's "What is this?"
+# pitch (FR-001), publishes the raw markdown at parallel paths with the bootstrap named
+# AGENTS.md (FR-007, FR-008, FR-010), emits `.nojekyll` (FR-012), and supplies each page
+# with its raw-markdown address for the AI pointer (FR-002).
+#
+# The hook reads `site_url` from THIS config at build time rather than re-reading the
+# file, so overriding the base (as the base-swap test does) really does move every
+# generated address (NFR-001, SC-006).
+hooks:
+  - src/build/site.py
+
+# FR-011 at the MkDocs level: an undeclared document must FAIL the build.
+#
+# `omitted_files` defaults to `info`, and --strict only escalates WARNING — so with the
+# default, a new undeclared document in src/pack/ builds green and is silently missing
+# from the nav, which is exactly the silent failure FR-011 exists to prevent (R-003).
+# Verified against MkDocs 1.6.1: with the default, a probe document produced only an
+# INFO and exit 0. Raising it to `warn` is what makes --strict actually bite.
+#
+# `guide roles lint` enforces the same rule independently and with a better message;
+# both exist because CI runs the lint but a human running `mkdocs serve` gets only this.
+validation:
+  nav:
+    omitted_files: warn
+
+  # FR-013 at the MkDocs level, added by WP03: a cross-reference that does not resolve
+  # must FAIL the build, on the site as on every other published surface.
+  #
+  # Same shape of trap as `omitted_files` above, and for the same reason: --strict only
+  # escalates WARNING, so anything left at the `info` default is not enforced by it.
+  # `not_found` is already `warn` by default; `unrecognized_links` and `anchors` are not,
+  # and those two are the ones that catch a link this pack can plausibly grow — a link to
+  # a document that does not exist, or to a `#section-anchor` that has been renamed. The
+  # pack's cross-links are bare siblings (C-001), so every one of them is an internal
+  # link that this validation is able to check.
+  links:
+    not_found: warn
+    unrecognized_links: warn
+    anchors: warn
+
+# REQUIRED, not optional. docs_dir is src/pack, so these two documents sit inside the
+# docs tree while being deliberately absent from `nav`. With `omitted_files: warn` above,
+# that would fail the build. Declaring them here tells MkDocs the omission is intentional
+# and suppresses the warning for exactly these two WITHOUT weakening --strict for genuine
+# mistakes: a new, undeclared document still fails.
+#
+# This list must always equal extra.pack.not_in_book below.
+# `guide roles lint` asserts that the two agree — two lists that can disagree is
+# precisely the drift this declaration exists to end.
+not_in_nav: |
+  README.md
+  start.md
+
+extra:
+  # `version_string` is INJECTED by the on_config hook from pyproject.toml's version.
+  # Deliberately not written here: a second copy is a second source, free to drift.
+  analytics:
+    provider: google
+    property: G-WT4KQCWFYC
+  pack:
+    # Published, but outside the book's reading flow.
+    not_in_book:
+      - README.md   # the pack's index; front door of the pack branch
+      - start.md    # the bootstrap; published as AGENTS.md (FR-010)
+
+theme:
+  name: material
+
+  # Declared by WP03, together with the directory it names — see the note below.
+  custom_dir: src/theme/site/overrides
+
+  # NFR-004: palette and typography only. Stock Material otherwise, deliberately.
+  # The values live in src/theme/site/overrides/stylesheets/, which `main.html` links.
+  #
+  # `primary: custom` / `accent: custom` are REQUIRED, not decoration — leave them.
+  # Without them Material defaults to `indigo` and stamps `data-md-color-primary="indigo"`
+  # on the body, which activates its own rule:
+  #
+  #     [data-md-color-scheme=slate][data-md-color-primary=indigo]{--md-typeset-a-color:#5488e8}
+  #
+  # That compound selector has specificity (0,2,0) and beats palette.css's
+  # `[data-md-color-scheme="slate"]` (0,1,0) no matter which stylesheet loads last. The
+  # result was a site whose links rendered in Material's indigo while our palette said
+  # otherwise — measured in a browser, invisible to a test that reads the CSS. `custom`
+  # is Material's own escape hatch: it declares no rules for it, so palette.css is
+  # unopposed. Verified: `data-md-color-primary=custom` appears nowhere in its CSS.
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+  # false = Material's system font stack, no Google Fonts request. The type scale and
+  # the families are ours, in typography.css; see NFR-002 (the site must be readable on
+  # a 320px phone, which a blocking webfont request does not help).
+  font: false
+
+  features:
+    - navigation.top
+    - content.code.copy
+
+# Material enables `search` implicitly only while `plugins` is unset. It is named here so
+# that FR-001's "searchable" is a declaration rather than a side effect of silence.
+plugins:
+  - search
+
+# --- The two theme hooks, and why only ONE of them is above --------------------------
+#
+# WP02 left both undeclared and documented why; WP03 added `theme.custom_dir` above,
+# together with the directory it names. Recorded here so the reasoning is not lost and
+# the second hook is not "helpfully" restored:
+#
+#   theme.custom_dir: src/theme/site/overrides        <- DECLARED ABOVE
+#       Validated eagerly, at config load: `mkdocs build` refuses to start if the
+#       directory is absent ("Aborted with a configuration error!", exit 1). So it could
+#       not precede the directory it names — declaring it early would have broken every
+#       build in the lanes depending on WP02. It is safe now, and only now, because
+#       src/theme/site/overrides/ exists in the same change. This is the loud failure,
+#       and the harmless one.
+#
+#   extra_css:                                        <- DELIBERATELY ABSENT. Leave it so.
+#       NOT validated, and that makes it worse, not better. extra_css paths resolve
+#       relative to `docs_dir`, which here is `src/pack/` — the product.
+#       `extra_css: [stylesheets/extra.css]` demands `src/pack/stylesheets/extra.css`:
+#       writing build assets into the guide, which C-002/C-006 forbid.
+#
+#       Naming a file that does not exist does NOT abort the build. MkDocs exits 0 and
+#       emits the `<link>` regardless — a silent 404 on a site that looks like it built
+#       fine. And nothing downstream catches it: the role lint globs `*.md` only
+#       (`_pack_files` in src/build/roles.py), so a `.css` under `src/pack/` sails
+#       straight through untouched.
+#
+#       The CSS therefore ships through `custom_dir`: files under
+#       src/theme/site/overrides/ are copied to the output, so the stylesheets live at
+#       src/theme/site/overrides/stylesheets/ and `main.html` links them with MkDocs'
+#       `url` filter (which keeps them subpath-correct, C-003).
+# -------------------------------------------------------------------------------------
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - toc:
+      permalink: true

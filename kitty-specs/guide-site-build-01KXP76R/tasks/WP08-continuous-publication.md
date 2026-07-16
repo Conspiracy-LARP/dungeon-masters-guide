@@ -21,8 +21,7 @@ subtasks:
 - T040
 phase: Phase 3 - Publication and acceptance
 assignee: ''
-agent: "claude:opus:implementer-ivan:implementer"
-shell_pid: "38894"
+agent: claude
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -255,4 +254,3 @@ The workflow is verified by executing it, not by review:
 
 - 2026-07-16T19:58:13Z – system – Prompt created.
 - 2026-07-16T23:25:47Z – user – Moved to planned
-- 2026-07-16T23:29:28Z – claude:opus:implementer-ivan:implementer – shell_pid=38894 – Started implementation via action command

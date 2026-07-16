@@ -1,9 +1,8 @@
 # Technical suggestions — how to build the thing, cheaply
 
-*Companion to `creator-kit.md`. This file is **all optional** — conveniences, not commandments. It exists
-to give you and your LLM a running start so you're publishing within the hour instead of the week. If
-you're an experienced developer with your own way of working, ignore every word of this and you're still
-playing the game exactly right.*
+*Hosting that costs nothing when nobody is looking, faking a period look with a modern stack, shipping
+each property as a resettable bundle, and why to self-host rather than trust a platform that can delete
+you. Entirely optional — ignore all of it and you are still playing the game exactly right.*
 
 **The running theme of this whole pack is: keep costs low.** Most nodes you dream up won't get real
 traction — that's fine, that's improv — so you want each one to cost as close to nothing as possible to

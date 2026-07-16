@@ -1,0 +1,81 @@
+/* The site's colour, in both schemes. NFR-004, NFR-006.
+ *
+ * SCOPE, because this is the file where scope creep starts: this sets Material's own
+ * custom properties and nothing else. No new components, no bespoke layout. The test is
+ * whether the result can honestly be described as "Material with a good palette"; a
+ * distinctive referee's-manual identity is Out of Scope (spec A-004).
+ *
+ * WHY IT LIVES HERE and not in `extra_css`: extra_css resolves relative to `docs_dir`,
+ * which is `src/pack/` — the product. Shipping CSS that way would mean writing build
+ * assets into the guide (C-002, C-006). Files under the theme's `custom_dir` are copied
+ * to the output instead, and `main.html` links this one. See mkdocs.yml.
+ *
+ * EVERY PAIR BELOW IS MEASURED, not eyeballed (NFR-006). `tests/test_site.py` parses
+ * this file, computes the WCAG contrast ratio for each foreground/background pair named
+ * in `CONTRAST_PAIRS`, and fails under 4.5:1. Changing a value here without running that
+ * test is how a palette becomes unreadable for someone who is not you. The ratios in the
+ * comments are what the test measures today.
+ *
+ * The scheme names are Material's: `default` is the light scheme, `slate` the dark one.
+ * mkdocs.yml binds each to `prefers-color-scheme` and to the header toggle.
+ */
+
+/* --- Light: ink on warm paper ------------------------------------------------------ */
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: #fbf9f5;          /* paper, not a screen white */
+  --md-default-fg-color: #23211d;
+  --md-default-fg-color--light: #5c5850;   /* metadata, captions      6.73:1 on bg */
+  --md-default-fg-color--lighter: #8a857c; /* rules and borders only — never text */
+  --md-default-fg-color--lightest: #e6e1d7;
+
+  --md-typeset-color: #23211d;             /* body text             15.28:1 on bg */
+  --md-typeset-a-color: #8f2d20;           /* links                  7.79:1 on bg */
+
+  --md-primary-fg-color: #2b2925;          /* header/nav ink */
+  --md-primary-fg-color--light: #46433d;
+  --md-primary-fg-color--dark: #1b1a17;
+  --md-primary-bg-color: #fbf9f5;          /* text on the header    13.81:1 */
+  --md-primary-bg-color--light: #e6e1d7;
+
+  --md-accent-fg-color: #b03a26;           /* hover                  5.74:1 on bg */
+  --md-accent-bg-color: #fbf9f5;
+
+  --md-code-bg-color: #f0ece3;
+  --md-code-fg-color: #33302b;             /*                       11.14:1 on code bg */
+
+  --md-footer-bg-color: #2b2925;
+  --md-footer-bg-color--dark: #1b1a17;
+  --md-footer-fg-color: #fbf9f5;
+  --md-footer-fg-color--light: #e6e1d7;
+}
+
+/* --- Dark: the same paper at night -------------------------------------------------- */
+[data-md-color-scheme="slate"] {
+  --md-hue: 240;
+
+  --md-default-bg-color: #17171b;
+  --md-default-fg-color: #e6e2da;
+  --md-default-fg-color--light: #a8a49c;   /*                        7.20:1 on bg */
+  --md-default-fg-color--lighter: #6f6b64; /* rules and borders only — never text */
+  --md-default-fg-color--lightest: #34343c;
+
+  --md-typeset-color: #e6e2da;             /* body text             13.84:1 on bg */
+  --md-typeset-a-color: #e79a80;           /* links                  7.94:1 on bg */
+
+  --md-primary-fg-color: #101014;
+  --md-primary-fg-color--light: #2a2a31;
+  --md-primary-fg-color--dark: #08080a;
+  --md-primary-bg-color: #f2efe9;          /* text on the header    16.54:1 */
+  --md-primary-bg-color--light: #c9c5bd;
+
+  --md-accent-fg-color: #f2b49b;           /* hover                 10.02:1 on bg */
+  --md-accent-bg-color: #17171b;
+
+  --md-code-bg-color: #202027;
+  --md-code-fg-color: #e6e2da;             /*                       12.53:1 on code bg */
+
+  --md-footer-bg-color: #101014;
+  --md-footer-bg-color--dark: #08080a;
+  --md-footer-fg-color: #f2efe9;
+  --md-footer-fg-color--light: #c9c5bd;
+}

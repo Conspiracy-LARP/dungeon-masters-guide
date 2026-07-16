@@ -1,5 +1,12 @@
 # Story Continuity Checker — reusable prompt
 
+*A tool, not a chapter. Your node accumulates dates, company numbers and names faster than you can hold
+them, and a reader who spots a contradiction you did not intend has caught you being careless rather
+than clever. This prompt finds those — within **your own** work only. It never checks you against
+anyone else's; global contradictions are the point (see `premise.md`).*
+
+---
+
 Hand this whole prompt to another LLM, then paste your own story canon after it (fabricated
 records with dates, blog posts with publication dates + text, intranet material, timeline and
 character notes). It returns a structured JSON report of continuity bugs, each with two proposed

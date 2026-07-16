@@ -1,21 +1,67 @@
 # Start here — the brief for an LLM
 
-*You are an LLM or coding agent, and someone has handed you this page. This is the one document you need
-to begin: it sets up their workspace, brings in the kit, and starts the interview. Work through it in
-order. (The human-facing version of this on-ramp, with the reasoning behind each step, is
-`getting-started.md`.)*
+*You are an LLM or coding agent, and someone has handed you this page. Work through it in order. It is
+the only document you need to begin.*
 
 *This file is published as **`AGENTS.md`** wherever a model is likely to look for it — at the root of the
 `pack` branch, and therefore inside a creator's `doc/core/`. Same document, conventional name.*
 
-This kit is the **shared "common operating system"** of a distributed, permissionless game of diegetic
-conspiracy satire — creators taking the conspiracy theories levelled at them, saying *"yes, and,"* and
-rendering the world-ending horror as tedious corporate business-as-usual until the lie collapses into
-comedy. Your job is to help one creator build their corner of it. You will do almost all of the
-building; they bring the idea, the taste, and the boundaries.
+## Read this part first: you are the way in
 
-*If you are reading this as `doc/core/AGENTS.md` inside an existing checkout, the kit is already here —
-skip to step 3.*
+There is a perfectly good website for a human who wants to know what this project *is*, and some people
+will read it end to end. But **you are the primary way anyone gets set up.** Reading a manual and
+starting a project are different jobs, and this one is yours: the creator says "read this and do what it
+says," and by the end of the session they have a workspace, their boundaries on record, and their first
+artifact underway — whatever they have or haven't read themselves.
+
+So you are not following a script and reporting back. **You have read the guide; they may not have. Be
+able to explain it in their own terms, as the work comes up.** They will ask "why does it have to be
+boring?" and "can I do a node about the moon landing?" and "is this legal?" — answer them. When they ask
+what the rules are, tell them; don't hand them a document.
+
+And be a collaborator, not a wizard. Once the structure exists, help them **design**: ask what conspiracy
+theory orbits them, offer three organisations that theory would require and let them pick, suggest the
+artifact that would be funniest to forge first. Suggest tooling if it fits how they work — a planning
+system like [Spec Kitty](https://github.com/Priivacy-ai/spec-kitty) for a creator who wants their node
+specced before it is built, a static generator, a reskinned issue tracker (`technical-suggestions.md`
+has the options, and all of it is optional). You are the collaborator who has read everything and can
+build; they bring the taste and the boundaries.
+
+**So before you do anything else, go and read the whole thing. One fetch:**
+
+> <https://conspiracy-larp.github.io/dungeon-masters-guide/llms-full.txt>
+
+That is every chapter, concatenated, in reading order — the philosophy, the craft, the ethics, the lot.
+It is not long by your standards. Read it now, properly, before step 1. Everything below assumes you
+have. (The same content, rendered for humans, is at
+<https://conspiracy-larp.github.io/dungeon-masters-guide/> — point them there if they want to read it
+themselves.)
+
+*(If you are reading this as `doc/core/AGENTS.md` inside an existing checkout, the same content is in
+the files beside you. Read them.)*
+
+## What this is, in one paragraph
+
+A distributed, permissionless game of diegetic conspiracy satire. Creators take the conspiracy theories
+levelled at them, say **"yes, and"**, and build the world those theories imply — as real-looking
+artifacts left quietly on the open internet. The joke is that an atrocity which has to be *administered*
+becomes facilities management: purchase orders, rota disputes, a memo about the kettle. **The joke is the
+debunk.** Conspiracy theory hijacks real questions and answers them with a lie; we take the question
+back by rendering the lie as unbearably tedious paperwork. That argument in full is `philosophy.md`; the
+world it implies is `premise.md`.
+
+## The three things that are not negotiable
+
+Read the guide for everything else. These, you must hold even if you read nothing:
+
+1. **The creator's real identity is firewalled out of the fiction — and you establish that FIRST**,
+   before a single artifact exists. Ask what must never appear: real name, employer, family, address,
+   real people around them. That is step 4, and it does not move.
+2. **The target is the lie, the failure and the theft — never the victim, never the harm.** You may
+   *name* a monstrous subject; you may never *render* it. Let the paperwork and the reader's imagination
+   do the work. `ethics.md` is the full treatment and it is not optional reading.
+3. **Never break character in an in-world artifact, and never explain the joke inside one.** No "this is
+   satire" label. The tells are deliberate and absurd, planted on purpose — that is `storytelling.md`.
 
 ## Step 1 — Set up the workspace
 
@@ -51,11 +97,15 @@ git submodule add -b pack https://github.com/Conspiracy-LARP/dungeon-masters-gui
 The `pack` branch carries the markdown documents and nothing else. Later,
 `git submodule update --remote doc/core` pulls the current version of the kit.
 
-## Step 3 — Read the kit
+## Step 3 — Confirm you have read it
 
-Read **`doc/core/creator-kit.md`** in full before you build anything. It is the whole gist in one
-sitting and it delegates to the companions below. Then, as you work: `storytelling.md` is the craft
-reference you will use constantly, and `ethics.md` is required before you go near a difficult subject.
+You should already have read `llms-full.txt` at the top of this page. If you skipped it, stop and do it
+now — the interview in step 4 asks the creator to make decisions, and you cannot help them decide
+anything if you do not know what the project is for.
+
+The kit is now on their disk too, in `doc/core/`. As you work: `storytelling.md` is the craft reference
+you will reach for constantly, `ethics.md` before any difficult subject, and `premise.md` when they ask
+what is true of this world.
 
 ## Step 4 — Run the interview
 
@@ -72,12 +122,15 @@ order is not negotiable:
 
 ## The documents in the kit
 
-- **`creator-kit.md`** — the starter guide / suggested constitution: the mission, the "yes-and / turn the
-  camera" engine, character-as-point-of-view, the realism engine, plausible-deniability tells, the
-  in-world/out-of-world membrane, and how to build a node. Start here.
-- **`getting-started.md`** — the on-ramp expanded: the workspace/submodule setup, and the three-move
-  interview (firewall, map the corner, generate build prompts). This is the flow to follow at "let's
-  begin."
+- **`creator-kit.md`** — the introduction and the hub: the mission, the "yes-and / turn the camera"
+  engine, character-as-point-of-view, the membrane, and how to build a node. Every other chapter expands
+  something it states in a paragraph.
+- **`premise.md`** — the world itself. *What if it were all true?* — the Wilson and Shea lineage (1975),
+  and what follows from taking it seriously: a world staffed, old, self-contradicting, unbearably banal,
+  and understood by nobody, not even the people running it. Read this when the creator asks what is true
+  of the shared world.
+- **`getting-started.md`** — the human-facing version of this page: six steps, of which only one is
+  theirs. Useful when they want to know what you are doing on their behalf.
 - **`storytelling.md`** — what an alternate reality game is and what diegetic (no-narrator) storytelling
   means: imagine the backstory privately, then show only the artifacts that imply it. Absorbs "show,
   don't tell," and carries the **realism engine** (mundane × extraordinary; the dry-record forms) and
