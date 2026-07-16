@@ -1,0 +1,2 @@
+Build machinery for compiling src/pack/ into the site, book, and llms.txt outputs.
+See ../../doc/build.md for the brief. Nothing here yet.

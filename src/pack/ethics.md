@@ -1,7 +1,7 @@
 # Ethics — what we satirise, and what we never do
 
-*Companion to `creator-kit.md` (see especially §0 "The mission" and §7 "Ethics as an attitude, not a
-rulebook"). This document is the founders' considered position on the hard moral questions this work
+*Companion to `creator-kit.md` (see especially §0 "The mission" and §7 "Ethics — an attitude and a craft,
+not a rulebook"). This document is the founders' considered position on the hard moral questions this work
 raises. It is offered as guidance and as a shared understanding — not as a code of law with an enforcer.
 There is no enforcer. But these are the principles the founders hold to, and they are the reason the
 project can go near difficult subjects at all.*

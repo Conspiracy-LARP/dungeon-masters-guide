@@ -23,8 +23,9 @@ tell the LLM "let's begin," and it will interview you and start.*
 *This is the **quick read** — the whole gist in one sitting. Several themes are summarised here in a
 paragraph and expanded in their own companion documents, so you can go deep only where you want to:*
 
+> - **[`getting-started.md`](getting-started.md)** — the on-ramp: your workspace, and the interview the LLM runs before it builds anything.
 > - **[`philosophy.md`](philosophy.md)** — the detailed *why*: conspiracy steals real conversations; our answer; and why it's a fight worth joining.
-> - **[`storytelling.md`](storytelling.md)** — what an alternate reality game is, and how diegetic (no-narrator) storytelling works.
+> - **[`storytelling.md`](storytelling.md)** — the whole craft of the telling: what an alternate reality game is, how diegetic (no-narrator) storytelling works, the realism engine that makes an artifact convincing, and the tells that stop it being quoted as evidence.
 > - **[`improvisation.md`](improvisation.md)** — the craft: "yes, and," radical acceptance, and turning the camera.
 > - **[`ethics.md`](ethics.md)** — the moral floor for hard subjects: infer, don't embrace; never the victim.
 > - **[`communications.md`](communications.md)** — how the loose community of creators finds and builds on each other.
@@ -185,72 +186,28 @@ So the reassurance this section exists to give is about **time, not skill**:
 - **You bring the judgement; the LLM brings the labour.** Your job is to point ("what if there's a
   company that…"), to react ("funnier if it's a purchase order"), and to hold the line on taste and on
   your own boundaries. The model handles everything downstream of that.
+- **It need not cost much either.** Most nodes you dream up won't get traction — that's improv — so the
+  whole game is to make each one nearly free to stand up and nearly free to leave running. The model
+  will happily write the Dockerfile, the DNS records, and the deploy commands for you.
+
+**The practical side — cheap scale-to-zero hosting, faking a period look with a modern stack, shipping
+each property as an immutable resettable bundle, and a suggested project layout — is in
+[`technical-suggestions.md`](technical-suggestions.md). All of it optional.**
 
 ---
 
 ## 3. Getting started — your workspace, the interview, and your corner
 
-Getting started has two halves: **setting up a workspace**, and then letting the LLM **interview you**.
+Getting started has two halves. First, **set up a workspace**: keep a private project of your own on
+whatever git host you like, and add the shared creator-kit repository as a **git submodule** inside it —
+your always-at-hand copy of this manifesto, plus the starter scaffolding that gets you building sooner.
+(None of it is obligatory. Ignore every word of it and you are still properly playing the game.) Then
+tell the LLM to begin, and let it **interview you**, in three moves: **firewall your real identity**
+first — building a do-not-leak list, because the real you must never surface in the fiction — then **map
+your corner** of the imagined world, choosing which conspiracy theory you'll treat as true and render as
+banal, and finally **generate build prompts** that turn that idea into concrete things to make.
 
-### First — set up your workspace
-
-You don't need much, and none of it is compulsory. The suggested shape is simply this: keep a **private
-project of your own** on whatever git host you like (GitHub, GitLab, Codeberg — it genuinely doesn't
-matter), and add the shared **creator-kit repository as a git submodule** inside it. That submodule is
-your always-at-hand copy of this manifesto and its companion files — think of it as the project's
-**common operating system**: the shared reference every participant tries to hold to *as much as they
-personally want to*, and no more. Pulling the submodule keeps you current as the kit evolves; your own
-work stays private in the parent repo until (and unless) you choose to publish a node.
-
-Two more things that shared repo gives you:
-
-- **A place to signal.** Its **issue tracker** is an opt-in notice-board: open an issue to flag a hook
-  you've left, invite another participant to look at something, or offer a thread for interweaving.
-  Nobody is obliged to answer, or to do anything at all — it is an invitation, never a summons.
-- **Starter scaffolding.** Alongside the manifesto, the kit carries the practical stuff that gets you
-  building *sooner* — a suggested project layout, cheap and resettable ways to put things on the web,
-  tool hints, and the git/pull-request trick for interlinking — all collected in
-  [`technical-suggestions.md`](technical-suggestions.md). Plus conventions for keeping track of the
-  **back-story you never explicitly show** — the private lore and timelines behind your node (the
-  continuity checker in Section 14 is part of this). It all exists for one reason: to give a large
-  language model enough of a running start that you're creating within the hour instead of the week.
-
-And now the load-bearing caveat, because freedom is the whole point: **none of this is obligatory.** Some
-of you are seasoned developers with your own hard-won way of working who need no advice from strangers on
-the internet — ignore every suggestion here and you are still completely, properly playing the game. The
-layout, the tool hints, the submodule pattern are conveniences, not commandments. The only real goal is
-to get people improvising on the web and telling a story together; everything in the starter pack is just
-there to get you there faster.
-
-### Then — the interview
-
-When you tell the LLM to begin, it should run a short **interview** before it writes a single artifact.
-The interview has three moves, in order.
-
-**Move 1 — Firewall your real identity (do this first, always).** The LLM will ask you about your
-*real* self: your legal name, your real employer, your family, your address, the real people around
-you, anything that is genuinely private. The purpose is the opposite of what it sounds like: it is
-building a **do-not-leak list**. That real identity is exactly what must *never* surface in the
-diegetic storytelling. (Some creators — like the author of the reference node in Section 9 — choose to
-write a *fictionalised version of themselves* in as a character. That's a deliberate creative choice,
-and it's still built on invented details, not private ones. The firewall protects the real facts; it
-doesn't forbid you from casting "yourself.") **You** set the boundaries here. Every creator has clear
-ideas about what must stay out of the game — real people who haven't consented, a real bereavement, a
-living relative, a genuine address. Name them now, so the LLM can hold that line for the rest of the
-session.
-
-**Move 2 — Map your corner of the imagined world.** Now the fun part. The LLM asks: *what conspiracy
-theories orbit you?* Which ones are levelled at you personally, at your work, at the things you cover?
-Which ones do you find funniest, or most revealing of the theft described in Section 0? You are picking
-the patch of the collective delusion that you will treat as **true** and render as **banal**. It might
-be the theory that you specifically are a paid disinformation agent. It might be a whole technical
-domain (5G, ULEZ, water fluoridation, the shape of the earth). Pick the corner where your knowledge and
-your sense of humour overlap.
-
-**Move 3 — Generate build prompts.** With the firewall set and the corner mapped, the LLM turns the
-idea into concrete things to make. This is where "what if there's a company that runs the ULEZ cameras"
-becomes "let's build that company's staff intranet, and its procurement tickets, and its dead SOAP
-service." The rest of this kit (Sections 4–9) is the toolbox the LLM draws on to do that well.
+**The full on-ramp is in [`getting-started.md`](getting-started.md).**
 
 ---
 
@@ -293,47 +250,35 @@ simply reality.
 
 ---
 
-## 6. The realism engine — mundane × extraordinary
+## 6. How we tell it — show, don't tell, and the tells
 
-The thing that makes a node feel real is the collision of the **extraordinary** premise with an
-avalanche of **mundane** detail. The horror is the given; the texture is the craft. So whenever you
-have an extraordinary claim, immediately ask the small questions:
+The one non-negotiable: **show, don't tell.** Never explain the premise, never narrate the menace, never
+wink. The world is revealed only through the mundane things it contains — the ticket, the memo, the
+invoice, the expired certificate — and the reader assembles the story and reaches their *own* conclusion,
+which is exactly why it's unshakeable. An accounting ledger that says nothing and means everything beats
+a paragraph of sinister narration every time. So you work in two movements: **imagine the truth
+privately** and keep it private, then **show only the artifacts that truth would have left behind.**
 
-- Who *runs* it, and what's their job title?
-- What's on the **procurement** system? What's the SLA? Which ticket is overdue?
-- Who signs it off? Which certificate expired? Which mailbox is dead?
-- **What does the cafeteria serve on Thursday?**
+What makes those artifacts land is the **realism engine** — the collision of an extraordinary premise
+with an avalanche of mundane detail. Anyone can invent a death-ray; the thing that makes the death-ray
+*land* is the maintenance log for the death-ray. So ask the small questions: who runs it, and what's
+their job title? Which ticket is overdue? Which certificate expired? **What does the cafeteria serve on
+Thursday?** Any dry record can carry the whole story — an expense table, a clinical case file, a ledger,
+a rota — and the trick is always the same: paperwork that reads, straight, as unremarkable, and reads,
+with the premise in mind, as monstrous. Infer, don't embrace (Section 7): name nothing terrible; measure
+it, invoice it, minute it, and let the register do the work.
 
-That last one is not a joke — the vending machine, the honesty jar, the rota dispute, the memo about
-the kettle cost-centre are what sell the whole edifice. Anyone can invent a death-ray. The thing that
-makes the death-ray *land* is the maintenance log for the death-ray.
+And then salt it with **tells**. Because this project has to survive its own success: build the
+straight-faced kill-grid company too well and a conspiracy influencer will broadcast your fiction as
+*proof* — mock-not-fuel turned into fuel. The defence isn't a disclaimer; it's **built-in absurdity**,
+deliberate discoverable jokes planted inside the artifact — a board of directors who are secretly the
+cast of *Dad's Army*, a company incorporated in 1600, a QR code that decodes to a limerick — so the
+thing cannot be quoted as evidence without the joke being quoted along with it. A good tell reads as
+authored wit; a bad one just reads as a typo, and a typo detonates nothing.
 
-**Any dry record can carry the story — a record is just one of many diegetic tools, not a gold
-standard.** The trick is the same whichever form you pick: paperwork that reads, straight, as
-unremarkable, and reads, with the premise in mind, as monstrous. The reader's imagination fills the
-blank far more horribly than you ever could, and you never had to depict a single terrible thing. A few
-of the forms this can take:
-
-- **A table of business expenses.** A column of line items is a story if you read it right. Why did the
-  senior board charter a boat, and to *where*? Whose name is on the passenger manifest that has no
-  business being there? What was "hospitality, off-site (do not itemise)" for? You never explain; the
-  expense line asks the question the company spent a fortune hoping nobody would ask.
-- **Clinical / medical records.** To tell the story of the company that harvests adrenochrome, you do
-  not describe the process — you release the case files, in terse, deadpan pseudo-medical jargon. A
-  batch record. An intake note. A quality-control variance: *did the subject struggle; did an elevated
-  state of terror correlate with an unusually high harvest yield?* — rendered as a clinical KPI, a line
-  in a validation report, an audit finding about "cohort distress affecting throughput." The atrocity
-  is entirely inferred and the artifact is entirely a QA document; the horror lives in the gap between
-  the flat clinical register and what it is quietly measuring.
-- **Accounting records / annual accounts.** A cost centre, a supplier ledger, a cold-chain logistics
-  line, a quarterly note about "yield." (Picture an abandoned acquisition-diligence pack for a
-  "non-human adrenochrome supply route" that dead-ends, in-world, on a *no-bid decision on economics* —
-  the horror entirely inferred, the artifact entirely a spreadsheet.)
-- **Logs, manifests, rotas, maintenance records** — the maintenance log for the death-ray; the rota
-  that shows who was on shift the night the ticket was raised.
-
-Whichever you reach for: infer, don't embrace (Section 7). Name nothing terrible; measure it, invoice
-it, minute it, and let the register do the work.
+**The full method — what an alternate reality game is, the private-lore-to-public-artifact method, the
+realism engine worked through with examples, and the craft of good tells versus bad ones — is in
+[`storytelling.md`](storytelling.md).**
 
 ---
 
@@ -353,61 +298,44 @@ satire" banner shatters the illusion the work depends on.
 
 ---
 
-## 8. Plausible deniability — salt every artifact with tells
+## 8. Inside the world and outside it — mind the membrane
 
-Here is the failure mode this whole project has to survive: **what if it works too well?** You build a
-straight-faced company that runs the kill-grid, a conspiracy influencer stumbles onto it, doesn't get
-the joke, and starts broadcasting your fiction as *proof*. That is the exact inversion of the mission
-(Section 0) — mock-not-fuel turned into fuel. The defence is *not* a disclaimer (Section 7 explains why
-we don't use them). The defence is **built-in absurdity**: deliberate, discoverable tells planted
-*inside* the artifact that anyone paying real attention will catch, and that make the thing impossible
-to quote as evidence without quoting the joke along with it.
+Everything you make falls on one side or the other of a membrane, and knowing which side a thing is on is
+the difference between immersion and a broken fourth wall.
 
-Think of them as **concealed bugs** — not mistakes, but jokes wearing the costume of mistakes. Salt a
-few into everything you make. When the influencer reads your board of directors aloud on their stream,
-the tell reads out too, and the "evidence" detonates in their hands.
+**Inside the world (diegetic).** The artifacts the audience is *meant to encounter as real*: the fake
+intranet, the consultancy website, the fabricated filings, the blog in a character's voice, the leaked
+memo, the dead SOAP service. These must never break character — no "this is satire" label, no wink, no
+author's aside, not in the page, not in a view-source comment, not in a filename or an HTTP header. The
+only tells permitted inside the world are the *deliberate absurdist ones* from Section 6; those are part
+of the joke, not confessions that it is one.
 
-### The line between a good tell and a bad one
+**Outside the world (the scaffolding).** The things you need in order to build the fiction, which the
+audience is never meant to meet: source code, build systems, deployment configs, Terraform, the prompts
+you fed the LLM, your private notes — **and this very document.** The manifesto, the charter, the
+continuity checker *explain the operating principles* and therefore shatter the illusion by their nature.
+They are the editor's desk, not the stage. They belong in a repository's `doc/` folder or a private
+notebook — never on a client-facing surface. If a visitor to your world can reach the document that
+explains the joke, the joke is over. (Stated as a rule: *never break immersion — the only place to
+document the joke is private editor notes that never reach the client.*)
 
-This distinction is the whole craft of the section, so get it right. **A good tell reads, once spotted,
-as deliberate wit.** It points at something *outside* the fiction that the reader recognises, and its
-unmistakable message is *"a person planted this on purpose."* It cannot be quietly fixed, because
-there's nothing to fix — it's a joke, not an error. **A bad tell reads as incompetence.** It looks like
-a slip, and a debunker does one of two fatal things with it: shrugs ("sloppy record-keeping, but the
-rest checks out") and keeps citing everything around it as real, or silently *corrects* it and carries
-on. An error doesn't detonate the evidence. A joke does. Compare:
+**But the membrane can be crossed on purpose.** The line is *not* "code is always outside." The line is
+the single question: *is the audience meant to encounter this as part of the story?* — and sometimes the
+answer turns scaffolding into set-dressing. Source code is usually outside the world, but it can be
+pulled inside and made a diegetic device. Suppose your node is the company that operates the 5G
+energy-weapon grid. You might publish the **device drivers and control software** for that grid — the
+firmware, the calibration routines, the actuation API — as a leaked or "accidentally open-sourced"
+repository. That is source code for a weapon network *that never existed*, and it is emphatically
+**inside** the world: an in-universe artifact the reader is meant to find and read as real, and so it
+must obey every in-world rule — stay in character, carry its own tells (a register that can't exist, a
+physical constant that's wrong, a code comment signed by a director off Section 6's board), and never,
+ever explain itself. A fake build pipeline, a diegetic bug tracker, a "release specification" for the
+kill-grid are all the same: the instant code is offered to the audience *as part of the fiction*, it has
+crossed the membrane and lives on the stage.
 
-| ✅ Good tell (reads as a *joke*) | ❌ Bad tell (reads as a *mistake*) |
-|---|---|
-| A board of directors that turns out to be the cast of *Dad's Army* — points outside the fiction, unmistakably authored. | A director whose date of birth falls *after* the date he was appointed. Reads as a data-entry error; a debunker just says "typo" and moves on. |
-| A company "incorporated in 1600," older than the register that holds it — an impossibility with a *mythic, authored* flavour, like a legend rather than a fat-fingered field. | A "fortnight" that is nineteen days, or a budget total that doesn't add up. Looks like arithmetic you got *wrong*, not arithmetic you *rigged*. |
-| A registrar whose own certificate of incorporation certifies a *different* name — strange, deliberate, and it deepens the mystery. | A postcode in the wrong format, a misspelt statute. Just sloppiness; erodes your competence without landing a gag. |
-| A QR code that decodes to a limerick; a reference number that spells a word — no one reaches these by accident. | A field left as `<placeholder>` or `lorem ipsum`. Not a tell, just an unfinished document. |
-
-**The test:** *if a stranger spotted this, would they laugh — or would they think you'd made a mistake?*
-If the honest answer is "made a mistake," it isn't a tell; it's a bug, and it will be either ignored or
-corrected. Aim for the laugh. Some reliable families of the *good* kind:
-
-- **A cast lifted from comedy.** One node's four-hundred-year-old immortal board of directors are named,
-  to a man, after the cast of *Dad's Army* — Mainwaring, Wilson, Jones, Pike, Frazer, Godfrey, Walker.
-  Read cold, it's a chilling list of deathless directors; read by anyone over forty, it's the Home
-  Guard. You might name everyone filing tickets after 90s stand-up comedians, or the actors from *ALF*,
-  or the starting eleven of some 1974 football team. Sincere on the page, ridiculous the instant someone
-  recognises it — and *recognition*, not arithmetic, is what makes it land.
-- **Mythic impossibilities, played dead straight.** A company incorporated in 1600, older than
-  the company register that lists it. A certificate that vouches for the wrong name. These are impossible, but they
-  read as *authored legend*, not clerical slips — the difference between "no one could have typed this
-  by accident" and "someone typed this wrong."
-- **Technical Easter eggs.** A QR code that, scanned, decodes (a UUENCODED or base64 blob, say) to a
-  line of pure nonsense that gives the game away. A hidden comment, a checksum that reads as a word, an
-  "encrypted" payload that decrypts to a limerick. These reward exactly the kind of person who would try
-  to *authenticate* the document — and hand them the punchline for their trouble.
-
-Aim for **a few per artifact**, vary them, and never announce them — they work precisely because
-they're discovered, not flagged. The best tells do triple duty: they're funny to the reader who's in on
-it, they're a landmine under anyone trying to weaponise the work, and — because they're absurd on their
-face — they are the strongest possible evidence that the whole thing was always a performance. Plant
-your deniability *now*, in the making; don't reach for it as an apology later.
+So before you publish anything, ask which side it's on. Out-of-world scaffolding: keep it in `doc/` or
+keep it private, and let it explain freely. In-world artifact: it lives on the stage, in character,
+forever — even when it happens to be a thousand lines of C for a death-ray that was always a joke.
 
 ---
 
@@ -464,61 +392,7 @@ shape.
 
 ---
 
-## 10. Show, don't tell — never narrate, always imply
-
-The one non-negotiable: **show, don't tell.** Never explain the premise, never narrate the menace, never
-wink. The world is revealed only through the mundane things it contains — the ticket, the memo, the
-invoice, the expired certificate — and the reader assembles the story and reaches their *own* conclusion,
-which is exactly why it's unshakeable. An accounting ledger that says nothing and means everything beats
-a paragraph of sinister narration every time.
-
-**The full method — what an alternate reality game is, why we tell it with no narrator, and how to work
-from a private backstory to the public artifacts that imply it — is in [`storytelling.md`](storytelling.md).**
-
----
-
-## 11. Inside the world and outside it — mind the membrane
-
-Everything you make falls on one side or the other of a membrane, and knowing which side a thing is on is
-the difference between immersion and a broken fourth wall.
-
-**Inside the world (diegetic).** The artifacts the audience is *meant to encounter as real*: the fake
-intranet, the consultancy website, the fabricated filings, the blog in a character's voice, the leaked
-memo, the dead SOAP service. These must never break character — no "this is satire" label, no wink, no
-author's aside, not in the page, not in a view-source comment, not in a filename or an HTTP header. The
-only tells permitted inside the world are the *deliberate absurdist ones* from Section 8; those are part
-of the joke, not confessions that it is one.
-
-**Outside the world (the scaffolding).** The things you need in order to build the fiction, which the
-audience is never meant to meet: source code, build systems, deployment configs, Terraform, the prompts
-you fed the LLM, your private notes — **and this very document.** The manifesto, the charter, the
-continuity checker *explain the operating principles* and therefore shatter the illusion by their nature.
-They are the editor's desk, not the stage. They belong in a repository's `doc/` folder or a private
-notebook — never on a client-facing surface. If a visitor to your world can reach the document that
-explains the joke, the joke is over. (Stated as a rule: *never break immersion — the only place to
-document the joke is private editor notes that never reach the client.*)
-
-**But the membrane can be crossed on purpose.** The line is *not* "code is always outside." The line is
-the single question: *is the audience meant to encounter this as part of the story?* — and sometimes the
-answer turns scaffolding into set-dressing. Source code is usually outside the world, but it can be
-pulled inside and made a diegetic device. Suppose your node is the company that operates the 5G
-energy-weapon grid. You might publish the **device drivers and control software** for that grid — the
-firmware, the calibration routines, the actuation API — as a leaked or "accidentally open-sourced"
-repository. That is source code for a weapon network *that never existed*, and it is emphatically
-**inside** the world: an in-universe artifact the reader is meant to find and read as real, and so it
-must obey every in-world rule — stay in character, carry its own tells (a register that can't exist, a
-physical constant that's wrong, a code comment signed by a director off Section 8's board), and never,
-ever explain itself. A fake build pipeline, a diegetic bug tracker, a "release specification" for the
-kill-grid are all the same: the instant code is offered to the audience *as part of the fiction*, it has
-crossed the membrane and lives on the stage.
-
-So before you publish anything, ask which side it's on. Out-of-world scaffolding: keep it in `doc/` or
-keep it private, and let it explain freely. In-world artifact: it lives on the stage, in character,
-forever — even when it happens to be a thousand lines of C for a death-ray that was always a joke.
-
----
-
-## 12. How we communicate together
+## 10. How we communicate together
 
 The community side of the project has its own document: **`communications.md`**. It covers interweaving
 etiquette (offer freely, hold loosely, celebrate the mutation), how we organise in loose **cells** with
@@ -529,7 +403,7 @@ who made it, don't wait for permission — build your own, fold theirs in, and l
 
 ---
 
-## 13. Poe's Law as the goal — indistinguishable, and that's the point
+## 11. Poe's Law as the goal — indistinguishable, and that's the point
 
 How we're organised (see `communications.md`) leads straight to an obvious, slightly vertiginous
 question: **what if some of the people we
@@ -553,7 +427,7 @@ supremacy* — the point at which our elaborate nonsense is woven so deep into t
 it is load-bearing.
 
 But "indistinguishable" is only safe — and only *satire* — because of one thing, and it is the thing
-Section 8 exists for: **the tells are always already inside.** Every node is salted with its Easter eggs
+Section 6 exists for: **the tells are always already inside.** Every node is salted with its Easter eggs
 — the *Dad's Army* board, the impossible incorporation in 1600, the QR code that decodes to a limerick —
 quietly waiting. The work can pass for the real thing at a glance precisely *because* the proof that it
 never was the real thing is baked in, primed, and ours to detonate whenever we choose. So the satire
@@ -565,7 +439,7 @@ camouflage so perfectly and still, always, be telling the truth.
 
 ---
 
-## 14. The LLM as co-author, and the continuity checker as a personal tool
+## 12. The LLM as co-author, and the continuity checker as a personal tool
 
 Lean on the model as a genuine collaborator, not a typist. Ask it to generate three versions and pick
 the most boring. Ask it what the Thursday cafeteria menu would be. Ask it who signs the purchase order.
@@ -582,7 +456,7 @@ to keep your own room coherent, and let the mansion stay gloriously impossible.
 
 ---
 
-## 15. Growing the world
+## 13. Growing the world
 
 There is no anointment here and no promotion ladder. You don't earn a rank, and nobody hands you the
 keys. The only way the world grows is the improv way: **make work that other people want to "yes, and."**

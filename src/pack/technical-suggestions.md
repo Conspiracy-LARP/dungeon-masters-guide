@@ -155,20 +155,30 @@ an idle blog costs almost nothing, and the shared database is your only always-o
 
 ## A suggested project layout
 
-Keep a **private parent repository** of your own (any git host), with the shared creator-kit repo added
-as a **submodule**:
+Keep a **private parent repository** of your own (any git host), with the shared creator-kit added as a
+**submodule** on your own desk — inside `doc/`, because the kit is out-of-world scaffolding like
+everything else in there:
 
 ```
 my-node/                     ← your private parent repo
-├─ core/                     ← the shared kit, as a git submodule (read-only reference)
-├─ lore/                     ← OUT-OF-WORLD: private back-story, timelines, character bios
+├─ doc/                      ← OUT-OF-WORLD: the editor's desk
+│  ├─ core/                  ←   the shared kit, as a git submodule (read-only reference)
+│  └─ lore/                  ←   private back-story, timelines, character bios
 ├─ sites/                    ← IN-WORLD: the artifacts the audience sees (each a deployable)
 ├─ build/                    ← OUT-OF-WORLD: Dockerfiles, deploy scripts, prompts
 └─ README.md                 ← OUT-OF-WORLD: notes to yourself
 ```
 
+Add it by tracking the kit's **`pack` branch**, which carries the markdown documents and nothing else —
+no build machinery, no meta-documentation, just the reference you actually read:
+
+```
+git submodule add -b pack <the creator-kit repo> doc/core
+git submodule update --remote doc/core        # later: pull the current version of the kit
+```
+
 Honour the membrane (kit): keep out-of-world scaffolding clearly separated from in-world artifacts. Track
-the back-story you imply but never show in `lore/`; the continuity checker is built for exactly that.
+the back-story you imply but never show in `doc/lore/`; the continuity checker is built for exactly that.
 
 ---
 
@@ -219,7 +229,7 @@ saved it before they scrubbed it" is the genre's favourite sentence, and the Way
 you for free. A live page is just a website; the *ghost* of a page, preserved in the archive after its
 removal, is *evidence*. (A conspiracy-blogger character can use exactly this move in-world — a record
 "removed at the request of the registrar" that the character had the foresight to save.) Used deliberately, the
-archived copy is now an **in-world artifact**, so it must carry its tells (kit §8) and stay in character
+archived copy is now an **in-world artifact**, so it must carry its tells (`storytelling.md`) and stay in character
 like anything else on the stage.
 
 Two cautions, because permanence cuts both ways:
@@ -228,7 +238,7 @@ Two cautions, because permanence cuts both ways:
   clean, in-world, tells intact, and with **no real-identity leak**, because the archive will faithfully
   keep any mistake you make.
 - **Archive the finished artifact, not the scaffolding.** Snapshot the in-world page; never the repo, the
-  build files, or anything from `core/`.
+  build files, or anything from the kit itself.
 
 ---
 

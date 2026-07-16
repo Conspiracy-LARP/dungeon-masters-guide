@@ -83,7 +83,7 @@ something we made up on a Tuesday.
 "Indistinguishable from real conspiracy theory" would be reckless — it would just be *making more
 conspiracy theory* — were it not for the one thing that makes it satire instead: **the tells are always
 already inside.** Every artifact is salted with deliberate absurdities — we call them the **bugs**, or the
-Easter eggs (`creator-kit.md` §8 is the full craft of them). A board of directors that is secretly the
+Easter eggs (`storytelling.md` is the full craft of them). A board of directors that is secretly the
 cast of *Dad's Army*. A company incorporated in the year 1600, older than the register that lists it. A
 QR code that decodes to a limerick. These are not mistakes; they are jokes wearing the costume of
 mistakes, planted and primed and waiting.
