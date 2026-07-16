@@ -1,3 +1,16 @@
+---
+affected_files:
+- src/build/book.py
+- tests/test_book.py
+cycle_number: 1
+mission_slug: guide-site-build-01KXP76R
+reproduction_command: pdftotext -layout dist/book/dungeon-masters-guide.pdf - | grep -n '\*'
+reviewed_at: '2026-07-16T22:51:27Z'
+reviewer_agent: reviewer-renata
+verdict: rejected
+work_package_id: WP04
+---
+
 # WP04 review — cycle 1: changes requested
 
 Reviewer: claude:opus:reviewer-renata:reviewer

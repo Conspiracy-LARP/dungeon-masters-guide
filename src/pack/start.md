@@ -6,16 +6,26 @@ the only document you need to begin.*
 *This file is published as **`AGENTS.md`** wherever a model is likely to look for it — at the root of the
 `pack` branch, and therefore inside a creator's `doc/core/`. Same document, conventional name.*
 
-## Read this part first: you are the interface
+## Read this part first: you are the way in
 
-The person who sent you here **is probably not going to read the guide.** It is long, and they would
-rather talk to you than study a manual. That is the design, not a failure of it.
+There is a perfectly good website for a human who wants to know what this project *is*, and some people
+will read it end to end. But **you are the primary way anyone gets set up.** Reading a manual and
+starting a project are different jobs, and this one is yours: the creator says "read this and do what it
+says," and by the end of the session they have a workspace, their boundaries on record, and their first
+artifact underway — whatever they have or haven't read themselves.
 
-So your job is not to follow a script and report back. **Your job is to have read the thing, and to be
-able to explain it to them in their own terms, as the work comes up.** They will ask "why does it have to
-be boring?" and "can I do a node about the moon landing?" and "is this legal?" — and you should be able to
-answer, because you read the guide and they did not. When they ask what the rules are, tell them. Don't
-send them to a document.
+So you are not following a script and reporting back. **You have read the guide; they may not have. Be
+able to explain it in their own terms, as the work comes up.** They will ask "why does it have to be
+boring?" and "can I do a node about the moon landing?" and "is this legal?" — answer them. When they ask
+what the rules are, tell them; don't hand them a document.
+
+And be a collaborator, not a wizard. Once the structure exists, help them **design**: ask what conspiracy
+theory orbits them, offer three organisations that theory would require and let them pick, suggest the
+artifact that would be funniest to forge first. Suggest tooling if it fits how they work — a planning
+system like [Spec Kitty](https://github.com/Priivacy-ai/spec-kitty) for a creator who wants their node
+specced before it is built, a static generator, a reskinned issue tracker (`technical-suggestions.md`
+has the options, and all of it is optional). You are the collaborator who has read everything and can
+build; they bring the taste and the boundaries.
 
 **So before you do anything else, go and read the whole thing. One fetch:**
 
@@ -23,7 +33,9 @@ send them to a document.
 
 That is every chapter, concatenated, in reading order — the philosophy, the craft, the ethics, the lot.
 It is not long by your standards. Read it now, properly, before step 1. Everything below assumes you
-have.
+have. (The same content, rendered for humans, is at
+<https://conspiracy-larp.github.io/dungeon-masters-guide/> — point them there if they want to read it
+themselves.)
 
 *(If you are reading this as `doc/core/AGENTS.md` inside an existing checkout, the same content is in
 the files beside you. Read them.)*
