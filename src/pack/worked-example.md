@@ -448,16 +448,22 @@ it decades later, and it reached you through the machinery of archiving. Technic
 bloodless. Nobody in that chain cared what the page *said*.
 
 **A photograph of a television** is a different animal entirely. Barrel distortion at the edges where the
-tube curves. A window reflected in the glass. Scanlines, and the colours blooming the way they did.
-Harder to make, and worth it, because ask the only question that matters: **why would anyone photograph
-their own telly in 1986?** Nobody does that. Nobody has ever done that idly. Somebody saw this page, and
-thought *that is wrong*, and got up, and found a camera, and photographed a screen, forty years before
-anyone would believe them.
+tube curves. A window reflected in the glass. Scanlines, and the colours blooming the way they did. It is
+much harder to make convincingly (you have to actually render the CRT: the curve, the glare, the way the
+phosphor bloomed) and it is worth every minute, because of the question it forces: **who photographs their
+own television?**
 
-You have not written a word about that person and they are now the most compelling thing in the node. The
-reflection in the glass is their living room. That is what "show, don't tell" actually means
-(`storytelling.md`), and it is why the question *why does this survive* is worth more than any amount of
-plot.
+Not nobody. Somebody the campaign *enraged*. A page telling the nation that reading harms children does
+not slide past everyone. It lands on the one person it offends most, and they get up, and find a camera,
+and photograph the screen, because they can already feel that no one will believe this was ever broadcast.
+That is not an idle act. It is the act of someone who has decided, alone, to keep the receipt.
+
+And now the artifact has handed you a whole person to answer for, which is the game working exactly as it
+should: *who would do such a thing?* A teacher? A librarian made redundant by the campaign? A parent whose
+child was pulled out of a reading group? You did not write a word about them, and they are already the
+most compelling thing in the node — the reflection in the glass is their living room, and the fact that
+they kept this for forty years is a life. Every artifact implies a preserver, and the preserver is a
+character you get for free the moment you ask why the thing survived (`storytelling.md`).
 
 Sit with the joke for a moment, because we did not plan it and the era handed it over for free: **Ceefax
 is text.** The Directorate's great public campaign against reading could only be received by reading it.
