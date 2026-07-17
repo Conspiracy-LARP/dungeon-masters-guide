@@ -121,3 +121,27 @@ belongs in `storytelling.md` (which owns "show, don't tell" and the realism engi
 demonstrating rather than stating it. Left in place for now because the chapter is the only surface that
 currently shows it working. If `storytelling.md` takes it, check the kit's §6 summary still tells the
 truth.
+
+## hansard-1926.svg has no chrome, and is currently an anti-example (raised 2026-07-17)
+
+The render is content on white. It is not a screenshot of anything: it reads as a *diagram of* a Hansard
+page rather than a *capture of* one, and it fails in the quarter-second before you read a word — exactly
+the way the duty roster does, and for a related reason.
+
+A screenshot of a web page has **two layers of chrome** and it needs both:
+
+1. **The browser's** — title bar, URL bar showing a plausible dead `hansard.millbanksystems.com/...`
+   path, tab strip, scrollbar, the OS furniture of the era it was captured in.
+2. **The site's own** — masthead, nav, breadcrumb, the "back to volume" links, footer.
+
+Worse than the roster, because the two-dates passage sits directly beside it and *promises* the chrome is
+doing the characterisation: old layout means she saved it in 2009 and watched the design change around
+her. There is no chrome there to carry that, so the prose is writing a cheque the artifact does not pay.
+
+This one is worth fixing rather than keeping as a failure, because unlike the roster it is *easy*: per
+`technical-suggestions.md`, a period web page is a **specification**, so hitting it exactly is the same as
+being right. The roster fails because paper has no spec; this fails only because I did not do the work.
+
+Fix: rebuild with both chrome layers, in the 2009-era Hansard design (the site the current one replaced),
+so the artifact and the prose finally agree. Consider generating it from `src/build/artgen/` like the
+Ceefax pages, since browser chrome is reusable furniture for every future web artifact.
