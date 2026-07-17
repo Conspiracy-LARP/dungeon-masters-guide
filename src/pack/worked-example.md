@@ -229,18 +229,18 @@ emulate it exactly. The craft is entirely in the furniture:
     must ask for notice.
 ```
 
-Now put it in its chrome, because an excerpt argues and a screenshot lands:
+Now put it in its chrome, because an excerpt argues and a web page *lands*. So build the web page: a real
+HTML page wearing genuine Historic Hansard furniture, because you fake a website with a website, not with
+a picture of one. (The guide keeps a live example of exactly this alongside its other exhibits, and it is
+worth opening, because of what opening it does to you.)
 
-![A fabricated screenshot of a 1926 Hansard column that does not exist](hansard-1926.svg)
-
-> **This is a fake. An LLM wrote it, in about four seconds, from a one-line brief.** No such debate took
-> place. No such member sat. The volume and column numbers are invented. Every word of it is fabricated,
-> including the ones that sound most like a real minister. The image was drawn from that same brief and
-> cost nothing.
+> **It is a fake. An LLM wrote it in about four seconds from a one-line brief.** No such debate took
+> place, no such member sat, and the volume and column numbers are invented. Every word is fabricated,
+> including the ones that sound most like a real minister, and it cost nothing.
 >
-> Notice what happened to you between the plain text above and the picture. The words did not change.
-> Your belief did. That gap, between an assertion and an assertion *in a serif face with a column
-> number*, is the entire margin conspiracy theory operates in, and we just manufactured it for free.
+> Yet nothing about the words changed between the plain excerpt above and the page. Only your belief did.
+> That gap, between an assertion and an assertion *wearing a government website*, is the entire margin
+> conspiracy theory operates in, and we manufactured it for free.
 
 That is the point: it *reads* right. The
 cadence is right, "I must ask for notice" is what ministers genuinely say when they do not want to
