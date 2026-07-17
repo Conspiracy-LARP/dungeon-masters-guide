@@ -103,15 +103,21 @@ began. Somebody is quietly rather pleased.
 Government leaves records, and the boring ones nobody thought to destroy are all still sitting in public,
 digitised, searchable, free.
 
-So don't invent a Hansard column. **Quote a real one.** The 1920s record is thick with questions about
-elementary education and provision in the north-east, really asked by real backbenchers. Your teacher
-finds one and supplies the reading:
+So don't invent a Hansard column. **Go and read one.** Parliament has been arguing about elementary
+education since long before 1924, it is all digitised at `hansard.parliament.uk`, and it is free. Find a
+real question, really asked, and have your teacher supply the reading. The move is to quote the words
+exactly and then lean on one of them: an MP asks whether provision is *satisfactory*, and your blogger
+circles the word. Satisfactory to whom? He wrote it. She only noticed it.
 
-> *Note the phrasing. He doesn't ask whether standards are rising. He asks whether they are
-> "satisfactory". Satisfactory to whom?*
+She invented nothing, and the citation resolves. A reader who checks finds she was scrupulously honest
+about the words and wrong about everything else, which is far more unsettling than catching a forgery.
 
-She wrote none of that quote. It resolves. A reader who checks finds she was scrupulously honest about
-the words and wrong about everything else, which is far more unsettling than catching her in a forgery.
+**A warning, and it is the one you will need first.** Ask an LLM for a suitable 1926 Hansard quote and it
+will give you a beauty. Right cadence, right vocabulary, precisely the sentiment you were hoping for, and
+completely fictitious. This is the same hallucination you are about to weaponise deliberately in step 12,
+leaking into the one place it ruins you: a fabricated citation is not a tell, it is just a dead link, and
+the reader who checks it stops reading. **The model finds the connections. You verify the sources.** Open
+the page yourself. If you have not personally seen the column, it does not go in.
 
 This is the whole technique of the real thing: cite something true and unfalsifiable, then supply the
 lens. It costs you nothing but an afternoon in the archive, and **the archive is where the jokes are**.
@@ -145,7 +151,11 @@ And the real citation lends its credibility to the fake one sitting next to it. 
 ## 12. It ran a century. Where did it end up?
 
 Files drift. Nobody remembers why they have them, and no department has ever closed one on purpose. So
-follow the machine through the reorganisations, because each one is a fresh canvas:
+walk it forward from Atterbow's desk, because each reorganisation is a fresh canvas, and because this is
+how you write a hundred-year conspiracy: not by planning a century, but by asking, over and over, *and
+then what happened to it?*
+
+**The 1920s.** The War Office, the typing pool, the Official Secrets Act, the missed 1927 target.
 
 **The 1980s.** It lands in the **Department of Administrative Affairs**, and the register is the polite
 minute, the deniable circumlocution, the thing agreed in a corridor. Sir Arnold Robinson would like it
@@ -164,10 +174,14 @@ administered it. By the 2010s it is defended purely because cancelling it would 
 department that cannot explain a hundred-year-old illiteracy programme has a much worse week than one
 that quietly renews it.
 
-Each decade steals its cast from a comedy set in that decade: Potter's clerks for the mid-century office,
-then the two great British satires of how Whitehall actually fails. That is the tell doing its job
-(`storytelling.md`). Read cold it is a staff list. Read by the one reader assembling the case, it is
-proof the whole thing was authored, and no minor character is loud enough to give it away early.
+Be clear about what just happened: we stole all three settings. An obscure teleplay for the mid-century
+office, then two of the most celebrated political comedies ever made in this country, and we took the
+furniture rather than the plots. That is the tell doing its job (`storytelling.md`), and the audiences
+split exactly the way we want. A comedy fan may well clock it, grin, and say nothing, because spotting it
+is the reward. A conspiracy theorist almost certainly will not, because that is not what they watch, and
+they are reading the memo for the redactions rather than the staff list. Read cold it is a directory of
+civil servants. Read by the one reader assembling a case, it is proof the whole thing was authored, and
+no minor character is loud enough to give it away early.
 
 ## 13. Where does the reader come in?
 
@@ -207,19 +221,30 @@ point it at a bureaucracy (`improvisation.md`). A hundred years of institutional
 infinitely deep well, and each new artifact makes the next one easier, because it now has a century of
 context to be consistent with.
 
-**And it eats.** It absorbed a Dennis Potter teleplay, then two political satires, then real Hansard,
-then a real gazette. It can absorb your favourite obscure film, a genuine 1937 pamphlet, a joke your
-colleague made. It can absorb *another creator's node*. Their department had dealings with ours. Their
-minister sat on our committee. Their scandal is in our minutes, and now two stories are one world, which
-is the whole point of building this together rather than alone (`communications.md`).
+**And it never stops eating.** It has already absorbed a Dennis Potter teleplay, two political satires,
+real Hansard and a real gazette. It will take your favourite obscure film, a genuine 1937 pamphlet, a
+joke your colleague made on Slack. It will take *another creator's node*: their department had dealings
+with ours, their minister sat on our committee, their scandal is in our minutes, and now two stories are
+one world, which is the whole argument for building this together rather than alone
+(`communications.md`).
+
+This is where the LLM stops being a writing assistant and becomes the engine itself. Ask it what else was
+happening in Britain in 1926, and it will hand you a list, and it will not be able to stop itself from
+drawing lines between the items. That tendency is a defect everywhere else in your life. Here it is the
+entire product. **We are weaponising the hallucination**, pointing the model's compulsion to connect
+unrelated things at a fiction whose whole subject is people connecting unrelated things.
+
+Which is the joke closing on itself, and it is why the discipline in step 10 matters so much. The model
+supplies the connections, and they can be as spurious as you like, because spurious connection is what we
+are satirising. You supply the sources, and those must be real.
 
 ## Which is the actual lesson
 
 Everything above came from a teacher being fed up at work.
 
-Not a writer's room. Not a plot. Not a special talent for this. One person with a real job, a real
-irritation, and specific knowledge of an unglamorous field, who asked the funniest available question
-about it and then kept going.
+She had specific knowledge of an unglamorous field and an irritation she had carried for years before any
+of this began. She asked the funniest available question about it and then kept going. That is the whole
+qualification.
 
 **That is the whole barrier to entry, and you have already cleared it.** Your corner needn't be about
 5G. Why the trains are late. Why the planning application went through. Why the coffee machine on the
