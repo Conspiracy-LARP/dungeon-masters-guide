@@ -1,8 +1,8 @@
 # Technical suggestions — how to build the thing, cheaply
 
-*Hosting that costs nothing when nobody is looking, faking a period look with a modern stack, shipping
-each property as a resettable bundle, and why to self-host rather than trust a platform that can delete
-you. Entirely optional: ignore all of it and you are still playing the game exactly right.*
+*Hosting that costs nothing when nobody is looking, shipping each property as a resettable bundle, and
+why to self-host rather than trust a platform that can delete you. Entirely optional: ignore all of it
+and you are still playing the game exactly right.*
 
 **The running theme of this whole pack is: keep costs low.** Most nodes you dream up won't get real
 traction (that's fine, that's improv), so you want each one to cost as close to nothing as possible to
@@ -17,19 +17,6 @@ Everything here is **out-of-world scaffolding**: hosting, build tooling, deploym
 it should ever surface on a client-facing page (see the "membrane" section of the creator kit). The
 one interesting exception is when you deliberately make source code itself a diegetic artifact; that's
 covered in the kit.
-
----
-
-## Fake the period: don't actually use old technology
-
-A lot of nodes want a *dated* look: a site that appears to have been built with twenty-year-old
-technology, a neglected 2012 intranet, a 1998 GeoCities page. **You do not have to use old technology to
-look old.** Build with a completely modern stack and *costume* it: period fonts, table layouts, beveled
-borders, a fake `Server: Microsoft-IIS/7.5` header, `[CACHED]` tags, broken-looking widgets. You get the
-best of both worlds: a convincingly ancient façade, deployed on modern infrastructure that's cheap,
-fast, and easy to stand up. A node can be a thoroughly modern Python/JS app wearing a 2012 IIS costume:
-the visitor sees rust, you get containers and a CDN. Self-host your fonts and libraries rather than
-hot-linking a CDN, both to stay in period and to keep control.
 
 ---
 
@@ -209,6 +196,43 @@ For each property you can get real insight and make sure it's findable:
 
 A sitemap plus these three, behind Cloudflare, is usually enough to get a new property discovered and
 indexed within days.
+
+---
+
+## A note on faking old technology
+
+Minor, but it comes up, because a story often needs something to *look* old: a neglected 2012 intranet, a
+departmental system nobody has touched since the merger, a 1998 page that somehow still resolves.
+
+**You never have to use old technology to look old.** Build on a completely modern stack and costume it.
+Period fonts, table layouts, beveled borders, a `Server: Microsoft-IIS/6.0` header that is simply a
+string you chose, `[CACHED]` tags, a hit counter, a widget that looks broken. The visitor sees rust; you
+get containers, a CDN and a deploy that takes nine seconds. Self-host the fonts rather than hot-linking,
+both to stay in period and to keep control.
+
+And the range is wider than a dated website. Almost any computing era can be simulated on a modern box,
+usually in an afternoon, because the old thing was mostly a **protocol or a character grid**:
+
+- **An ancient browser's rendering**, or a page that only makes sense in one.
+- **A BBS**: FidoNet message bases, a Hotline server, an ANSI login screen and a menu you navigate by
+  number. Telnet still exists; so does everyone's willingness to type `3` and press return.
+- **A text-only database terminal**: green on black, an F-key legend along the bottom, record 1 of 4,412.
+- **Twenty-year-old server furniture**: IIS directory listings, an `.asp` extension, a `WEB-INF` leak, an
+  Apache index-of page with the little folder icons.
+
+Each of those is a look, not a dependency. Nobody is asking you to actually run a 2004 server, and you
+should not: it is slower to stand up, impossible to keep patched, and no more convincing.
+
+**Which is worth putting beside the hard case.** `worked-example.md` shows a fabricated 1926 duty roster
+failing, badly, because a pre-digital document is a *physical object* and its whole character is physical
+accident: uneven type, a pencilled margin, a rusted staple. That is genuinely hard to fake, and mostly
+not worth trying.
+
+Old *technology* is the opposite. It is the easiest thing in this entire pack. A character grid is a
+specification, a protocol is a specification, and a 2004 page is a specification, so hitting it exactly
+is the same as being right. **Where your story needs age, prefer the era that had a spec.** If the
+artifact has to be paper, reach for the thing that digitised it instead: a catalogue entry, a scan-viewer
+page, a search result. Those are web pages, and web pages you can nail.
 
 ---
 
