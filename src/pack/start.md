@@ -141,8 +141,9 @@ order is not negotiable:
 - **`improvisation.md`** — the craft: what improv teaches about world-building — "yes, and," radical
   acceptance, Del Close's law, and turning the camera (out to generate, toward others to offer, toward
   yourself to be inspired).
-- **`worked-example.md`** — one anonymised history showing how a corner grows one idea at a time; the
-  shape of the process, not a template to copy.
+- **`worked-example.md`** — the method run once, on a teacher's anger about illiteracy: the leap to *what
+  if it's on purpose*, and the paperwork it would leave. Use it when a creator says they have no
+  conspiracy theory to work with.
 - **`ethics.md`** — the moral floor: you can satirise anything, but the target is the lie/failure/theft,
   never the victim or the harm. Read before going near a difficult subject.
 - **`communications.md`** — how the community works: interweaving etiquette, loose cells with no boss, and

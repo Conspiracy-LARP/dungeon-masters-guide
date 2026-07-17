@@ -47,10 +47,11 @@ ever appear on a client-facing surface (see the "membrane" section of the creato
   and hands us fake solutions; we answer, as comedians and software developers, with technical ingenuity
   and humour; diegetic satire built to be indistinguishable from the real thing, salted with tells we
   reserve the right to detonate.
-- **[`worked-example.md`](worked-example.md)**: one illustrative history, told without naming any real
-  site or character. How a single corner grew one idea at a time (an intranet → a blogger who discovers
-  it → the creator written in as the villain → the villain's corporate homepage). The lesson is the
-  *shape*, not the specifics.
+- **[`worked-example.md`](worked-example.md)**: the method run once, start to finish, on a subject nobody
+  would call lurid. A teacher's anger about illiteracy, the leap to *what if it's on purpose*, and the
+  paperwork that leap would leave behind. The lesson: you do not need one of the famous theories. You need
+  one person who is angry about something true.
+
 - **[`improvisation.md`](improvisation.md)**: what improv teaches us about world-building. "Yes, and,"
   radical acceptance (harmonise, don't negate; ignore what you can't), Del Close's "treat your fellow
   players like poets and geniuses," and the turn-the-camera technique. The craft the whole project rests

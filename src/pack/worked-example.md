@@ -1,64 +1,85 @@
-# A worked example — how one corner grew, one idea at a time
+# A worked example — anything can be a conspiracy
 
-*How a single node actually grew, one idea suggesting the next, from a rediscovered intranet, to a
-blogger who finds it, to the villain's own corporate homepage. Anonymised on purpose: the lesson is the
-shape of the process, not the specifics. Yours will look nothing like it, and that is correct.*
+*You do not need one of the famous theories. Take something that genuinely angers you, ask the one
+question a conspiracy theorist would ask, and the rest of this pack does the work. Here is that done
+once, start to finish, on a subject nobody would call lurid.*
 
 ---
 
-## The first flash
+## Start with the anger, not the aliens
 
-It began with a single observation. The creator noticed a live conspiracy theory (the claim that a
-city's environmental-enforcement cameras were, secretly, *deadly energy weapons*) and asked the one
-question this whole game turns on: **what if that were true?** Not "how do I debunk this," but "suppose
-it's real: who would run it, and what would their paperwork look like?"
+A teacher watches a class of eleven-year-olds who cannot read. Not badly: at all. She has watched it for
+nine years. She has read the research, sat through the training, bought the books herself. Nothing moves.
 
-## The first artifact: a technical, rediscovered intranet
+That anger is real, and so is the question underneath it. Why can't they read? There are honest answers,
+and people argue about them ferociously: phonics against whole language, class sizes, funding, screens,
+what happened to reading at home. It is a live and serious argument.
 
-That question produced the first property: an elaborate, neglected, *lost-and-then-rediscovered* internal
-intranet, the sort of dreary staff IT system that the organisation running such a weapon-grid would
-actually use. It was detailed, period-costumed, and technical, and it revealed its horrors only through
-banal artifacts: tickets, memos, service notes. It was also, honestly, quite *hard* for an ordinary
-visitor to penetrate. A dense, cold, technical world is convincing. But it doesn't hand a newcomer a way
-in.
+Now make the leap.
 
-## The second idea: turn the camera onto a discoverer
+## The leap: what if it's on purpose?
 
-So the creator turned the camera. How might an ordinary person reach this dense technical world? **What
-if it had been discovered by a conspiracy theorist?** That reframing invented a *character*: someone
-reacting to the first creation from the outside. And where the intranet was cold and technical, the
-second property was warm and utterly familiar: **a blog** (the most ordinary format on the internet,
-stood up on an off-the-shelf blogging engine). A blog is one person's point of view, so it was written
-exactly that way: a single voice, discovering and reacting.
+Not "the system is failing." **Someone is doing this on purpose.**
 
-## One thing suggests another, and the creator becomes the villain
+Notice what just happened, because it is the whole trick. The question stopped being *why can't they
+read* and became *who is preventing it*. The second question is far more satisfying. It has a villain,
+it explains everything, and it cannot be answered. It has also completely evicted the first one, which
+had answers and needed work.
 
-As the blog grew, so did the ideas. The creator began imagining how this blogger would cover events
-unfolding in the conspiracy world more or less in real time, *including events that touched the
-creator's own real self.* Which raised an irresistible question: how might the creator appear inside this
-fictional universe? The obvious, delicious answer was **as a villain.** So he wrote himself (his villain
-alter-ego) into the original intranet, and imagined an *encounter* between that villain and the
-fictional blogger. Each of those choices spawned more.
+You have just built a conspiracy theory. It took one sentence.
 
-## And another: the villain's own corporate homepage
+**This is exactly how the real ones are made.** Someone is angry about something true, asks *what if it's
+deliberate*, and starts collecting evidence. Not one step of that is different from what you are about to
+do. The only difference is that you know you are doing it, and you will salt the thing with tells (see
+`storytelling.md`) so that anyone paying attention catches you.
 
-The chain kept going of its own accord. If the villain alter-ego existed in this world, then surely *he*
-had also left things on the internet to be found. For instance: his own **corporate consultancy
-homepage**, a bland, respectable, entirely ordinary business website that describes a series of quietly
-monstrous services in flat corporate jargon. The comedy lives in the contrast: the sober professional
-register on the surface, the conspiracy-imagination horror sitting plainly underneath it.
+## Then ask the boring question
 
-## The lesson: you never needed the whole plan
+The theorist stops at the villain. That is where we start, and it is the only move in this pack that
+matters: **who administers it?**
 
-Now notice the shape of all that, because the shape is the teaching. **Nobody sat down and designed this
-world.** It grew from one flash of insight, and then each thing suggested the next:
+Because if illiteracy is deliberate, it is a programme. Programmes have owners. Someone holds the budget
+line. Someone chairs the meeting where phonics was assessed and rejected. Someone had to specify the
+textbook. There is a unit, the unit has a name, and the name is boring, because all their names are
+boring.
 
-> the intranet needed a discoverer → the discoverer became a blogger → the blogger's coverage suggested a
-> villain → the villain suggested his own website → …
+Say it is the **Reading Standards Harmonisation Unit**.
 
-You do **not** have to come up with all of the ideas at once. Get one small flash of creativity and
-follow it. The existence of one thing implies the existence of another: a company implies its
-paperwork, a paperwork trail implies a person, a person implies their website, a villain implies a hero
-who noticed him. Pull that thread and it keeps giving. Share the ideas with collaborators and build on one
-another's; you don't have to wait for anyone's validation before you make the next thing. Just start, let
-one creation suggest the next, and **revel in the fun of it.**
+Now ask the small questions (`storytelling.md` calls this the realism engine, and it is where the comedy
+actually lives). Who chairs it? What is on their risk register? Which of their KPIs is green? What does
+the cafeteria serve on Thursday?
+
+## Then build the evidence
+
+You never write the theory down. You write the paperwork it would have left, and let the reader do the
+arithmetic:
+
+- **Minutes** of a working group that assessed synthetic phonics and recorded it as *off-strategy*, with
+  an action to "monitor sector drift."
+- A **procurement note** specifying the new reader at 8pt, justified on paper cost, approved.
+- A **quarterly dashboard** where *cohort comprehension variance* is a KPI, and it is **green**. Targets
+  met. Someone got a bonus.
+- A **ticket** raised by a teacher in the north-west, escalated twice, closed **won't fix**, with a note
+  thanking her for her feedback.
+
+That last one is the punchline, and it is the reason the whole thing started: the teacher whose anger
+invented this world gets a reference number and a form letter. Nothing in that document is monstrous.
+Every line of it is Tuesday.
+
+Notice what you never wrote. No child struggling. No harm depicted, anywhere. That is the rule from
+`ethics.md`, and it is not squeamishness, it is the craft: the atrocity is entirely inferred, the
+artifact is entirely a spreadsheet, and the reader assembles the horror themselves out of a RAG status.
+The target is the invented Unit and the lie that it exists. Never the children, never the teacher, never
+the real argument about how reading is taught.
+
+## So: anything
+
+Nothing here needed a cabal, a lizard, or a mast. It needed one person who was angry about something
+true.
+
+Which means your corner does not have to be about 5G. It can be about why the trains are late, why the
+planning application went through, why your industry's certification body exists, why nobody can get a
+dentist. Anywhere a real grievance meets an unanswerable question, the same move works: agree, ask who
+runs it, file the minutes.
+
+The theory takes a sentence. The paperwork takes a weekend. The paperwork is the joke.

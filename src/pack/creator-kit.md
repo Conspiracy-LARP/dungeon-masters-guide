@@ -31,7 +31,7 @@ paragraph and expanded in their own companion documents, so you can go deep only
 > - **[`ethics.md`](ethics.md)**: the moral floor for hard subjects. Infer, don't embrace; never the victim.
 > - **[`communications.md`](communications.md)**: how the loose community of creators finds and builds on each other.
 > - **[`technical-suggestions.md`](technical-suggestions.md)**: cheap, resettable ways to actually put it all on the web.
-> - **[`worked-example.md`](worked-example.md)**: one anonymised history of how a corner grew, idea by idea.
+> - **[`worked-example.md`](worked-example.md)**: the method run once on a teacher's anger about illiteracy. Anything can be a conspiracy.
 > - **[`story-continuity-checker-prompt.md`](story-continuity-checker-prompt.md)**: a personal tool to catch your own timeline bugs.
 
 ---
@@ -346,7 +346,7 @@ The worst thing this kit could do is hand you a fill-in-the-blanks template, bec
 would look the same and the maze would collapse into a form. So instead, here is **one worked example**
 and then a **buffet**. Take what's useful, ignore the rest, invent your own forms.
 
-**The reference: a worked example, told without names.** The companion file **`worked-example.md`** walks
+**The reference: the method run once.** The companion file **`worked-example.md`** walks
 through how one corner of the world actually grew, one idea at a time: a technical, rediscovered intranet;
 then a blogger who "discovers" it; then the creator writing himself in as the villain; then that villain's
 own straight-faced corporate consultancy homepage. What makes that shape work is worth stating here: every
