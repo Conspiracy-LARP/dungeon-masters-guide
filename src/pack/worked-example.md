@@ -105,9 +105,15 @@ digitised, searchable, free.
 
 So don't invent a Hansard column. **Go and read one.** Parliament has been arguing about elementary
 education since long before 1924, it is all digitised at `hansard.parliament.uk`, and it is free. Find a
-real question, really asked, and have your teacher supply the reading. The move is to quote the words
-exactly and then lean on one of them: an MP asks whether provision is *satisfactory*, and your blogger
-circles the word. Satisfactory to whom? He wrote it. She only noticed it.
+real question, really asked, and have your teacher supply the reading.
+
+The move is to quote the words exactly and then lean on one of them. Suppose you turn up a member asking
+whether provision in his constituency is *satisfactory*, which is the sort of thing members ask. Your
+blogger circles that one word. Satisfactory to whom? He wrote it. She only noticed it.
+
+(That is the shape, not a citation. Go and find the real sentence. Yours will be better than anything
+invented for you here, because a real undersecretary in a real bad mood is funnier than a writer trying
+to sound like one.)
 
 She invented nothing, and the citation resolves. A reader who checks finds she was scrupulously honest
 about the words and wrong about everything else, which is far more unsettling than catching a forgery.
