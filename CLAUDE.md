@@ -52,7 +52,9 @@ diegetic costume. It is the one surface in the whole project that is allowed to 
 
 Easy to conflate, so keep them straight:
 
-- **`CLAUDE.md`**, with **`AGENTS.md` as a symlink to it** — this file, at the repo root. Instructions
+- **`CLAUDE.md`**, with **`AGENTS.md` as a symlink to it** (verify with `git ls-files -s AGENTS.md`:
+  mode `120000` is the symlink, `100644` means a tool has replaced it with a copy that will silently
+  drift — Spec Kitty's installer did exactly this once, to inject its orientation block) — this file, at the repo root. Instructions
   for an agent *editing the guide* (Claude Code reads `CLAUDE.md`, Codex reads `AGENTS.md`; the symlink
   keeps them identical rather than drifting). Not part of the pack, not in the site build.
 - **`src/pack/start.md`** — pack *content*, and the project's machine-facing front door. Instructions
@@ -170,3 +172,21 @@ teaches people to build. Read `ethics.md` in full before touching a difficult su
 - **No disclaimers.** The pack argues against "this is satire" banners; don't add one to a document
   that is arguing against them.
 - **Prose wraps at ~100 characters.** Match it.
+
+<!-- spec-kitty:orientation -->
+**Spec Kitty v3.2.5** — project: unknown (healthy)
+
+Two usage patterns:
+- **Full mission** (spec → plan → tasks → implement → review → merge):
+  trigger: "spec out", "create a mission", "write a spec", "plan this"
+  → run `/spec-kitty.specify`
+- **Lightweight dispatch** (ad-hoc fix, question, or advice — no mission created):
+  trigger: "hey spec kitty", "use spec kitty to", "spec kitty <anything>"
+  → **ALWAYS run `spec-kitty dispatch "<request verbatim>"` — do NOT answer directly.**
+  If you know the right profile, pass it to skip routing:
+  `spec-kitty dispatch "<request verbatim>" --profile <profile-id>`
+  Reason: `spec-kitty dispatch` loads governance context, routes the request,
+  and opens the Op. Skipping it produces ungoverned, untracked responses.
+  After finishing the work, close the Op with the command printed in the capsule
+  (`spec-kitty profile-invocation complete --invocation-id <id> --outcome <done|failed|abandoned>`).
+<!-- /spec-kitty:orientation -->
