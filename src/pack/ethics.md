@@ -99,9 +99,38 @@ work:
   private person.)
 - **No real-world harm instructions:** no working weapon, drug, or attack how-to hiding inside the
   fiction.
+- **Never write to the real record.** Do not edit the Wikipedia article. Do not file the freedom of
+  information request. Do not get a fabricated document into a real registry, a real archive, or a real
+  public database. Those are commons, and other people rely on them being true.
 - **No real bereavement inverted**, no real victim mocked, nothing that is simply **cruelty wearing a
   costume**.
 - **Family-friendly by default** where the setting allows: the horror is *implied*, not graphic.
+
+## Why the record is different
+
+**Never write to the real record** deserves its reason, because it is the only item on that floor which
+costs a creator anything, and the reason is the whole project turned on itself.
+
+We exist because conspiracy theory poisons the shared record. It takes a real question, floods the space
+around it with lurid nonsense, and leaves nobody able to tell what is true. That is the injury. It is
+the entire argument of `philosophy.md`.
+
+So a creator who edits the real Wikipedia article has not bent a rule. They have **become the thing**.
+Same act, same harm, and no amount of satirical intent makes the next reader's search results any less
+poisoned. You cannot defend the commons by salting it.
+
+**Imagining the record is completely different, and it is where the whole craft lives.** Invent the
+Wikipedia page. Screenshot it. Write the FOI response that never came. Put it on *your* surface, in your
+blogger's own voice, and let the reader go and check the real one.
+
+They will find nothing. Which is exactly what your fiction predicted, and now the absence is doing your
+work for you: *"it was there in March."* You have forged nothing, touched nothing, and the real internet
+has told the story for you. The imagined record is the stronger artifact, every time.
+
+The inverse is just as useful, and `worked-example.md` leans on it: where the real record **is** there
+and always will be (Hansard, a gazette of record), quote it honestly and supply the reading. You invent
+nothing, the citation resolves, and the reader who checks finds you were scrupulous about the words and
+wrong about everything else. That is unfalsifiable, free, and far more unsettling than a forgery.
 
 ## Ethics is an attitude, not a rulebook
 

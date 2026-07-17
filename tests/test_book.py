@@ -16,6 +16,7 @@ import json
 import re
 import shutil
 import subprocess
+import tempfile
 from pathlib import Path
 from typing import Any, Callable
 
@@ -36,7 +37,9 @@ from build.book import (
     retarget_for_html,
     write_intermediates,
 )
-from build.config import BuildConfig
+from build import llms, packbranch
+from build.config import BuildConfig, load_config
+from build.roles import load_documents
 
 
 def _pandoc_ast(markdown: str, tmp_path: Path) -> dict[str, Any] | None:
@@ -732,26 +735,35 @@ def test_building_the_book_never_writes_to_the_pack(
     assert after == before
 
 
-def test_the_live_pack_is_unmodified_in_git(repo_root: Path) -> None:
-    """`git diff --stat src/pack/` must be empty — the reviewer's check, automated.
+def test_the_real_build_never_writes_to_the_real_pack() -> None:
+    """C-002/C-006. Every build entry point, run against the live `src/pack/`.
 
     The temporary-pack tests above prove the transforms do not write to *a* pack. This
-    proves nothing has written to *the* pack: a stray `Path.write_text` against
+    proves nothing writes to *the* pack: a stray `Path.write_text` against
     `config.pack_dir` in some future refactor would sail past them.
-    """
-    result = subprocess.run(
-        ["git", "diff", "--stat", "--", "src/pack/"],
-        cwd=repo_root,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    if result.returncode != 0:  # pragma: no cover - no git, e.g. a source tarball
-        pytest.skip("git is unavailable")
 
-    assert result.stdout.strip() == "", (
-        "src/pack/ has been modified. The guide's prose is the product and the build "
-        "never edits it (C-002, C-006).\n" + result.stdout
+    This deliberately does NOT ask git whether `src/pack/` is dirty. A dirty pack means a
+    human edited the guide, which is the entire point of the repository — the prose is the
+    product. Only a write that happens *across a build* is the defect.
+    """
+    config = load_config()
+    pack_dir = config.pack_dir
+    documents = load_documents(pack_dir, config)
+
+    before = {path.name: path.read_bytes() for path in sorted(pack_dir.glob("*.md"))}
+    assert before  # guard the guard: an empty pack would pass vacuously
+
+    with tempfile.TemporaryDirectory() as tmp:
+        out = Path(tmp)
+        write_intermediates(config, out / "book")
+        llms.write_index(config, documents, out / "llms")
+        llms.write_full(config, documents, out / "llms")
+        packbranch.build_tree(out / "pack", config)
+
+    after = {path.name: path.read_bytes() for path in sorted(pack_dir.glob("*.md"))}
+    assert after == before, (
+        "A build entry point wrote to src/pack/. The guide's prose is the product and the "
+        "build only ever reads it (C-002, C-006)."
     )
 
 
