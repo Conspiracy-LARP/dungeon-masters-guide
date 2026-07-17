@@ -1,0 +1,166 @@
+# Ethics — what we satirise, and what we never do
+
+*Satire has no forbidden subjects. But the target is always the lie, the failure and the theft, never
+the victim and never the harm. This is the reasoning that lets the project go near difficult material at
+all, and the technique that keeps it clean. Read it before you go there.*
+
+---
+
+## The founders' position, in one line
+
+**You can satirise anything. But the target is never the victim, and never the harm, and never the person
+who got fooled. The target is the move that fooled them: the leap from "something is wrong" to "somebody
+did this on purpose", and the theft it commits every time it runs.**
+
+Both halves matter. Drop the first and you become a coward who can't tell a joke about anything that
+matters. Drop the second and you become a bully who punches down at the people a joke should protect.
+The whole craft of this project lives in holding both at once.
+
+Aiming at the move rather than at any particular theory is what keeps the second half honest. Believers
+are not our quarry. Most of them are frightened, or lonely, or grieving, and they were handed the engine
+by someone who profits from it. Go after the engine (`philosophy.md`). It has no feelings to hurt and an
+unlimited supply of victims, some of whom are reading your node.
+
+## "You can satirise anything": why we mean it
+
+Satire has no forbidden subjects. The moment you publish a list of topics that are Too Serious To Touch,
+you have handed the powerful a tool: anything they'd rather not be laughed at, they simply file under Too
+Serious. Great satire has always gone exactly where it was told not to. Chris Morris's *Brass Eye*
+special "Paedogeddon" is the reference point: it took the single most radioactive subject in British
+public life and made unforgettable comedy out of it, and it is now regarded as one of the bravest
+things television has done. So we do not maintain a banned-topics list. Racism, child abuse, mass death,
+the darkest corners of conspiracy folklore: all of it is *available* to the work.
+
+## What "Paedogeddon" actually satirised, and the distinction everything rests on
+
+Here is the distinction that makes the sentence above safe rather than monstrous. *Brass Eye* did **not**
+satirise child abuse. It satirised society's **hysteria** about it: the media's appetite, the
+politicians' posturing, the collective loss of proportion that made it impossible to think clearly about
+protecting actual children. The abuse itself was never the joke. The *panic*, the *attitudes*, and the
+*consequences* were.
+
+That is our line, exactly:
+
+- **Child abuse is not, in itself, a subject for hilarity.** It is real. Its victims are real people who
+  can be hurt again by careless work. We never make the abuse the object of the joke, never depict it,
+  never wink at it, never treat a survivor as a punchline.
+- **What we satirise instead** is the *lie built on top of it* and the *failure around it*: the way
+  conspiracy culture seizes a real horror, inflates it into a lurid cartoon (a cabal, a coded pizza
+  menu, an adrenochrome trade), and in doing so makes the real problem *impossible to talk about*. We
+  satirise the panic, the profiteers, the credulous machinery. And the theft itself.
+
+## The theft: why this is a moral act and not just edgy comedy
+
+Conspiracy theories don't merely spread falsehood. They **hijack real problems and evict the real
+question.** There are genuine, serious things to discuss:
+
+- **Child protection** is a real and difficult field. The QAnon-style trafficking panic didn't help a
+  single child; it drowned real safeguarding in a fantasy about celebrities and tunnels, and made
+  ordinary people distrust the actual institutions that protect children.
+- **Environmental pollution** is real. When "chemtrails" swallow the conversation, you can no longer
+  have an honest public argument about air quality, industrial emissions, or geoengineering. The lurid
+  version has evicted the real one.
+- **Taxation, surveillance, corporate power over public health, who owns a city's infrastructure**:
+  every one of these is a legitimate thing to be worried about, and every one has a conspiracy theory
+  squatting in its place, so that raising the real concern gets you lumped in with the death-ray brigade.
+
+This is the injury we are actually attacking. By agreeing with the conspiracy ("suppose it's all true")
+and rendering its world-ending horror as tedious, banal bureaucracy, we collapse the lie into comedy,
+and in doing so we **clear the ground the conspiracy was squatting on, so the real conversation can
+happen again.** That is why the work is worth doing. We are not mocking the frightened; we are trying to
+give them back the questions the grifters stole.
+
+## The craft that keeps it clean: infer, don't embrace
+
+The technique that lets us name a monstrous subject without ever *rendering* the monstrosity is this:
+**infer, don't embrace.** You may point at the horror; you must never stage it. Let the paperwork, the
+inference, and the reader's own imagination do the work.
+
+The model: to tell the story of a company that harvests adrenochrome, you do not
+describe (or invent, or dramatise) a single act of harm. You release its **accounting records**: a
+cost centre, a supplier ledger, a cold-chain logistics line, a diligence pack that dead-ends on a no-bid
+decision *on economics*. The atrocity is entirely implied; nothing terrible is ever shown; and the joke,
+an unspeakable horror run as dreary facilities management, is the debunk. The reader fills the blank
+far more powerfully than any depiction could, and no victim was ever put on the page.
+
+If a subject can only be done by depicting the harm, don't do it that way. Find the paperwork angle, the
+bureaucratic angle, the Brass-Eye-panic angle. Or leave it.
+
+## Never build on the ugliness
+
+Conspiracy culture is soaked in ugly material: antisemitism, racism, the scapegoating of
+minorities, the exploitation of real grief. **We satirise the conspiracy *and its consequences*, never
+the victims, and never the groups the theory scapegoats.** We build on the *theory* and the *harm it
+does*. We do not reproduce the slur, launder the blood-libel, or use a real person's real tragedy as a
+prop. The 700-block on a certain London road can be *named* and made a dull shell-company address; the
+antisemitic myth attached to it is not something we ever pick up and carry.
+
+## The plain floor
+
+Beneath all the freedom, a short floor that no decent person needs argued and no satire needs in order to
+work:
+
+- **No real private individuals** dragged in without their consent. (Public conspiracy influencers, as
+  the *targets* of the satire, are the narrow exception, and even then, aim at the public work, not the
+  private person.)
+- **No real-world harm instructions:** no working weapon, drug, or attack how-to hiding inside the
+  fiction.
+- **Never write to the real record. This one is flatly forbidden, and it is the only rule here we would
+  ask you to leave over.** Do not edit Wikipedia. Do not send a request through WhatDoTheyKnow. Do not
+  get a fabricated document into a real registry, a real archive, a real database, or any other record
+  a stranger might one day check. Not as a joke, not "just the once", not with a note on the talk page,
+  and not because it would be very funny. There is no version of this we will defend.
+- **No real bereavement inverted**, no real victim mocked, nothing that is simply **cruelty wearing a
+  costume**.
+- **Family-friendly by default** where the setting allows: the horror is *implied*, not graphic.
+
+## Why the record is different
+
+**Never write to the real record** deserves its reason, because it is the only item on that floor which
+costs a creator anything, and the reason is the whole project turned on itself.
+
+We exist because conspiracy theory poisons the shared record. It takes a real question, floods the space
+around it with lurid nonsense, and leaves nobody able to tell what is true. That is the injury. It is
+the entire argument of `philosophy.md`.
+
+Now think about what Wikipedia and WhatDoTheyKnow actually are. They are among the few places an ordinary
+person can go to **find out whether a thing is real**. Someone reads a wild claim, wants to check it, and
+those are the tools they reach for. They work because thousands of people maintained them honestly for
+years, and they are fragile in the specific way that all trust is fragile.
+
+They are, in other words, precisely the machinery our whole project exists to protect. A creator who
+edits the real Wikipedia article to prop up a bit of satire has not bent a rule or taken a shortcut. They
+have **become the thing**. Same act, same harm to the same commons, and no amount of satirical intent
+makes the next reader's search results any less poisoned. The theorist who salts the record at least
+believes what they are writing. You would be doing it knowingly, to a resource you were claiming to
+defend, and calling it a joke.
+
+You cannot defend the commons by salting it. If our fiction ever makes it harder for one person to
+establish one true thing, we have done net harm and every clever artifact we built is a debit.
+
+**Imagining the record is completely different, and it is where the whole craft lives.** Invent the
+Wikipedia page. Screenshot it. Write the FOI response that never came. Put it on *your* surface, in your
+blogger's own voice, and let the reader go and check the real one.
+
+They will find nothing. Which is exactly what your fiction predicted, and now the absence is doing your
+work for you: *"it was there in March."* You have forged nothing, touched nothing, and the real internet
+has told the story for you. The imagined record is the stronger artifact, every time.
+
+The inverse is just as useful, and `worked-example.md` leans on it: where the real record **is** there
+and always will be (Hansard, a gazette of record), quote it honestly and supply the reading. You invent
+nothing, the citation resolves, and the reader who checks finds you were scrupulous about the words and
+wrong about everything else. That is unfalsifiable, free, and far more unsettling than a forgery.
+
+## Ethics is an attitude, not a rulebook
+
+Within that floor, we trust **judgement over prohibition.** Two things regulate this work far better than
+any list of banned words. **Taste** is your own first filter. **Adoption** is the second: other
+creators and, ultimately, audiences build on what is good and quietly ignore what is not. Extend Del
+Close's law to your fellow creators: *treat them as poets and geniuses*, and assume a brave solution to a
+hard problem may exist where a blanket ban would have foreclosed it.
+
+And a closing honesty: every creator draws their own boundaries, and should. If a subject is one you
+cannot treat without harming the real people behind it, that is a reason to leave it, or to find the
+oblique, inferential, Brass-Eye way in. Approaching a hard topic head-on doesn't make you braver. It
+just narrows the set of creators and audiences willing to stand next to your work. The indirection is not
+squeamishness. It is the craft, and it is the ethics, and here they are the same thing.
