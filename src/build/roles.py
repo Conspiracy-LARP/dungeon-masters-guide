@@ -17,7 +17,7 @@ import re
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Final, Iterable
+from typing import Final, Iterable, Final
 
 from build.config import BuildConfig, load_config
 from build.rename import published_name
@@ -65,10 +65,16 @@ def _pack_files(pack_dir: Path) -> list[str]:
     ``glob`` rather than ``rglob``: the pack is flat (C-001). A nested `.md` is caught
     below and failed rather than quietly included.
     """
+    _assert_flat(pack_dir)
+    return sorted(p.name for p in pack_dir.glob("*.md"))
+
+
+def _assert_flat(pack_dir: Path) -> None:
+    """The pack has no subdirectories. Shared by the document and asset scans."""
     if not pack_dir.is_dir():
         raise RoleError(f"No pack directory at {pack_dir}.")
 
-    nested = [p for p in pack_dir.rglob("*.md") if p.parent != pack_dir]
+    nested = [p for p in pack_dir.rglob("*") if p.is_file() and p.parent != pack_dir]
     if nested:
         listed = ", ".join(sorted(str(p.relative_to(pack_dir)) for p in nested))
         raise RoleError(
@@ -77,7 +83,62 @@ def _pack_files(pack_dir: Path) -> list[str]:
             "single property that lets one set of bytes serve the site, the book, the "
             "pack branch and GitHub's rendering with no rewrite step (C-001)."
         )
-    return sorted(p.name for p in pack_dir.glob("*.md"))
+
+
+#: Asset extensions the pack may hold alongside its markdown.
+#:
+#: The pack is flat (C-001), and "flat" forbids *subdirectories*, not non-markdown files.
+#: ``![...](hansard-1926.svg)`` is a bare sibling link exactly like ``[ethics.md](ethics.md)``,
+#: so an asset beside the prose obeys the invariant rather than breaking it, and resolves on
+#: the site, the pack branch and GitHub's own rendering alike.
+#:
+#: SVG only, deliberately. It is text, so it diffs and reviews in git; it scales; and it keeps
+#: the first binary out of the pack. Widening this set is a decision, not a convenience: every
+#: surface in :mod:`build` must be able to carry whatever is listed here.
+ASSET_SUFFIXES: Final[frozenset[str]] = frozenset({".svg"})
+
+
+def load_assets(pack_dir: Path) -> list[str]:
+    """Every asset in the pack, sorted.
+
+    Assets are declared by *extension* rather than by nav entry: they are not documents,
+    have no role, and appear in no reading order. This is the explicit exemption. A stray
+    file the pack should not hold (a ``.png``, a ``.docx``, an editor backup) is not
+    silently tolerated by a glob that happens not to match it — it fails
+    :func:`check_pack_contents` by name.
+
+    Raises:
+        RoleError: the pack is not flat.
+    """
+    _assert_flat(pack_dir)
+    return sorted(p.name for p in pack_dir.glob("*") if p.suffix.lower() in ASSET_SUFFIXES)
+
+
+def check_pack_contents(pack_dir: Path) -> None:
+    """Fail on any pack file that is neither a document nor a permitted asset.
+
+    Without this, the pack's contract is enforced by omission: ``_pack_files`` globs
+    ``*.md`` and :func:`load_assets` globs the asset suffixes, and anything else simply
+    goes unmentioned by both — present in the tree, absent from every surface. That is a
+    check reporting success without looking, which is the defect this build keeps
+    producing. Name the strays instead.
+
+    Raises:
+        RoleError: the pack holds a file of an unrecognised kind.
+    """
+    _assert_flat(pack_dir)
+    permitted = {".md", *ASSET_SUFFIXES}
+    strays = sorted(
+        p.name for p in pack_dir.glob("*") if p.is_file() and p.suffix.lower() not in permitted
+    )
+    if strays:
+        raise RoleError(
+            f"The pack holds files that are neither documents nor permitted assets: "
+            f"{', '.join(strays)}. src/pack/ is the product: markdown, plus assets in "
+            f"{sorted(ASSET_SUFFIXES)}. Anything else belongs in src/build/ or doc/. If a "
+            "new asset kind is genuinely needed, add it to ASSET_SUFFIXES and teach every "
+            "surface (site, book, llms.txt, pack branch) to carry it — in that order."
+        )
 
 
 def load_documents(pack_dir: Path, config: BuildConfig) -> list[Document]:

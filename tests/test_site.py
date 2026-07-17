@@ -28,6 +28,7 @@ from mkdocs.commands.build import build as mkdocs_build
 from mkdocs.config import load_config as mkdocs_load_config
 from mkdocs.exceptions import Abort
 
+from build.roles import ASSET_SUFFIXES
 from build.config import BuildConfig, load_config
 from build.rename import PUBLISHED_NAME, SOURCE_NAME
 from build.roles import load_documents
@@ -906,7 +907,15 @@ def test_the_theme_ships_through_custom_dir_and_not_into_the_product(config: Bui
     )
     assert raw["theme"]["custom_dir"] == "src/theme/site/overrides"
 
-    strays = [p.name for p in config.pack_dir.rglob("*") if p.is_file() and p.suffix != ".md"]
+    # `.svg` is the pack's own artifact kind (roles.ASSET_SUFFIXES), not a build leak: the
+    # guide's period mocks are authored beside the prose and referenced as bare siblings.
+    # Everything else that is not markdown is still a stray, so this keeps catching what it
+    # was written for — theme CSS or a build intermediate landing in the product.
+    strays = [
+        p.name
+        for p in config.pack_dir.rglob("*")
+        if p.is_file() and p.suffix != ".md" and p.suffix.lower() not in ASSET_SUFFIXES
+    ]
     assert not strays, f"build assets have been written into the product: {strays}"
 
 

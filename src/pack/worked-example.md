@@ -229,9 +229,18 @@ emulate it exactly. The craft is entirely in the furniture:
     must ask for notice.
 ```
 
+Now put it in its chrome, because an excerpt argues and a screenshot lands:
+
+![A fabricated screenshot of a 1926 Hansard column that does not exist](hansard-1926.svg)
+
 > **This is a fake. An LLM wrote it, in about four seconds, from a one-line brief.** No such debate took
 > place. No such member sat. The volume and column numbers are invented. Every word of it is fabricated,
-> including the ones that sound most like a real minister.
+> including the ones that sound most like a real minister. The image was drawn from that same brief and
+> cost nothing.
+>
+> Notice what happened to you between the plain text above and the picture. The words did not change.
+> Your belief did. That gap, between an assertion and an assertion *in a serif face with a column
+> number*, is the entire margin conspiracy theory operates in, and we just manufactured it for free.
 
 That is the point: it *reads* right. The
 cadence is right, "I must ask for notice" is what ministers genuinely say when they do not want to

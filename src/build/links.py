@@ -44,7 +44,7 @@ from typing import Final
 from build.config import BuildConfig
 from build.packbranch import build_tree
 from build.rename import PUBLISHED_NAME, SOURCE_NAME
-from build.roles import load_documents
+from build.roles import ASSET_SUFFIXES, load_assets, load_documents
 
 
 class LinkError(RuntimeError):
@@ -225,13 +225,21 @@ class Surface:
     """
 
     branch: Branch
-    #: Published name → the document's text on that branch.
+    #: Published name → the document's text on that branch. Scanned for links.
     documents: dict[str, str]
+    #: Published names of assets on this branch. A valid link target, never scanned.
+    #:
+    #: Two separate things are being tracked, and conflating them is a real bug rather
+    #: than a tidiness point: an asset **exists** (so ``![...](hansard-1926.svg)``
+    #: resolves) but is not prose (so its innards are not link-extracted). Fold assets
+    #: into ``documents`` and the checker starts hunting for markdown links inside SVG
+    #: markup, which is both meaningless and eventually a false positive.
+    assets: frozenset[str] = frozenset()
 
     @property
     def names(self) -> set[str]:
-        """Every filename that exists on this branch."""
-        return set(self.documents)
+        """Every filename that exists on this branch, prose and assets alike."""
+        return set(self.documents) | set(self.assets)
 
 
 @dataclass(frozen=True)
@@ -297,6 +305,7 @@ def main_surface(config: BuildConfig, pack_dir: Path | None = None) -> Surface:
             document.filename: (resolved / document.filename).read_text(encoding="utf-8")
             for document in documents
         },
+        assets=frozenset(load_assets(resolved)),
     )
 
 
@@ -312,12 +321,19 @@ def pack_surface(config: BuildConfig, pack_dir: Path | None = None) -> Surface:
     with tempfile.TemporaryDirectory() as directory:
         out_dir = Path(directory)
         files = build_tree(out_dir, config, pack_dir=pack_dir)
+        asset_names = {
+            built.published_name
+            for built in files
+            if Path(built.published_name).suffix.lower() in ASSET_SUFFIXES
+        }
         return Surface(
             branch=Branch.PACK,
             documents={
                 built.published_name: (out_dir / built.published_name).read_text(encoding="utf-8")
                 for built in files
+                if built.published_name not in asset_names
             },
+            assets=frozenset(asset_names),
         )
 
 

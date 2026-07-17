@@ -22,7 +22,7 @@ from pathlib import Path
 from typing import Final
 
 from build.config import BuildConfig
-from build.roles import Document, load_documents
+from build.roles import Document, load_assets, load_documents
 
 #: Generated artifacts that legitimately have no single pack document behind them.
 #: Each is derived from the pack as a whole, and each is named by a contract.
@@ -73,14 +73,20 @@ class Unaccounted:
         )
 
 
-def _expected_from_documents(documents: list[Document]) -> set[str]:
-    """Every output path that a pack document legitimately produces.
+def _expected_from_documents(documents: list[Document], assets: list[str]) -> set[str]:
+    """Every output path that the pack legitimately produces.
 
     Two renderings per document, per the url-map contract:
       * `{base}<doc>.md`      — raw markdown, byte-identical (FR-007)
       * `{base}<chapter>/`    — the chapter as a page (FR-001), i.e. `<stem>/index.html`
+
+    Plus the pack's assets, published under their own names. An asset belongs here rather
+    than in :data:`ALLOWED_GENERATED_FILES` because it is neither generated nor an
+    exception: it *is* the pack, copied out under an identity transform, exactly as the
+    raw markdown is. Listing it as a generated artifact would record a falsehood in the
+    one place whose entire job is knowing where published bytes came from.
     """
-    expected: set[str] = set()
+    expected: set[str] = set(assets)
     for document in documents:
         # Raw markdown, under its published name (start.md publishes as AGENTS.md).
         expected.add(document.published_name)
@@ -111,7 +117,7 @@ def find_unaccounted(output_dir: Path, config: BuildConfig) -> list[Unaccounted]
         raise ProvenanceError(f"No output directory at {output_dir}; nothing to verify.")
 
     documents = load_documents(config.pack_dir, config)
-    expected = _expected_from_documents(documents)
+    expected = _expected_from_documents(documents, load_assets(config.pack_dir))
 
     unaccounted: list[Unaccounted] = []
     for path in sorted(output_dir.rglob("*")):

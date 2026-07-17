@@ -21,7 +21,8 @@ from typing import Callable
 import pytest
 
 from build import packbranch
-from build.config import BuildConfig
+from build.roles import load_assets
+from build.config import BuildConfig, load_config
 from build.packbranch import (
     COMMIT_MESSAGE,
     REFERENCE_COMMIT,
@@ -459,3 +460,29 @@ def test_the_real_pack_is_never_written_to(tmp_path: Path, real_repo_config: Bui
 
     after = {p.name: p.read_bytes() for p in sorted(pack_dir.glob("*.md"))}
     assert before == after
+
+
+def test_pack_assets_reach_the_branch_byte_for_byte(tmp_path: Path) -> None:
+    """An asset the prose references must exist on the branch, unchanged.
+
+    The trap this guards: `render_documents` derives its file list from the role
+    declaration, which globs `*.md`. An asset is invisible to that glob, so the natural
+    failure is a branch of markdown pointing at images that are not there — and consumers
+    track this branch as a submodule, so the breakage lands in *their* checkout while our
+    CI stays green. Asserted on the materialised tree rather than the returned list,
+    because the bytes on disk are what a consumer gets.
+    """
+    config = load_config()
+    assets = load_assets(config.pack_dir)
+    assert assets, "guard the guard: no assets in the pack, so this proves nothing"
+
+    files = build_tree(tmp_path, config)
+    published = {built.published_name for built in files}
+
+    for name in assets:
+        assert name in published, f"{name} never reached the branch"
+        assert (tmp_path / name).read_bytes() == (
+            config.pack_dir / name
+        ).read_bytes(), (
+            f"{name} was altered on the way to the branch; an asset's bytes are the artifact"
+        )
