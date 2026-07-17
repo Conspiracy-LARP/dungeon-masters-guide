@@ -12,21 +12,25 @@ consumer-path test, which are *about* the real repository and must hold against 
 
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
 from typing import Callable
 
 import pytest
 
+from build import packbranch
 from build.config import BuildConfig
 from build.packbranch import (
     COMMIT_MESSAGE,
     REFERENCE_COMMIT,
+    REFERENCE_INPUT_COMMIT,
     BuiltFile,
     PackBranchError,
     build_tree,
     check_publish_allowed,
     compare_against_ref,
     render_documents,
+    verify_reproduction,
 )
 from build.roles import RoleError
 
@@ -342,11 +346,76 @@ def test_generated_tree_reproduces_the_hand_built_branch(
     the `submodule add` command to readers. A mismatch means either the hand build or the
     automation is wrong, and force-pushing before knowing which makes the guide lie to
     people who followed its published instructions (R-002).
+
+    **Rendered from `39c2452`'s pack, not today's.** This test used to render from the
+    live `src/pack/`, which made it assert that the guide's prose never changes: adding
+    `premise.md` and rewriting the bootstrap turned it red, though the automation was
+    entirely correct and the hand build was untouched. Editing the pack is the job — a
+    gate that fires on it is a gate that gets re-baselined until it means nothing.
+
+    Holding the inputs at the commit the hand build was rendered from makes this the claim
+    C-005 asked for: *the generator* reproduces the hand build. It reds when the generator
+    changes what it would ship to that submodule, and at no other time.
     """
-    files = render_documents(real_repo_config.pack_dir, real_repo_config)
-    result = compare_against_ref(files, ref=REFERENCE_COMMIT, repo_root=repo_root)
+    result = verify_reproduction(
+        real_repo_config,
+        ref=REFERENCE_COMMIT,
+        input_ref=REFERENCE_INPUT_COMMIT,
+        repo_root=repo_root,
+    )
 
     assert result.matches, result.describe()
+
+
+def test_the_reproduction_gate_is_not_coupled_to_live_pack_content(
+    real_repo_config: BuildConfig, repo_root: Path, tmp_path: Path
+) -> None:
+    """The gate must survive an edit to the guide — the defect above, pinned open.
+
+    Renders the reproduction with the live pack replaced by a mutilated copy. If the gate
+    still consults `src/pack/` for any part of its answer, this reds; if it truly reads
+    its inputs from `REFERENCE_INPUT_COMMIT`, the edit is invisible to it.
+    """
+    decoy = tmp_path / "decoy-pack"
+    decoy.mkdir()
+    (decoy / "wildly-undeclared.md").write_text("# Not in any declaration\n", encoding="utf-8")
+
+    result = verify_reproduction(
+        replace(real_repo_config, pack_dir=decoy),
+        ref=REFERENCE_COMMIT,
+        input_ref=REFERENCE_INPUT_COMMIT,
+        repo_root=repo_root,
+    )
+
+    assert result.matches, (
+        "The reproduction gate changed its answer when the live pack changed. It is "
+        "still reading today's content instead of the hand build's inputs.\n" + result.describe()
+    )
+
+
+def test_the_reproduction_gate_reds_when_the_generator_changes(
+    real_repo_config: BuildConfig, repo_root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The gate must be able to fail — a repro gate that cannot fire is worse than none.
+
+    Breaks the half of the rename that the hand build proved (FR-010: rename *and*
+    rewrite) and asserts the gate notices. Without this, decoupling the gate from live
+    content could quietly have decoupled it from everything.
+    """
+    monkeypatch.setattr(packbranch, "rewrite_references", lambda text: text)
+
+    result = verify_reproduction(
+        real_repo_config,
+        ref=REFERENCE_COMMIT,
+        input_ref=REFERENCE_INPUT_COMMIT,
+        repo_root=repo_root,
+    )
+
+    assert not result.matches, (
+        "The generator was mutated to skip the reference rewrite and the reproduction "
+        "gate stayed green. The gate is not testing the generator."
+    )
+    assert "Do NOT force-push" in result.describe()
 
 
 def test_every_consumer_path_from_the_contract_exists(

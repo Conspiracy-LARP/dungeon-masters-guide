@@ -20,7 +20,7 @@ subtasks:
 phase: Phase 2 - The surfaces
 assignee: ''
 agent: "claude:opus:reviewer-renata:reviewer"
-shell_pid: "33434"
+shell_pid: "24774"
 history:
 - at: '2026-07-16T19:58:13Z'
   actor: system
@@ -272,4 +272,4 @@ printed on paper, by a human.
 - 2026-07-16T21:29:46Z – claude:opus:reviewer-renata:reviewer – shell_pid=14582 – Started review via action command
 - 2026-07-16T22:44:57Z – claude:opus:reviewer-renata:reviewer – shell_pid=24774 – Started review via action command
 - 2026-07-16T22:51:27Z – user – shell_pid=24774 – Moved to planned
-- 2026-07-16T23:16:58Z – claude:opus:reviewer-renata:reviewer – shell_pid=33434 – Started review via action command
+- 2026-07-16T23:23:50Z – user – shell_pid=24774 – Cycle 1 fix verified. Both defects fixed; I watched both guards fire. (1) _emphasised_title now emits raw inline \emph{} RawInline; reverting it to the markdown spelling turns the suite red with exactly 13 failures and 'Flattening introduced 2 markdown delimiter(s) (2 -> 4)'. check_emphasis_safety is stated as an inequality so it is total over the document. Stray-asterisk lines in the PDF 22 -> 3; pages 19/21/27/33/37/41/47 clean. (2) Missing-glyph regex: blinding COVERED_CHARACTERS with U+1F916 without fc-list plus the emoji in a chapter H1 -- cycle 1 printed OK with the glyph absent; guide book pdf now exits 1 naming both DejaVu warnings. Tested against captured, not invented, pandoc lines plus an e2e run through _run against the pinned image. PAGE-45 ATTRIBUTION HOLDS: rendered src/pack/worked-example.md:3-6 through the pinned image with ZERO flattening and reproduced the identical failure (emph closes early at what*, strands right.*). Authored nested emphasis, not a code defect. Their refusal to gate authored-malformed emphasis is sound: C-002/C-006 forbid editing src/pack, so the gate's only resolution path is forbidden to whoever trips it and would hard-block WP08 on prose they cannot fix. Gates: 137 passed (up from 125), black 14/14, mypy clean, src/pack diff EMPTY, 58pp A4, zero '??', HTML book has zero emph leak. Anti-pattern checklist all 8 PASS (cycle-1 FAILs on dead code and FR coverage both resolved). Full detail in review-cycle-2.md.

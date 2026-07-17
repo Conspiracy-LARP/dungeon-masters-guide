@@ -21,11 +21,12 @@ from build.config import BuildConfig, ConfigError, load_config
 from build.llms import DEFAULT_OUTPUT_DIR, LlmsError, write_full, write_index
 from build.packbranch import (
     REFERENCE_COMMIT,
+    REFERENCE_INPUT_COMMIT,
     PackBranchError,
     build_tree,
-    compare_against_ref,
     publish,
     render_documents,
+    verify_reproduction,
 )
 from build.links import LinkError, Rule, check_links
 from build.provenance import ProvenanceError, verify_provenance
@@ -390,18 +391,27 @@ def pack_build(out_dir: Path) -> None:
     show_default=True,
     help="The commit the generated tree must reproduce byte-for-byte.",
 )
-def pack_verify_reproduction(ref: str) -> None:
+@click.option(
+    "--input-ref",
+    default=REFERENCE_INPUT_COMMIT,
+    show_default=True,
+    help="The commit whose src/pack/ the reference tree was rendered from.",
+)
+def pack_verify_reproduction(ref: str, input_ref: str) -> None:
     """Compare the generated tree against the hand-built pack tip (C-005).
 
     The gate between this automation and a branch a live consumer's submodule tracks. A
     mismatch is a finding to investigate, not a baseline to update: either the hand build
     or the automation is wrong, and force-pushing before knowing which breaks the
     `submodule add` command the guide already publishes to readers (R-002).
+
+    Renders from `--input-ref`'s pack, NOT from today's. The claim under test is that the
+    generator reproduces the hand build; holding the inputs fixed is what makes it that
+    claim rather than "the guide's prose has never been edited".
     """
     config = _config()
     try:
-        files = render_documents(config.pack_dir, config)
-        result = compare_against_ref(files, ref=ref)
+        result = verify_reproduction(config, ref=ref, input_ref=input_ref)
     except (PackBranchError, RoleError) as exc:
         click.secho(str(exc), fg="red", err=True)
         sys.exit(1)

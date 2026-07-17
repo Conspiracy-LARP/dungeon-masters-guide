@@ -34,14 +34,41 @@ where `mkdocs.yml`, `llms.py` and `book.py` all coexist.*
    catches any miss on both branches — that is what it is for.
    Also consider: nav label "Creator Kit" → "Introduction".
 
-## The blocker these all share
+## The blocker these all share — FIXED (WP08, 2026-07-17)
 
-**WP06's reproduction gate reds on ANY content change** — proven, not predicted:
-`test_generated_tree_reproduces_the_hand_built_branch` compares **live `src/pack/`** against `d024682`,
-so it asserts "the guide's content never changes again" rather than "the automation reproduces the
-hand-built branch". C-005 asked for a one-time proof *before* the automation takes over; WP06's own
-prompt said to compare against `d024682`'s **inputs** (regenerate from that commit's `src/pack/`).
+*Was:* WP06's reproduction gate compared a tree generated from **live `src/pack/`** against `d024682`,
+so it asserted "the guide's content never changes again" rather than "the automation reproduces the
+hand-built branch" — the mission's signature defect inverted: not a check with no teeth, but a check
+biting the wrong thing.
 
-**Fix that gate before landing any content**, or the first legitimate edit reds CI. This is the ninth
-instance of the mission's signature defect, inverted: not a check with no teeth, but a check biting the
-wrong thing.
+*Now:* `build.packbranch.verify_reproduction()` renders from the hand build's **own inputs**
+(`39c2452`, tagged `pack-hand-build-inputs`) and compares against `d024682` (tagged `pack-hand-build`).
+The claim is about the generator, with the prose held fixed, so **content edits no longer red it** —
+proven in CI both ways: it stayed green when the live pack was edited, and went red when the generator
+was mutated to skip either half of the rename.
+
+Both reference commits are now **tagged**. `d024682` was an orphan reachable only as the tip of `pack`,
+which CI force-pushes on every push to `main` — the first successful mirror would have orphaned the
+gate's own reference and left it reading a commit git is free to collect.
+
+**Content is no longer blocked by this gate.** Land the items above.
+
+## What still blocks a green `main` (WP08 finding, 2026-07-17)
+
+Items 1–3 above have **landed** in `src/pack/`, but their consequences were not finished, and the
+gates are correctly reporting it. `guide roles lint`, `guide links check`, `mkdocs build --strict`,
+`guide verify provenance` and the reproduction gate **all pass**; `pytest` does not. Six failures, none
+of them stale tests — each is the guard doing its job. All need a `src/pack/` or spec edit, which the
+build mission is forbidden to make (C-002/C-006):
+
+| Failing test | Real finding |
+|---|---|
+| `test_real_pack_has_no_prose_drift` | `README.md` and `creator-kit.md` never list `premise.md`. A reader of the prose would not learn the chapter exists. |
+| `test_check_drift_cli_on_main_exits_zero_when_there_is_no_drift` | Same root cause. `guide roles check-drift` warns on a branch but **fails on `main`** — so this alone reds the pipeline after merge. |
+| `test_the_pack_declares_no_absolute_address_of_itself` | `getting-started.md` and `start.md` now quote the deployed base URL. The rewritten flow ("Please read and action `<url>`") needs it — but it makes changing the domain a **content** change, breaking SC-006's one-value promise. **A decision, not a typo.** |
+| `test_swapping_the_base_moves_every_generated_address` | Consequence of the above: those addresses survive a base swap. |
+| `test_real_pack_declares_ten_chapters` | `mkdocs.yml` `nav` now has **11** chapters; `doc/build.md` still specifies **ten** and never mentions `premise.md`. The declaration has drifted from the spec — fix `doc/build.md` (§ reading order and "the ten documents"), then the test. |
+| `test_the_theme_is_material_lightly_dressed` | `extra.css` (the version stamp) is a third stylesheet. The stakeholder asked for the stamp, so this is the "requirement or project?" question the test exists to raise — answer it and update the allow-list. |
+
+Also pre-existing and unrelated to content: `mypy` reports
+`cli.py:21: Incompatible import of "DEFAULT_OUTPUT_DIR"` (a `Path` imported over a `str`).

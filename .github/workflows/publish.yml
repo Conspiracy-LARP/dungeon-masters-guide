@@ -1,0 +1,217 @@
+# Continuous publication (FR-012, WP08).
+#
+# Every push to `main` rebuilds and redeploys EVERY surface from the same bytes: the
+# site, the machine indexes, and the `pack` branch a downstream submodule tracks. A pull
+# request builds and lints and publishes nothing.
+#
+# The rule that shapes this file: **one gate, both targets.** `deploy` and `mirror` each
+# declare `needs: [verify, build]`, so a lint failure stops both. Publishing a valid site
+# beside a broken branch is worse than publishing neither — it is precisely how a surface
+# starts disagreeing with the guide's own text, for readers who already followed its
+# published instructions (data-model.md § Failure semantics, R-002).
+#
+# The PDF is descoped (FR-003/FR-004, stakeholder decision 2026-07-17), so nothing here
+# installs pandoc or TeX. That was the only reason CI needed a 1.1GB image, and its
+# absence is why the 5-minute budget (NFR-005) is comfortable rather than tight. WP04's
+# code stays in the repo; it is simply not in this pipeline.
+
+name: publish
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Read-only by default. The two jobs that need more ask for it themselves, so nothing
+# here can publish by accident: a fork PR that could deploy Pages or force-push a branch
+# would be a security problem, not just a mistake.
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PYTHON_VERSION: "3.12"
+
+jobs:
+  # ------------------------------------------------------------------------------------
+  # The gate. Everything that publishes waits on this.
+  # ------------------------------------------------------------------------------------
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # REQUIRED, not tidiness. The reproduction gate (C-005) reads the hand-built
+          # tree and its inputs out of the object database — see the tags below. A
+          # shallow clone has neither, and the gate would error rather than check.
+          fetch-depth: 0
+
+      # The reproduction gate compares against `pack-hand-build` (d024682) and renders
+      # from `pack-hand-build-inputs` (39c2452). d024682 is an ORPHAN commit that used to
+      # be reachable only as the tip of `pack` — the branch the mirror job below
+      # force-pushes on every run. Without these tags the first successful mirror would
+      # orphan the gate's own reference and leave it reading a commit git may collect.
+      - name: Fetch the reproduction gate's reference commits
+        run: |
+          git fetch --no-tags --force origin \
+            'refs/tags/pack-hand-build:refs/tags/pack-hand-build' \
+            'refs/tags/pack-hand-build-inputs:refs/tags/pack-hand-build-inputs'
+          git cat-file -e pack-hand-build^{commit}
+          git cat-file -e pack-hand-build-inputs^{commit}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Cache the virtualenv
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ env.PYTHON_VERSION }}-${{ hashFiles('poetry.lock') }}
+
+      - name: Install
+        run: |
+          poetry config virtualenvs.in-project true
+          poetry install --no-interaction
+
+      # Each of these exits non-zero on a finding. That is asserted, not assumed:
+      # `guide links check` was proved able to report a failure and still exit 0 while
+      # 151 tests stayed green (WP07 review). See T038 — the gates are exercised against
+      # deliberately broken input and watched to go red, because a check that reports
+      # without failing is this mission's signature defect.
+      - name: Roles lint (FR-011)
+        run: poetry run guide roles lint
+
+      - name: Links check (FR-013)
+        run: poetry run guide links check
+
+      # C-005. Renders from the hand build's OWN inputs and compares to the hand build:
+      # a statement about the generator, not about the prose. Editing src/pack/ is the
+      # job and must never red this.
+      - name: Reproduction gate (C-005)
+        run: poetry run guide pack verify-reproduction
+
+      - name: Tests
+        run: poetry run pytest
+
+  # ------------------------------------------------------------------------------------
+  # The site and the machine indexes — one artifact, from the same bytes.
+  # ------------------------------------------------------------------------------------
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Cache the virtualenv
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ env.PYTHON_VERSION }}-${{ hashFiles('poetry.lock') }}
+
+      - name: Install
+        run: |
+          poetry config virtualenvs.in-project true
+          poetry install --no-interaction
+
+      - name: Build the site (FR-001)
+        run: poetry run mkdocs build --strict
+
+      # `--output site` is PASSED EXPLICITLY on purpose (WP05 review). The default
+      # mirrors `site_dir:` rather than reading it, so a drifting `site_dir` would
+      # silently strand llms.txt outside the published tree: the machine index 404s while
+      # the site looks perfect. One flag removes the coupling.
+      - name: Machine indexes (FR-005, FR-006)
+        run: |
+          poetry run guide llms index --output site
+          poetry run guide llms full --output site
+
+      # AFTER the build, against the built output — it inspects the tree, so running it
+      # earlier would inspect nothing and pass vacuously (NFR-003).
+      - name: Provenance (NFR-003)
+        run: poetry run guide verify provenance --output site
+
+      # FR-012: without this, GitHub Pages runs the output through Jekyll and eats the
+      # raw .md files the machine surfaces point at.
+      - name: Assert the Jekyll opt-out is present (FR-012)
+        run: test -f site/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  # ------------------------------------------------------------------------------------
+  # Target 1: GitHub Pages. `main` only.
+  # ------------------------------------------------------------------------------------
+  deploy:
+    needs: [verify, build]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  # ------------------------------------------------------------------------------------
+  # Target 2: the `pack` branch. `main` only.
+  #
+  # This force-pushes the branch that 5g_arg's `doc/core` submodule tracks. It is safe
+  # only because the branch is read-only by contract and because `verify` stands in front
+  # of it — which is why `needs` names both jobs and the `if` refuses everything but a
+  # push to main. Never a PR, never a fork.
+  # ------------------------------------------------------------------------------------
+  mirror:
+    needs: [verify, build]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # `guide pack publish` refuses to run from anywhere but `main` (T030). Naming
+          # the branch keeps HEAD attached to it rather than detached at a bare SHA.
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Cache the virtualenv
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ env.PYTHON_VERSION }}-${{ hashFiles('poetry.lock') }}
+
+      - name: Install
+        run: |
+          poetry config virtualenvs.in-project true
+          poetry install --no-interaction
+
+      - name: Build the pack tree (FR-009, FR-010)
+        run: poetry run guide pack build --out pack-tree
+
+      # Idempotent: an unchanged src/pack/ yields an identical tree and no push at all,
+      # so a re-run does not churn the branch every consumer is tracking.
+      - name: Publish the pack branch (FR-009)
+        run: poetry run guide pack publish --remote origin
