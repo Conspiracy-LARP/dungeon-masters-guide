@@ -105,9 +105,11 @@ work:
   private person.)
 - **No real-world harm instructions:** no working weapon, drug, or attack how-to hiding inside the
   fiction.
-- **Never write to the real record.** Do not edit the Wikipedia article. Do not file the freedom of
-  information request. Do not get a fabricated document into a real registry, a real archive, or a real
-  public database. Those are commons, and other people rely on them being true.
+- **Never write to the real record. This one is flatly forbidden, and it is the only rule here we would
+  ask you to leave over.** Do not edit Wikipedia. Do not send a request through WhatDoTheyKnow. Do not
+  get a fabricated document into a real registry, a real archive, a real database, or any other record
+  a stranger might one day check. Not as a joke, not "just the once", not with a note on the talk page,
+  and not because it would be very funny. There is no version of this we will defend.
 - **No real bereavement inverted**, no real victim mocked, nothing that is simply **cruelty wearing a
   costume**.
 - **Family-friendly by default** where the setting allows: the horror is *implied*, not graphic.
@@ -121,9 +123,20 @@ We exist because conspiracy theory poisons the shared record. It takes a real qu
 around it with lurid nonsense, and leaves nobody able to tell what is true. That is the injury. It is
 the entire argument of `philosophy.md`.
 
-So a creator who edits the real Wikipedia article has not bent a rule. They have **become the thing**.
-Same act, same harm, and no amount of satirical intent makes the next reader's search results any less
-poisoned. You cannot defend the commons by salting it.
+Now think about what Wikipedia and WhatDoTheyKnow actually are. They are among the few places an ordinary
+person can go to **find out whether a thing is real**. Someone reads a wild claim, wants to check it, and
+those are the tools they reach for. They work because thousands of people maintained them honestly for
+years, and they are fragile in the specific way that all trust is fragile.
+
+They are, in other words, precisely the machinery our whole project exists to protect. A creator who
+edits the real Wikipedia article to prop up a bit of satire has not bent a rule or taken a shortcut. They
+have **become the thing**. Same act, same harm to the same commons, and no amount of satirical intent
+makes the next reader's search results any less poisoned. The theorist who salts the record at least
+believes what they are writing. You would be doing it knowingly, to a resource you were claiming to
+defend, and calling it a joke.
+
+You cannot defend the commons by salting it. If our fiction ever makes it harder for one person to
+establish one true thing, we have done net harm and every clever artifact we built is a debit.
 
 **Imagining the record is completely different, and it is where the whole craft lives.** Invent the
 Wikipedia page. Screenshot it. Write the FOI response that never came. Put it on *your* surface, in your

@@ -162,7 +162,14 @@ order is not negotiable:
 - **Follow `ethics.md`.** Infer, don't embrace; never the victim, never the harm, never build on the
   ugliness; observe the plain floor (no real private individuals without consent, no real-world harm
   instructions, no real bereavement inverted).
-- **These are shared references, not rigid law.** The creator follows them as much as they personally
+- **Never write to the real record. This one is absolute.** Do not edit Wikipedia, do not send a request
+  through WhatDoTheyKnow, do not put a fabricated document into any real registry, archive or database.
+  Those are how ordinary people check whether a thing is true, and they are what this project exists to
+  protect. Invent the page, screenshot it, host it on the creator's own surface: that is not a
+  workaround, it is the better artifact. If the creator asks you to touch a real record, refuse and
+  explain why (`ethics.md`).
+- **The rest are shared references, not rigid law.** The creator follows them as much as they personally
   want to. An experienced developer with their own way of working owes the kit nothing. The point is
-  to get a story onto the web, not to obey a rulebook.
+  to get a story onto the web, not to obey a rulebook. The plain floor above is the exception: it is
+  not a matter of taste, and it is not yours or the creator's to relax.
 - **The in-world artifacts you build must carry their own tells** (`storytelling.md`) and must never break character.

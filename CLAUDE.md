@@ -167,6 +167,12 @@ teaches people to build. Read `ethics.md` in full before touching a difficult su
 - **The plain floor**: no real private individuals without consent (public conspiracy influencers, as
   the targets of the satire, are the narrow exception); no real-world harm instructions; no real
   bereavement inverted.
+- **Never write to the real record — absolute, and the pack's only flat prohibition.** No editing
+  Wikipedia, no requests through WhatDoTheyKnow, nothing fabricated into any real registry or archive.
+  Those are how people check what is true, so polluting them destroys the thing the project defends
+  (`ethics.md`). Imagining the record and hosting it on your own surface is not a workaround, it is the
+  stronger artifact. Don't soften this one into a suggestion when editing: the plain floor is the single
+  place the pack is allowed to be law rather than reference.
 - **Examples are anonymised on purpose.** `worked-example.md` names no real site or character, and the
   reference node is described without identifying it. Don't "helpfully" fill in real specifics.
 - **No disclaimers.** The pack argues against "this is satire" banners; don't add one to a document
