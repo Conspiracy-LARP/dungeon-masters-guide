@@ -101,27 +101,9 @@ _BUILD: SiteBuild | None = None
 # --------------------------------------------------------------------------------------
 
 
-def _project_version() -> str:
-    """The single source of the version: ``pyproject.toml``'s ``[tool.poetry].version``.
-
-    Read at build time and injected into ``config.extra`` so the footer, ``llms.txt`` and the
-    book all state the same number. Typing it into ``mkdocs.yml`` as well would be a second
-    source free to drift — the exact failure the reading order and the title both taught us.
-    Fails loudly rather than shipping a page that quietly claims the wrong version.
-    """
-    import re as _re
-
-    from build.config import _repo_root
-
-    pyproject = _repo_root() / "pyproject.toml"
-    text = pyproject.read_text(encoding="utf-8")
-    match = _re.search(r'^version\s*=\s*"([^"]+)"', text, _re.M)
-    if match is None:
-        raise SiteError(
-            f"no `version` found in {pyproject}. The site footer, llms.txt and the book all "
-            "derive the version from it; there is nowhere else to read it from."
-        )
-    return match.group(1)
+# The version resolver lives in build.config (the neutral shared module) so the site
+# footer, llms.txt and the book all read one source and cannot disagree (SC-004).
+from build.config import project_version as _project_version
 
 
 def extract_pitch(markdown: str) -> str:

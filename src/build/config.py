@@ -35,6 +35,78 @@ def _repo_root() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
+def _base_version() -> str:
+    """The human-controlled ``major.minor`` base from ``pyproject.toml``.
+
+    ``pyproject`` holds the *base*, bumped by hand only when a release earns a new minor or
+    major. The patch is not read from here; it is derived from git (see
+    :func:`project_version`), so the number climbs on its own every merge without anyone
+    editing a file, and without a CI job committing back to `main` and re-triggering itself.
+    """
+    import re as _re
+
+    pyproject = _repo_root() / "pyproject.toml"
+    text = pyproject.read_text(encoding="utf-8")
+    match = _re.search(r'^version\s*=\s*"([^"]+)"', text, _re.M)
+    if match is None:
+        raise ConfigError(
+            f"no `version` found in {pyproject}. The site footer, llms.txt and the book all "
+            "derive the version from it; there is nowhere else to read it from."
+        )
+    return match.group(1)
+
+
+def _git_commit_count() -> int | None:
+    """Commits reachable from HEAD, or ``None`` if git cannot answer (a source tarball).
+
+    This is the auto-incrementing patch: it rises by one on every merge to `main`, which is
+    "a new number per release" with no manual step.
+
+    **CI trap:** a shallow clone (`actions/checkout` default depth 1) returns ``1`` — every
+    build would claim ``x.y.1``. The publish workflow's build job sets ``fetch-depth: 0`` so
+    the count is real; :func:`project_version` refuses a count of 1 as a backstop.
+    """
+    import subprocess
+
+    try:
+        result = subprocess.run(
+            ["git", "rev-list", "--count", "HEAD"],
+            cwd=_repo_root(),
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+    try:
+        return int(result.stdout.strip())
+    except ValueError:
+        return None
+
+
+def project_version() -> str:
+    """The version stamped into every compiled surface: ``major.minor.<commit-count>``.
+
+    ``major.minor`` is the human base (:func:`_base_version`); the patch is the git commit
+    count (:func:`_git_commit_count`), so it bumps automatically each merge. The single
+    source every surface reads — footer, ``llms.txt`` and the book — so no two can disagree.
+
+    Falls back to the pyproject patch when git is unavailable, **and refuses a commit count
+    of 1**: in a real repo the count is in the hundreds, so a 1 means a shallow CI checkout,
+    and stamping a number known to be wrong is worse than one that is merely static.
+    """
+    base = _base_version()
+    parts = base.split(".")
+    major = parts[0] if parts else "0"
+    minor = parts[1] if len(parts) > 1 else "0"
+    pyproject_patch = parts[2] if len(parts) > 2 else "0"
+
+    count = _git_commit_count()
+    if count is None or count <= 1:
+        return f"{major}.{minor}.{pyproject_patch}"
+    return f"{major}.{minor}.{count}"
+
+
 def _mkdocs_loader() -> type[yaml.SafeLoader]:
     """A YAML loader tolerant of MkDocs' custom tags (``!!python/name:``, ``!ENV``).
 

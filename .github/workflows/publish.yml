@@ -107,6 +107,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The version is major.minor.<commit-count> (build/site.py). A shallow clone
+          # counts 1 commit, so the whole site would stamp x.y.1; full history makes the
+          # count real. build/site.py._project_version refuses a count of 1 as a backstop.
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}

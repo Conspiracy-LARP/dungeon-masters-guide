@@ -34,7 +34,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Final, Iterable, Mapping
 
-from build.config import BuildConfig
+from build.config import BuildConfig, project_version
 from build.rename import published_name
 from build.roles import Document, chapters, load_documents
 
@@ -992,7 +992,7 @@ def render_pdf(
             "--metadata",
             f"title={BOOK_TITLE}",
             "--metadata",
-            f"subtitle={BOOK_SUBTITLE}",
+            f"subtitle={BOOK_SUBTITLE} (version {project_version()})",
             # `lang` is deliberately NOT set. pandoc's common partial keys babel off it
             # and takes the language from a \documentclass option this template does not
             # have, which loads babel with no language and hyphenates as American
@@ -1053,7 +1053,7 @@ def render_html(
             "--metadata",
             f"title={BOOK_TITLE}",
             "--metadata",
-            f"subtitle={BOOK_SUBTITLE}",
+            f"subtitle={BOOK_SUBTITLE} (version {project_version()})",
             "--metadata",
             "lang=en-GB",
             "--output",

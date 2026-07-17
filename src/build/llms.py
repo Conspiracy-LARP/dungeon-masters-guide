@@ -38,7 +38,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Final
 
-from build.config import BuildConfig
+from build.config import BuildConfig, project_version
 from build.roles import Document, chapters
 
 
@@ -141,7 +141,7 @@ def render_index(config: BuildConfig, documents: list[Document]) -> str:
     bootstrap = _bootstrap(documents)
     lines: list[str] = [TITLE, ""]
     lines.extend(f"> {line}" if line else ">" for line in SUMMARY.splitlines())
-    lines.extend(["", "## Start here", ""])
+    lines.extend(["", f"Version {project_version()}", "", "## Start here", ""])
     lines.append(
         _link(
             bootstrap.published_name,
