@@ -467,6 +467,17 @@ administered it. By the 2010s it is defended purely because cancelling it would 
 department that cannot explain a hundred-year-old illiteracy programme has a much worse week than one
 that quietly renews it.
 
+![A fabricated 1926 War Office duty roster for an office that never existed](duty-roster-1926.svg)
+
+> **Fake, and the most restrained thing in this chapter.** No such office existed and no such roster was
+> typed. Notice what it does *not* do: it does not describe the room, the green paint, the dado rail, or
+> the man crying at his desk on Armistice Day. It is a duty roster. It has a "return by" column.
+>
+> And it is the only artifact here that could not have been borrowed. We could have reached for a frame
+> of the teleplay these names come from and shown you the office directly. That would have annotated our
+> own joke — pointed at the tell, and killed it. **Build the artifact, never borrow the source.** The
+> roster shows the office by refusing to mention it.
+
 Be clear about what just happened: we stole all three settings. An obscure teleplay for the mid-century
 office, then two of the most celebrated political comedies ever made in this country, and we took the
 furniture rather than the plots. That is the tell doing its job (`storytelling.md`), and the audiences
