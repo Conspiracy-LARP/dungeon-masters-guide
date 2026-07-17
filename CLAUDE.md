@@ -98,6 +98,12 @@ and the fix is to merge those sections, not to add a third pointer. Current mapp
 | §6 How we tell it | `storytelling.md` |
 | §7 Ethics | `ethics.md` |
 | §9 Build your node | `worked-example.md` |
+
+`worked-example.md`'s subject is **manufacturing the evidence**, not having the idea. The nine-step chain
+from a teacher's irritation to a motive is setup; the artifacts are the chapter. It carries mocks of a
+1926 Hansard column, a WhatDoTheyKnow response, a Ceefax page and old-site chrome, each labelled an
+LLM-generated fake, because the guide is out-of-world and may explain itself. These are ASCII in code
+fences pending the asset work in `doc/follow-ups.md`; the intent is SVG.
 | §10 How we communicate | `communications.md` |
 | §12 The LLM as co-author | `story-continuity-checker-prompt.md` |
 

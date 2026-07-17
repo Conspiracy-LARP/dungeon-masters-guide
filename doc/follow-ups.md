@@ -72,3 +72,38 @@ build mission is forbidden to make (C-002/C-006):
 
 Also pre-existing and unrelated to content: `mypy` reports
 `cli.py:21: Incompatible import of "DEFAULT_OUTPUT_DIR"` (a `Path` imported over a `str`).
+
+---
+
+## Period artifacts as SVG assets in the pack (agreed 2026-07-17, not started)
+
+**Why:** `worked-example.md`'s subject is manufacturing evidence, and its own argument is that upholstery
+(dates, chrome, screenshots) is what makes a theory feel researched. A chapter making that case while
+shipping only ASCII is arguing for something it declines to demonstrate. Stakeholder: *"an excerpt with a
+screenshot lands harder."* Agreed; ASCII mocks are live and correct in the meantime, nothing is blocked.
+
+**Decision already taken: SVG, not PNG.** It is text, so it diffs and reviews in git; it scales; it is
+authored directly rather than screenshotted; and it avoids putting the first binary in the pack.
+
+**This is not as radical as it first looks.** "Flat" forbids *subdirectories*, not non-markdown files.
+`src/pack/hansard-1926.svg` referenced as `![...](hansard-1926.svg)` **is** a bare sibling link. It obeys
+C-001 rather than breaking it, and resolves on the site, the pack branch and GitHub alike.
+
+**What must change, and the trap in each:**
+
+1. `build/packbranch.py` — `render_documents()` / `build_tree()` glob `*.md`. Assets are silently
+   dropped, so the branch would ship markdown pointing at images that do not exist. **This is the
+   contract `5g_arg` depends on via its `doc/core` submodule.** Reproduction gate applies.
+2. `build/roles.py` / `guide roles lint` — requires every document declared. Assets need an *explicit*
+   exemption. An accidental one (the glob simply not matching) means the lint quietly stops meaning what
+   it says, which is this mission's signature defect.
+3. `llms.txt` / `llms-full.txt` — an image is invisible to the LLM audience, which is half this project's
+   readership. **Keep the ASCII mocks.** They are not a fallback; they are the correct machine-readable
+   form. The SVG is the human-facing one. Both, not either.
+4. `book.py` — inlines content; an external asset reference needs handling. Note the glyph check already
+   rejects box-drawing characters, so SVG text must use fonts the book carries.
+
+**Acceptance:** `git submodule add -b pack <repo> doc/core` still yields working images; `llms-full.txt`
+still conveys every artifact in text; `guide roles lint` fails if an asset is undeclared; the book
+renders. Do not start this without room to hold the pack-branch contract, the four surfaces and the
+reproduction gate in context at once.

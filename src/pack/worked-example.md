@@ -1,8 +1,8 @@
 # A worked example — anything can be a conspiracy
 
-*One node, from the first irritation to the first artifact, with nothing skipped. Every step here is
-caused by the one before it. That is the only thing this chapter teaches: you never need the whole plan,
-because each answer hands you the next question.*
+*How we manufacture evidence for a conspiracy that never happened. The theory itself is the cheap part
+and takes nine steps; the proof is the craft, and it is everything after. Each step here is caused by the
+one before it, so you never need the whole plan, because each answer hands you the next question.*
 
 **The theory in this chapter is brand new, and invented for the occasion.** Two reasons, and both matter.
 
