@@ -193,18 +193,72 @@ emulate it exactly. The craft is entirely in the furniture:
     must ask for notice.
 ```
 
-**None of that is real.** No such debate took place, no such member sat, and the column numbers are
-invented. It is fake from the first line to the last, and that is the point: it *reads* right. The
+> **This is a fake. An LLM wrote it, in about four seconds, from a one-line brief.** No such debate took
+> place. No such member sat. The volume and column numbers are invented. Every word of it is fabricated,
+> including the ones that sound most like a real minister.
+
+That is the point: it *reads* right. The
 cadence is right, "I must ask for notice" is what ministers genuinely say when they do not want to
 answer, and the refusal to name the Department is doing all the work. You have manufactured evidence for
 a conspiracy that never happened, and it is more persuasive than most evidence for ones people believe.
 
 Sit with that for a second, because it is the whole argument in one artifact.
 
-The rules that keep it clean: it lives on **your** blog as an image, never as a citation into the real
+Here is the same trick on a modern surface, where the furniture is a web page rather than a column of
+type:
+
+```
+  WhatDoTheyKnow                                    Make a request   Browse
+  ....................................................................
+
+    Directorate of Reading Standards: file series and current status
+
+    A. Hollis made this Freedom of Information request to
+    Ministry of Defence
+
+      (o)  Awaiting internal review
+
+    --------------------------------------------------------------
+
+    A. Hollis  |  4 March
+    Dear Ministry of Defence,
+
+    Please provide a list of file series held under or referencing
+    the Directorate of Reading Standards (formerly War Office),
+    together with the date of the most recent review.
+
+    Yours faithfully,  A. Hollis
+
+    --------------------------------------------------------------
+
+    Ministry of Defence  |  2 April
+    Our ref: FOI2024/0 [####] 41
+
+    We can neither confirm nor deny whether information of the
+    description specified is held, as to do so would [##########]
+    [##############] under section 23(5).
+
+    This response has been withheld pending review.
+  ....................................................................
+```
+
+> **Also a fake, also LLM-generated, and this one matters more.** No such request was ever filed. It was
+> never sent to anybody. WhatDoTheyKnow has never heard of it, and that is not an oversight we intend to
+> correct: **filing this for real would be flatly forbidden** (`ethics.md`). The page above exists
+> nowhere except as an image on our blogger's own site.
+
+Notice how little work the fabrication is doing. "Neither confirm nor deny" is a real formula. Section 23
+is a real exemption. The redaction bars are the joke, because a department that redacts the *reason* for
+a redaction is funnier than any invented atrocity. The image is doing what a hundred sinister paragraphs
+could not, and it took a model four seconds.
+
+The rules that keep both clean: they live on **your** blog as images, never as citations into the real
 archive (a link that 404s is not a tell, it is a dead link); the words go in a real minister's mouth only
 where the fiction leaves him innocent, which is why the man above is a dupe reading a departmental line
-rather than a plotter (`ethics.md`); and you invent the backbenchers outright.
+rather than a plotter (`ethics.md`); you invent the backbenchers outright; and **you never, under any
+circumstances, put either artifact anywhere real.** Imagine the record. Screenshot the imagining. Host it
+yourself. The moment you file the actual request, you have stopped satirising the pollution of the
+commons and started contributing to it.
 
 Notice these are opposite tricks, and the chapter needs both. Hansard works because it **is** there and
 always will be. The FOI works because it **isn't**, and disappearance is plausible on that surface.
