@@ -401,12 +401,27 @@ P274 CEEFAX 274      Mon 14 Oct 20:41/32
   Standards on behalf of HM Government
 ```
 
-![A fabricated Ceefax page 274 that was never broadcast](ceefax-274.svg)
+And once you have the medium, you do not make one page. Departments do not make one page.
+They make a *service*, and the service is funnier than any single artifact in it:
+
+![A fabricated Ceefax page 273: a book with a frowning face](ceefax-273.svg)
+
+![A fabricated Ceefax page 274: a public information message about the dangers of reading](ceefax-274.svg)
+
+![A fabricated Ceefax page 275: league football recommended as an alternative to reading](ceefax-275.svg)
 
 > **Fake, LLM-generated, and never broadcast.** No such page existed. The page number is invented. It is
 > laid out as Mode 7 really was, 40 columns by 24 rows, because the grid is the whole costume, and it is
 > in the palette Mode 7 actually had: white, yellow, cyan, green on black, and nothing else, because
-> nothing else was available.
+> nothing else was available. The drawings are real 2x3 block mosaics on the 80x75 grid, because that is
+> the only way teletext could draw anything, and the chunkiness is what your eye recognises before you
+> have read a word.
+>
+> Three pages, and the third is the one that gives the game away. Nobody at the Directorate thought
+> "let us suppress literature". Somebody thought *the reading habit is making people unhappy, and the
+> football is very good this year*, and cross-referenced page 275 from page 273, and went home at five.
+> The index strip at the bottom of each page links them together, because that is what a service does,
+> and a department that builds an index has stopped questioning itself.
 
 And now make the provenance choice, because for this one artifact you have two, and they are two
 different stories.
