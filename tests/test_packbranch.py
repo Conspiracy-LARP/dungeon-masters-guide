@@ -12,6 +12,8 @@ consumer-path test, which are *about* the real repository and must hold against 
 
 from __future__ import annotations
 
+import os
+import subprocess
 from dataclasses import replace
 from pathlib import Path
 from typing import Callable
@@ -309,15 +311,34 @@ def test_publishing_from_a_laptop_is_refused(monkeypatch: pytest.MonkeyPatch) ->
 
 
 def test_publishing_from_ci_on_a_feature_branch_is_refused(
-    monkeypatch: pytest.MonkeyPatch, repo_root: Path
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
-    """CI is necessary but not sufficient: the branch mirrors `main`, only."""
+    """CI is necessary but not sufficient: the branch mirrors `main`, only.
+
+    The branch is created here rather than inherited from wherever the suite happens to
+    run. The original relied on the ambient checkout ("a mission worktree, which is never
+    `main`") — true on a laptop, false in CI, where the workflow checks out `main` and the
+    guard then correctly allowed the publish. The test passed locally by accident and
+    failed the moment it ran in the place it was written to describe.
+    """
+    subprocess.run(["git", "init", "-q", "-b", "not-main"], cwd=tmp_path, check=True)
+    subprocess.run(
+        ["git", "commit", "-q", "--allow-empty", "-m", "x"],
+        cwd=tmp_path,
+        check=True,
+        env={
+            **os.environ,
+            "GIT_AUTHOR_NAME": "t",
+            "GIT_AUTHOR_EMAIL": "t@t",
+            "GIT_COMMITTER_NAME": "t",
+            "GIT_COMMITTER_EMAIL": "t@t",
+        },
+    )
     monkeypatch.setenv("CI", "true")
     monkeypatch.delenv("GITHUB_ACTIONS", raising=False)
 
-    # This test runs from a mission worktree, which is never `main`.
     with pytest.raises(PackBranchError, match="Refusing to publish from"):
-        check_publish_allowed(repo_root=repo_root)
+        check_publish_allowed(repo_root=tmp_path)
 
 
 def test_the_commit_message_states_the_read_only_contract() -> None:
