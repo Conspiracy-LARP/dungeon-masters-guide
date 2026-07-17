@@ -145,3 +145,20 @@ being right. The roster fails because paper has no spec; this fails only because
 Fix: rebuild with both chrome layers, in the 2009-era Hansard design (the site the current one replaced),
 so the artifact and the prose finally agree. Consider generating it from `src/build/artgen/` like the
 Ceefax pages, since browser chrome is reusable furniture for every future web artifact.
+
+## Move "why now" out of the kit; make the LLM the headline of the tech guide (agreed 2026-07-17)
+
+**In `creator-kit.md` §2**, cut it down to roughly: this game is designed to be played by a human paired
+with a coding LLM; it is easier than ever because you no longer need to understand the technology to
+build your part of the world; the proposal for how we use it is in `technical-suggestions.md`. That is
+all §2 should say. The bulk of the current section moves out.
+
+**In `technical-suggestions.md`**, the LLM becomes the headline and the first section — everything else
+follows from it. The file currently opens with "the running theme of this whole pack is: keep costs low",
+which is a *consequence*, not the premise: it is cheap because the model does the building. Reorder so
+the argument runs in the direction it actually runs.
+
+Related, already noted: `creator-kit.md` line ~208 still summarises the tech guide as "faking a period
+look with a modern stack", which was demoted to a closing note on 2026-07-17. That summary is now false
+and this edit is the moment to fix it. Check the §2 mapping in `CLAUDE.md`'s hub-and-spoke table still
+holds afterwards (it should — the companion does not change, only the weight).
