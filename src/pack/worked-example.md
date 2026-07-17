@@ -182,7 +182,7 @@ This is the whole technique of the real thing: cite something true and unfalsifi
 lens. It costs you nothing but an afternoon in the archive, and **the archive is where the jokes are**.
 You will not invent anything as funny as what a 1926 undersecretary actually said. Go and find it.
 
-The gazette notice works the same way. Look up what a department genuinely published week to week
+The gazette notice works the same way. Look up what a department published week to week
 (appointments, establishment lists, contract notices) and put your one line in that genre:
 
 > *Appointment. Directorate of Reading Standards (War Office). Brig.-Gen. Sir H. Atterbow, DSO.*
@@ -243,8 +243,8 @@ Nothing about the words changed between the plain excerpt above and that page. O
 gap between an assertion and an assertion *wearing a government website* is the entire margin conspiracy
 theory operates in, and an LLM built that page in about four seconds from a one-line brief, for free.
 
-That is the point: it *reads* right. The
-cadence is right, "I must ask for notice" is what ministers genuinely say when they do not want to
+It *reads* right. The
+cadence is right, "I must ask for notice" is what ministers say when they do not want to
 answer, and the refusal to name the Department is doing all the work. You have manufactured evidence for
 a conspiracy that never happened, and it is more persuasive than most evidence for ones people believe.
 
@@ -561,8 +561,7 @@ are satirising. You supply the sources, and those must be real.
 Everything above came from a teacher being fed up at work.
 
 She had specific knowledge of an unglamorous field and an irritation she had carried for years before any
-of this began. She asked the funniest available question about it and then kept going. That is the whole
-qualification.
+of this began. She asked the funniest available question about it and then kept going. That was all it took.
 
 **That is the whole barrier to entry, and you have already cleared it.** Your corner needn't be about
 5G. Why the trains are late. Why the planning application went through. Why the coffee machine on the
