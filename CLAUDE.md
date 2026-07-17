@@ -48,6 +48,18 @@ client-facing artifact. If a visitor to a finished node can reach the manifesto,
 The corollary for the site build: the guide's own website is openly and unashamedly a manual — no
 diegetic costume. It is the one surface in the whole project that is allowed to explain itself.
 
+**The corollary for example artifacts — the one that is easy to get wrong.** When the guide *shows a
+specimen* of an in-world artifact (a screenshot of a fabricated filing, a mock intranet, an example
+Hansard or WhatDoTheyKnow page), the specimen is still **in-world and must hold character completely**.
+It carries no "fabricated", no "made for the guide", no "this is fiction" — nothing, ever, even though it
+lives inside an out-of-world manual. The label is out-of-world commentary, and it belongs in the guide's
+**caption around the specimen, never inside it.** Baking a disclaimer into the artifact ruptures the
+membrane exactly as if a finished node shipped with a "this is satire" banner — the very thing the pack
+argues against (`ethics.md`, the "no disclaimers" rule below). A non-rendering source comment in the
+artifact's file is fine (it is scaffolding, never seen); any visible label is the rupture. Rule of thumb:
+if you are typing "this is fake" *into* a screenshot, a mock, or an exhibit page, stop — it goes in the
+caption. This mistake has been made here at least once; that is why this paragraph exists.
+
 ## Three agent-facing files, two different jobs
 
 Easy to conflate, so keep them straight:
