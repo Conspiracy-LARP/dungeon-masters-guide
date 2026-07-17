@@ -204,9 +204,10 @@ So the reassurance this section exists to give is about **time, not skill**:
   whole game is to make each one nearly free to stand up and nearly free to leave running. The model
   will happily write the Dockerfile, the DNS records, and the deploy commands for you.
 
-**[`technical-suggestions.md`](technical-suggestions.md) covers the practical side: cheap scale-to-zero
-hosting, faking a period look with a modern stack, shipping each property as an immutable resettable
-bundle, and a suggested project layout. All of it optional.**
+**[`technical-suggestions.md`](technical-suggestions.md) covers the practical side, and it opens with the
+same point this section makes: the LLM does the building. From there, cheap scale-to-zero hosting,
+shipping each property as an immutable resettable bundle, a suggested project layout, and a note on
+faking old technology when a node wants to look dated. All of it optional.**
 
 ---
 
@@ -359,14 +360,15 @@ The worst thing this kit could do is hand you a fill-in-the-blanks template, bec
 would look the same and the maze would collapse into a form. So instead, here is **one worked example**
 and then a **buffet**. Take what's useful, ignore the rest, invent your own forms.
 
-**The reference: the method run once.** The companion file **`worked-example.md`** walks
-through how one corner of the world actually grew, one idea at a time: a technical, rediscovered intranet;
-then a blogger who "discovers" it; then the creator writing himself in as the villain; then that villain's
-own straight-faced corporate consultancy homepage. What makes that shape work is worth stating here: every
-piece is **mundane paperwork and public-facing corporate copy**; the villain is played dead straight
-(Section 5); the horror is inferred, never stated (Section 7); and the separate pieces **interweave**, a
-blogger node and a villain node made by different hands, cross-linking into something neither author
-fully controls (Section 4). That is a node. Yours will look nothing like it, and that's correct.
+**The reference: the method run once, and the evidence built.** The companion file
+**`worked-example.md`** starts from an ordinary grievance (a teacher's irritation that children read
+worse than they used to), makes the one leap that turns a real problem into a conspiracy (*what if it's
+on purpose?*), and follows each answer to the next question until a century-long government office for
+*suppressing* reading has assembled itself. Then it does the part that matters: it manufactures the
+evidence, one fabricated period artifact at a time, each labelled a fake and each forced to answer *why
+would this survive, in this form, today?* The lesson underneath is the whole project in miniature: the
+engine is topic-neutral, so a coherent, documented, richly-sourced theory proves nothing about its own
+truth. Yours will look nothing like it, and that's correct.
 
 **The forms buffet.** Any of these can *be* a node, or part of one:
 

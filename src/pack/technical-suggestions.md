@@ -1,13 +1,20 @@
 # Technical suggestions — how to build the thing, cheaply
 
-*Hosting that costs nothing when nobody is looking, shipping each property as a resettable bundle, and
-why to self-host rather than trust a platform that can delete you. Entirely optional: ignore all of it
-and you are still playing the game exactly right.*
+*The one idea the rest of this follows from: the LLM does the building. Given that, here is how to host
+nodes that cost nothing when nobody is looking, ship each property as a resettable bundle, and stay off
+platforms that can delete you. Entirely optional: ignore all of it and you are still playing the game
+exactly right.*
 
-**The running theme of this whole pack is: keep costs low.** Most nodes you dream up won't get real
-traction (that's fine, that's improv), so you want each one to cost as close to nothing as possible to
-stand up and to leave running. Optimise for cheap-to-start and cheap-to-idle. Everything below serves
-that.
+**Start from the fact this whole document depends on: the LLM does the building.** You supply the idea
+and the taste; the model writes the HTML, the fake filings, the Dockerfile, the DNS records, and the
+deploy commands, and talks to the provider's CLI for you. You do not need to know how any of it works.
+That is what makes standing up many small properties realistic for one person, and everything below is a
+consequence of it.
+
+**The first consequence is: keep each node cheap.** Most nodes you dream up won't get real traction
+(that's fine, that's improv), so you want each one to cost as close to nothing as possible to stand up
+and to leave running. Optimise for cheap-to-start and cheap-to-idle. The model will happily write the
+scale-to-zero config that gets you there.
 
 ---
 
