@@ -156,7 +156,8 @@ moves and its name does not. The Treasury's Sir Frank Gordon signs off without r
 changed completely. Nobody minutes anything now. It's shouted, then denied, then briefed to a paper. The
 Directorate is a line item nobody can explain, defended by a press office that has not been told what it
 is. Terri Coverley fields the freedom of information request, because that is precisely her job, and
-handles it exactly as well as you would expect.
+actions a major historical redaction over her lunchtime tuna sandwiches. Not maliciously. She has a
+four o'clock.
 
 **None of them are conspirators.** That's the joke maturing. Atterbow believed in it. The eighties merely
 administered it. By the 2010s it is defended purely because cancelling it would be a story, and a
@@ -189,19 +190,40 @@ Neither is defamed by a fiction in which they are right.
 Fourteen steps, and not one of them was planned. Each was the obvious next question about the answer
 before it. The teacher's irritation about bad pedagogy, which she had carried for years before any of
 this, turned out to be the method. The soldier arrived because programmes need chairmen, and *then* told
-us why the Treasury paid. The joke about failure came from a fact about the 1920s nobody invented, and the best line in the whole
-node was said in Parliament by a real man who meant it sincerely.
+us why the Treasury paid. The joke about failure came from a fact about the 1920s nobody invented, and
+the best line in the whole node was said in Parliament by a real man who meant it sincerely.
 
-There is no cabal, no lizard, no mast. There is a person who was angry about something true.
+There is no cabal, no lizard, no mast. There is a teacher who was annoyed about something true.
 
-And look what it turned into. A hundred-year paper trail that is also, quietly, a love letter to the
-British political satires that got there first: a conspiracy theory the reader can check, wearing the
-cast of the shows that already told us how government really fails. The fiction and the tribute are the
-same object. That is the sort of thing this framework makes almost by accident, and it is the reason to
-build in it.
+## It doesn't stop
 
-Which is why your corner needn't be about 5G. Why the trains are late. Why the planning application went
-through. Why nobody can get an NHS dentist. Anywhere a real grievance meets an unanswerable question, the
-same move works: agree, ask who administers it, file the minutes.
+Notice there was no point at which this became finished. Fourteen steps in, it is still accelerating,
+because every answer is a fresh surface with its own questions. What did the Directorate try in 1936?
+What happened to it during the war, when the whole country suddenly needed men who could read a manual?
+Who signed the 1994 review? Why is the current dashboard green?
+
+You will not run out. That is not a feature of this particular node, it is what "yes, and" does when you
+point it at a bureaucracy (`improvisation.md`). A hundred years of institutional paperwork is an
+infinitely deep well, and each new artifact makes the next one easier, because it now has a century of
+context to be consistent with.
+
+**And it eats.** It absorbed a Dennis Potter teleplay, then two political satires, then real Hansard,
+then a real gazette. It can absorb your favourite obscure film, a genuine 1937 pamphlet, a joke your
+colleague made. It can absorb *another creator's node*. Their department had dealings with ours. Their
+minister sat on our committee. Their scandal is in our minutes, and now two stories are one world, which
+is the whole point of building this together rather than alone (`communications.md`).
+
+## Which is the actual lesson
+
+Everything above came from a teacher being fed up at work.
+
+Not a writer's room. Not a plot. Not a special talent for this. One person with a real job, a real
+irritation, and specific knowledge of an unglamorous field, who asked the funniest available question
+about it and then kept going.
+
+**That is the whole barrier to entry, and you have already cleared it.** Your corner needn't be about
+5G. Why the trains are late. Why the planning application went through. Why the coffee machine on the
+third floor was decommissioned. Anywhere a real grievance meets an unanswerable question, the same move
+works: agree, ask who administers it, file the minutes.
 
 The theory takes a sentence. The paperwork takes a weekend. **The paperwork is the joke.**
