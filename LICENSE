@@ -1,0 +1,42 @@
+# Licensing
+
+This repository is the **Conspiracy LARP Dungeon Master's Guide**: a manual (the prose in
+`src/pack/`) plus the tooling that renders it (`src/build/`, `src/theme/`, and the rest of
+the code). The two are licensed differently, each under the copyleft licence meant for its
+kind of work. Both are strong copyleft: share, adapt, and build on them, but keep
+adaptations as free as you received them.
+
+## The guide — the prose in `src/pack/`
+
+Licensed under the **Creative Commons Attribution-ShareAlike 4.0 International** licence
+(CC BY-SA 4.0).
+
+- SPDX: `CC-BY-SA-4.0`
+- Full text: <https://creativecommons.org/licenses/by-sa/4.0/legalcode>
+
+You may copy, redistribute, and adapt it for any purpose, including commercially, provided
+you give appropriate attribution and license your adaptations **of this guide** under the
+same terms.
+
+## The tooling — `src/build/`, `src/theme/`, and other code
+
+Licensed under the **GNU General Public License, version 3 or later** (GPL-3.0-or-later).
+
+- SPDX: `GPL-3.0-or-later`
+- Full text: <https://www.gnu.org/licenses/gpl-3.0.txt>
+
+## What these licences do NOT cover: your game is yours
+
+This applies **only to the guide and its tooling**. The properties you create for the game —
+your nodes, sites, filings, characters, stories, screenshots, and every artifact you build by
+following this guide — **remain your own, under whatever copyright and licence you choose,
+even though the guide inspired them.**
+
+ShareAlike reaches adaptations of the guide's *own text*. It does not reach the fiction you
+make with it. You owe attribution if you reproduce or adapt this guide; you owe it nothing for
+the world you build after reading it. The guide is given freely so the idea can spread; the
+worlds people make with it are theirs.
+
+---
+
+© the Conspiracy LARP contributors.

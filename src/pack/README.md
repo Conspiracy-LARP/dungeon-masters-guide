@@ -82,3 +82,13 @@ consequences — never the victims**, and never build on the genuinely ugly mate
 traffics in. The craft rule for hard topics is *infer, don't embrace*: name the monstrous thing, never
 render it; let the paperwork and the reader's imagination do the work. The full philosophy is in the
 creator kit; the moral reasoning is in the ethics document.
+
+## Licence
+
+This guide is free to share, adapt, and build on under
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); its build tooling under
+[GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html). One thing this does **not** cover: the
+properties you create for the game — your nodes, characters, sites, and every artifact you build by
+following this guide — remain your own, under whatever copyright you choose, even though the guide
+inspired them. You owe the guide attribution if you reproduce it; you owe it nothing for the world you
+make with it.
