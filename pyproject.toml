@@ -38,7 +38,10 @@ target-version = ["py311"]
 # is meant to format: a gate that only looks like one. WP08 wires this into CI and
 # WP03-WP06 inherit this file, so the vacuity would propagate. Guarded by
 # tests/test_toolchain.py — if you edit this line, that test tells you what you broke.
-exclude = "/(\\.git|\\.venv|\\.mypy_cache|\\.pytest_cache|site)/"
+# `.worktrees` holds spec-kitty's lane checkouts — eight copies of this repo. Replacing
+# black's defaults to reach src/build/ also stopped it skipping those, so black walked 128
+# files against the repo's 22. Same guard caught it, firing the other way.
+exclude = "/(\\.git|\\.venv|\\.mypy_cache|\\.pytest_cache|\\.worktrees|site)/"
 
 [tool.mypy]
 python_version = "3.11"

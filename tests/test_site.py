@@ -453,15 +453,20 @@ def test_swapping_the_base_moves_every_generated_address(
         "configured base — moving the guide to a custom domain would half-work (SC-006)."
     )
 
+    # The same-set check, minus the two documents that quote the base in prose: they carry
+    # the OLD base by design, so they never appear in `followed`. Comparing them would
+    # assert the exception away. Every GENERATED address must still move as a set.
     followed = {
         str(path.relative_to(swapped_site))
         for path in _text_files(swapped_site)
         if _OTHER_BASE in path.read_text(encoding="utf-8", errors="ignore")
+        and not _is_declared_exception(str(path.relative_to(swapped_site)))
     }
     generated = {
         str(path.relative_to(site))
         for path in _text_files(site)
         if original_base in path.read_text(encoding="utf-8", errors="ignore")
+        and not _is_declared_exception(str(path.relative_to(site)))
     }
     assert generated, "sanity: the site generates absolute addresses at all"
     assert followed == generated, (
