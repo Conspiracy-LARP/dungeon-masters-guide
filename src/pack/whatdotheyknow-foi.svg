@@ -33,14 +33,9 @@
   <line x1="44" y1="398" x2="716" y2="398" stroke="#e8e8e4"/>
   <text x="44" y="424" font-size="13" font-weight="bold" fill="#1a1a1a">Ministry of Defence</text>
   <text x="192" y="424" font-size="12" fill="#8a8a8a">2 April</text>
-  <text x="44" y="446" font-size="12" fill="#8a8a8a">Our ref: FOI2024/0</text>
-  <rect x="152" y="435" width="30" height="13" fill="#1a1a1a"/>
-  <text x="186" y="446" font-size="12" fill="#8a8a8a">41</text>
-  <text x="44" y="472" font-size="13.5" fill="#333333">We can neither confirm nor deny whether information of the</text>
-  <text x="44" y="492" font-size="13.5" fill="#333333">description specified is held, as to do so would</text>
-  <rect x="392" y="481" width="118" height="14" fill="#1a1a1a"/>
-  <rect x="44" y="501" width="188" height="14" fill="#1a1a1a"/>
-  <text x="240" y="512" font-size="13.5" fill="#333333">under section 23(5).</text>
-  <rect x="44" y="524" width="672" height="1" fill="#e8e8e4"/>
-  <text x="44" y="548" font-size="12.5" fill="#932a2a" font-style="italic">This response has been withheld pending review.</text>
+  <text x="44" y="446" font-size="12" fill="#8a8a8a">Our ref: FOI2024/03841</text>
+  <text x="44" y="472" font-size="13.5" fill="#333333">Dear Ms Hollis,</text>
+  <text x="44" y="496" font-size="13.5" fill="#333333">The Ministry of Defence can neither confirm nor deny whether it holds</text>
+  <text x="44" y="516" font-size="13.5" fill="#333333">information of the description specified in your request, as the duty in</text>
+  <text x="44" y="536" font-size="13.5" fill="#333333">section 1(1)(a) of the Act does not apply by virtue of section 23(5).</text>
 </svg>

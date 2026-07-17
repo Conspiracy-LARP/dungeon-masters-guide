@@ -339,10 +339,24 @@ type:
 > correct: **filing this for real would be flatly forbidden** (`ethics.md`). The page above exists
 > nowhere except as an image on our blogger's own site.
 
-Notice how little work the fabrication is doing. "Neither confirm nor deny" is a real formula. Section 23
-is a real exemption. The redaction bars are the joke, because a department that redacts the *reason* for
-a redaction is funnier than any invented atrocity. The image is doing what a hundred sinister paragraphs
-could not, and it took a model four seconds.
+Notice how little work the fabrication is doing, and notice what it does **not** do: there are no black
+bars anywhere on it.
+
+That matters, and getting it wrong is the fastest way to lose a reader who has actually used the site.
+Bars belong on a *released* document, where somebody has disclosed a page and obscured part of it. This
+is not that. This is a refusal to say whether the page exists at all — the English cousin of the Glomar
+response — and there is nothing to black out, because they have given you nothing to black out.
+
+So the whole artifact is one sentence of real, unmodified officialese: *"can neither confirm nor deny
+whether it holds information of the description specified, as the duty in section 1(1)(a) of the Act does
+not apply by virtue of section 23(5)."* That is the actual formula. Section 23 is a real exemption and it
+covers the security bodies.
+
+And that is the joke, arriving with no help from us at all. Nobody redacted anything. Nobody refused
+anything. A department has simply declined to say whether a hundred-year-old office for discouraging
+reading is a matter of national security, and the reader supplies every implication for free. The
+temptation to add black bars is the temptation to *perform* secrecy, and the plain sentence is more
+frightening than any amount of ink.
 
 The rules that keep both clean: they live on **your** blog as images, never as citations into the real
 archive (a link that 404s is not a tell, it is a dead link); the words go in a real minister's mouth only
