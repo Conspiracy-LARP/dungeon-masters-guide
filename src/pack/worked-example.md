@@ -4,6 +4,18 @@
 caused by the one before it. That is the only thing this chapter teaches: you never need the whole plan,
 because each answer hands you the next question.*
 
+**The theory in this chapter is brand new, and invented for the occasion.** Two reasons, and both matter.
+
+First, because we can. That is the entire thesis (`philosophy.md`): the engine does not care what you
+feed it, so a conspiracy theory nobody has ever held is exactly as buildable as one millions do. If the
+demonstration only worked on a theory that already existed, it would prove nothing.
+
+Second, and more practically: **we are not going to use a real player's node as the teaching example.**
+Walking through somebody's live fiction and explaining where the seams are would spoil it for their
+readers and cast doubt on work they are still building. The membrane cuts both ways (`creator-kit.md`
+§8). So the illiteracy conspiracy exists only here, in a manual nobody in-world will ever read, and every
+node in the actual world is left intact.
+
 ---
 
 ## 1. The irritation
@@ -125,6 +137,11 @@ leaking into the one place it ruins you: a fabricated citation is not a tell, it
 the reader who checks it stops reading. **The model finds the connections. You verify the sources.** Open
 the page yourself. If you have not personally seen the column, it does not go in.
 
+None of which stops you inventing a debate wholesale. Step 11 does exactly that. The line is not
+invented-versus-real, it is **where you put it**: on your own surface, an invented Hansard page is an
+artifact you made and the reader can only ever see your copy of it. Pointed at the real archive, the same
+words are a citation, and a citation that does not resolve is just you being caught.
+
 This is the whole technique of the real thing: cite something true and unfalsifiable, then supply the
 lens. It costs you nothing but an afternoon in the archive, and **the archive is where the jokes are**.
 You will not invent anything as funny as what a 1926 undersecretary actually said. Go and find it.
@@ -147,6 +164,47 @@ A teacher files a freedom of information request. Something comes back. Then the
 anything anywhere real (`ethics.md`). Instead: your blogger says the response was there in March, and
 here is her screenshot. The reader looks. There is nothing there. The absence is the evidence, the
 fiction predicted exactly what they found, and you forged nothing at all.
+
+And once you are on your own surface, **you can invent the whole debate.** Not a link to Hansard: an
+image of it, in your blogger's post, the way she would have grabbed it. Go and look at how the real thing
+is laid out (the column numbers, the running heads, the way a member is styled on first mention) and
+emulate it exactly. The craft is entirely in the furniture:
+
+```
+                                                                          2103
+    HC Deb 09 March 1926 vol 192 cc2103-4
+
+              ELEMENTARY EDUCATION (READING STANDARDS).
+
+    Mr. PETHERBRIDGE asked the President of the Board of Education
+    whether he is satisfied that standards of reading among elementary
+    schoolchildren in the northern counties are satisfactory; and what
+    steps are being taken to that end.
+
+    The PRESIDENT of the BOARD of EDUCATION: I am aware of the figures
+    to which my hon. Friend refers. The matter is under review.
+
+    Mr. PETHERBRIDGE: Is the right hon. Gentleman aware that the
+    position in Durham has not improved since 1921, and can he say
+    which Department is now seised of the question?
+                                                                          2104
+    The PRESIDENT of the BOARD of EDUCATION: I would not accept the
+    hon. Member's figures. As to the second part of the Question, I
+    must ask for notice.
+```
+
+**None of that is real.** No such debate took place, no such member sat, and the column numbers are
+invented. It is fake from the first line to the last, and that is the point: it *reads* right. The
+cadence is right, "I must ask for notice" is what ministers genuinely say when they do not want to
+answer, and the refusal to name the Department is doing all the work. You have manufactured evidence for
+a conspiracy that never happened, and it is more persuasive than most evidence for ones people believe.
+
+Sit with that for a second, because it is the whole argument in one artifact.
+
+The rules that keep it clean: it lives on **your** blog as an image, never as a citation into the real
+archive (a link that 404s is not a tell, it is a dead link); the words go in a real minister's mouth only
+where the fiction leaves him innocent, which is why the man above is a dupe reading a departmental line
+rather than a plotter (`ethics.md`); and you invent the backbenchers outright.
 
 Notice these are opposite tricks, and the chapter needs both. Hansard works because it **is** there and
 always will be. The FOI works because it **isn't**, and disappearance is plausible on that surface.
