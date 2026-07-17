@@ -280,6 +280,50 @@ minute, the deniable circumlocution, the thing agreed in a corridor. Sir Arnold 
 understood that the Directorate is not being wound up, merely *rationalised*, which means its budget
 moves and its name does not. The Treasury's Sir Frank Gordon signs off without reading it.
 
+And every era hands you a medium the previous one didn't have, which is where the best artifacts come
+from. The twenties give you typed minutes and columns of Hansard. The eighties give you **Ceefax**:
+
+```
+P274 CEEFAX 274      Mon 14 Oct 20:41/32
+
+       R E A D I N G   A N D   Y O U
+
+  A PUBLIC INFORMATION MESSAGE
+
+  Doctors now advise that prolonged reading
+  may contribute to:
+
+     eye strain and headache
+     poor posture
+     disturbed sleep
+     nervous exhaustion
+
+  No more than 20 minutes of continuous
+  reading is advised in any one evening,
+  and none at all after 9 pm.
+
+  Children under 14 should be encouraged
+  to take up an outdoor pursuit instead.
+
+  Health .. 275   Sport .. 300   Index .. 100
+
+  Issued by the Directorate of Reading
+  Standards on behalf of HM Government
+```
+
+> **Fake, LLM-generated, and never broadcast.** No such page existed. The page number is invented. It is
+> laid out as Mode 7 really was, 40 columns by 24 rows, because the grid is the whole costume.
+
+Sit with the joke for a moment, because we did not plan it and the era handed it over for free: **Ceefax
+is text.** The Directorate's great public campaign against reading could only be received by reading it.
+You navigate it by reading page numbers. Somebody in that office commissioned it, signed it off, and
+noticed nothing, and there is not one word of commentary anywhere on the page telling you that. It simply
+sits there being what it is (`storytelling.md`).
+
+That is what "period appropriate" buys you. Do not carry the twenties artifact forward into the eighties;
+ask what the eighties could do that the twenties could not, and let the medium write the joke. The
+nineties will offer a CD-ROM and a helpline. The 2010s will offer a dashboard and a press office.
+
 **The 2010s.** It surfaces at the **Department of Social Affairs and Citizenship**, and the register has
 changed completely. Nobody minutes anything now. It's shouted, then denied, then briefed to a paper. The
 Directorate is a line item nobody can explain, defended by a press office that has not been told what it
