@@ -149,3 +149,19 @@ body {
   font-size: 0.7rem;
   opacity: 0.65;
 }
+
+/* Figure captions. A short italic paragraph sitting directly beneath an image is a
+ * caption (the fabricated-exhibit note under each screenshot). Centre it, and the image
+ * it captions, so the two read as one figure. This is site presentation only: the pack
+ * markdown stays plain image-then-italic, so the book, the pack branch and GitHub still
+ * render it correctly without this rule. Scoped by the image adjacency so it never
+ * touches the chapter's italic section abstracts, which have no image above them. */
+.md-typeset p:has(> img):has(+ p > em:only-child),
+.md-typeset p:has(> img) + p:has(> em:only-child) {
+  text-align: center;
+}
+.md-typeset p:has(> img) + p:has(> em:only-child) {
+  font-size: 0.85em;
+  opacity: 0.82;
+  margin-top: -0.3rem;
+}
