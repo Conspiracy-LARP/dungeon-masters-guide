@@ -332,6 +332,8 @@ type:
   ....................................................................
 ```
 
+![A fabricated WhatDoTheyKnow page for a request that was never filed](whatdotheyknow-foi.svg)
+
 > **Also a fake, also LLM-generated, and this one matters more.** No such request was ever filed. It was
 > never sent to anybody. WhatDoTheyKnow has never heard of it, and that is not an oversight we intend to
 > correct: **filing this for real would be flatly forbidden** (`ethics.md`). The page above exists

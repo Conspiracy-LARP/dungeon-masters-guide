@@ -50,9 +50,10 @@ inventing it.
 2. **Anachronism** — an entity depending on something that didn't exist yet (e.g., a 2002 company
    serviced by a formation agent incorporated in 2005; a person born *after* an appointment; a
    technology/brand referenced before its era).
-3. **Premature knowledge** — a character (especially Roy) commenting on, or a post referencing, an
-   event/evidence that has not yet happened or been discovered **in publication order**. A post
-   scheduled on date X must not rely on anything only revealed on a later date.
+3. **Premature knowledge** — a character (your narrator most of all, since they post the most)
+   commenting on, or a post referencing, an event/evidence that has not yet happened or been discovered
+   **in publication order**. A post scheduled on date X must not rely on anything only revealed on a
+   later date.
 4. **Date arithmetic / calendar** — "a fortnight" that isn't ~14 days; "months ago" that is really
    weeks; any stated **weekday** (verify it against a real calendar for that year); intervals that
    don't add up.
