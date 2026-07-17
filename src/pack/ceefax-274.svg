@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 500" role="img" aria-labelledby="t d">
+  <title id="t">Fabricated screenshot: a Ceefax page that was never broadcast</title>
+  <desc id="d">An invented Ceefax teletext page 274, headed READING AND YOU, presenting a
+  public information message that claims prolonged reading causes eye strain, poor posture,
+  disturbed sleep and nervous exhaustion, advising no more than 20 minutes of reading an
+  evening and none after 9pm, and recommending children under 14 take up an outdoor pursuit
+  instead. Issued by the fictional Directorate of Reading Standards. No such page was ever
+  broadcast. This image is a fake, generated to demonstrate how easily documentary evidence
+  is manufactured.</desc>
+  <defs>
+    <style>
+      .tt { font-family: 'Courier New', monospace; font-size: 19.5px; font-weight: bold;
+            letter-spacing: 1.6px; }
+      .dh { font-size: 39px; letter-spacing: 3px; }
+      .w { fill: #ffffff } .y { fill: #ffff00 } .c { fill: #00ffff }
+      .g { fill: #00ff00 } .r { fill: #ff0000 }
+    </style>
+  </defs>
+  <rect width="640" height="500" fill="#000000"/>
+  <g class="tt">
+    <text x="16" y="34" class="w">P274</text>
+    <text x="106" y="34" class="c">CEEFAX 274</text>
+    <text x="330" y="34" class="w">Mon 14 Oct</text>
+    <text x="500" y="34" class="g">20:41/32</text>
+
+    <text x="60" y="104" class="dh y">READING AND YOU</text>
+
+    <text x="16" y="156" class="c">A PUBLIC INFORMATION MESSAGE</text>
+
+    <text x="16" y="200" class="w">Doctors now advise that prolonged</text>
+    <text x="16" y="224" class="w">reading may contribute to:</text>
+
+    <text x="60" y="262" class="y">eye strain and headache</text>
+    <text x="60" y="286" class="y">poor posture</text>
+    <text x="60" y="310" class="y">disturbed sleep</text>
+    <text x="60" y="334" class="y">nervous exhaustion</text>
+
+    <text x="16" y="374" class="w">No more than 20 minutes of reading</text>
+    <text x="16" y="398" class="w">is advised in any one evening, and</text>
+    <text x="16" y="422" class="w">none at all after 9 pm.</text>
+
+    <text x="16" y="466" class="g">Health 275</text>
+    <text x="220" y="466" class="c">Sport 300</text>
+    <text x="420" y="466" class="y">Index 100</text>
+  </g>
+</svg>

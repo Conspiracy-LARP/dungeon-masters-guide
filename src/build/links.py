@@ -376,6 +376,17 @@ def check_resolution(surface: Surface, other: Surface, label: str) -> list[Findi
         for link in extract_links(text):
             if link.has_separator or link.path in surface.names:
                 continue
+            # Assets live on `main` only, by decision: the pack branch is markdown and
+            # nothing else, because it exists to be read by a model that cannot see an
+            # SVG anyway (see build.packbranch). An `![...](x.svg)` reference is therefore
+            # *expected* to dangle there, and the both-branches rule does not apply to it.
+            #
+            # Exempted by name rather than by a glob that quietly fails to match it: the
+            # asymmetry is deliberate, so it is stated here where someone will read it. A
+            # broken link to a *document* is still caught exactly as before, and so is an
+            # asset link on `main`, where the file must really exist.
+            if surface.branch is Branch.PACK and Path(link.path).suffix.lower() in ASSET_SUFFIXES:
+                continue
             findings.append(
                 Finding(
                     source=f"{label}/{name}",

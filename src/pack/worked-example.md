@@ -401,8 +401,12 @@ P274 CEEFAX 274      Mon 14 Oct 20:41/32
   Standards on behalf of HM Government
 ```
 
+![A fabricated Ceefax page 274 that was never broadcast](ceefax-274.svg)
+
 > **Fake, LLM-generated, and never broadcast.** No such page existed. The page number is invented. It is
-> laid out as Mode 7 really was, 40 columns by 24 rows, because the grid is the whole costume.
+> laid out as Mode 7 really was, 40 columns by 24 rows, because the grid is the whole costume, and it is
+> in the palette Mode 7 actually had: white, yellow, cyan, green on black, and nothing else, because
+> nothing else was available.
 
 And now make the provenance choice, because for this one artifact you have two, and they are two
 different stories.

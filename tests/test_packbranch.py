@@ -462,27 +462,27 @@ def test_the_real_pack_is_never_written_to(tmp_path: Path, real_repo_config: Bui
     assert before == after
 
 
-def test_pack_assets_reach_the_branch_byte_for_byte(tmp_path: Path) -> None:
-    """An asset the prose references must exist on the branch, unchanged.
+def test_the_branch_is_markdown_only_and_carries_no_assets(tmp_path: Path) -> None:
+    """The branch is pure text, by decision (2026-07-17).
 
-    The trap this guards: `render_documents` derives its file list from the role
-    declaration, which globs `*.md`. An asset is invisible to that glob, so the natural
-    failure is a branch of markdown pointing at images that are not there — and consumers
-    track this branch as a submodule, so the breakage lands in *their* checkout while our
-    CI stays green. Asserted on the materialised tree rather than the returned list,
-    because the bytes on disk are what a consumer gets.
+    The pack exists to be consumed by a model, and a model cannot see an SVG: it reads the
+    alt text and the ASCII rendering beside each image, both of which travel in the
+    markdown for free. So assets stay on `main` and reach readers through the site.
+
+    Asserted rather than left to the `*.md` glob that currently produces it. The glob is
+    correct today by coincidence of implementation; this makes it correct on purpose, and
+    fails loudly if someone later "fixes" packbranch to mirror assets without revisiting
+    the decision.
     """
     config = load_config()
-    assets = load_assets(config.pack_dir)
-    assert assets, "guard the guard: no assets in the pack, so this proves nothing"
+    assert load_assets(config.pack_dir), "guard the guard: no assets in the pack"
 
     files = build_tree(tmp_path, config)
-    published = {built.published_name for built in files}
 
-    for name in assets:
-        assert name in published, f"{name} never reached the branch"
-        assert (tmp_path / name).read_bytes() == (
-            config.pack_dir / name
-        ).read_bytes(), (
-            f"{name} was altered on the way to the branch; an asset's bytes are the artifact"
-        )
+    published = sorted(built.published_name for built in files)
+    assert published, "the branch is empty"
+    assert all(
+        name.endswith(".md") for name in published
+    ), f"the pack branch must be markdown only; found {[n for n in published if not n.endswith('.md')]}"
+    on_disk = sorted(p.name for p in tmp_path.iterdir())
+    assert on_disk == published, "the tree on disk disagrees with the returned file list"

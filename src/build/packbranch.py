@@ -72,6 +72,16 @@ REFERENCE_INPUT_COMMIT: Final[str] = "39c2452"
 PACK_PATH: Final[str] = "src/pack"
 
 #: The pack's index — published, but not a chapter. The branch's front door.
+#: The branch is **markdown and nothing else**, by decision (2026-07-17).
+#:
+#: The pack's assets (``roles.ASSET_SUFFIXES``) stay behind on ``main`` and reach readers
+#: through the site. The branch exists to be maximally easy for an LLM to consume, and an
+#: LLM cannot see an SVG: it reads the alt text and the ASCII rendering that sits beside
+#: every image in the prose, both of which travel in the markdown for free.
+#:
+#: The cost, recorded rather than discovered: an ``![...](x.svg)`` reference dangles on the
+#: branch. That is acceptable for this audience and is exempted *explicitly* in
+#: :mod:`build.links` rather than by a glob that happens not to match it.
 PACK_INDEX: Final[str] = "README.md"
 
 #: The generating commit message — the branch's own statement of its contract.
@@ -208,36 +218,12 @@ def build_tree(out_dir: Path, config: BuildConfig, pack_dir: Path | None = None)
     resolved_pack = config.pack_dir if pack_dir is None else pack_dir
     roles.check_pack_contents(resolved_pack)
     files = render_documents(resolved_pack, config)
-    files.extend(_render_assets(resolved_pack))
-    files.sort(key=lambda built: built.published_name)
 
     _clean_output_dir(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     for built in files:
         (out_dir / built.published_name).write_bytes(built.content)
     return files
-
-
-def _render_assets(pack_dir: Path) -> list[BuiltFile]:
-    """The pack's assets, copied verbatim onto the branch.
-
-    Assets ride along because the prose references them as bare siblings
-    (``![...](hansard-1926.svg)``). Ship the markdown without them and the branch is a set
-    of documents pointing at files that do not exist — and consumers track this branch as a
-    submodule, so the breakage lands in *their* checkout, not in our CI. That is the whole
-    reason this function exists rather than the mirror simply globbing ``*.md``.
-
-    No rename and no rewrite: an asset has no bootstrap reference to fix, and its bytes are
-    the artifact.
-    """
-    return [
-        BuiltFile(
-            source_name=name,
-            published_name=name,
-            content=(pack_dir / name).read_bytes(),
-        )
-        for name in roles.load_assets(pack_dir)
-    ]
 
 
 # --------------------------------------------------------------------------------------
