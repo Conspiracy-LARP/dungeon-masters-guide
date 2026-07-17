@@ -107,3 +107,17 @@ C-001 rather than breaking it, and resolves on the site, the pack branch and Git
 still conveys every artifact in text; `guide roles lint` fails if an asset is undeclared; the book
 renders. Do not start this without room to hold the pack-branch contract, the four surfaces and the
 reproduction gate in context at once.
+
+## The preservation track belongs in storytelling.md (raised 2026-07-17, not started)
+
+`worked-example.md` now carries a formal principle that outgrows it: an unpreserved record and a
+character's interior thoughts are the same category error. Both are things nobody in the world could have
+found, and publishing either walks an omniscient narrator back through the membrane. The consequence is a
+construction rule — the chronology has two tracks, what happened and what happened to the evidence, and
+the second decides what the reader is permitted to see.
+
+This is a general storytelling law, not a fact about the illiteracy node, so by the hub-and-spoke rule it
+belongs in `storytelling.md` (which owns "show, don't tell" and the realism engine), with the chapter
+demonstrating rather than stating it. Left in place for now because the chapter is the only surface that
+currently shows it working. If `storytelling.md` takes it, check the kit's §6 summary still tells the
+truth.

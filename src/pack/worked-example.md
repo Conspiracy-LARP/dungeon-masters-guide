@@ -121,6 +121,21 @@ and it is the one most creators never ask. Get it wrong and a reader who knows t
 note without being able to name it. Get it right and the artifact does two jobs at once, because *how a
 thing survived* is itself a story.
 
+This is not fussiness. It is the same rule as the one that stops you narrating a character's thoughts.
+
+An omniscient narrator can tell you what the Brigadier felt. A diegetic world cannot, because there is
+nobody standing outside it to say so, and the moment you reach for that voice you have stepped through
+the membrane (`creator-kit.md` §8). **A record that was never preserved is the identical error.** It is a
+thing no one in the world could have found, offered to a reader who is only ever allowed to find things.
+Publish it and you have not cheated at history, you have cheated at *form*: the same omniscient narrator
+has walked back in, wearing a memo.
+
+So your chronology has two tracks, and most creators build one. The first is what happened in the
+alternative history. The second is **what happened to the evidence**: who captured it, why they bothered,
+what survived the file being moved, what a digitisation programme swept up decades later, and what was
+quietly lost. That second track is not admin. It decides what your reader is permitted to see, which
+means it decides the story. Build it deliberately, at the same time as the first.
+
 Our three eras answer it in three completely different ways, and none of them is interchangeable:
 
 - **The FOI response survives natively.** WhatDoTheyKnow is recent, it is built to keep requests in
