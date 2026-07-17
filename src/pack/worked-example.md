@@ -322,22 +322,24 @@ type:
     --------------------------------------------------------------
 
     Ministry of Defence  |  2 April
-    Our ref: FOI2024/0 [####] 41
+    Our ref: FOI2024/03841
 
-    We can neither confirm nor deny whether information of the
-    description specified is held, as to do so would [##########]
-    [##############] under section 23(5).
+    Dear Ms Hollis,
 
-    This response has been withheld pending review.
+    The Ministry of Defence can neither confirm nor deny whether it
+    holds information of the description specified in your request,
+    as the duty in section 1(1)(a) of the Act does not apply by
+    virtue of section 23(5).
   ....................................................................
 ```
 
-![A fabricated WhatDoTheyKnow page for a request that was never filed](whatdotheyknow-foi.svg)
+Build it as a real page, the same way (the guide keeps this one live among its exhibits too, a genuine
+HTML page that looks like the site it imitates):
 
-> **Also a fake, also LLM-generated, and this one matters more.** No such request was ever filed. It was
-> never sent to anybody. WhatDoTheyKnow has never heard of it, and that is not an oversight we intend to
-> correct: **filing this for real would be flatly forbidden** (`ethics.md`). The page above exists
-> nowhere except as an image on our blogger's own site.
+> **Also a fake, also built in seconds, and this one matters more.** No such request was ever filed. It
+> was never sent to anybody. WhatDoTheyKnow has never heard of it, and that is not an oversight we intend
+> to correct: **filing this for real would be flatly forbidden** (`ethics.md`). It exists only as our own
+> page, on our own surface, which is the whole point.
 
 Notice how little work the fabrication is doing, and notice what it does **not** do: there are no black
 bars anywhere on it.
