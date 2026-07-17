@@ -1,9 +1,10 @@
 # The philosophy — why we do this
 
-*Conspiracy theory does not merely spread falsehood. It hijacks real questions and answers them with a
-lie so lurid the real question can never be asked again. This is the argument for fighting that with
-comedy rather than correction, and for why comedians and software developers turn out to be the right
-people to try. The reasoning the rest of the pack states only in passing.*
+*Our target is not a list of theories. It is the move that manufactures them: the leap from "something
+is wrong" to "somebody did this on purpose". Every theory it produces hijacks a real question and answers
+it with a lie so lurid the real question can never be asked again. This is the argument for fighting that
+with comedy rather than correction, for why the move is best exposed by running it ourselves, and for why
+comedians and software developers turn out to be the right people to try.*
 
 ---
 
@@ -35,6 +36,23 @@ real question and occupies the ground it stood on.** Once the mast is a death-ra
 un-discussable. The fake solution (*name the cabal, share the meme, "do your own research"*) feels like
 engagement while guaranteeing that the real problem is never touched. The grifter gets an audience; the
 real problem gets abandoned. That theft is what we are against.
+
+## 1a. But those are four thefts, and there is only one thief
+
+Look again at that list. It is tempting to read it as four bad ideas that happened to catch on, and to
+conclude that the work is to argue against each in turn. That reading is why debunking never finishes.
+They are not four ideas. They are four outputs of **one move, run four times**:
+
+> Something is genuinely wrong. **What if it's on purpose?**
+
+That is the whole machine. A real grievance goes in. One leap. Out comes a cabal, a motive, and a
+demand to do your own research. It has no opinion about telecoms or air quality; those were simply what
+happened to be lying around. **The move is a question-eviction engine**, and every conversation it takes
+is another one nobody gets back.
+
+So the target of this project is not the mast, the trail, or the tunnel. It is **the leap**. Argue the
+mast and you have won one argument out of an infinite supply, because the engine is already building the
+next one. Expose the leap and you have gone after the thing that makes all of them.
 
 ## 2. Our response: we are comedians and software developers, so we fight with what we have
 

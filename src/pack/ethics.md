@@ -8,12 +8,18 @@ all, and the technique that keeps it clean. Read it before you go there.*
 
 ## The founders' position, in one line
 
-**You can satirise anything. But the target is never the victim, and never the harm. The target is the
-lie, the failure, and the theft.**
+**You can satirise anything. But the target is never the victim, and never the harm, and never the person
+who got fooled. The target is the move that fooled them: the leap from "something is wrong" to "somebody
+did this on purpose", and the theft it commits every time it runs.**
 
 Both halves matter. Drop the first and you become a coward who can't tell a joke about anything that
 matters. Drop the second and you become a bully who punches down at the people a joke should protect.
 The whole craft of this project lives in holding both at once.
+
+Aiming at the move rather than at any particular theory is what keeps the second half honest. Believers
+are not our quarry. Most of them are frightened, or lonely, or grieving, and they were handed the engine
+by someone who profits from it. Go after the engine (`philosophy.md`). It has no feelings to hurt and an
+unlimited supply of victims, some of whom are reading your node.
 
 ## "You can satirise anything": why we mean it
 

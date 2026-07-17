@@ -151,8 +151,17 @@ teaches people to build. Read `ethics.md` in full before touching a difficult su
 
 - **Infer, don't embrace.** You may *name* a monstrous subject; never *render* it. The technique the
   whole pack rests on is letting paperwork and the reader's imagination do the work.
-- **The target is the lie, the failure, and the theft — never the victim, never the harm.** Conspiracy
-  culture's genuinely ugly material (antisemitism, racism, exploited grief) is never built upon.
+- **The target is the move, never the victim and never the believer.** The enemy is not a list of
+  theories; it is the leap from "something is wrong" to "somebody did this on purpose", and the theft it
+  commits every time it runs. Believers were handed the engine by someone who profits from it, so aim at
+  the engine. Conspiracy culture's genuinely ugly material (antisemitism, racism, exploited grief) is
+  never built upon.
+- **"Anything can be a conspiracy" is the thesis, not a boast about range.** The engine is topic-neutral,
+  so its output is worthless as evidence: if a teacher's irritation about phonics yields a century of War
+  Office paperwork with citations that resolve (`worked-example.md`), then coherence, documentation and
+  richly joined dots prove nothing about truth. Running the engine on something absurd, in public, is the
+  only way to show that. Agreeing with a live theory until it collapses is one instance of the argument,
+  not the argument itself (`philosophy.md`).
 - **The plain floor**: no real private individuals without consent (public conspiracy influencers, as
   the targets of the satire, are the narrow exception); no real-world harm instructions; no real
   bereavement inverted.

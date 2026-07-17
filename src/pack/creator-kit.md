@@ -47,6 +47,12 @@ about telecoms infrastructure. The ULEZ camera becomes a component of a genocide
 cannot talk about air quality. The lie doesn't just mislead. It **evicts** the real concern and
 squats in its place.
 
+And those are not separate accidents. They are outputs of **one move, run over and over**: *something is
+genuinely wrong* → **what if it's on purpose?** A real grievance goes in, one leap happens, and out comes
+a cabal, a motive, and an instruction to do your own research. The move has no opinion about telecoms or
+air quality; those were merely lying around. It is a question-eviction engine, and our target is the
+engine, not any one thing it has built.
+
 This project is a satire aimed at that theft. We take a conspiracy theory and we do the one thing the
 theorist never expects: we **agree**. We say, "Fine. Suppose it's all true. Suppose there really is a
 sinister organisation running the kill-grid / suppressing the flat earth / harvesting adrenochrome."
@@ -55,6 +61,13 @@ purchase orders? What's the SLA on a malfunctioning death-ray? What does the caf
 Thursday?* We render the world-ending horror as **tedious, banal, corporate business-as-usual**, and
 in that incongruity the theory collapses into comedy. An atrocity run as facilities management cannot
 also be a terrifying secret. The joke *is* the debunk.
+
+The sharper move is to run the engine ourselves, on something nobody has ever theorised, with the reader
+watching every step. `worked-example.md` starts from a teacher's irritation about how reading is taught
+and ends with a century of War Office paperwork and real citations that resolve. If a phonics complaint
+can produce that, then a conspiracy theory being coherent, documented and richly evidenced tells you
+**nothing whatsoever** about whether it is true. That is why "anything can be a conspiracy" is not a
+boast about range. It is the proof, and `philosophy.md` makes the whole argument.
 
 Two things follow from this, and they sit at the top because everything else depends on them:
 
