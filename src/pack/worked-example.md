@@ -142,23 +142,31 @@ Never mix them up: an invented Hansard citation is not spooky, it is just broken
 
 And the real citation lends its credibility to the fake one sitting next to it. That is the layering.
 
-## 12. It ran a century. Who has it now?
+## 12. It ran a century. Where did it end up?
 
-Nobody remembers why. The file has drifted, as files do, to the **Department of Administrative Affairs**,
-where the minister is a man called Hacker, the permanent secretary is Sir Humphrey Appleby, and the
-principal private secretary is Bernard Woolley.
+Files drift. Nobody remembers why they have them, and no department has ever closed one on purpose. So
+follow the machine through the reorganisations, because each one is a fresh canvas:
 
-That is your second stolen cast, and the eighties layer gets its own imagined Hansard, screenshotted on
-your blogger's surface. Hacker is asked a question. He has been handed a line by the department. He reads
-it. It is bland, technically true, and reveals nothing, and he has no idea what he has just said.
+**The 1980s.** It lands in the **Department of Administrative Affairs**, and the register is the polite
+minute, the deniable circumlocution, the thing agreed in a corridor. Sir Arnold Robinson would like it
+understood that the Directorate is not being wound up, merely *rationalised*, which means its budget
+moves and its name does not. The Treasury's Sir Frank Gordon signs off without reading it.
 
-**He isn't a conspirator. He's a dupe.** Atterbow wrote that line in 1926; the minister merely said it.
-Which is both historically accurate and much funnier, and it is why real politicians can appear here at
-all: put words in a dead public figure's mouth only where the fiction has them innocent (`ethics.md`).
+**The 2010s.** It surfaces at the **Department of Social Affairs and Citizenship**, and the register has
+changed completely. Nobody minutes anything now. It's shouted, then denied, then briefed to a paper. The
+Directorate is a line item nobody can explain, defended by a press office that has not been told what it
+is. Terri Coverley fields the freedom of information request, because that is precisely her job, and
+handles it exactly as well as you would expect.
 
-Each decade steals its cast from a teleplay set in that decade: Potter's clerks for the mid-century
-office, Hacker's lot for the eighties. It stops being one gag and becomes a system, and a reader who
-spots one starts hunting the next decade for another. That is the tell doing its job (`storytelling.md`).
+**None of them are conspirators.** That's the joke maturing. Atterbow believed in it. The eighties merely
+administered it. By the 2010s it is defended purely because cancelling it would be a story, and a
+department that cannot explain a hundred-year-old illiteracy programme has a much worse week than one
+that quietly renews it.
+
+Each decade steals its cast from a comedy set in that decade: Potter's clerks for the mid-century office,
+then the two great British satires of how Whitehall actually fails. That is the tell doing its job
+(`storytelling.md`). Read cold it is a staff list. Read by the one reader assembling the case, it is
+proof the whole thing was authored, and no minor character is loud enough to give it away early.
 
 ## 13. Where does the reader come in?
 
@@ -185,6 +193,12 @@ us why the Treasury paid. The joke about failure came from a fact about the 1920
 node was said in Parliament by a real man who meant it sincerely.
 
 There is no cabal, no lizard, no mast. There is a person who was angry about something true.
+
+And look what it turned into. A hundred-year paper trail that is also, quietly, a love letter to the
+British political satires that got there first: a conspiracy theory the reader can check, wearing the
+cast of the shows that already told us how government really fails. The fiction and the tribute are the
+same object. That is the sort of thing this framework makes almost by accident, and it is the reason to
+build in it.
 
 Which is why your corner needn't be about 5G. Why the trains are late. Why the planning application went
 through. Why nobody can get an NHS dentist. Anywhere a real grievance meets an unanswerable question, the
