@@ -352,7 +352,11 @@ def test_no_module_hard_codes_a_hostname(repo_root: Path) -> None:
 
     Only config.py may name the host, and only as the documented default.
     """
-    hostname = re.compile(r"https?://(?!example\.(test|com))[\w.-]+")
+    # `www.w3.org/2000/svg` is an XML namespace *identifier*, not an address: it is never
+    # fetched, never rendered into a URL, and cannot be reconfigured to another host, so it
+    # is not the thing NFR-001 protects. Exempted by exact prefix rather than by relaxing
+    # the pattern, so a genuine `https://www.w3.org/...` link still fails.
+    hostname = re.compile(r"https?://(?!example\.(test|com)|www\.w3\.org/2000/svg)[\w.-]+")
     offenders: list[str] = []
     for path in sorted((repo_root / "src" / "build").rglob("*.py")):
         if path.name == "config.py":
