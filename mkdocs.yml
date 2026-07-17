@@ -10,7 +10,7 @@
 # fails by design (FR-011): a document that is silently absent from the book is the
 # exact failure this declaration exists to prevent.
 
-site_name: "Conspiracy Larp: Player/Creator's Kit"
+site_name: "Conspiracy LARP: Player/Creator's Kit"
 site_description: The creator kit for a shared, permissionless world of diegetic conspiracy satire.
 
 # NFR-001 / C-003: the one configured base. Note the subpath and the trailing slash.
