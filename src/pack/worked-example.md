@@ -204,6 +204,32 @@ a conspiracy that never happened, and it is more persuasive than most evidence f
 
 Sit with that for a second, because it is the whole argument in one artifact.
 
+**Then ask when the screenshot was taken.** Not when the debate happened: when your blogger grabbed it.
+The column is 1926 either way, but she can have captured it from the site as it looks today, or from the
+one it replaced:
+
+```
+    Hansard 1803-2005                    [ Search ]
+
+    HC Deb 09 March 1926 vol 192 cc2103-4
+    -------------------------------------------------
+    << Previous       Column 2103        Next >>
+```
+
+Those are two different characters. The current site says she found this last month. The dead one says
+she has been at this since 2009, saved it when the pages still looked like that, and watched the design
+change around her while nobody else cared. **Nothing in the text says any of that.** The chrome says it,
+and the reader who recognises the old layout feels it without being told (`storytelling.md`).
+
+It also does something useful. Hansard really was rebuilt, and old links to it really did stop working,
+by the thousand, because that is what happens to URLs. So a saved page whose link no longer resolves is
+not suspicious, it is *Tuesday*. Your blogger has the ordinary grievance of anyone who has cited a
+government website for fifteen years, and it happens to be indistinguishable from the grievance of
+someone whose evidence keeps vanishing.
+
+Every artifact has both dates. The event's, and your character's. Most creators set the first and forget
+the second, which is a whole layer of characterisation left on the floor.
+
 Here is the same trick on a modern surface, where the furniture is a web page rather than a column of
 type:
 
