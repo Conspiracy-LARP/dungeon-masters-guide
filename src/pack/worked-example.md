@@ -497,9 +497,9 @@ Here is the 1920s roster, rendered the same way as everything else in this chapt
 
 > **This one does not work, and it is here because it does not work.**
 
-Look at it. It is clean. The type is perfectly even, every character identically inked, the baseline
-exact, the paper flat. It reads as a computer wearing a costume, and it reads that way in about a
-quarter of a second, before you have taken in a single word.
+Look at it. It is too clean. The type is perfectly even, every character identically inked, the baseline
+exact, the paper flat. Real typewriters never produced anything this consistent, and that evenness is the
+tell: it reads as a computer's work, not a clerk's.
 
 Now think about what a real one *is*. A 1926 roster is a **physical object**. It went through a
 typewriter, so the `e` is clogged and the capitals punch harder than the lowercase and one letter sits a
