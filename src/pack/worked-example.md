@@ -115,6 +115,27 @@ began. Somebody is quietly rather pleased.
 Government leaves records, and the boring ones nobody thought to destroy are all still sitting in public,
 digitised, searchable, free.
 
+**Before you build any of it, answer one question about every single artifact: why does this still exist,
+in this form, in front of me, today?** This is the question that separates evidence from set dressing,
+and it is the one most creators never ask. Get it wrong and a reader who knows the period feels the wrong
+note without being able to name it. Get it right and the artifact does two jobs at once, because *how a
+thing survived* is itself a story.
+
+Our three eras answer it in three completely different ways, and none of them is interchangeable:
+
+- **The FOI response survives natively.** WhatDoTheyKnow is recent, it is built to keep requests in
+  public, and it keeps them for years. A modern screenshot needs no explanation at all. It is simply what
+  the page looks like.
+- **The 1926 column survives because somebody typed it back in.** There was nothing but paper in 1926.
+  It exists on your screen because a digitisation programme decades later put it there, which is why a
+  present-day screenshot of an ancient debate is not a contradiction: it is the *only* form it could
+  possibly reach you in. The modern chrome around the old words is correct, and it is correct for a
+  reason you can name.
+- **The Ceefax page should not exist, and that is the interesting one.** Teletext was broadcast and then
+  gone. Nobody archived it. It survives only because somebody chose to capture it off-air at the time,
+  which means somebody was *watching for it* in 1986. That is not a technicality. That is a person, and
+  you have just acquired them for free.
+
 So don't invent a Hansard column. **Go and read one.** Parliament has been arguing about elementary
 education since long before 1924, it is all digitised at `hansard.parliament.uk`, and it is free. Find a
 real question, really asked, and have your teacher supply the reading.
@@ -358,6 +379,26 @@ P274 CEEFAX 274      Mon 14 Oct 20:41/32
 
 > **Fake, LLM-generated, and never broadcast.** No such page existed. The page number is invented. It is
 > laid out as Mode 7 really was, 40 columns by 24 rows, because the grid is the whole costume.
+
+And now make the provenance choice, because for this one artifact you have two, and they are two
+different stories.
+
+**A reconstruction from captured data** looks like the clean grid above: crisp, exact, every character
+where the broadcast put it. It says a hobbyist pulled the signal off-air, a preservation project rendered
+it decades later, and it reached you through the machinery of archiving. Technical, cool, slightly
+bloodless. Nobody in that chain cared what the page *said*.
+
+**A photograph of a television** is a different animal entirely. Barrel distortion at the edges where the
+tube curves. A window reflected in the glass. Scanlines, and the colours blooming the way they did.
+Harder to make, and worth it, because ask the only question that matters: **why would anyone photograph
+their own telly in 1986?** Nobody does that. Nobody has ever done that idly. Somebody saw this page, and
+thought *that is wrong*, and got up, and found a camera, and photographed a screen, forty years before
+anyone would believe them.
+
+You have not written a word about that person and they are now the most compelling thing in the node. The
+reflection in the glass is their living room. That is what "show, don't tell" actually means
+(`storytelling.md`), and it is why the question *why does this survive* is worth more than any amount of
+plot.
 
 Sit with the joke for a moment, because we did not plan it and the era handed it over for free: **Ceefax
 is text.** The Directorate's great public campaign against reading could only be received by reading it.
