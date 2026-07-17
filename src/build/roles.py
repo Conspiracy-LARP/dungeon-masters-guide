@@ -92,10 +92,14 @@ def _assert_flat(pack_dir: Path) -> None:
 #: so an asset beside the prose obeys the invariant rather than breaking it, and resolves on
 #: the site, the pack branch and GitHub's own rendering alike.
 #:
-#: SVG only, deliberately. It is text, so it diffs and reviews in git; it scales; and it keeps
-#: the first binary out of the pack. Widening this set is a decision, not a convenience: every
-#: surface in :mod:`build` must be able to carry whatever is listed here.
-ASSET_SUFFIXES: Final[frozenset[str]] = frozenset({".svg"})
+#: Two kinds, for two jobs. ``.svg`` is for art the guide draws itself (the Ceefax teletext,
+#: the duty roster) — text, so it diffs and reviews in git. ``.png`` is for *screenshots of the
+#: guide's own live exhibit pages*: a fake web page is a real web page (hosted with the org-root
+#: site), and the guide shows a photograph of it, because a photograph of a web page is a raster
+#: image, not a diagram. Widening this set is a decision, not a convenience: every surface in
+#: :mod:`build` must carry whatever is listed here (verified: the site copies both; the book
+#: leaves image refs unembedded, as it already does for the SVGs; the pack branch takes neither).
+ASSET_SUFFIXES: Final[frozenset[str]] = frozenset({".svg", ".png"})
 
 
 def load_assets(pack_dir: Path) -> list[str]:

@@ -231,16 +231,17 @@ emulate it exactly. The craft is entirely in the furniture:
 
 Now put it in its chrome, because an excerpt argues and a web page *lands*. So build the web page: a real
 HTML page wearing genuine Historic Hansard furniture, because you fake a website with a website, not with
-a picture of one. (The guide keeps a live example of exactly this alongside its other exhibits, and it is
-worth opening, because of what opening it does to you.)
+a picture of one. Here is a screenshot of ours:
 
-> **It is a fake. An LLM wrote it in about four seconds from a one-line brief.** No such debate took
-> place, no such member sat, and the volume and column numbers are invented. Every word is fabricated,
-> including the ones that sound most like a real minister, and it cost nothing.
->
-> Yet nothing about the words changed between the plain excerpt above and the page. Only your belief did.
-> That gap, between an assertion and an assertion *wearing a government website*, is the entire margin
-> conspiracy theory operates in, and we manufactured it for free.
+![A Historic Hansard web page showing a fabricated 1926 Commons exchange on reading standards](hansard-1926.png)
+
+*Fabricated exhibit. This is not a real parliamentary record. It is an invented page created for the
+Conspiracy LARP Dungeon Master's Guide, styled to resemble the "Historic Hansard" archive. No such debate
+took place; there is no Member named "Petherbridge," and the citation, columns and volume are fiction.*
+
+Nothing about the words changed between the plain excerpt above and that page. Only your belief did. The
+gap between an assertion and an assertion *wearing a government website* is the entire margin conspiracy
+theory operates in, and an LLM built that page in about four seconds from a one-line brief, for free.
 
 That is the point: it *reads* right. The
 cadence is right, "I must ask for notice" is what ministers genuinely say when they do not want to
@@ -295,51 +296,18 @@ feel how completely convincing an entirely empty thing can be made to look.
 Coherence is not evidence. Neither is age. Neither is a screenshot.
 
 Here is the same trick on a modern surface, where the furniture is a web page rather than a column of
-type:
+type. Same method: a real HTML page, hosted like any other, screenshotted here:
 
-```
-  WhatDoTheyKnow                                    Make a request   Browse
-  ....................................................................
+![A WhatDoTheyKnow FOI request page showing a fabricated request to the Ministry of Defence](whatdotheyknow-foi.png)
 
-    Directorate of Reading Standards: file series and current status
+*Fabricated exhibit. No such request was ever filed; WhatDoTheyKnow has never heard of it. This is an
+invented page made for the Conspiracy LARP Dungeon Master's Guide, styled to resemble a WhatDoTheyKnow
+FOI request. "A. Hollis," the "Directorate of Reading Standards," and the reference number are all
+fiction.*
 
-    A. Hollis made this Freedom of Information request to
-    Ministry of Defence
-
-      (o)  Awaiting internal review
-
-    --------------------------------------------------------------
-
-    A. Hollis  |  4 March
-    Dear Ministry of Defence,
-
-    Please provide a list of file series held under or referencing
-    the Directorate of Reading Standards (formerly War Office),
-    together with the date of the most recent review.
-
-    Yours faithfully,  A. Hollis
-
-    --------------------------------------------------------------
-
-    Ministry of Defence  |  2 April
-    Our ref: FOI2024/03841
-
-    Dear Ms Hollis,
-
-    The Ministry of Defence can neither confirm nor deny whether it
-    holds information of the description specified in your request,
-    as the duty in section 1(1)(a) of the Act does not apply by
-    virtue of section 23(5).
-  ....................................................................
-```
-
-Build it as a real page, the same way (the guide keeps this one live among its exhibits too, a genuine
-HTML page that looks like the site it imitates):
-
-> **Also a fake, also built in seconds, and this one matters more.** No such request was ever filed. It
-> was never sent to anybody. WhatDoTheyKnow has never heard of it, and that is not an oversight we intend
-> to correct: **filing this for real would be flatly forbidden** (`ethics.md`). It exists only as our own
-> page, on our own surface, which is the whole point.
+It was never sent to anybody, and that is not an oversight we intend to correct: **filing this for real
+would be flatly forbidden** (`ethics.md`). It exists only as our own page, on our own surface, which is
+the whole point.
 
 Notice how little work the fabrication is doing, and notice what it does **not** do: there are no black
 bars anywhere on it.
