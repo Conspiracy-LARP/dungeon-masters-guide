@@ -213,5 +213,13 @@ jobs:
 
       # Idempotent: an unchanged src/pack/ yields an identical tree and no push at all,
       # so a re-run does not churn the branch every consumer is tracking.
+      # `git commit-tree` needs an identity. The runner has none, so the orphan commit
+      # fails with exit 128 — after verify and build have both passed, which is the
+      # expensive place to discover it.
+      - name: Identity for the generated commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Publish the pack branch (FR-009)
         run: poetry run guide pack publish --remote origin
