@@ -230,6 +230,25 @@ someone whose evidence keeps vanishing.
 Every artifact has both dates. The event's, and your character's. Most creators set the first and forget
 the second, which is a whole layer of characterisation left on the floor.
 
+**And now notice what the model just did for you, because it is the argument again.** Ask an LLM for the
+2009 Hansard layout and it produces it. Ask for the 1997 one and it produces that. It knows what
+government websites looked like in every year you care about, what their URLs were shaped like, which
+services were rebuilt and roughly when, and what the chrome of a dead web looked like. It will fake
+fifteen years of a stranger's browsing history, convincingly, in the time it takes to read this sentence.
+
+Every one of those details reads as *authenticity*. None of them is **evidence**. The old layout does not
+mean she was there in 2009; it means a model knows what 2009 looked like. The plausible URL does not mean
+the page existed. The patina is generated, and it is generated from the same indifference to truth as
+everything else the engine makes (`philosophy.md`).
+
+Which is exactly why it belongs in our fiction and nowhere near our sources. The reason a conspiracy
+theory feels researched is that it is *upholstered*: dates, references, screenshots, the texture of
+someone having done the work. We can now manufacture that texture for free, on demand, about anything.
+So we do it in the open, on our own surfaces, about a department that never existed, and let the reader
+feel how completely convincing an entirely empty thing can be made to look.
+
+Coherence is not evidence. Neither is age. Neither is a screenshot.
+
 Here is the same trick on a modern surface, where the furniture is a web page rather than a column of
 type:
 
