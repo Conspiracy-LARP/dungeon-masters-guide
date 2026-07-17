@@ -467,16 +467,40 @@ administered it. By the 2010s it is defended purely because cancelling it would 
 department that cannot explain a hundred-year-old illiteracy programme has a much worse week than one
 that quietly renews it.
 
-![A fabricated 1926 War Office duty roster for an office that never existed](duty-roster-1926.svg)
+### An artifact that fails, and why
 
-> **Fake, and the most restrained thing in this chapter.** No such office existed and no such roster was
-> typed. Notice what it does *not* do: it does not describe the room, the green paint, the dado rail, or
-> the man crying at his desk on Armistice Day. It is a duty roster. It has a "return by" column.
->
-> And it is the only artifact here that could not have been borrowed. We could have reached for a frame
-> of the teleplay these names come from and shown you the office directly. That would have annotated our
-> own joke — pointed at the tell, and killed it. **Build the artifact, never borrow the source.** The
-> roster shows the office by refusing to mention it.
+Here is the 1920s roster, rendered the same way as everything else in this chapter:
+
+![A 1926 War Office duty roster that fails to convince](duty-roster-1926.svg)
+
+> **This one does not work, and it is here because it does not work.**
+
+Look at it. It is clean. The type is perfectly even, every character identically inked, the baseline
+exact, the paper flat. It reads as a computer wearing a costume, and it reads that way in about a
+quarter of a second, before you have taken in a single word.
+
+Now think about what a real one *is*. A 1926 roster is a **physical object**. It went through a
+typewriter, so the `e` is clogged and the capitals punch harder than the lowercase and one letter sits a
+half-millimetre high. Somebody pencilled a change in the margin. It was folded, filed, unfolded, stapled,
+and the staple rusted into the paper. None of that is decoration. **That is what the document is.**
+
+So the lesson the chapter needs, and the one my clean render taught by failing:
+
+**Everything from before about 1990 is a hand-made thing, and hand-made things are hard to fake.** The
+digital artifacts in this chapter were easy: Ceefax was a character grid, WhatDoTheyKnow is a web page,
+and both are *specifications*, so hitting the spec exactly is the same as being right. A typed sheet has
+no spec. It has a history of physical accidents, and faking those convincingly is real work.
+
+And notice this is the provenance question again (`why does this survive?`), arriving from the other
+side. A 1926 document cannot reach your reader as a crisp render, because **there is no route by which it
+could.** It reaches them as a *scan*: grey, slightly skewed on the glass, the shadow of a page curl down
+one edge, the contrast pushed too far by a bulk digitisation programme that had four million pages to get
+through and eleven months to do it in. Get the provenance right and the artifact tells you how it must
+look. Get it wrong and no amount of period vocabulary saves you.
+
+**Which is the honest bit of advice: if you cannot make it well, make something else.** A memo you cannot
+convincingly age is worth less than a modern archive catalogue entry *describing* a memo, which is a web
+page, which you can nail. The reader's imagination does the rest, and it is better at 1926 than you are.
 
 Be clear about what just happened: we stole all three settings. An obscure teleplay for the mid-century
 office, then two of the most celebrated political comedies ever made in this country, and we took the
