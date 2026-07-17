@@ -75,6 +75,30 @@ SharePoint web part and an argument about the kettle. The incongruity is the jok
 debunk, because an atrocity run as facilities management cannot also be a terrifying secret. We don't
 refute the theory; we agree with it so completely and so literally that it collapses under its own weight.
 
+**And then there is the sharper version, which goes after the engine rather than its output.** Don't take
+a live theory at all. Take a real grievance nobody has ever theorised, make the leap yourself, in public,
+with the reader watching, and build the thing out properly: a century of institutional paperwork, a
+motive that pays for itself, primary sources that genuinely resolve. `worked-example.md` does exactly
+this, start to finish, beginning with a secondary teacher's irritation about how reading is taught.
+
+What that demonstrates cannot be demonstrated by arguing. If one teacher's Tuesday annoyance about
+phonics can produce a hundred-year War Office programme, internally consistent, richly documented and
+citable, then **the existence of a well-built conspiracy theory tells you nothing at all about whether it
+is true.** Coherence is not evidence. Documentation is not evidence. The thrill of joining the dots is
+not evidence. The engine produces all of them for free, from any input you like, and ours came out of a
+complaint about phonics.
+
+That is why "anything can be a conspiracy" is not a cheerful remark about our range. **It is the proof.**
+The engine's output is worthless as evidence precisely because the engine does not care what you feed it,
+and the only way to show someone that is to feed it something absurd while they watch.
+
+There is an ethical dividend, and it is not small. Agreeing with a live theory means aiming at something
+real people believe, and many of them are frightened, or lonely, or grieving. Running the engine on
+phonics aims at nobody. There is no believer to mock, because there are no believers. The reader watches
+the machine assemble itself out of an ordinary irritation, recognises the move, and is never once made
+the butt of it. We are not laughing at the people who got fooled. We are exhibiting the machine that
+fooled them (`ethics.md`).
+
 ## 3. The method: diegetic storytelling, indistinguishable on purpose
 
 We deliver this the way conspiracy theory itself is delivered. The *form* is half the argument.
