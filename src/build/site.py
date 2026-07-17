@@ -300,6 +300,54 @@ def write_robots(site_dir: Path, config: BuildConfig) -> Path:
     return path
 
 
+#: The browser-only stylesheet, authored under src/theme/ and shipped to the site root.
+SITEMAP_STYLESHEET_SOURCE: Final[Path] = (
+    Path(__file__).resolve().parent.parent / "theme" / "sitemap.xsl"
+)
+SITEMAP_STYLESHEET_NAME: Final[str] = "sitemap.xsl"
+
+
+def style_sitemap(site_dir: Path, config: BuildConfig) -> None:
+    """Make the MkDocs-generated sitemap render as a table when opened in a browser.
+
+    Two steps, both cosmetic and both safe for crawlers:
+
+    1. Copy ``sitemap.xsl`` to the site root.
+    2. Insert one ``<?xml-stylesheet?>`` processing instruction after the XML
+       declaration in ``sitemap.xml``. A crawler ignores the instruction and reads the
+       ``<urlset>`` exactly as before; a browser follows it and renders the stylesheet.
+
+    Degrades to a no-op rather than failing the build: if MkDocs produced no sitemap, or
+    the stylesheet source is missing, there is nothing here worth breaking a publish over.
+    The sitemap remains valid either way — the worst outcome is that it is not pretty.
+
+    The ``.gz`` twin is rewritten to match, so the two never disagree (SC-004 in spirit).
+    """
+    sitemap = site_dir / "sitemap.xml"
+    if not sitemap.is_file() or not SITEMAP_STYLESHEET_SOURCE.is_file():
+        return
+
+    (site_dir / SITEMAP_STYLESHEET_NAME).write_bytes(SITEMAP_STYLESHEET_SOURCE.read_bytes())
+
+    href = config.absolute_url(SITEMAP_STYLESHEET_NAME)
+    instruction = f'<?xml-stylesheet type="text/xsl" href="{href}"?>'
+    text = sitemap.read_text(encoding="utf-8")
+    if "xml-stylesheet" in text:
+        return  # already styled; keep idempotent
+    declaration = '<?xml version="1.0" encoding="UTF-8"?>'
+    if declaration in text:
+        text = text.replace(declaration, f"{declaration}\n{instruction}", 1)
+    else:
+        text = f"{instruction}\n{text}"
+    sitemap.write_text(text, encoding="utf-8")
+
+    gz = site_dir / "sitemap.xml.gz"
+    if gz.is_file():
+        import gzip
+
+        gz.write_bytes(gzip.compress(text.encode("utf-8")))
+
+
 def write_nojekyll(site_dir: Path) -> Path:
     """Emit the empty ``.nojekyll`` marker (FR-012).
 
@@ -473,3 +521,4 @@ def on_post_build(*, config: MkDocsConfig) -> None:
         raise PluginError(str(exc)) from exc
     write_nojekyll(site_dir)
     write_robots(site_dir, build.config)
+    style_sitemap(site_dir, build.config)
